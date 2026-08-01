@@ -4,7 +4,7 @@ import { db } from "@/db";
 import { getLeeches, getRecentEvents, getStats } from "@/db/repo";
 import { retentionRate, adaptiveNewCardLimit, DEFAULT_CONFIG } from "@/srs/engine";
 import { wordById, roots } from "@/content";
-import { HebrewWord } from "@/components/HebrewWord";
+import { ScriptWord } from "@/components/ScriptWord";
 import { Empty, TopBar } from "@/components/ui";
 
 export function StatsScreen() {
@@ -118,7 +118,7 @@ export function StatsScreen() {
                 if (!w) return null;
                 return (
                   <div key={c.wordId} className="row row--between">
-                    <HebrewWord word={w.hebrew} rootIndices={w.rootIndices} size={22} highlight />
+                    <ScriptWord word={w.text} highlight={w.rootIndices} size={22} showHighlight />
                     <span className="small muted">
                       {w.gloss} · {c.lapses} lapses
                     </span>

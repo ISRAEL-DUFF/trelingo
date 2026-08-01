@@ -1,9 +1,9 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { Link } from "react-router-dom";
 import { passageById, passagesByRoot, rootById, unitByWordId, wordsByRoot } from "@/content";
-import { HebrewWord } from "@/components/HebrewWord";
+import { ScriptWord } from "@/components/ScriptWord";
 import { Sheet } from "@/components/ui";
-import { formatRoot } from "@/lib/hebrew";
+import { scriptOf } from "@/content/course";
 import { db } from "@/db";
 
 /**
@@ -29,7 +29,7 @@ export function RootSheet({ rootId, onClose }: { rootId: string | null; onClose:
       {root && (
         <>
           <div className="center" style={{ paddingBottom: 8 }}>
-            <HebrewWord word={formatRoot(root.letters)} size={38} highlight={false} />
+            <ScriptWord word={scriptOf().joinLetters(root.letters)} size={38} showHighlight={false} />
             <p style={{ margin: "8px 0 0", fontSize: 17, fontWeight: 600 }}>{root.coreGloss}</p>
             {root.notes && (
               <p className="small muted" style={{ marginTop: 8, lineHeight: 1.6 }}>
@@ -51,7 +51,7 @@ export function RootSheet({ rootId, onClose }: { rootId: string | null; onClose:
                 <div key={w.id} className="card card--flat">
                   <div className="row row--between">
                     <div>
-                      <HebrewWord word={w.hebrew} rootIndices={w.rootIndices} size={26} highlight />
+                      <ScriptWord word={w.text} highlight={w.rootIndices} size={26} showHighlight />
                       <div className="translit" style={{ marginTop: 3 }}>
                         {w.translit}
                       </div>

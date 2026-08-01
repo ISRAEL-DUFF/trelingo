@@ -13,6 +13,7 @@
  */
 import { api } from "@/api/client";
 import type { AudioManifestEntry, PronunciationVariant } from "@/api/types";
+import { scriptOf } from "@/content/course";
 
 let manifest: Map<string, AudioManifestEntry> | null = null;
 let manifestVariant: PronunciationVariant | null = null;
@@ -33,19 +34,20 @@ export function audioEntryFor(wordId: string): AudioManifestEntry | undefined {
   return manifest?.get(wordId);
 }
 
-/** Voices whose language is Hebrew, if the platform ships any. */
-function hebrewVoice(): SpeechSynthesisVoice | null {
+/** A voice matching the active course's language, if the platform ships one. */
+function voiceForCourse(): SpeechSynthesisVoice | null {
   if (typeof speechSynthesis === "undefined") return null;
+  const lang = scriptOf().lang.toLowerCase();
   const voices = speechSynthesis.getVoices();
-  return voices.find((v) => v.lang?.toLowerCase().startsWith("he")) ?? null;
+  return voices.find((v) => v.lang?.toLowerCase().startsWith(lang)) ?? null;
 }
 
 export function speechSupported(): boolean {
   return typeof speechSynthesis !== "undefined" && typeof SpeechSynthesisUtterance !== "undefined";
 }
 
-export function hebrewVoiceAvailable(): boolean {
-  return hebrewVoice() !== null;
+export function courseVoiceAvailable(): boolean {
+  return voiceForCourse() !== null;
 }
 
 let currentAudio: HTMLAudioElement | null = null;
@@ -64,7 +66,7 @@ export interface PlayResult {
  */
 export async function playWord(
   wordId: string,
-  hebrew: string,
+  text: string,
   opts: { rate?: number; enabled?: boolean } = {},
 ): Promise<PlayResult> {
   const { rate = 1, enabled = true } = opts;
@@ -85,7 +87,7 @@ export async function playWord(
     }
   }
 
-  return speak(hebrew, rate);
+  return speak(text, rate);
 }
 
 export async function speak(text: string, rate = 1): Promise<PlayResult> {
@@ -93,9 +95,9 @@ export async function speak(text: string, rate = 1): Promise<PlayResult> {
   try {
     speechSynthesis.cancel();
     const utter = new SpeechSynthesisUtterance(text);
-    const voice = hebrewVoice();
+    const voice = voiceForCourse();
     if (voice) utter.voice = voice;
-    utter.lang = "he-IL";
+    utter.lang = scriptOf().lang;
     utter.rate = rate;
     speechSynthesis.speak(utter);
     return { played: true, source: "speech" };

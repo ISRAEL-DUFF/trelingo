@@ -4,11 +4,11 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { api } from "@/api/client";
 import { ApiError, NetworkError, type Deck } from "@/api/types";
 import { Banner, Button, Empty, Sheet, TopBar } from "@/components/ui";
-import { HebrewWord } from "@/components/HebrewWord";
+import { ScriptWord } from "@/components/ScriptWord";
 import { roots, words, wordsByRoot } from "@/content";
 import { db } from "@/db";
 import { putLocalDecks } from "@/db/repo";
-import { formatRoot } from "@/lib/hebrew";
+import { scriptOf, textProps } from "@/content/course";
 import { useSession } from "@/state/session";
 
 /** Custom decks (spec §4 Phase 7): review any subset independently of the path. */
@@ -148,8 +148,8 @@ export function DecksScreen() {
                 .filter((r) => (wordsByRoot[r.id]?.length ?? 0) > 1)
                 .map((r) => (
                   <button key={r.id} className="chip" onClick={() => addRoot(r.id)}>
-                    <span lang="he" dir="rtl">
-                      {formatRoot(r.letters)}
+                    <span {...textProps()}>
+                      {scriptOf().joinLetters(r.letters)}
                     </span>
                   </button>
                 ))}
@@ -166,7 +166,7 @@ export function DecksScreen() {
                   onClick={() => toggle(w.id)}
                 >
                   <span className="row row--between">
-                    <HebrewWord word={w.hebrew} rootIndices={w.rootIndices} size={20} highlight />
+                    <ScriptWord word={w.text} highlight={w.rootIndices} size={20} showHighlight />
                     <span className="small muted">{w.gloss}</span>
                   </span>
                 </button>

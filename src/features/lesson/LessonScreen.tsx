@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { unitById, wordById } from "@/content";
 import { Button, TopBar } from "@/components/ui";
-import { HebrewWord } from "@/components/HebrewWord";
+import { ScriptWord } from "@/components/ScriptWord";
 import { ExerciseView } from "./Exercises";
 import type { GradeResult } from "./grade";
 import { completeUnit, recordReview } from "@/db/repo";
@@ -169,7 +169,7 @@ export function LessonScreen() {
         <div className="pad" style={{ paddingTop: 24 }}>
           {word && (
             <div className="center" style={{ marginBottom: 14 }}>
-              <HebrewWord word={word.hebrew} rootIndices={word.rootIndices} size={22} highlight />
+              <ScriptWord word={word.text} highlight={word.rootIndices} size={22} showHighlight />
               <span className="small muted" style={{ marginInlineStart: 8 }}>
                 {word.gloss}
               </span>

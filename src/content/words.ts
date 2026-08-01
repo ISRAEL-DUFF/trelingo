@@ -3,7 +3,7 @@ import type { Word } from "./schema";
 /**
  * Vocabulary.
  *
- * `rootIndices` are LETTER positions within `hebrew` (vowel points do not count).
+ * `rootIndices` are LETTER positions within `text` (vowel points do not count).
  * The content test asserts, for every entry, that the letters those indices
  * select are a subsequence of the declared root — which catches both mis-indexed
  * roots and words filed under the wrong root.
@@ -17,7 +17,7 @@ export const words: Word[] = [
   {
     id: "bereshit",
     rootId: "ראשׁ",
-    hebrew: "בְּרֵאשִׁית",
+    text: "בְּרֵאשִׁית",
     translit: "bərēʾšîṯ",
     gloss: "in the beginning",
     partOfSpeech: "noun",
@@ -29,7 +29,7 @@ export const words: Word[] = [
   {
     id: "bara",
     rootId: "ברא",
-    hebrew: "בָּרָא",
+    text: "בָּרָא",
     translit: "bārāʾ",
     gloss: "he created",
     partOfSpeech: "verb",
@@ -41,7 +41,7 @@ export const words: Word[] = [
   {
     id: "elohim",
     rootId: "אלה",
-    hebrew: "אֱלֹהִים",
+    text: "אֱלֹהִים",
     translit: "ʾĕlōhîm",
     gloss: "God",
     partOfSpeech: "noun",
@@ -53,7 +53,7 @@ export const words: Word[] = [
   {
     id: "el",
     rootId: "אלה",
-    hebrew: "אֵל",
+    text: "אֵל",
     translit: "ʾēl",
     gloss: "God, a god",
     partOfSpeech: "noun",
@@ -65,7 +65,7 @@ export const words: Word[] = [
   {
     id: "shamayim",
     rootId: "שׁמי",
-    hebrew: "הַשָּׁמַיִם",
+    text: "הַשָּׁמַיִם",
     translit: "haššāmayim",
     gloss: "the heavens",
     partOfSpeech: "noun",
@@ -77,7 +77,7 @@ export const words: Word[] = [
   {
     id: "erets",
     rootId: "ארץ",
-    hebrew: "הָאָרֶץ",
+    text: "הָאָרֶץ",
     translit: "hāʾāreṣ",
     gloss: "the earth",
     partOfSpeech: "noun",
@@ -90,7 +90,7 @@ export const words: Word[] = [
   {
     id: "vayomer",
     rootId: "אמר",
-    hebrew: "וַיֹּאמֶר",
+    text: "וַיֹּאמֶר",
     translit: "wayyōʾmer",
     gloss: "and he said",
     partOfSpeech: "verb",
@@ -103,7 +103,7 @@ export const words: Word[] = [
   {
     id: "or",
     rootId: "אור",
-    hebrew: "אוֹר",
+    text: "אוֹר",
     translit: "ʾôr",
     gloss: "light",
     partOfSpeech: "noun",
@@ -114,7 +114,7 @@ export const words: Word[] = [
   {
     id: "yehi",
     rootId: "היה",
-    hebrew: "יְהִי",
+    text: "יְהִי",
     translit: "yəhî",
     gloss: "let there be",
     partOfSpeech: "verb",
@@ -127,7 +127,7 @@ export const words: Word[] = [
   {
     id: "tov",
     rootId: "טוב",
-    hebrew: "טוֹב",
+    text: "טוֹב",
     translit: "ṭôḇ",
     gloss: "good",
     partOfSpeech: "adjective",
@@ -138,7 +138,7 @@ export const words: Word[] = [
   {
     id: "choshekh",
     rootId: "חשׁך",
-    hebrew: "חֹשֶׁךְ",
+    text: "חֹשֶׁךְ",
     translit: "ḥōšeḵ",
     gloss: "darkness",
     partOfSpeech: "noun",
@@ -149,7 +149,7 @@ export const words: Word[] = [
   {
     id: "yom",
     rootId: "יום",
-    hebrew: "יוֹם",
+    text: "יוֹם",
     translit: "yôm",
     gloss: "day",
     partOfSpeech: "noun",
@@ -160,7 +160,7 @@ export const words: Word[] = [
   {
     id: "laylah",
     rootId: "ליל",
-    hebrew: "לָיְלָה",
+    text: "לָיְלָה",
     translit: "lāyəlâ",
     gloss: "night",
     partOfSpeech: "noun",
@@ -171,7 +171,7 @@ export const words: Word[] = [
   {
     id: "vayar",
     rootId: "ראה",
-    hebrew: "וַיַּרְא",
+    text: "וַיַּרְא",
     translit: "wayyarʾ",
     gloss: "and he saw",
     partOfSpeech: "verb",
@@ -186,7 +186,7 @@ export const words: Word[] = [
   {
     id: "shamar",
     rootId: "שׁמר",
-    hebrew: "שָׁמַר",
+    text: "שָׁמַר",
     translit: "šāmar",
     gloss: "he guarded, he kept",
     partOfSpeech: "verb",
@@ -198,7 +198,7 @@ export const words: Word[] = [
   {
     id: "shomer",
     rootId: "שׁמר",
-    hebrew: "שֹׁמֵר",
+    text: "שֹׁמֵר",
     translit: "šōmēr",
     gloss: "one who guards, keeper",
     partOfSpeech: "noun",
@@ -211,7 +211,7 @@ export const words: Word[] = [
   {
     id: "mishmeret",
     rootId: "שׁמר",
-    hebrew: "מִשְׁמֶרֶת",
+    text: "מִשְׁמֶרֶת",
     translit: "mišmereṯ",
     gloss: "watch, guard duty",
     partOfSpeech: "noun",
@@ -223,7 +223,7 @@ export const words: Word[] = [
   {
     id: "yishmor",
     rootId: "שׁמר",
-    hebrew: "יִשְׁמֹר",
+    text: "יִשְׁמֹר",
     translit: "yišmōr",
     gloss: "he will guard",
     partOfSpeech: "verb",
@@ -235,7 +235,7 @@ export const words: Word[] = [
   {
     id: "shamru",
     rootId: "שׁמר",
-    hebrew: "שָׁמְרוּ",
+    text: "שָׁמְרוּ",
     translit: "šāmərû",
     gloss: "they guarded",
     partOfSpeech: "verb",
@@ -249,7 +249,7 @@ export const words: Word[] = [
   {
     id: "mizmor",
     rootId: "זמר",
-    hebrew: "מִזְמוֹר",
+    text: "מִזְמוֹר",
     translit: "mizmôr",
     gloss: "psalm, song",
     partOfSpeech: "noun",
@@ -261,7 +261,7 @@ export const words: Word[] = [
   {
     id: "roi",
     rootId: "רעה",
-    hebrew: "רֹעִי",
+    text: "רֹעִי",
     translit: "rōʿî",
     gloss: "my shepherd",
     partOfSpeech: "noun",
@@ -273,7 +273,7 @@ export const words: Word[] = [
   {
     id: "roeh",
     rootId: "רעה",
-    hebrew: "רֹעֶה",
+    text: "רֹעֶה",
     translit: "rōʿeh",
     gloss: "shepherd",
     partOfSpeech: "noun",
@@ -284,7 +284,7 @@ export const words: Word[] = [
   {
     id: "echsar",
     rootId: "חסר",
-    hebrew: "אֶחְסָר",
+    text: "אֶחְסָר",
     translit: "ʾeḥsār",
     gloss: "I shall lack",
     partOfSpeech: "verb",
@@ -299,7 +299,7 @@ export const words: Word[] = [
   {
     id: "ahav",
     rootId: "אהב",
-    hebrew: "אָהַב",
+    text: "אָהַב",
     translit: "ʾāhaḇ",
     gloss: "he loved",
     partOfSpeech: "verb",
@@ -311,7 +311,7 @@ export const words: Word[] = [
   {
     id: "ahavah",
     rootId: "אהב",
-    hebrew: "אַהֲבָה",
+    text: "אַהֲבָה",
     translit: "ʾahăḇâ",
     gloss: "love",
     partOfSpeech: "noun",
@@ -322,7 +322,7 @@ export const words: Word[] = [
   {
     id: "ohev",
     rootId: "אהב",
-    hebrew: "אֹהֵב",
+    text: "אֹהֵב",
     translit: "ʾōhēḇ",
     gloss: "loving, one who loves",
     partOfSpeech: "noun",
@@ -336,7 +336,7 @@ export const words: Word[] = [
   {
     id: "davar",
     rootId: "דבר",
-    hebrew: "דָּבָר",
+    text: "דָּבָר",
     translit: "dāḇār",
     gloss: "word, thing, matter",
     partOfSpeech: "noun",
@@ -347,7 +347,7 @@ export const words: Word[] = [
   {
     id: "devar",
     rootId: "דבר",
-    hebrew: "דְּבַר",
+    text: "דְּבַר",
     translit: "dəḇar",
     gloss: "word of (construct)",
     partOfSpeech: "noun",
@@ -359,7 +359,7 @@ export const words: Word[] = [
   {
     id: "dibber",
     rootId: "דבר",
-    hebrew: "דִּבֶּר",
+    text: "דִּבֶּר",
     translit: "dibber",
     gloss: "he spoke",
     partOfSpeech: "verb",
@@ -374,7 +374,7 @@ export const words: Word[] = [
   {
     id: "gadal",
     rootId: "גדל",
-    hebrew: "גָּדַל",
+    text: "גָּדַל",
     translit: "gāḏal",
     gloss: "he was great, he grew",
     partOfSpeech: "verb",
@@ -386,7 +386,7 @@ export const words: Word[] = [
   {
     id: "giddel",
     rootId: "גדל",
-    hebrew: "גִּדֵּל",
+    text: "גִּדֵּל",
     translit: "giddēl",
     gloss: "he raised, he brought up",
     partOfSpeech: "verb",
@@ -398,7 +398,7 @@ export const words: Word[] = [
   {
     id: "higdil",
     rootId: "גדל",
-    hebrew: "הִגְדִּיל",
+    text: "הִגְדִּיל",
     translit: "hiḡdîl",
     gloss: "he magnified, he made great",
     partOfSpeech: "verb",
@@ -411,7 +411,7 @@ export const words: Word[] = [
   {
     id: "lamad",
     rootId: "למד",
-    hebrew: "לָמַד",
+    text: "לָמַד",
     translit: "lāmaḏ",
     gloss: "he learned",
     partOfSpeech: "verb",
@@ -423,7 +423,7 @@ export const words: Word[] = [
   {
     id: "limmed",
     rootId: "למד",
-    hebrew: "לִמַּד",
+    text: "לִמַּד",
     translit: "limmaḏ",
     gloss: "he taught",
     partOfSpeech: "verb",
@@ -438,7 +438,7 @@ export const words: Word[] = [
   {
     id: "am",
     rootId: "עמם",
-    hebrew: "עַם",
+    text: "עַם",
     translit: "ʿam",
     gloss: "people",
     partOfSpeech: "noun",
@@ -450,7 +450,7 @@ export const words: Word[] = [
   {
     id: "halakh",
     rootId: "הלך",
-    hebrew: "הָלַךְ",
+    text: "הָלַךְ",
     translit: "hālaḵ",
     gloss: "he walked, he went",
     partOfSpeech: "verb",
@@ -462,7 +462,7 @@ export const words: Word[] = [
   {
     id: "shuv",
     rootId: "שׁוב",
-    hebrew: "שׁוּב",
+    text: "שׁוּב",
     translit: "šûḇ",
     gloss: "to return",
     partOfSpeech: "verb",
@@ -475,7 +475,7 @@ export const words: Word[] = [
   {
     id: "melekh",
     rootId: "מלך",
-    hebrew: "מֶלֶךְ",
+    text: "מֶלֶךְ",
     translit: "meleḵ",
     gloss: "king",
     partOfSpeech: "noun",
@@ -486,7 +486,7 @@ export const words: Word[] = [
   {
     id: "katav",
     rootId: "כתב",
-    hebrew: "כָּתַב",
+    text: "כָּתַב",
     translit: "kāṯaḇ",
     gloss: "he wrote",
     partOfSpeech: "verb",
@@ -498,7 +498,7 @@ export const words: Word[] = [
   {
     id: "shofet",
     rootId: "שׁפט",
-    hebrew: "שֹׁפֵט",
+    text: "שֹׁפֵט",
     translit: "šōp̄ēṭ",
     gloss: "judge, one who judges",
     partOfSpeech: "noun",
@@ -511,7 +511,7 @@ export const words: Word[] = [
   {
     id: "vayiqra",
     rootId: "קרא",
-    hebrew: "וַיִּקְרָא",
+    text: "וַיִּקְרָא",
     translit: "wayyiqrāʾ",
     gloss: "and he called",
     partOfSpeech: "verb",
@@ -523,7 +523,7 @@ export const words: Word[] = [
   {
     id: "qara",
     rootId: "קרא",
-    hebrew: "קָרָא",
+    text: "קָרָא",
     translit: "qārāʾ",
     gloss: "he called",
     partOfSpeech: "verb",
@@ -535,7 +535,7 @@ export const words: Word[] = [
   {
     id: "barakh",
     rootId: "ברך",
-    hebrew: "בָּרַךְ",
+    text: "בָּרַךְ",
     translit: "bāraḵ",
     gloss: "he blessed",
     partOfSpeech: "verb",
@@ -547,7 +547,7 @@ export const words: Word[] = [
   {
     id: "qadosh",
     rootId: "קדשׁ",
-    hebrew: "קָדוֹשׁ",
+    text: "קָדוֹשׁ",
     translit: "qāḏôš",
     gloss: "holy",
     partOfSpeech: "adjective",

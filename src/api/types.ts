@@ -172,7 +172,7 @@ export interface PlacementQuestion {
   id: string;
   level: number;
   prompt: string;
-  hebrew: string;
+  text: string;
   choices: string[];
   answer: string;
 }

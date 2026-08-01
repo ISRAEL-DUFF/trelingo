@@ -1,15 +1,17 @@
 import { describe, it, expect } from "vitest";
-import {
-  MAX_FADE_STAGE,
-  fadeNiqqud,
-  fadeStageForInterval,
-  formatRoot,
-  letterCount,
-  rootLettersOf,
-  stripNiqqud,
-  toLetterClusters,
-  validateRootIndices,
-} from "./hebrew";
+import { MAX_FADE_STAGE, fadeNiqqud, hebrewScript, stripNiqqud, toLetterClusters } from "./hebrew";
+import { fadeStageForInterval as fadeStageFor } from "./index";
+import { lettersAt, letterCount as countLetters, validateLetterIndices } from "@/lib/morphology";
+
+// The helpers below moved out of the Hebrew module during the Phase 0 seam
+// extraction: index-validation is script-agnostic, and morpheme display is a
+// property of the script. Thin wrappers keep the original assertions intact.
+const letterCount = (w: string) => countLetters(hebrewScript, w);
+const validateRootIndices = (w: string, i: readonly number[]) =>
+  validateLetterIndices(hebrewScript, w, i);
+const rootLettersOf = (w: string, i: readonly number[]) => lettersAt(hebrewScript, w, i);
+const formatRoot = (letters: string) => hebrewScript.joinLetters(letters);
+const fadeStageForInterval = (days: number) => fadeStageFor(days, hebrewScript.stages);
 
 // Written with explicit escapes so the expected values are reviewable by eye —
 // combining marks are invisible in source.

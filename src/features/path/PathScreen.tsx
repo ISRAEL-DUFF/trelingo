@@ -5,6 +5,7 @@ import { db } from "@/db";
 import { getDueCounts, getPlacementUnlocked, getStreak, getXp } from "@/db/repo";
 import { TopBar } from "@/components/ui";
 import { SyncIndicator } from "@/features/sync/SyncIndicator";
+import { textProps } from "@/content/course";
 
 type Status = "done" | "current" | "locked";
 
@@ -61,7 +62,7 @@ export function PathScreen() {
 
       <div className="center" style={{ padding: "22px 20px 4px" }}>
         <p className="small muted" style={{ margin: 0, fontStyle: "italic", letterSpacing: 1 }}>
-          <span lang="he" dir="rtl">
+          <span {...textProps()}>
             שֹׁרֶשׁ
           </span>{" "}
           — “Root”

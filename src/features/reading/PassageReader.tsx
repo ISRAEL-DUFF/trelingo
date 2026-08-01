@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { passageById } from "@/content";
-import { HebrewWord } from "@/components/HebrewWord";
+import { ScriptWord } from "@/components/ScriptWord";
 import { RootSheet } from "./RootSheet";
 import { useSession } from "@/state/session";
 import { playWord, speak } from "@/lib/audio";
+import { textProps } from "@/content/course";
 
 /**
  * Renders a real verse with tap-to-gloss on every word (spec §4 Phase 4).
@@ -34,21 +35,21 @@ export function PassageReader({
   return (
     <div className="pad-x">
       <div className="card" style={{ padding: "22px 16px" }}>
-        <div className="passage" lang="he">
+        <div className="passage" {...textProps()}>
           {passage.tokens.map((t, i) => (
             <button
-              key={`${t.hebrew}-${i}`}
+              key={`${t.text}-${i}`}
               className={`passage__token passage__token--tappable${
                 activeIndex === i ? " passage__token--active" : ""
               }`}
               onClick={() => setActiveIndex(activeIndex === i ? null : i)}
-              aria-label={`${t.hebrew} — ${t.gloss}`}
+              aria-label={`${t.text} — ${t.gloss}`}
             >
-              <HebrewWord
-                word={t.hebrew}
-                rootIndices={t.rootIndices}
+              <ScriptWord
+                word={t.text}
+                highlight={t.rootIndices}
                 size={30}
-                highlight={activeIndex === i}
+                showHighlight={activeIndex === i}
                 fadeStage={fadeStage}
               />
             </button>
@@ -70,10 +71,10 @@ export function PassageReader({
                     aria-label="Hear this word"
                     onClick={() =>
                       void (active.wordId
-                        ? playWord(active.wordId, active.hebrew, {
+                        ? playWord(active.wordId, active.text, {
                             enabled: settings?.soundEnabled ?? true,
                           })
-                        : speak(active.hebrew))
+                        : speak(active.text))
                     }
                   >
                     🔊

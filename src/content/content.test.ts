@@ -1,7 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { rawBundle, getContent, units, words, roots, passages, wordsByRoot } from "./index";
 import { validateBundle } from "./schema";
-import { rootLettersOf, stripNiqqud, toLetterClusters, validateRootIndices } from "@/lib/hebrew";
+import { lettersAt, validateLetterIndices } from "@/lib/morphology";
+import { scriptOf } from "./course";
+
+const script = scriptOf();
 
 /**
  * Spec §5.3: "Content schema validation: CI-blocking, not just a warning."
@@ -36,7 +39,7 @@ describe("root indices — the product's core claim", () => {
   it.each(words.map((w) => [w.id, w] as const))(
     "%s: every root index lands on a real consonant",
     (_id, w) => {
-      const check = validateRootIndices(w.hebrew, w.rootIndices);
+      const check = validateLetterIndices(script, w.text, w.rootIndices);
       expect(check.ok, check.ok ? "" : check.reason).toBe(true);
     },
   );
@@ -45,19 +48,19 @@ describe("root indices — the product's core claim", () => {
     "%s: highlighted letters are actually the declared root's letters",
     (_id, w) => {
       // Catches both mis-indexed roots and words filed under the wrong root.
-      const picked = rootLettersOf(w.hebrew, w.rootIndices);
-      const rootLetters = Array.from(stripNiqqud(w.rootId));
+      const picked = lettersAt(script, w.text, w.rootIndices);
+      const rootLetters = Array.from(script.stripDiacritics(w.rootId));
       expect(
         isSubsequence(picked, rootLetters),
-        `${w.hebrew} indices [${w.rootIndices}] select "${picked.join("")}", not a subsequence of root "${rootLetters.join("")}"`,
+        `${w.text} indices [${w.rootIndices}] select "${picked.join("")}", not a subsequence of root "${rootLetters.join("")}"`,
       ).toBe(true);
     },
   );
 
   it("never highlights the whole word (that would teach nothing)", () => {
     for (const w of words) {
-      if (toLetterClusters(w.hebrew).length > 3) {
-        expect(w.rootIndices.length).toBeLessThan(toLetterClusters(w.hebrew).length);
+      if (script.toLetterClusters(w.text).length > 3) {
+        expect(w.rootIndices.length).toBeLessThan(script.toLetterClusters(w.text).length);
       }
     }
   });
@@ -72,14 +75,14 @@ describe("root indices — the product's core claim", () => {
 describe("passage tokens", () => {
   it.each(passages.map((p) => [p.id, p] as const))("%s: token root indices are valid", (_id, p) => {
     for (const t of p.tokens) {
-      const check = validateRootIndices(t.hebrew, t.rootIndices);
-      expect(check.ok, check.ok ? "" : `${t.hebrew}: ${!check.ok && check.reason}`).toBe(true);
+      const check = validateLetterIndices(script, t.text, t.rootIndices);
+      expect(check.ok, check.ok ? "" : `${t.text}: ${!check.ok && check.reason}`).toBe(true);
     }
   });
 
   it("gives every token a gloss, so tap-to-gloss never shows a blank", () => {
     for (const p of passages) {
-      for (const t of p.tokens) expect(t.gloss.length, `${p.id} / ${t.hebrew}`).toBeGreaterThan(0);
+      for (const t of p.tokens) expect(t.gloss.length, `${p.id} / ${t.text}`).toBeGreaterThan(0);
     }
   });
 

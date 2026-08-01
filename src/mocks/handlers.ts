@@ -138,7 +138,7 @@ function buildPlacementQuestions(): PlacementQuestion[] {
         id: `pq-${i}`,
         level: Math.floor(i / 2),
         prompt: "What does this word mean?",
-        hebrew: w.hebrew,
+        text: w.text,
         choices: [w.gloss, ...w.distractors.slice(0, 3)].sort(),
         answer: w.gloss,
       },

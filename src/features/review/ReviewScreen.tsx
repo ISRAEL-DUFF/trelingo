@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { wordById } from "@/content";
-import { HebrewWord } from "@/components/HebrewWord";
+import { ScriptWord } from "@/components/ScriptWord";
 import { Button, Spinner } from "@/components/ui";
 import { RootSheet } from "@/features/reading/RootSheet";
 import {
@@ -11,7 +11,8 @@ import {
   type SrsCard,
   RATING_LABELS,
 } from "@/srs/engine";
-import { fadeStageForInterval } from "@/lib/hebrew";
+import { fadeStageForInterval } from "@/lib/script";
+import { scriptOf } from "@/content/course";
 import { getDeckQueue, getRecentEvents, getReviewQueue, recordReview, addXp, touchStreak } from "@/db/repo";
 import { db } from "@/db";
 import { useSession } from "@/state/session";
@@ -147,7 +148,7 @@ export function ReviewScreen() {
     settings?.niqqudPref === "off"
       ? 6
       : settings?.niqqudPref === "fading"
-        ? fadeStageForInterval(card.intervalDays)
+        ? fadeStageForInterval(card.intervalDays, scriptOf().stages)
         : 0;
 
   return (
@@ -174,11 +175,11 @@ export function ReviewScreen() {
           onClick={() => setFlipped(true)}
         >
           <div className="center">
-            <HebrewWord
-              word={word?.hebrew ?? card.wordId}
-              rootIndices={word?.rootIndices}
+            <ScriptWord
+              word={word?.text ?? card.wordId}
+              highlight={word?.rootIndices}
               size={46}
-              highlight={flipped}
+              showHighlight={flipped}
               fadeStage={fadeStage}
             />
             <div className="translit" style={{ marginTop: 10, minHeight: 18 }}>
@@ -193,7 +194,7 @@ export function ReviewScreen() {
                     style={{ minHeight: 0, padding: 6 }}
                     onClick={(e) => {
                       e.stopPropagation();
-                      void playWord(card.wordId, word?.hebrew ?? "", {
+                      void playWord(card.wordId, word?.text ?? "", {
                         enabled: settings?.soundEnabled ?? true,
                       });
                     }}

@@ -1,7 +1,7 @@
 import { useMemo, useState, type ReactNode } from "react";
-import { HebrewWord } from "@/components/HebrewWord";
+import { ScriptWord } from "@/components/ScriptWord";
 import { Button } from "@/components/ui";
-import { formatRoot } from "@/lib/hebrew";
+import { scriptOf } from "@/content/course";
 import { playWord } from "@/lib/audio";
 import { wordById, words as allWords, type Exercise, type Parse } from "@/content";
 import { gradeChoice, gradeMatching, gradeParse, gradeTranslation, type GradeResult } from "./grade";
@@ -42,7 +42,11 @@ function seededShuffle<T>(items: readonly T[], seed: string): T[] {
   return out;
 }
 
-const HEBREW_RANGE = /[֐-׿]/;
+/** True when a choice is written in the course's script rather than English. */
+function isScriptText(s: string): boolean {
+  const script = scriptOf();
+  return script.toLetterClusters(s).some((c) => script.isLetter(c));
+}
 
 function Note({ children }: { children: ReactNode }) {
   if (!children) return null;
@@ -84,18 +88,18 @@ function McVocabExerciseView({
     const others = allWords.filter((w) => w.id !== word.id && w.rootId !== word.rootId);
     const picked = seededShuffle(others, exercise.id)
       .slice(0, 3)
-      .map((w) => w.hebrew);
-    return seededShuffle([word.hebrew, ...picked], exercise.id);
+      .map((w) => w.text);
+    return seededShuffle([word.text, ...picked], exercise.id);
   }, [word, production, exercise.id]);
 
   if (!word) return null;
-  const answer = production ? word.hebrew : word.gloss;
+  const answer = production ? word.text : word.gloss;
   const revealed = selected !== null;
 
   const choose = (c: string) => {
     if (revealed) return;
     setSelected(c);
-    void playWord(word.id, word.hebrew, { enabled: soundEnabled });
+    void playWord(word.id, word.text, { enabled: soundEnabled });
     onAnswer(gradeChoice(c, answer));
   };
 
@@ -107,11 +111,11 @@ function McVocabExerciseView({
           <p style={{ fontSize: 22, fontWeight: 600, margin: 0 }}>{word.gloss}</p>
         ) : (
           <>
-            <HebrewWord
-              word={word.hebrew}
-              rootIndices={word.rootIndices}
+            <ScriptWord
+              word={word.text}
+              highlight={word.rootIndices}
               size={52}
-              highlight={revealed}
+              showHighlight={revealed}
               fadeStage={fadeStage}
             />
             <div className="translit" style={{ marginTop: 10, minHeight: 18 }}>
@@ -132,7 +136,7 @@ function McVocabExerciseView({
             : "";
           return (
             <button key={c} className={`choice${cls}`} onClick={() => choose(c)} disabled={revealed}>
-              {production ? <HebrewWord word={c} size={26} highlight={false} /> : c}
+              {production ? <ScriptWord word={c} size={26} showHighlight={false} /> : c}
             </button>
           );
         })}
@@ -164,7 +168,7 @@ function ConjugationExerciseView({
       <div className="center" style={{ padding: "30px 24px 10px" }}>
         <Prompt>Grammar drill</Prompt>
         <p style={{ fontSize: 16, lineHeight: 1.55, margin: "0 0 14px" }}>{exercise.prompt}</p>
-        <span className="tag tag--root">{formatRoot(exercise.rootId)}</span>
+        <span className="tag tag--root">{scriptOf().joinLetters(exercise.rootId)}</span>
       </div>
       <div
         style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center", padding: "14px 20px" }}
@@ -185,7 +189,7 @@ function ConjugationExerciseView({
               onClick={() => choose(c)}
               disabled={revealed}
             >
-              <HebrewWord word={c} size={24} highlight={false} />
+              <ScriptWord word={c} size={24} showHighlight={false} />
             </button>
           );
         })}
@@ -204,7 +208,7 @@ function ConstructChainExerciseView({
   const [selected, setSelected] = useState<string | null>(null);
   const choices = useMemo(() => seededShuffle(exercise.choices, exercise.id), [exercise]);
   const revealed = selected !== null;
-  const isHebrew = HEBREW_RANGE.test(exercise.choices[0] ?? "");
+  const inScript = isScriptText(exercise.choices[0] ?? "");
 
   const choose = (c: string) => {
     if (revealed) return;
@@ -231,11 +235,11 @@ function ConstructChainExerciseView({
             <button
               key={c}
               className={`choice${cls}`}
-              style={{ textAlign: isHebrew ? "center" : "start" }}
+              style={{ textAlign: inScript ? "center" : "start" }}
               onClick={() => choose(c)}
               disabled={revealed}
             >
-              {isHebrew ? <HebrewWord word={c} size={24} highlight={false} /> : c}
+              {inScript ? <ScriptWord word={c} size={24} showHighlight={false} /> : c}
             </button>
           );
         })}
@@ -309,15 +313,15 @@ function ParsingExerciseView({
     <div>
       <div className="center" style={{ padding: "26px 24px 8px" }}>
         <Prompt>{exercise.prompt}</Prompt>
-        <HebrewWord
-          word={exercise.hebrew}
-          rootIndices={exercise.rootIndices}
+        <ScriptWord
+          word={exercise.text}
+          highlight={exercise.rootIndices}
           size={46}
-          highlight
+          showHighlight
           fadeStage={fadeStage}
         />
         <div style={{ marginTop: 10 }}>
-          <span className="tag tag--root">{formatRoot(exercise.rootId)}</span>
+          <span className="tag tag--root">{scriptOf().joinLetters(exercise.rootId)}</span>
         </div>
       </div>
 
@@ -384,10 +388,10 @@ function BinyanCompareExerciseView({
     [exercise],
   );
   const expected = useMemo(
-    () => Object.fromEntries(exercise.forms.map((f) => [f.hebrew, f.gloss])),
+    () => Object.fromEntries(exercise.forms.map((f) => [f.text, f.gloss])),
     [exercise],
   );
-  const complete = exercise.forms.every((f) => assigned[f.hebrew]);
+  const complete = exercise.forms.every((f) => assigned[f.text]);
 
   const assign = (gloss: string) => {
     if (result || !activeForm) return;
@@ -412,16 +416,16 @@ function BinyanCompareExerciseView({
     <div>
       <div className="center" style={{ padding: "26px 24px 6px" }}>
         <Prompt>{exercise.prompt}</Prompt>
-        <span className="tag tag--root">{formatRoot(exercise.rootId)}</span>
+        <span className="tag tag--root">{scriptOf().joinLetters(exercise.rootId)}</span>
       </div>
 
       <div className="stack pad-x" style={{ marginTop: 16 }}>
         {exercise.forms.map((f) => {
-          const chosen = assigned[f.hebrew];
-          const correct = result?.fields?.[f.hebrew];
+          const chosen = assigned[f.text];
+          const correct = result?.fields?.[f.text];
           return (
             <button
-              key={f.hebrew}
+              key={f.text}
               className="choice"
               style={{
                 borderColor:
@@ -429,16 +433,16 @@ function BinyanCompareExerciseView({
                     ? correct
                       ? "var(--sage)"
                       : "var(--root)"
-                    : activeForm === f.hebrew
+                    : activeForm === f.text
                       ? "var(--gold)"
                       : undefined,
               }}
               disabled={!!result}
-              onClick={() => setActiveForm(activeForm === f.hebrew ? null : f.hebrew)}
+              onClick={() => setActiveForm(activeForm === f.text ? null : f.text)}
             >
               <span className="row row--between">
                 <span>
-                  <HebrewWord word={f.hebrew} size={26} highlight={false} />
+                  <ScriptWord word={f.text} size={26} showHighlight={false} />
                   <span className="translit" style={{ display: "block", marginTop: 4 }}>
                     {f.translit} · {f.binyan}
                   </span>
@@ -510,7 +514,7 @@ function ListeningExerciseView({
   const revealed = selected !== null;
 
   const play = async () => {
-    const r = await playWord(word.id, word.hebrew, { enabled: soundEnabled });
+    const r = await playWord(word.id, word.text, { enabled: soundEnabled });
     setHasPlayed(true);
     setAudioSource(r.source);
   };
@@ -540,7 +544,7 @@ function ListeningExerciseView({
         )}
         {revealed && (
           <div style={{ marginTop: 16 }}>
-            <HebrewWord word={word.hebrew} rootIndices={word.rootIndices} size={40} highlight />
+            <ScriptWord word={word.text} highlight={word.rootIndices} size={40} showHighlight />
             <div className="translit" style={{ marginTop: 6 }}>
               {word.translit}
             </div>
@@ -606,7 +610,7 @@ function TranslationExerciseView({
     <div>
       <div className="center" style={{ padding: "28px 24px 8px" }}>
         <Prompt>{exercise.prompt}</Prompt>
-        <HebrewWord word={exercise.hebrew} size={38} highlight={false} fadeStage={fadeStage} />
+        <ScriptWord word={exercise.text} size={38} showHighlight={false} fadeStage={fadeStage} />
       </div>
 
       <div className="pad-x stack" style={{ marginTop: 16 }}>

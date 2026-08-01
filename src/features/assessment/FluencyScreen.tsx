@@ -5,7 +5,7 @@ import { passageById, units } from "@/content";
 import { db } from "@/db";
 import { api } from "@/api/client";
 import { Banner, Button, Empty, TopBar } from "@/components/ui";
-import { HebrewWord } from "@/components/HebrewWord";
+import { ScriptWord } from "@/components/ScriptWord";
 import type { AssessmentResult } from "@/api/types";
 
 type Phase = "pick" | "reading" | "questions" | "done";
@@ -48,7 +48,7 @@ export function FluencyScreen() {
         .slice(0, 3)
         .map((o) => o.gloss);
       return {
-        hebrew: t.hebrew,
+        text: t.text,
         answer: t.gloss,
         choices: [t.gloss, ...distractors].sort(),
       };
@@ -149,7 +149,7 @@ export function FluencyScreen() {
             <div className="passage">
               {passage.tokens.map((t, i) => (
                 <span key={i}>
-                  <HebrewWord word={t.hebrew} size={30} highlight={false} />
+                  <ScriptWord word={t.text} size={30} showHighlight={false} />
                 </span>
               ))}
             </div>
@@ -182,7 +182,7 @@ export function FluencyScreen() {
         />
         <div className="center" style={{ padding: "34px 24px 8px" }}>
           <p className="small muted">What does this word mean?</p>
-          <HebrewWord word={q.hebrew} size={44} highlight={false} />
+          <ScriptWord word={q.text} size={44} showHighlight={false} />
         </div>
         <div className="choice-list" style={{ marginTop: 18 }}>
           {q.choices.map((c) => (

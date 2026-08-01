@@ -5,8 +5,8 @@ import { db } from "@/db";
 import { PassageReader } from "./PassageReader";
 import { RootSheet } from "./RootSheet";
 import { Empty, TopBar } from "@/components/ui";
-import { HebrewWord } from "@/components/HebrewWord";
-import { formatRoot } from "@/lib/hebrew";
+import { ScriptWord } from "@/components/ScriptWord";
+import { scriptOf } from "@/content/course";
 import { useState } from "react";
 import { useSession } from "@/state/session";
 
@@ -98,7 +98,7 @@ export function LibraryScreen() {
                 onClick={() => setRootSheet(r.id)}
               >
                 <div className="row row--between">
-                  <HebrewWord word={formatRoot(r.letters)} size={24} highlight={false} />
+                  <ScriptWord word={scriptOf().joinLetters(r.letters)} size={24} showHighlight={false} />
                   <div style={{ textAlign: "end" }}>
                     <div className="small">{r.coreGloss}</div>
                     <div className="small muted">

@@ -9,7 +9,8 @@
  * so no migration is needed — which is the whole point of defining it now.
  */
 import { z } from "zod";
-import { validateRootIndices } from "@/lib/hebrew";
+import { validateLetterIndices } from "@/lib/morphology";
+import { scriptOf } from "./course";
 
 export const CONTENT_SCHEMA_VERSION = 1;
 
@@ -71,7 +72,7 @@ export const RootSchema = z.object({
 export type Root = z.infer<typeof RootSchema>;
 
 /**
- * A vocabulary item. `rootIndices` are LETTER positions (see lib/hebrew), never
+ * A vocabulary item. `rootIndices` are LETTER positions (see lib/script), never
  * code-point positions — the refinement below makes that impossible to get wrong
  * silently.
  */
@@ -80,11 +81,11 @@ export const WordSchema = z
     id: z.string().min(1),
     rootId: z.string().min(2),
     /** Pointed form as it appears in the text. */
-    hebrew: z.string().min(1),
+    text: z.string().min(1),
     translit: z.string().min(1),
     gloss: z.string().min(1),
     partOfSpeech: PartOfSpeechSchema,
-    /** Letter indices within `hebrew` that carry the root consonants. */
+    /** Letter indices within `text` that carry the root consonants. */
     rootIndices: z.array(z.number().int().nonnegative()).min(2).max(4),
     parse: ParseSchema.optional(),
     /** Verse references where this exact form occurs. */
@@ -96,12 +97,12 @@ export const WordSchema = z
   // The guard that makes the original prototype's bug unrepresentable: a word
   // whose root indices land on vowel points instead of consonants cannot parse.
   .superRefine((w, ctx) => {
-    const check = validateRootIndices(w.hebrew, w.rootIndices);
+    const check = validateLetterIndices(scriptOf(), w.text, w.rootIndices);
     if (!check.ok) {
       ctx.addIssue({
         code: "custom",
         path: ["rootIndices"],
-        message: `word "${w.id}" (${w.hebrew}): ${check.reason}`,
+        message: `word "${w.id}" (${w.text}): ${check.reason}`,
       });
     }
   });
@@ -117,7 +118,7 @@ export const McVocabExercise = z.object({
   ...ExerciseBase,
   type: z.literal("mc_vocab"),
   wordId: z.string(),
-  /** hebrew→gloss or gloss→hebrew. */
+  /** script→gloss or gloss→script. */
   direction: z.enum(["recognition", "production"]).default("recognition"),
 });
 
@@ -134,7 +135,7 @@ export const ConjugationExercise = z.object({
 export const ParsingExercise = z.object({
   ...ExerciseBase,
   type: z.literal("parsing"),
-  hebrew: z.string(),
+  text: z.string(),
   rootId: z.string(),
   rootIndices: z.array(z.number().int().nonnegative()),
   answer: ParseSchema,
@@ -151,7 +152,7 @@ export const BinyanCompareExercise = z.object({
   forms: z
     .array(
       z.object({
-        hebrew: z.string(),
+        text: z.string(),
         binyan: BinyanSchema,
         gloss: z.string(),
         translit: z.string(),
@@ -180,7 +181,7 @@ export const ListeningExercise = z.object({
 export const TranslationExercise = z.object({
   ...ExerciseBase,
   type: z.literal("translation"),
-  hebrew: z.string(),
+  text: z.string(),
   /** Canonical answer plus acceptable paraphrases. */
   acceptable: z.array(z.string()).min(1),
   /** Words that must appear (lemma-ish) for a pass. */
@@ -204,7 +205,7 @@ export type ExerciseType = Exercise["type"];
 
 /** One word inside a verse, linked back to vocabulary where we teach it. */
 export const PassageTokenSchema = z.object({
-  hebrew: z.string(),
+  text: z.string(),
   translit: z.string(),
   gloss: z.string(),
   /** Null for function words we do not teach as vocabulary. */
@@ -315,8 +316,8 @@ export function validateBundle(bundle: unknown): { bundle: ContentBundle; errors
       if (t.rootId && !rootIds.has(t.rootId)) {
         errors.push(`passage ${p.id} token references unknown root ${t.rootId}`);
       }
-      const check = validateRootIndices(t.hebrew, t.rootIndices);
-      if (!check.ok) errors.push(`passage ${p.id} token "${t.hebrew}": ${check.reason}`);
+      const check = validateLetterIndices(scriptOf(), t.text, t.rootIndices);
+      if (!check.ok) errors.push(`passage ${p.id} token "${t.text}": ${check.reason}`);
     }
   }
 

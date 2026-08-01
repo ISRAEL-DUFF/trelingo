@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "@/api/client";
 import { NetworkError, type PlacementQuestion, type SubmitPlacementResponse } from "@/api/types";
 import { Banner, Button, Spinner, TopBar } from "@/components/ui";
-import { HebrewWord } from "@/components/HebrewWord";
+import { ScriptWord } from "@/components/ScriptWord";
 import { unlockUnits } from "@/db/repo";
 import { unitById } from "@/content";
 import { useSession } from "@/state/session";
@@ -123,7 +123,7 @@ export function PlacementScreen() {
       />
       <div className="center" style={{ padding: "34px 24px 10px" }}>
         <p className="small muted">{q.prompt}</p>
-        <HebrewWord word={q.hebrew} size={50} highlight={false} />
+        <ScriptWord word={q.text} size={50} showHighlight={false} />
       </div>
       <div className="choice-list" style={{ marginTop: 20 }}>
         {q.choices.map((c) => (
