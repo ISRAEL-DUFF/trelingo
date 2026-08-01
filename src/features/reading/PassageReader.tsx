@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { passageById } from "@/content";
+import { useCourseContent } from "@/state/useCourse";
 import { ScriptWord } from "@/components/ScriptWord";
 import { RootSheet } from "./RootSheet";
 import { useSession } from "@/state/session";
@@ -23,6 +23,7 @@ export function PassageReader({
   showTranslation?: boolean;
   fadeStage?: number;
 }) {
+  const { passageById } = useCourseContent();
   const passage = passageById.get(passageId);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [rootSheet, setRootSheet] = useState<string | null>(null);

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLiveQuery } from "dexie-react-hooks";
-import { passageById, units } from "@/content";
+import { useCourseContent } from "@/state/useCourse";
 import { db } from "@/db";
 import { api } from "@/api/client";
 import { Banner, Button, Empty, TopBar } from "@/components/ui";
@@ -19,6 +19,7 @@ type Phase = "pick" | "reading" | "questions" | "done";
  * the same as having forgotten a word.
  */
 export function FluencyScreen() {
+  const { passageById, units } = useCourseContent();
   const navigate = useNavigate();
   const [phase, setPhase] = useState<Phase>("pick");
   const [passageId, setPassageId] = useState<string | null>(null);

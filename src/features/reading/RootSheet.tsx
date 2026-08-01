@@ -1,11 +1,11 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { Link } from "react-router-dom";
-import { passageById, passagesByFamily, familyById, unitByWordId, wordsByFamily } from "@/content";
+import { useActiveCourseId, useCourseContent } from "@/state/useCourse";
 import { ScriptWord } from "@/components/ScriptWord";
 import { Sheet } from "@/components/ui";
 import { scriptOf } from "@/content/course";
 import { db } from "@/db";
-import { DEFAULT_COURSE_ID } from "@/content/course";
+
 
 /**
  * The root card (spec §4 Phase 4): every word in the app built on this root,
@@ -15,11 +15,14 @@ import { DEFAULT_COURSE_ID } from "@/content/course";
  * a root once and it pays off across a family of words.
  */
 export function RootSheet({ rootId, onClose }: { rootId: string | null; onClose: () => void }) {
+  const { familyById, wordsByFamily, passagesByFamily, unitByWordId, passageById } =
+    useCourseContent();
+  const courseId = useActiveCourseId();
   const root = rootId ? familyById.get(rootId) : undefined;
   const family = rootId ? (wordsByFamily[rootId] ?? []) : [];
   const cards = useLiveQuery(
-    async () => (rootId ? db.srsCards.bulkGet(family.map((w) => [DEFAULT_COURSE_ID, w.id] as [typeof DEFAULT_COURSE_ID, string])) : []),
-    [rootId, family.length],
+    async () => (rootId ? db.srsCards.bulkGet(family.map((w) => [courseId, w.id] as [typeof courseId, string])) : []),
+    [rootId, family.length, courseId],
   );
 
   const cardFor = (wordId: string) => cards?.find((c) => c?.wordId === wordId) ?? undefined;

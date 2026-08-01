@@ -1,24 +1,29 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { Link, useNavigate } from "react-router-dom";
-import { units } from "@/content";
+import { useCourse, useCourseContent } from "@/state/useCourse";
+import { CourseSwitcher } from "@/features/courses/CourseScreen";
+import { useState } from "react";
 import { db } from "@/db";
-import { getDueCounts, getPlacementUnlocked, getStreak, getXp } from "@/db/repo";
+import { ALL_COURSES, getDueCounts, getPlacementUnlocked, getStreak, getXp } from "@/db/repo";
 import { TopBar } from "@/components/ui";
 import { SyncIndicator } from "@/features/sync/SyncIndicator";
-import { textProps } from "@/content/course";
 
 type Status = "done" | "current" | "locked";
 
 export function PathScreen() {
+  const { units } = useCourseContent();
+  const course = useCourse();
+  const [switching, setSwitching] = useState(false);
   const navigate = useNavigate();
 
   const data = useLiveQuery(async () => {
-    const [progress, counts, xp, streak, unlocked] = await Promise.all([
+    const [progress, counts, xp, streak, unlocked, allCounts] = await Promise.all([
       db.unitProgress.toArray(),
       getDueCounts(),
       getXp(),
       getStreak(),
       getPlacementUnlocked(),
+      getDueCounts(Date.now(), ALL_COURSES),
     ]);
     return {
       completed: new Set(progress.map((p) => p.unitId)),
@@ -26,6 +31,7 @@ export function PathScreen() {
       xp,
       streak,
       unlocked: new Set(unlocked),
+      allDue: allCounts.due + allCounts.new,
     };
   }, []);
 
@@ -61,18 +67,20 @@ export function PathScreen() {
       />
 
       <div className="center" style={{ padding: "22px 20px 4px" }}>
-        <p className="small muted" style={{ margin: 0, fontStyle: "italic", letterSpacing: 1 }}>
-          <span {...textProps()}>
-            שֹׁרֶשׁ
-          </span>{" "}
-          — “Root”
+        <button
+          className="btn btn--ghost"
+          style={{ minHeight: 0, padding: "4px 12px", color: "var(--accent)", fontWeight: 600 }}
+          onClick={() => setSwitching(true)}
+        >
+          {course.name} <span aria-hidden>▾</span>
+        </button>
+        <p className="small muted" style={{ margin: "2px 0 0", lineHeight: 1.5 }}>
+          {course.subtitle}
         </p>
-        <h1 className="title h1" style={{ marginTop: 2 }}>
-          Learn by the Root
-        </h1>
       </div>
 
       <SyncIndicator />
+      <CourseSwitcher open={switching} onClose={() => setSwitching(false)} />
 
       {dueTotal > 0 && (
         <div className="center" style={{ margin: "16px 0 4px" }}>
@@ -86,6 +94,19 @@ export function PathScreen() {
             onClick={() => navigate("/review")}
           >
             🔁 Review — {dueTotal} due
+          </button>
+        </div>
+      )}
+
+      {/* D4: the merged session is offered, never imposed. */}
+      {(data?.allDue ?? 0) > dueTotal && (
+        <div className="center" style={{ marginTop: 6 }}>
+          <button
+            className="btn btn--ghost"
+            style={{ minHeight: 0, fontSize: 13 }}
+            onClick={() => navigate("/review?all")}
+          >
+            or review all {data!.allDue} across every course
           </button>
         </div>
       )}
@@ -124,7 +145,7 @@ export function PathScreen() {
           >
             <div className="row row--between">
               <div>
-                <div style={{ fontWeight: 600 }}>Already know some Hebrew?</div>
+                <div style={{ fontWeight: 600 }}>Already know some {course.name}?</div>
                 <div className="small muted">Take a short placement test and skip ahead.</div>
               </div>
               <span className="muted">›</span>

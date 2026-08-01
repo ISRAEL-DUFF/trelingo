@@ -14,6 +14,7 @@ import { FluencyScreen } from "@/features/assessment/FluencyScreen";
 import { SettingsScreen } from "@/features/settings/SettingsScreen";
 import { AuthScreen } from "@/features/auth/AuthScreen";
 import { DevPanel } from "@/features/dev/DevPanel";
+import { CourseScreen } from "@/features/courses/CourseScreen";
 
 import { useSession } from "@/state/session";
 import { startSyncTriggers } from "@/sync/sync";
@@ -116,6 +117,7 @@ export default function App() {
         <Route path="/decks" element={<DecksScreen />} />
         <Route path="/placement" element={<PlacementScreen />} />
         <Route path="/assessment" element={<FluencyScreen />} />
+        <Route path="/courses" element={<CourseScreen />} />
         <Route path="/settings" element={<SettingsScreen />} />
         <Route path="/auth" element={<AuthScreen />} />
         <Route path="/dev" element={<DevPanel />} />

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { wordById } from "@/content";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useCourseContent } from "@/state/useCourse";
 import { ScriptWord } from "@/components/ScriptWord";
 import { Button, Spinner } from "@/components/ui";
 import { RootSheet } from "@/features/reading/RootSheet";
@@ -13,7 +13,15 @@ import {
 } from "@/srs/engine";
 import { fadeStageForInterval } from "@/lib/script";
 import { scriptOf } from "@/content/course";
-import { getDeckQueue, getRecentEvents, getReviewQueue, recordReview, addXp, touchStreak } from "@/db/repo";
+import {
+  ALL_COURSES,
+  addXp,
+  getDeckQueue,
+  getRecentEvents,
+  getReviewQueue,
+  recordReview,
+  touchStreak,
+} from "@/db/repo";
 import { db } from "@/db";
 import { useSession } from "@/state/session";
 import { sync } from "@/sync/sync";
@@ -36,7 +44,11 @@ const RATING_STYLE: Record<Rating, { bg: string; color: string }> = {
  * which is the behaviour that filtering was accidentally approximating.
  */
 export function ReviewScreen() {
+  const { wordById } = useCourseContent();
   const { deckId } = useParams<{ deckId?: string }>();
+  // D4: merging every course into one session is opt-in via ?all, because
+  // alternating RTL Hebrew and LTR Greek mid-session has a real cognitive cost.
+  const merged = new URLSearchParams(useLocation().search).has("all");
   const navigate = useNavigate();
   const settings = useSession((s) => s.settings);
 
@@ -55,15 +67,16 @@ export function ReviewScreen() {
         cards = deck ? await getDeckQueue(deck.wordIds) : [];
       } else {
         // Adaptive pacing: if recent recall is poor, introduce fewer new cards.
-        const recent = await getRecentEvents(7);
-        cards = await getReviewQueue(Date.now(), adaptiveNewCardLimit(recent));
+        const scope = merged ? ALL_COURSES : undefined;
+        const recent = await getRecentEvents(7, scope);
+        cards = await getReviewQueue(Date.now(), adaptiveNewCardLimit(recent), scope);
       }
       if (!cancelled) setQueue(cards);
     })();
     return () => {
       cancelled = true;
     };
-  }, [deckId]);
+  }, [deckId, merged]);
 
   const card = queue?.[index];
   const word = card ? wordById.get(card.wordId) : undefined;

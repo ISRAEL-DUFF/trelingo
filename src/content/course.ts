@@ -112,14 +112,59 @@ export const courses: Course[] = [HEBREW_BIBLICAL, GREEK_KOINE, GREEK_ATTIC];
 
 export const courseById = new Map(courses.map((c) => [c.id, c]));
 
-/**
- * The active course. A single course exists today; Phase 4 replaces this with a
- * user-selected value. Keeping the indirection here means call sites are already
- * written against "the current course" rather than against Hebrew.
- */
 export const DEFAULT_COURSE_ID: CourseId = "hebrew-biblical";
 
-export function getCourse(id: CourseId = DEFAULT_COURSE_ID): Course {
+/**
+ * The active course.
+ *
+ * Held here, outside React, because the repository and sync layers need it too
+ * and neither can call a hook. The UI subscribes via `useActiveCourse()`.
+ *
+ * Mirrored into localStorage so the boot script can apply the right accent and
+ * font before first paint — the same reason the theme is mirrored.
+ */
+const ACTIVE_COURSE_KEY = "shoresh.course";
+
+function readStoredCourseId(): CourseId {
+  try {
+    const raw = localStorage.getItem(ACTIVE_COURSE_KEY);
+    if (raw && courseById.has(raw as CourseId)) return raw as CourseId;
+  } catch {
+    /* private mode — fall through */
+  }
+  return DEFAULT_COURSE_ID;
+}
+
+let activeCourseId: CourseId = typeof localStorage === "undefined" ? DEFAULT_COURSE_ID : readStoredCourseId();
+
+const listeners = new Set<() => void>();
+
+export function getActiveCourseId(): CourseId {
+  return activeCourseId;
+}
+
+export function setActiveCourse(id: CourseId): void {
+  if (!courseById.has(id)) throw new Error(`Unknown course "${id}"`);
+  if (id === activeCourseId) return;
+  activeCourseId = id;
+  try {
+    localStorage.setItem(ACTIVE_COURSE_KEY, id);
+  } catch {
+    /* non-fatal */
+  }
+  applyCourse(getCourse(id));
+  listeners.forEach((l) => l());
+}
+
+export function subscribeToCourse(l: () => void): () => void {
+  listeners.add(l);
+  return () => {
+    listeners.delete(l);
+  };
+}
+
+/** Defaults to the ACTIVE course, so call sites follow the learner's choice. */
+export function getCourse(id: CourseId = activeCourseId): Course {
   const c = courseById.get(id);
   if (!c) throw new Error(`Unknown course "${id}"`);
   return c;

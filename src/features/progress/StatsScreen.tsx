@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { db } from "@/db";
 import { getLeeches, getRecentEvents, getStats } from "@/db/repo";
 import { retentionRate, adaptiveNewCardLimit, DEFAULT_CONFIG } from "@/srs/engine";
-import { wordById, families } from "@/content";
+import { useCourseContent } from "@/state/useCourse";
 import { ScriptWord } from "@/components/ScriptWord";
 import { Empty, TopBar } from "@/components/ui";
 
 export function StatsScreen() {
+  const { wordById, families } = useCourseContent();
   const data = useLiveQuery(async () => {
     const [stats, events, leeches] = await Promise.all([
       getStats(),

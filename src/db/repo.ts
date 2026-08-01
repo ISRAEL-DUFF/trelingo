@@ -25,8 +25,8 @@ import {
   type ReviewEvent,
   type SrsCard,
 } from "@/srs/engine";
-import { unitById, words } from "@/content";
-import { DEFAULT_COURSE_ID, type CourseId } from "@/content/course";
+import { contentFor } from "@/content";
+import { getActiveCourseId, type CourseId } from "@/content/course";
 import type { StreakState, UnitProgress } from "@/api/types";
 
 /** Pass this instead of a course id to work across every course (D4). */
@@ -38,13 +38,13 @@ const scoped = (courseId: CourseScope) =>
 
 // ---------- cards ----------
 
-export async function getAllCards(courseId: CourseScope = DEFAULT_COURSE_ID): Promise<LocalCard[]> {
+export async function getAllCards(courseId: CourseScope = getActiveCourseId()): Promise<LocalCard[]> {
   return scoped(courseId);
 }
 
 export async function getCard(
   wordId: string,
-  courseId: CourseId = DEFAULT_COURSE_ID,
+  courseId: CourseId = getActiveCourseId(),
 ): Promise<LocalCard | undefined> {
   return db.srsCards.get([courseId, wordId]);
 }
@@ -52,7 +52,7 @@ export async function getCard(
 /** Introduce vocabulary as new cards, skipping any the learner already has. */
 export async function ensureCards(
   wordIds: string[],
-  courseId: CourseId = DEFAULT_COURSE_ID,
+  courseId: CourseId = getActiveCourseId(),
 ): Promise<void> {
   const keys = wordIds.map((id) => [courseId, id] as [CourseId, string]);
   const existing = new Set((await db.srsCards.bulkGet(keys)).filter(Boolean).map((c) => c!.wordId));
@@ -70,7 +70,7 @@ export async function recordReview(
   wordId: string,
   rating: Rating,
   now = Date.now(),
-  courseId: CourseId = DEFAULT_COURSE_ID,
+  courseId: CourseId = getActiveCourseId(),
 ): Promise<LocalCard> {
   const deviceId = await getDeviceId();
   const existing = (await db.srsCards.get([courseId, wordId])) ?? { ...newCard(wordId), courseId };
@@ -96,7 +96,7 @@ export async function recordReview(
  * Rebuild every card in a course from its local log. Used as a repair path if
  * the derived cache is ever suspect.
  */
-export async function rebuildCardsFromLogs(courseId: CourseId = DEFAULT_COURSE_ID): Promise<void> {
+export async function rebuildCardsFromLogs(courseId: CourseId = getActiveCourseId()): Promise<void> {
   const logs = await db.reviewLogs.where({ courseId }).toArray();
   const events: ReviewEvent[] = logs.map((l) => ({
     wordId: l.wordId,
@@ -120,7 +120,7 @@ export async function rebuildCardsFromLogs(courseId: CourseId = DEFAULT_COURSE_I
  */
 export async function adoptServerCards(
   serverCards: readonly SrsCard[],
-  courseId: CourseId = DEFAULT_COURSE_ID,
+  courseId: CourseId = getActiveCourseId(),
 ): Promise<void> {
   const unsynced = await db.reviewLogs.where("synced").equals(0).toArray();
   const pendingByWord = new Map<string, ReviewEvent[]>();
@@ -162,7 +162,7 @@ export async function adoptServerCards(
 export async function getReviewQueue(
   now = Date.now(),
   newCardLimit?: number,
-  courseId: CourseScope = DEFAULT_COURSE_ID,
+  courseId: CourseScope | undefined = getActiveCourseId(),
 ): Promise<LocalCard[]> {
   const cards = await scoped(courseId);
   return buildReviewQueue(cards, now, {
@@ -174,7 +174,7 @@ export async function getReviewQueue(
 export async function getDeckQueue(
   wordIds: string[],
   now = Date.now(),
-  courseId: CourseId = DEFAULT_COURSE_ID,
+  courseId: CourseId = getActiveCourseId(),
 ): Promise<LocalCard[]> {
   const keys = wordIds.map((id) => [courseId, id] as [CourseId, string]);
   const cards = (await db.srsCards.bulkGet(keys)).map(
@@ -183,13 +183,13 @@ export async function getDeckQueue(
   return buildReviewQueue(cards, now, { newCardLimit: cards.length }) as LocalCard[];
 }
 
-export async function getDueCounts(now = Date.now(), courseId: CourseScope = DEFAULT_COURSE_ID) {
+export async function getDueCounts(now = Date.now(), courseId: CourseScope = getActiveCourseId()) {
   return dueCounts(await scoped(courseId), now);
 }
 
 export async function getRecentEvents(
   sinceDays = 30,
-  courseId: CourseScope = DEFAULT_COURSE_ID,
+  courseId: CourseScope | undefined = getActiveCourseId(),
 ): Promise<ReviewEvent[]> {
   const cutoff = Date.now() - sinceDays * 24 * 60 * 60 * 1000;
   const logs = await db.reviewLogs.where("reviewedAt").aboveOrEqual(cutoff).toArray();
@@ -199,20 +199,20 @@ export async function getRecentEvents(
 }
 
 /** Cards flagged as leeches, for the "needs attention" screen. */
-export async function getLeeches(courseId: CourseScope = DEFAULT_COURSE_ID): Promise<LocalCard[]> {
+export async function getLeeches(courseId: CourseScope = getActiveCourseId()): Promise<LocalCard[]> {
   return (await scoped(courseId)).filter((c) => c.isLeech);
 }
 
 // ---------- progress ----------
 
-export async function getProgress(courseId: CourseScope = DEFAULT_COURSE_ID): Promise<UnitProgress[]> {
+export async function getProgress(courseId: CourseScope = getActiveCourseId()): Promise<UnitProgress[]> {
   return courseId === ALL_COURSES
     ? db.unitProgress.toArray()
     : db.unitProgress.where({ courseId }).toArray();
 }
 
 export async function getCompletedUnitIds(
-  courseId: CourseId = DEFAULT_COURSE_ID,
+  courseId: CourseId = getActiveCourseId(),
 ): Promise<string[]> {
   return (await db.unitProgress.where({ courseId }).toArray()).map((p) => p.unitId);
 }
@@ -220,8 +220,9 @@ export async function getCompletedUnitIds(
 export async function completeUnit(
   unitId: string,
   score: number,
-  courseId: CourseId = DEFAULT_COURSE_ID,
+  courseId: CourseId = getActiveCourseId(),
 ): Promise<void> {
+  const { unitById } = contentFor(courseId);
   const unit = unitById.get(unitId);
   await db.transaction("rw", [db.unitProgress, db.srsCards], async () => {
     const existing = await db.unitProgress.get([courseId, unitId]);
@@ -246,13 +247,13 @@ export async function completeUnit(
 /** Placement can unlock units without the learner completing them. */
 export async function unlockUnits(
   unitIds: string[],
-  courseId: CourseId = DEFAULT_COURSE_ID,
+  courseId: CourseId = getActiveCourseId(),
 ): Promise<void> {
   await setMeta(`placementUnlocked:${courseId}`, unitIds);
 }
 
 export async function getPlacementUnlocked(
-  courseId: CourseId = DEFAULT_COURSE_ID,
+  courseId: CourseId = getActiveCourseId(),
 ): Promise<string[]> {
   return getMeta<string[]>(`placementUnlocked:${courseId}`, []);
 }
@@ -324,13 +325,13 @@ export async function setStreak(streak: StreakState): Promise<void> {
 
 // ---------- decks ----------
 
-export async function listLocalDecks(courseId: CourseScope = DEFAULT_COURSE_ID): Promise<LocalDeck[]> {
+export async function listLocalDecks(courseId: CourseScope = getActiveCourseId()): Promise<LocalDeck[]> {
   return courseId === ALL_COURSES ? db.decks.toArray() : db.decks.where({ courseId }).toArray();
 }
 
 export async function putLocalDecks(
   decks: readonly { id: string; name: string; wordIds: string[]; createdAt: number }[],
-  courseId: CourseId = DEFAULT_COURSE_ID,
+  courseId: CourseId = getActiveCourseId(),
 ): Promise<void> {
   await db.decks.where({ courseId }).delete();
   await db.decks.bulkPut(decks.map((d) => ({ ...d, courseId })));
@@ -338,7 +339,7 @@ export async function putLocalDecks(
 
 // ---------- stats ----------
 
-export async function getStats(now = Date.now(), courseId: CourseScope = DEFAULT_COURSE_ID) {
+export async function getStats(now = Date.now(), courseId: CourseScope = getActiveCourseId()) {
   const [cards, allLogs, progress, xp, streak] = await Promise.all([
     scoped(courseId),
     db.reviewLogs.toArray(),
@@ -349,8 +350,11 @@ export async function getStats(now = Date.now(), courseId: CourseScope = DEFAULT
   const logs = allLogs.filter((l) => courseId === ALL_COURSES || l.courseId === courseId);
 
   const known = cards.filter((c) => c.state === "review" && c.intervalDays >= 21).length;
+  // Stats for a merged scope span courses, so resolve words per card's course.
   const familiesSeen = new Set(
-    cards.map((c) => words.find((w) => w.id === c.wordId)?.familyId).filter(Boolean),
+    cards
+      .map((c) => contentFor(c.courseId).wordById.get(c.wordId)?.familyId)
+      .filter(Boolean),
   ).size;
 
   return {

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Banner, Button, Sheet, Switch, TopBar } from "@/components/ui";
 import { useSession } from "@/state/session";
-import { CONTENT_REVIEW_NOTES, families, units, words } from "@/content";
+import { CONTENT_REVIEW_NOTES } from "@/content";
+import { useCourseContent } from "@/state/useCourse";
 import { requestPersistentStorage, storageEstimate } from "@/db";
 import { api } from "@/api/client";
 import { useSyncState } from "@/features/sync/SyncIndicator";
@@ -13,6 +14,7 @@ import { getCourse } from "@/content/course";
 import { notificationState, requestNotificationPermission } from "@/lib/notifications";
 
 export function SettingsScreen() {
+  const { families, units, words } = useCourseContent();
   const navigate = useNavigate();
   const { user, settings, updateSettings, logout } = useSession();
   const syncStatus = useSyncState();
@@ -102,6 +104,18 @@ export function SettingsScreen() {
             </>
           )}
         </div>
+
+        {/* ---- course ---- */}
+        <Link to="/courses" className="card" style={{ display: "block", textDecoration: "none", color: "inherit" }}>
+          <div className="row row--between">
+            <div>
+              <span className="label">Course</span>
+              <div style={{ fontWeight: 600, marginTop: 4 }}>{course.name}</div>
+              <div className="small muted">{course.subtitle}</div>
+            </div>
+            <span className="muted">›</span>
+          </div>
+        </Link>
 
         {/* ---- appearance ---- */}
         <div className="card stack">

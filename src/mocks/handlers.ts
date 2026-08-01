@@ -15,7 +15,7 @@ import { API_BASE } from "@/api/client";
 import { mockDb } from "./db";
 import { mockConfig } from "./config";
 import { deriveCard, type ReviewEvent } from "@/srs/engine";
-import { units, words } from "@/content";
+import { contentFor } from "@/content";
 import type {
   ApiErrorBody,
   ApiUser,
@@ -133,7 +133,8 @@ function gemBalance(userId: string): number {
 
 // Placement questions are drawn from real content so the test actually measures
 // the thing the path teaches.
-function buildPlacementQuestions(): PlacementQuestion[] {
+function buildPlacementQuestions(courseId = "hebrew-biblical" as const): PlacementQuestion[] {
+  const { words } = contentFor(courseId);
   const picks = ["bara", "shamar", "mishmeret", "vayomer", "echsar", "dibber", "higdil", "shofet"];
   return picks.flatMap((id, i) => {
     const w = words.find((x) => x.id === id);
@@ -364,7 +365,7 @@ export const handlers = [
     const variant = (new URL(request.url).searchParams.get("variant") ??
       "sephardic") as AudioManifestEntry["variant"];
     return json({
-      entries: words.map<AudioManifestEntry>((w) => ({
+      entries: contentFor("hebrew-biblical").words.map<AudioManifestEntry>((w) => ({
         wordId: w.id,
         variant,
         url: url(`/audio/clip/${w.id}.${variant}.mp3`),
@@ -486,7 +487,9 @@ export const handlers = [
     // Score bands map onto unit placement levels.
     const ratio = questions.length ? correct / questions.length : 0;
     const levelAssigned = ratio >= 0.9 ? 4 : ratio >= 0.7 ? 3 : ratio >= 0.5 ? 2 : ratio >= 0.3 ? 1 : 0;
-    const unlockedUnitIds = units.filter((u) => u.placementLevel <= levelAssigned).map((u) => u.id);
+    const unlockedUnitIds = contentFor("hebrew-biblical")
+      .units.filter((u) => u.placementLevel <= levelAssigned)
+      .map((u) => u.id);
 
     const user = mockDb.findUserById(id)!;
     user.placementLevel = levelAssigned;

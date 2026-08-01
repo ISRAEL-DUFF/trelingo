@@ -5,7 +5,7 @@ import { NetworkError, type PlacementQuestion, type SubmitPlacementResponse } fr
 import { Banner, Button, Spinner, TopBar } from "@/components/ui";
 import { ScriptWord } from "@/components/ScriptWord";
 import { unlockUnits } from "@/db/repo";
-import { unitById } from "@/content";
+import { useCourseContent } from "@/state/useCourse";
 import { useSession } from "@/state/session";
 
 /**
@@ -13,6 +13,7 @@ import { useSession } from "@/state/session";
  * ahead rather than grinding through Genesis 1 to prove it.
  */
 export function PlacementScreen() {
+  const { unitById } = useCourseContent();
   const navigate = useNavigate();
   const user = useSession((s) => s.user);
   const [questions, setQuestions] = useState<PlacementQuestion[] | null>(null);

@@ -5,7 +5,7 @@ import { api } from "@/api/client";
 import { ApiError, NetworkError, type Deck } from "@/api/types";
 import { Banner, Button, Empty, Sheet, TopBar } from "@/components/ui";
 import { ScriptWord } from "@/components/ScriptWord";
-import { families, words, wordsByFamily } from "@/content";
+import { useCourseContent } from "@/state/useCourse";
 import { db } from "@/db";
 import { putLocalDecks } from "@/db/repo";
 import { scriptOf, textProps } from "@/content/course";
@@ -14,6 +14,7 @@ import { DEFAULT_COURSE_ID } from "@/content/course";
 
 /** Custom decks (spec §4 Phase 7): review any subset independently of the path. */
 export function DecksScreen() {
+  const { families, words, wordsByFamily } = useCourseContent();
   const navigate = useNavigate();
   const user = useSession((s) => s.user);
   const decks = useLiveQuery(() => db.decks.toArray(), []) ?? [];

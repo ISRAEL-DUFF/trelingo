@@ -1,6 +1,6 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { passages, families, units, wordsByFamily } from "@/content";
+import { useCourseContent } from "@/state/useCourse";
 import { db } from "@/db";
 import { PassageReader } from "./PassageReader";
 import { RootSheet } from "./RootSheet";
@@ -12,6 +12,7 @@ import { useSession } from "@/state/session";
 
 /** Every verse the learner has unlocked, re-readable at any time. */
 export function LibraryScreen() {
+  const { passages, families, units, wordsByFamily } = useCourseContent();
   const [tab, setTab] = useState<"verses" | "families">("verses");
   const [rootSheet, setRootSheet] = useState<string | null>(null);
 

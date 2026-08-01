@@ -10,7 +10,7 @@
  */
 import { z } from "zod";
 import { validateLetterIndices } from "@/lib/morphology";
-import { scriptOf, parseFieldsOf } from "./course";
+import { scriptOf, parseFieldsOf, getCourse, type CourseId } from "./course";
 import { isValidParseValue, type ParseFieldId } from "./parse-fields";
 
 export const CONTENT_SCHEMA_VERSION = 1;
@@ -137,20 +137,13 @@ export const WordSchema = z
     /** Distractor glosses for multiple choice. */
     distractors: z.array(z.string()).min(3),
     notes: z.string().optional(),
-  })
-  // The guard that makes both prototypes' bug unrepresentable: a word whose
-  // highlight lands on vowel points, or off the end of the word, cannot parse.
-  .superRefine((w, ctx) => {
-    const check = validateLetterIndices(scriptOf(), w.text, w.morphology.highlight);
-    if (!check.ok) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["morphology", "highlight"],
-        message: `word "${w.id}" (${w.text}): ${check.reason}`,
-      });
-    }
   });
 export type Word = z.infer<typeof WordSchema>;
+
+// The guard that makes both prototypes' bug unrepresentable — a highlight
+// landing on a vowel point, or off the end of the word — lives in
+// validateBundle rather than here, because it needs the course's script and a
+// Zod refinement has no way to receive one.
 
 // ---------- Exercises ----------
 // Each type carries its own payload shape. Grading logic lives in
@@ -306,9 +299,16 @@ export type ContentBundle = z.infer<typeof ContentBundleSchema>;
  * Parse + cross-reference check. Zod covers shape; this covers referential
  * integrity, which is where hand-authored content actually breaks.
  */
-export function validateBundle(bundle: unknown): { bundle: ContentBundle; errors: string[] } {
+export function validateBundle(
+  bundle: unknown,
+  courseId?: CourseId,
+): { bundle: ContentBundle; errors: string[] } {
   const parsed = ContentBundleSchema.parse(bundle);
   const errors: string[] = [];
+  // Validate against the course the content BELONGS to, not whichever happens
+  // to be active — otherwise CI passes or fails depending on UI state.
+  const course = getCourse(courseId);
+  const script = scriptOf(course);
 
   const familyIds = new Set(parsed.families.map((f) => f.id));
   const wordIds = new Set(parsed.words.map((w) => w.id));
@@ -320,7 +320,7 @@ export function validateBundle(bundle: unknown): { bundle: ContentBundle; errors
   for (const d of dupes(parsed.units.map((u) => u.id))) errors.push(`duplicate unit id: ${d}`);
   for (const d of dupes(parsed.families.map((f) => f.id))) errors.push(`duplicate family id: ${d}`);
 
-  const parseFields = parseFieldsOf();
+  const parseFields = parseFieldsOf(course);
   const knownFieldIds = new Set(parseFields.map((f) => f.id));
 
   /** Every parse value must be legal for THIS course's language. */
@@ -339,6 +339,8 @@ export function validateBundle(bundle: unknown): { bundle: ContentBundle; errors
   for (const w of parsed.words) {
     if (!familyIds.has(w.familyId)) errors.push(`word ${w.id} references unknown family ${w.familyId}`);
     checkParse(`word ${w.id}`, w.parse);
+    const highlight = validateLetterIndices(script, w.text, w.morphology.highlight);
+    if (!highlight.ok) errors.push(`word "${w.id}" (${w.text}): ${highlight.reason}`);
     if (w.distractors.includes(w.gloss)) {
       errors.push(`word ${w.id} lists its own gloss "${w.gloss}" as a distractor`);
     }
@@ -388,7 +390,7 @@ export function validateBundle(bundle: unknown): { bundle: ContentBundle; errors
       }
       // Function words legitimately have no morpheme to highlight.
       if (t.morphology) {
-        const check = validateLetterIndices(scriptOf(), t.text, t.morphology.highlight);
+        const check = validateLetterIndices(script, t.text, t.morphology.highlight);
         if (!check.ok) errors.push(`passage ${p.id} token "${t.text}": ${check.reason}`);
       }
       checkParse(`passage ${p.id} token "${t.text}"`, t.parse);

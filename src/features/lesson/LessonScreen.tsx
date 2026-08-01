@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { unitById, wordById } from "@/content";
+import { useCourseContent } from "@/state/useCourse";
 import { Button, TopBar } from "@/components/ui";
 import { ScriptWord } from "@/components/ScriptWord";
 import { ExerciseView } from "./Exercises";
@@ -20,6 +20,7 @@ import { PassageReader } from "@/features/reading/PassageReader";
  * separate "lesson score" that quietly disagrees with what the learner knows.
  */
 export function LessonScreen() {
+  const { unitById, wordById } = useCourseContent();
   const { unitId } = useParams<{ unitId: string }>();
   const navigate = useNavigate();
   const settings = useSession((s) => s.settings);

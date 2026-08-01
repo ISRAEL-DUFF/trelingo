@@ -4,7 +4,8 @@ import { Button } from "@/components/ui";
 import { scriptOf, parseFieldsOf } from "@/content/course";
 import { findField } from "@/content/parse-fields";
 import { playWord } from "@/lib/audio";
-import { wordById, words as allWords, type Exercise, type Parse } from "@/content";
+import { type Exercise, type Parse } from "@/content";
+import { useCourseContent } from "@/state/useCourse";
 import { gradeChoice, gradeMatching, gradeParse, gradeTranslation, type GradeResult } from "./grade";
 
 /** Narrow the Exercise union to one variant. */
@@ -77,6 +78,7 @@ function McVocabExerciseView({
   fadeStage = 0,
   soundEnabled,
 }: BaseProps & { exercise: Of<"mc_vocab"> }) {
+  const { wordById, words: allWords } = useCourseContent();
   const [selected, setSelected] = useState<string | null>(null);
   const word = wordById.get(exercise.wordId);
   const production = exercise.direction === "production";
@@ -462,6 +464,7 @@ function ListeningExerciseView({
   onAnswer,
   soundEnabled = true,
 }: BaseProps & { exercise: Of<"listening_mc"> }) {
+  const { wordById } = useCourseContent();
   const [selected, setSelected] = useState<string | null>(null);
   const [hasPlayed, setHasPlayed] = useState(false);
   const [audioSource, setAudioSource] = useState<string | null>(null);
