@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useCourseContent } from "@/state/useCourse";
 import { ScriptWord } from "@/components/ScriptWord";
 import { Button, Spinner } from "@/components/ui";
-import { RootSheet } from "@/features/reading/RootSheet";
+import { FamilySheet } from "@/features/reading/FamilySheet";
 import {
   adaptiveNewCardLimit,
   previewIntervals,
@@ -28,7 +28,7 @@ import { sync } from "@/sync/sync";
 import { playWord } from "@/lib/audio";
 
 const RATING_STYLE: Record<Rating, { bg: string; color: string }> = {
-  0: { bg: "var(--root-wash)", color: "var(--root)" },
+  0: { bg: "var(--danger-wash)", color: "var(--danger)" },
   1: { bg: "var(--gold-wash)", color: "var(--gold)" },
   2: { bg: "var(--sage-wash)", color: "var(--sage)" },
   3: { bg: "var(--ink-wash)", color: "var(--ink)" },
@@ -56,7 +56,7 @@ export function ReviewScreen() {
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [reviewed, setReviewed] = useState(0);
-  const [rootSheet, setRootSheet] = useState<string | null>(null);
+  const [familySheet, setFamilySheet] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -220,10 +220,10 @@ export function ReviewScreen() {
                   </button>
                   {word && (
                     <button
-                      className="tag tag--root"
+                      className="tag tag--family"
                       onClick={(e) => {
                         e.stopPropagation();
-                        setRootSheet(word.familyId);
+                        setFamilySheet(word.familyId);
                       }}
                     >
                       {word.familyId}
@@ -266,7 +266,7 @@ export function ReviewScreen() {
         </div>
       )}
 
-      <RootSheet rootId={rootSheet} onClose={() => setRootSheet(null)} />
+      <FamilySheet familyId={familySheet} onClose={() => setFamilySheet(null)} />
     </div>
   );
 }

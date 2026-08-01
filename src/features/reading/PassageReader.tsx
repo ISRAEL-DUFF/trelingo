@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useCourseContent } from "@/state/useCourse";
 import { ScriptWord } from "@/components/ScriptWord";
-import { RootSheet } from "./RootSheet";
+import { FamilySheet } from "./FamilySheet";
 import { useSession } from "@/state/session";
 import { playWord, speak } from "@/lib/audio";
 import { textProps } from "@/content/course";
@@ -26,7 +26,7 @@ export function PassageReader({
   const { passageById } = useCourseContent();
   const passage = passageById.get(passageId);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [rootSheet, setRootSheet] = useState<string | null>(null);
+  const [familySheet, setFamilySheet] = useState<string | null>(null);
   const settings = useSession((s) => s.settings);
 
   if (!passage) return <div className="empty">Passage not found.</div>;
@@ -81,7 +81,7 @@ export function PassageReader({
                     🔊
                   </button>
                   {active.familyId && (
-                    <button className="tag tag--root" onClick={() => setRootSheet(active.familyId)}>
+                    <button className="tag tag--family" onClick={() => setFamilySheet(active.familyId)}>
                       {active.familyId}
                     </button>
                   )}
@@ -112,7 +112,7 @@ export function PassageReader({
         </div>
       )}
 
-      <RootSheet rootId={rootSheet} onClose={() => setRootSheet(null)} />
+      <FamilySheet familyId={familySheet} onClose={() => setFamilySheet(null)} />
     </div>
   );
 }

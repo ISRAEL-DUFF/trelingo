@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { GREEK_ATTIC, GREEK_KOINE, HEBREW_BIBLICAL, courses, getCourse, scriptOf } from "./course";
+import { GREEK_ATTIC, GREEK_KOINE, HEBREW_BIBLICAL, courses, getCourse, morphemeLabel, scriptOf } from "./course";
+import { reviewNotesFor } from "./index";
 
 /**
  * Course configuration invariants.
@@ -76,6 +77,14 @@ describe("diacritics setting is described in the learner's own language", () => 
     }
   });
 
+  it("names the morpheme the way the language does", () => {
+    // Hebrew teaches the root; Greek teaches the stem/ending. Saying "root" to
+    // a Greek learner is the same class of error as "niqqud" was.
+    expect(HEBREW_BIBLICAL.morphemeNoun).toBe("root");
+    expect(GREEK_KOINE.morphemeNoun).toBe("stem");
+    for (const c of courses) expect(c.morphemeNoun.length, c.id).toBeGreaterThan(0);
+  });
+
   it("provides copy for every setting value", () => {
     for (const c of courses) {
       for (const k of ["always", "fading", "off"] as const) {
@@ -102,5 +111,45 @@ describe("parse fields match the language", () => {
     expect(gender(HEBREW_BIBLICAL)).not.toContain("n");
     expect(gender(GREEK_KOINE)).toContain("n");
     expect(gender(GREEK_KOINE)).not.toContain("c");
+  });
+});
+
+describe("morpheme label", () => {
+  // Screens said "Roots" to a Greek learner because they hardcoded the word.
+  // Everything user-visible now goes through morphemeLabel.
+  it("speaks each course's own language", () => {
+    expect(morphemeLabel(HEBREW_BIBLICAL)).toEqual({
+      one: "root", many: "roots", One: "Root", Many: "Roots",
+    });
+    expect(morphemeLabel(GREEK_KOINE)).toEqual({
+      one: "stem", many: "stems", One: "Stem", Many: "Stems",
+    });
+  });
+
+  it("produces non-empty forms for every course", () => {
+    for (const c of courses) {
+      const m = morphemeLabel(c);
+      for (const [k, v] of Object.entries(m)) expect(v.length, `${c.id}.${k}`).toBeGreaterThan(0);
+    }
+  });
+});
+
+describe("content provenance is per course", () => {
+  // The settings sheet showed Hebrew's notes for every course, which hid the
+  // Attic licence blocker — the single most important note in the project.
+  it("gives every course its own notes", () => {
+    for (const c of courses) expect(reviewNotesFor(c.id).length, c.id).toBeGreaterThan(0);
+  });
+
+  it("does not show one course's caveats under another", () => {
+    const hebrew = reviewNotesFor("hebrew-biblical").map((n) => n.id);
+    const attic = reviewNotesFor("greek-attic").map((n) => n.id);
+    expect(new Set(hebrew)).not.toEqual(new Set(attic));
+  });
+
+  it("surfaces the Attic licence blocker in the app, not only in the repo", () => {
+    const notes = reviewNotesFor("greek-attic");
+    expect(notes[0]!.id).toBe("licence");
+    expect(notes[0]!.note).toMatch(/NonCommercial/);
   });
 });

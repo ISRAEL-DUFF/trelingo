@@ -48,8 +48,8 @@ describe(".passage layout", () => {
   });
 });
 
-describe(".hebrew text rendering", () => {
-  const body = ruleBody(".hebrew");
+describe(".script text rendering", () => {
+  const body = ruleBody(".script");
 
   it("isolates bidi rather than overriding it", () => {
     // `bidi-override` forces visual order and corrupts mixed-direction content,
@@ -66,5 +66,24 @@ describe(".hebrew text rendering", () => {
 
   it("takes its font from the course rather than hardcoding the Hebrew face", () => {
     expect(body).toMatch(/--script-font/);
+  });
+});
+
+/*
+ * .tag--family renders family ids — Hebrew roots, Greek stems — so it needs the
+ * same two guarantees as .script. It had neither: it pinned the Hebrew face,
+ * which has no Greek glyphs, and forced direction: rtl. Verified in the running
+ * app on the Attic course before this was fixed.
+ */
+describe(".tag--family renders whatever script the course uses", () => {
+  const body = ruleBody(".tag--family");
+
+  it("takes its font from the course", () => {
+    expect(body).toMatch(/--script-font/);
+    expect(body).not.toMatch(/Frank Ruhl/);
+  });
+
+  it("does not hardcode a direction", () => {
+    expect(body).not.toMatch(/[^-]direction\s*:/);
   });
 });

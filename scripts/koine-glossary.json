@@ -1,0 +1,107 @@
+{
+  "_readme": [
+    "Curation layer for the Koine course. This file holds ONLY what a corpus cannot supply:",
+    "English glosses, multiple-choice distractors, teaching notes, and — where the corpus",
+    "cannot derive a stem — an explicit `stem` override.",
+    "",
+    "Everything else (stem/ending split, letter indices, morphological parse, attestations,",
+    "frequency) is derived by scripts/import-morphgnt.mjs from MorphGNT.",
+    "",
+    "NEEDS SPECIALIST REVIEW. Glosses are standard NT lexical meanings kept deliberately short",
+    "for teaching; they flatten real semantic range and are not lexicon entries. Every `stem`",
+    "override below is a hand judgement and should be checked first.",
+    "",
+    "`lemma` must match MorphGNT's lemma field exactly."
+  ],
+
+  "words": [
+    { "lemma": "θεός", "id": "theos", "translit": "theos", "gloss": "God", "distractors": ["spirit", "world", "truth"], "familyGloss": "god", "familyNotes": "Behind θεός and θεολογία." },
+    { "lemma": "λόγος", "id": "logos", "familyId": "λογ", "translit": "logos", "gloss": "word, reason", "distractors": ["light", "life", "flesh"], "familyGloss": "word, reason, account", "familyNotes": "Behind λόγος, λέγω (say) and every English -logy.", "notes": "2nd declension. The -ος ending marks nominative singular; the accusative is λόγον." },
+    { "lemma": "ἀρχή", "id": "arche", "translit": "archē", "gloss": "beginning", "distractors": ["end", "word", "light"], "familyGloss": "beginning, rule", "familyNotes": "Behind ἀρχή (beginning) and ἄρχων (ruler)." },
+    { "lemma": "κόσμος", "id": "kosmos", "translit": "kosmos", "gloss": "world", "distractors": ["temple", "heaven", "sin"], "familyGloss": "order, world", "familyNotes": "The same family gives both “cosmos” and “cosmetic”." },
+    { "lemma": "ζωή", "id": "zoe", "translit": "zōē", "gloss": "life", "distractors": ["death", "peace", "joy"], "familyGloss": "life" },
+    { "lemma": "ἀλήθεια", "id": "aletheia", "translit": "alētheia", "gloss": "truth", "distractors": ["lie", "grace", "hope"], "familyGloss": "truth" },
+    { "lemma": "ἀγάπη", "id": "agape", "familyId": "ἀγαπ", "translit": "agapē", "gloss": "love", "distractors": ["fear", "faith", "mercy"], "familyGloss": "love", "familyNotes": "Shares a family with ἀγαπάω, to love." },
+    { "lemma": "ἁμαρτία", "id": "hamartia", "translit": "hamartia", "gloss": "sin", "distractors": ["law", "death", "flesh"], "familyGloss": "sin, missing the mark" },
+    { "lemma": "ἄνθρωπος", "id": "anthropos", "translit": "anthrōpos", "gloss": "human being", "distractors": ["city", "river", "soul"], "familyGloss": "human being" },
+    { "lemma": "κύριος", "id": "kyrios", "familyId": "κυρι", "translit": "kyrios", "gloss": "lord, master", "distractors": ["servant", "prophet", "priest"], "familyGloss": "lord, master" },
+    { "lemma": "υἱός", "id": "huios", "translit": "huios", "gloss": "son", "distractors": ["daughter", "father", "servant"], "familyGloss": "son" },
+    { "lemma": "ἡμέρα", "id": "hemera", "translit": "hēmera", "gloss": "day", "distractors": ["night", "year", "hour"], "familyGloss": "day" },
+    { "lemma": "οὐρανός", "id": "ouranos", "translit": "ouranos", "gloss": "heaven, sky", "distractors": ["earth", "sea", "mountain"], "familyGloss": "heaven, sky" },
+    { "lemma": "καρδία", "id": "kardia", "translit": "kardia", "gloss": "heart", "distractors": ["hand", "eye", "mind"], "familyGloss": "heart" },
+    { "lemma": "δόξα", "id": "doxa", "translit": "doxa", "gloss": "glory", "distractors": ["shame", "power", "peace"], "familyGloss": "glory, opinion" },
+    { "lemma": "εἰρήνη", "id": "eirene", "translit": "eirēnē", "gloss": "peace", "distractors": ["war", "joy", "hope"], "familyGloss": "peace" },
+    { "lemma": "ἐκκλησία", "id": "ekklesia", "translit": "ekklēsia", "gloss": "assembly, church", "distractors": ["temple", "city", "household"], "familyGloss": "assembly" },
+    { "lemma": "νόμος", "id": "nomos", "translit": "nomos", "gloss": "law", "distractors": ["grace", "sin", "promise"], "familyGloss": "law, custom" },
+    { "lemma": "μαθητής", "id": "mathetes", "translit": "mathētēs", "gloss": "disciple", "distractors": ["teacher", "crowd", "brother"], "familyGloss": "disciple, learner" },
+    { "lemma": "βασιλεία", "id": "basileia", "familyId": "βασιλ", "translit": "basileia", "gloss": "kingdom", "distractors": ["city", "nation", "throne"], "familyGloss": "kingdom, reign" },
+    { "lemma": "ἔργον", "id": "ergon", "translit": "ergon", "gloss": "work, deed", "distractors": ["word", "faith", "rest"], "familyGloss": "work" },
+    { "lemma": "ὥρα", "id": "hora", "translit": "hōra", "gloss": "hour", "distractors": ["day", "year", "moment"], "familyGloss": "hour, time" },
+    { "lemma": "ἀδελφός", "id": "adelphos", "translit": "adelphos", "gloss": "brother", "distractors": ["father", "son", "friend"], "familyGloss": "brother" },
+    { "lemma": "τέκνον", "id": "teknon", "translit": "teknon", "gloss": "child", "distractors": ["son", "servant", "woman"], "familyGloss": "child" },
+    { "lemma": "δοῦλος", "id": "doulos", "translit": "doulos", "gloss": "servant, slave", "distractors": ["lord", "friend", "king"], "familyGloss": "servant" },
+    { "lemma": "καιρός", "id": "kairos", "translit": "kairos", "gloss": "appointed time", "distractors": ["place", "hour", "age"], "familyGloss": "appointed time" },
+    { "lemma": "ὁδός", "id": "hodos", "translit": "hodos", "gloss": "way, road", "distractors": ["gate", "wall", "field"], "familyGloss": "way, road" },
+    { "lemma": "εὐαγγέλιον", "id": "euangelion", "translit": "euangelion", "gloss": "good news, gospel", "distractors": ["letter", "commandment", "parable"], "familyGloss": "good news" },
+    { "lemma": "σκοτία", "id": "skotia", "translit": "skotia", "gloss": "darkness", "distractors": ["light", "cloud", "night"], "familyGloss": "darkness" },
+
+    { "lemma": "ἀγαθός", "id": "agathos", "translit": "agathos", "gloss": "good", "distractors": ["swift", "far", "old"], "familyGloss": "good" },
+    { "lemma": "ἅγιος", "id": "hagios", "familyId": "ἁγι", "translit": "hagios", "gloss": "holy", "distractors": ["great", "faithful", "wise"], "familyGloss": "holy, set apart" },
+    { "lemma": "πιστός", "id": "pistos", "familyId": "πιστ", "translit": "pistos", "gloss": "faithful", "distractors": ["fearful", "wise", "strong"], "familyGloss": "faithful" },
+    { "lemma": "καινός", "id": "kainos", "translit": "kainos", "gloss": "new", "distractors": ["old", "first", "last"], "familyGloss": "new" },
+    { "lemma": "πρῶτος", "id": "protos", "translit": "prōtos", "gloss": "first", "distractors": ["last", "great", "few"], "familyGloss": "first" },
+    { "lemma": "αἰώνιος", "id": "aionios", "translit": "aiōnios", "gloss": "eternal", "distractors": ["temporary", "holy", "hidden"], "stem": "αἰώνι", "familyGloss": "eternal", "notes": "Every attested ending here begins with omicron, so the corpus invariant looks like αἰωνιο-. The standard analysis is stem αἰωνι- with the 2nd-declension -ος ending." },
+
+    { "lemma": "πιστεύω", "id": "pisteuo", "familyId": "πιστ", "translit": "pisteuō", "gloss": "I believe", "distractors": ["I hear", "I see", "I know"], "stem": "πιστευ", "familyGloss": "believe, trust", "familyNotes": "Shares a family with πίστις (faith) and πιστός (faithful).", "notes": "The -ω ending marks 1st person singular present; -ει marks 3rd person." },
+    { "lemma": "ἀκούω", "id": "akouo", "translit": "akouō", "gloss": "I hear", "distractors": ["I speak", "I see", "I write"], "stem": "ἀκου", "familyGloss": "hear", "familyNotes": "Behind English “acoustic”." },
+    { "lemma": "γράφω", "id": "grapho", "translit": "graphō", "gloss": "I write", "distractors": ["I read", "I send", "I ask"], "stem": "γραφ", "familyGloss": "write", "familyNotes": "Behind γραφή (writing, Scripture) and every English -graphy." },
+    { "lemma": "βλέπω", "id": "blepo", "translit": "blepō", "gloss": "I see, I look at", "distractors": ["I hear", "I find", "I follow"], "stem": "βλεπ", "familyGloss": "see, look" },
+    { "lemma": "μένω", "id": "meno", "translit": "menō", "gloss": "I remain, I abide", "distractors": ["I leave", "I come", "I fall"], "stem": "μεν", "familyGloss": "remain, abide" },
+    { "lemma": "λαμβάνω", "id": "lambano", "translit": "lambanō", "gloss": "I take, I receive", "distractors": ["I give", "I lose", "I carry"], "stem": "λαμβαν", "familyGloss": "take, receive" },
+    { "lemma": "γινώσκω", "id": "ginosko", "translit": "ginōskō", "gloss": "I know", "distractors": ["I forget", "I teach", "I ask"], "stem": "γινωσκ", "familyGloss": "know", "familyNotes": "Behind γνῶσις (knowledge) and English “gnostic”." },
+    { "lemma": "κρίνω", "id": "krino", "translit": "krinō", "gloss": "I judge", "distractors": ["I forgive", "I rule", "I choose"], "stem": "κριν", "familyGloss": "judge, decide", "familyNotes": "Behind κρίσις (judgement) and English “critic”." },
+    { "lemma": "φαίνω", "id": "phaino", "translit": "phainō", "gloss": "I shine, I appear", "distractors": ["I hide", "I burn", "I fall"], "stem": "φαιν", "familyGloss": "shine, appear" },
+    { "lemma": "σῴζω", "id": "sozo", "translit": "sōzō", "gloss": "I save", "distractors": ["I judge", "I lose", "I heal"], "stem": "σῴζ", "familyGloss": "save, rescue", "familyNotes": "Behind σωτηρία (salvation)." },
+    { "lemma": "λέγω", "id": "lego", "familyId": "λογ", "translit": "legō", "gloss": "I say", "distractors": ["I hear", "I write", "I ask"], "stem": "λεγ", "familyGloss": "say, speak", "familyNotes": "Suppletive: its aorist is εἶπον, from a different family altogether." },
+    { "lemma": "ἀγαπάω", "id": "agapao", "familyId": "ἀγαπ", "translit": "agapaō", "gloss": "I love", "distractors": ["I hate", "I fear", "I seek"], "stem": "ἀγαπα", "familyGloss": "love", "familyNotes": "A contract verb: the stem vowel α merges with the ending." }
+  ],
+
+  "passages": [
+    {
+      "id": "john-1-1",
+      "bcv": "040101",
+      "reference": "John 1:1",
+      "translation": "In the beginning was the Word, and the Word was with God, and the Word was God.",
+      "notes": "θεόν and θεὸς are the same word in different cases — accusative after πρός, then nominative. Only the ending moves.",
+      "gloss": { "ἐν": "in", "ἀρχῇ": "the beginning", "ἦν": "was", "ὁ": "the", "λόγος": "Word", "καί": "and", "πρός": "with", "τόν": "the", "θεόν": "God", "θεός": "God" },
+      "translit": { "ἐν": "en", "ἀρχῇ": "archē", "ἦν": "ēn", "ὁ": "ho", "λόγος": "logos", "καί": "kai", "πρός": "pros", "τόν": "ton", "θεόν": "theon", "θεός": "theos" }
+    },
+    {
+      "id": "john-1-4",
+      "bcv": "040104",
+      "reference": "John 1:4",
+      "translation": "In him was life, and the life was the light of men.",
+      "notes": "τῶν ἀνθρώπων is genitive plural — “of the men”. The article declines with its noun.",
+      "gloss": { "ἐν": "in", "αὐτῷ": "him", "ζωή": "life", "ἦν": "was", "καί": "and", "ἡ": "the", "τό": "the", "φῶς": "light", "τῶν": "of the", "ἀνθρώπων": "of men" },
+      "translit": { "ἐν": "en", "αὐτῷ": "autō", "ζωή": "zōē", "ἦν": "ēn", "καί": "kai", "ἡ": "hē", "τό": "to", "φῶς": "phōs", "τῶν": "tōn", "ἀνθρώπων": "anthrōpōn" }
+    },
+    {
+      "id": "john-1-5",
+      "bcv": "040105",
+      "reference": "John 1:5",
+      "translation": "And the light shines in the darkness, and the darkness did not overcome it.",
+      "notes": "φαίνει is present — “shines”, not “shone”. κατέλαβεν is aorist, a single completed act in the past.",
+      "gloss": { "καί": "and", "τό": "the", "φῶς": "light", "ἐν": "in", "τῇ": "the", "σκοτίᾳ": "darkness", "φαίνει": "shines", "ἡ": "the", "σκοτία": "darkness", "αὐτό": "it", "οὐ": "not", "κατέλαβε(ν)": "overcame" },
+      "translit": { "καί": "kai", "τό": "to", "φῶς": "phōs", "ἐν": "en", "τῇ": "tē", "σκοτίᾳ": "skotia", "φαίνει": "phainei", "ἡ": "hē", "σκοτία": "skotia", "αὐτό": "auto", "οὐ": "ou", "κατέλαβε(ν)": "katelaben" }
+    },
+    {
+      "id": "mark-1-1",
+      "bcv": "020101",
+      "reference": "Mark 1:1",
+      "translation": "The beginning of the good news of Jesus Christ.",
+      "notes": "Three genitives in a row: “the beginning OF the gospel OF Jesus Christ”. Greek stacks them where English needs repeated “of”.",
+      "gloss": { "ἀρχή": "beginning", "τοῦ": "of the", "εὐαγγελίου": "of the good news", "Ἰησοῦ": "of Jesus", "Χριστοῦ": "of Christ" },
+      "translit": { "ἀρχή": "archē", "τοῦ": "tou", "εὐαγγελίου": "euangeliou", "Ἰησοῦ": "Iēsou", "Χριστοῦ": "Christou" }
+    }
+  ]
+}

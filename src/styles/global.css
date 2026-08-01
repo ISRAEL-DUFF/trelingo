@@ -30,8 +30,12 @@
   --sage: #9db98a;
   --text: #e8e2d4;
   --text-soft: #a49c88;
-  --root: #e5766a;
-  --root-wash: #3d2320;
+  --morpheme: #e5766a;
+  --morpheme-wash: #3d2320;
+  --danger: #e5766a;
+  --danger-wash: #3d2320;
+  --attention: #e5766a;
+  --attention-wash: #3d2320;
   --white: #23262f;
   --sage-wash: #26301f;
   --gold-wash: #362c17;
@@ -63,8 +67,12 @@
   --sage: #6e7f5c;
   --text: #241e14;
   --text-soft: #5b5240;
-  --root: #b23a2e;
-  --root-wash: #f5d9d4;
+  --morpheme: #b23a2e;
+  --morpheme-wash: #f5d9d4;
+  --danger: #b23a2e;
+  --danger-wash: #f5d9d4;
+  --attention: #b23a2e;
+  --attention-wash: #f5d9d4;
   --white: #fff9ee;
   --sage-wash: #dcebd2;
   --gold-wash: #f1e2c4;
@@ -161,9 +169,20 @@ button:disabled {
  * reused unchanged; only this hue differs, driving the header and per-course
  * highlights. Set from the active course's `accentColor`.
  *
- * The morpheme colour (--root) is deliberately NOT overridden: it means "the
+ * The morpheme colour (--morpheme) is deliberately NOT overridden: it means "the
  * morpheme this course teaches" — the root in Hebrew, the ending in Greek — and
  * stays reserved in every course so it never reads as an error state.
+ *
+ * Three reds, one value each, deliberately separate: --morpheme is the thing a
+ * course teaches, --danger is "you got that wrong", --attention is "you have
+ * work waiting". They look identical today and can diverge without touching a
+ * single call site.
+ *
+ * That reservation was fiction until --danger existed. The same token was the
+ * morpheme highlight AND .banner--error, .choice--wrong and .btn--danger, so a
+ * highlighted Greek ending was literally painted the error colour. The two now
+ * share a value but not a name, and can diverge without touching call sites.
+ * --morpheme has exactly two uses: .script__letter--highlight and .tag--family.
  */
 :root {
   --accent: var(--gold);
@@ -215,19 +234,23 @@ button:disabled {
  * from disturbing its surroundings, while overriding forces visual order and
  * corrupts mixed-direction content such as a Hebrew word beside an English gloss.
  */
-.hebrew {
+.script {
   /* Set per course from Course.fontStack; the Hebrew face is the fallback. */
   font-family: var(--script-font, var(--font-hebrew));
   unicode-bidi: isolate;
   line-height: 1.7;
 }
 
-.hebrew__letter {
+.script__letter {
   transition: color 0.35s ease;
 }
 
-.hebrew__letter--root {
-  color: var(--root);
+/*
+ * The morpheme a course teaches. Hebrew marks the ROOT, Greek the ENDING —
+ * one mechanism, inverse pedagogy — so this cannot be named for either.
+ */
+.script__letter--highlight {
+  color: var(--morpheme);
   font-weight: 700;
 }
 
@@ -306,9 +329,9 @@ button:disabled {
 }
 
 .btn--danger {
-  background: var(--root-wash);
-  color: var(--root);
-  border-color: var(--root);
+  background: var(--danger-wash);
+  color: var(--danger);
+  border-color: var(--danger);
 }
 
 .btn--block {
@@ -346,9 +369,9 @@ button:disabled {
 }
 
 .choice--wrong {
-  background: var(--root-wash);
-  border-color: var(--root);
-  color: var(--root);
+  background: var(--danger-wash);
+  border-color: var(--danger);
+  color: var(--danger);
 }
 
 .choice--selected {
@@ -484,7 +507,7 @@ button:disabled {
 .bottomnav__badge {
   position: absolute;
   transform: translate(14px, -8px);
-  background: var(--root);
+  background: var(--attention);
   color: #fff;
   border-radius: var(--radius-pill);
   font-size: 9px;
@@ -657,9 +680,9 @@ button:disabled {
 }
 
 .chip--wrong {
-  background: var(--root-wash);
-  border-color: var(--root);
-  color: var(--root);
+  background: var(--danger-wash);
+  border-color: var(--danger);
+  color: var(--danger);
 }
 
 /* ---------- Forms ---------- */
@@ -734,9 +757,9 @@ button:disabled {
 }
 
 .banner--error {
-  background: var(--root-wash);
-  color: var(--root);
-  border-color: var(--root);
+  background: var(--danger-wash);
+  color: var(--danger);
+  border-color: var(--danger);
 }
 
 .banner--success {
@@ -765,12 +788,17 @@ button:disabled {
   font-family: var(--font-mono);
 }
 
-.tag--root {
-  background: var(--root-wash);
-  color: var(--root);
-  font-family: var(--font-hebrew);
+/*
+ * A word-family chip. It renders family ids in whatever script the course uses,
+ * so it must not pin the font or the direction: it previously forced the Hebrew
+ * face — which has no Greek glyphs — and RTL onto Greek stems like δικ.
+ * Direction comes from the `dir` attribute the component sets, as in .passage.
+ */
+.tag--family {
+  background: var(--morpheme-wash);
+  color: var(--morpheme);
+  font-family: var(--script-font, var(--font-hebrew));
   font-size: 14px;
-  direction: rtl;
 }
 
 .spinner {

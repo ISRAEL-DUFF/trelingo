@@ -12,12 +12,32 @@
 import { validateBundle, type ContentBundle } from "./schema";
 import { getActiveCourseId, type CourseId } from "./course";
 import { hebrewBiblicalBundle, CONTENT_REVIEW_NOTES } from "./courses/hebrew-biblical";
-import { greekKoineBundle } from "./courses/greek-koine";
+import { greekKoineBundle, KOINE_REVIEW_NOTES } from "./courses/greek-koine";
+import { greekAtticBundle, ATTIC_REVIEW_NOTES } from "./courses/greek-attic";
 
 const BUNDLES: Partial<Record<CourseId, ContentBundle>> = {
   "hebrew-biblical": hebrewBiblicalBundle,
   "greek-koine": greekKoineBundle,
+  "greek-attic": greekAtticBundle,
 };
+
+/** What a specialist should check before a course reaches learners. */
+export type ReviewNote = { id: string; note: string };
+
+/*
+ * Each course carries its own caveats, and the settings screen used to show
+ * Hebrew's for every course — which meant the Attic licence blocker, the single
+ * most important note in the project, was written down and never displayed.
+ */
+const REVIEW_NOTES: Partial<Record<CourseId, ReviewNote[]>> = {
+  "hebrew-biblical": CONTENT_REVIEW_NOTES,
+  "greek-koine": KOINE_REVIEW_NOTES,
+  "greek-attic": ATTIC_REVIEW_NOTES,
+};
+
+export function reviewNotesFor(courseId: CourseId = getActiveCourseId()): ReviewNote[] {
+  return REVIEW_NOTES[courseId] ?? [];
+}
 
 export function getBundle(courseId: CourseId = getActiveCourseId()): ContentBundle {
   const bundle = BUNDLES[courseId];

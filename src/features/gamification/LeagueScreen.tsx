@@ -138,7 +138,7 @@ export function LeagueScreen() {
               {gems.transactions.slice(0, 8).map((t) => (
                 <div key={t.id} className="row row--between small">
                   <span className="muted">{t.reason}</span>
-                  <span style={{ color: t.amount > 0 ? "var(--sage)" : "var(--root)" }}>
+                  <span style={{ color: t.amount > 0 ? "var(--sage)" : "var(--danger)" }}>
                     {t.amount > 0 ? "+" : ""}
                     {t.amount}
                   </span>

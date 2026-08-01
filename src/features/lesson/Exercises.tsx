@@ -171,7 +171,7 @@ function ConjugationExerciseView({
       <div className="center" style={{ padding: "30px 24px 10px" }}>
         <Prompt>Grammar drill</Prompt>
         <p style={{ fontSize: 16, lineHeight: 1.55, margin: "0 0 14px" }}>{exercise.prompt}</p>
-        <span className="tag tag--root">{scriptOf().joinLetters(exercise.familyId)}</span>
+        <span className="tag tag--family">{scriptOf().joinLetters(exercise.familyId)}</span>
       </div>
       <div
         style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center", padding: "14px 20px" }}
@@ -285,7 +285,7 @@ function ParsingExerciseView({
           fadeStage={fadeStage}
         />
         <div style={{ marginTop: 10 }}>
-          <span className="tag tag--root">{scriptOf().joinLetters(exercise.familyId)}</span>
+          <span className="tag tag--family">{scriptOf().joinLetters(exercise.familyId)}</span>
         </div>
       </div>
 
@@ -380,7 +380,7 @@ function BinyanCompareExerciseView({
     <div>
       <div className="center" style={{ padding: "26px 24px 6px" }}>
         <Prompt>{exercise.prompt}</Prompt>
-        <span className="tag tag--root">{scriptOf().joinLetters(exercise.familyId)}</span>
+        <span className="tag tag--family">{scriptOf().joinLetters(exercise.familyId)}</span>
       </div>
 
       <div className="stack pad-x" style={{ marginTop: 16 }}>
@@ -396,7 +396,7 @@ function BinyanCompareExerciseView({
                   result != null
                     ? correct
                       ? "var(--sage)"
-                      : "var(--root)"
+                      : "var(--danger)"
                     : activeForm === f.text
                       ? "var(--gold)"
                       : undefined,

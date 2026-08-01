@@ -34,6 +34,9 @@ export interface Course {
   /** Whether this course has an honest diacritic-fading progression (Hebrew yes, Greek no). */
   supportsFading: boolean;
 
+  /** What this course calls the morpheme it teaches: "root", "stem", "ending". */
+  morphemeNoun: string;
+
   /** How this language's diacritics are described to the learner. */
   diacriticsCopy: {
     /** Field label, e.g. "Vowel points (niqqud)". */
@@ -54,6 +57,7 @@ export const HEBREW_BIBLICAL: Course = {
   script: "hebrew",
   fontStack: "'Frank Ruhl Libre', 'Times New Roman', serif",
   accentColor: "var(--gold)",
+  morphemeNoun: "root",
   supportsFading: true,
   parseFields: HEBREW_PARSE_FIELDS,
   diacriticsCopy: {
@@ -77,6 +81,7 @@ const GREEK_COMMON = {
   // glyphs at all — measured, not assumed (greek-build-plan.md §3.5).
   fontStack: "'Gentium Plus', 'New Athena Unicode', 'Times New Roman', serif",
   parseFields: GREEK_PARSE_FIELDS,
+  morphemeNoun: "stem",
   // Unaccented Greek is not a reading target — see §4.5.
   supportsFading: false,
   diacriticsCopy: {
@@ -89,7 +94,7 @@ const GREEK_COMMON = {
   },
 } as const satisfies Pick<
   Course,
-  "script" | "fontStack" | "parseFields" | "supportsFading" | "diacriticsCopy"
+  "script" | "fontStack" | "parseFields" | "supportsFading" | "diacriticsCopy" | "morphemeNoun"
 >;
 
 export const GREEK_KOINE: Course = {
@@ -103,7 +108,9 @@ export const GREEK_KOINE: Course = {
 export const GREEK_ATTIC: Course = {
   id: "greek-attic",
   name: "Attic Greek",
-  subtitle: "Plato · Xenophon · classical prose",
+  // Named for what the corpus actually contains. Xenophon was in the original
+  // plan, but AGDT 2.1 has no Xenophon at all — see ATTIC_REVIEW_NOTES.
+  subtitle: "Plato · Thucydides · classical prose",
   accentColor: "#211d1a", // charcoal
   ...GREEK_COMMON,
 };
@@ -176,6 +183,20 @@ export function scriptOf(course: Course = getCourse()): ScriptModule {
 
 export function parseFieldsOf(course: Course = getCourse()): ParseFieldDef[] {
   return course.parseFields;
+}
+
+/**
+ * The four forms of the morpheme noun that screens actually need.
+ *
+ * Every user-visible mention of the thing a course teaches goes through this.
+ * Hardcoding "root" was the same error as hardcoding "niqqud": a Greek learner
+ * was being shown a Hebrew word for something Greek does not have.
+ */
+export function morphemeLabel(course: Course = getCourse()) {
+  const one = course.morphemeNoun;
+  const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+  // "root"/"stem"/"ending" all pluralise with -s; assert rather than assume.
+  return { one, many: `${one}s`, One: cap(one), Many: cap(`${one}s`) };
 }
 
 /**

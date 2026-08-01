@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { db } from "@/db";
 import { getLeeches, getRecentEvents, getStats } from "@/db/repo";
 import { retentionRate, adaptiveNewCardLimit, DEFAULT_CONFIG } from "@/srs/engine";
-import { useCourseContent } from "@/state/useCourse";
+import { useCourse, useCourseContent } from "@/state/useCourse";
+import { morphemeLabel } from "@/content/course";
 import { ScriptWord } from "@/components/ScriptWord";
 import { Empty, TopBar } from "@/components/ui";
 
 export function StatsScreen() {
   const { wordById, families } = useCourseContent();
+  const morpheme = morphemeLabel(useCourse());
   const data = useLiveQuery(async () => {
     const [stats, events, leeches] = await Promise.all([
       getStats(),
@@ -34,7 +36,7 @@ export function StatsScreen() {
     { label: "XP", value: stats.xp },
     { label: "Units done", value: stats.unitsCompleted },
     { label: "Words seen", value: stats.counts.total },
-    { label: "Roots met", value: `${stats.familiesSeen} / ${families.length}` },
+    { label: `${morpheme.Many} met`, value: `${stats.familiesSeen} / ${families.length}` },
     { label: "Known well", value: stats.known, hint: "interval ≥ 21d" },
   ];
 
@@ -86,7 +88,7 @@ export function StatsScreen() {
           <span className="label">Queue right now</span>
           <div className="row" style={{ gap: 16, marginTop: 10 }}>
             <div>
-              <div style={{ fontSize: 19, fontWeight: 700, color: "var(--root)" }}>
+              <div style={{ fontSize: 19, fontWeight: 700, color: "var(--attention)" }}>
                 {stats.counts.due}
               </div>
               <div className="small muted">due</div>

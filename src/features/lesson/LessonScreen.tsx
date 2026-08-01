@@ -8,7 +8,7 @@ import type { GradeResult } from "./grade";
 import { completeUnit, recordReview } from "@/db/repo";
 import { addXp, touchStreak } from "@/db/repo";
 import { useSession } from "@/state/session";
-import { scriptOf } from "@/content/course";
+import { getCourse, scriptOf } from "@/content/course";
 import { sync } from "@/sync/sync";
 import { PassageReader } from "@/features/reading/PassageReader";
 
@@ -120,7 +120,8 @@ export function LessonScreen() {
         />
         <div className="pad">
           <p className="small muted center">
-            You now know every word you need for this verse. Tap any word to see its root.
+            You now know every word you need for this verse. Tap any word to see its{" "}
+            {getCourse().morphemeNoun}.
           </p>
         </div>
         <PassageReader passageId={unit.passageId} />

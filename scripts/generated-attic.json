@@ -1,0 +1,1623 @@
+{
+  "families": [
+    {
+      "id": "πολ",
+      "letters": "πολ",
+      "coreGloss": "city"
+    },
+    {
+      "id": "πολεμ",
+      "letters": "πολεμ",
+      "coreGloss": "war",
+      "notes": "Behind πολέμιος (hostile) and English “polemic”."
+    },
+    {
+      "id": "θε",
+      "letters": "θε",
+      "coreGloss": "god"
+    },
+    {
+      "id": "λογ",
+      "letters": "λογ",
+      "coreGloss": "word, reason, account"
+    },
+    {
+      "id": "νομ",
+      "letters": "νομ",
+      "coreGloss": "law, custom"
+    },
+    {
+      "id": "δικ",
+      "letters": "δικ",
+      "coreGloss": "justice",
+      "notes": "Behind δίκαιος (just) and δικαστής (juror)."
+    },
+    {
+      "id": "ἐργ",
+      "letters": "ἐργ",
+      "coreGloss": "work"
+    },
+    {
+      "id": "ἀνθρωπ",
+      "letters": "ἀνθρωπ",
+      "coreGloss": "human being"
+    },
+    {
+      "id": "χρον",
+      "letters": "χρον",
+      "coreGloss": "time",
+      "notes": "Behind English “chronology”."
+    },
+    {
+      "id": "ἀρχ",
+      "letters": "ἀρχ",
+      "coreGloss": "beginning, rule"
+    },
+    {
+      "id": "γνωμ",
+      "letters": "γνωμ",
+      "coreGloss": "judgement"
+    },
+    {
+      "id": "φιλ",
+      "letters": "φιλ",
+      "coreGloss": "friend, dear"
+    },
+    {
+      "id": "ὁσι",
+      "letters": "ὁσι",
+      "coreGloss": "holy, pious",
+      "notes": "The word the whole Euthyphro argues about."
+    },
+    {
+      "id": "πρωτ",
+      "letters": "πρωτ",
+      "coreGloss": "first"
+    },
+    {
+      "id": "ὀλιγ",
+      "letters": "ὀλιγ",
+      "coreGloss": "few",
+      "notes": "Behind “oligarchy” — rule by the few."
+    },
+    {
+      "id": "μον",
+      "letters": "μον",
+      "coreGloss": "alone"
+    },
+    {
+      "id": "χωρι",
+      "letters": "χωρι",
+      "coreGloss": "place"
+    },
+    {
+      "id": "δυναμ",
+      "letters": "δυναμ",
+      "coreGloss": "power",
+      "notes": "Behind English “dynamic”."
+    },
+    {
+      "id": "βασιλε",
+      "letters": "βασιλε",
+      "coreGloss": "king"
+    },
+    {
+      "id": "ἀν",
+      "letters": "ἀν",
+      "coreGloss": "man"
+    },
+    {
+      "id": "πατ",
+      "letters": "πατ",
+      "coreGloss": "father"
+    },
+    {
+      "id": "πα",
+      "letters": "πα",
+      "coreGloss": "all"
+    },
+    {
+      "id": "ναυτικ",
+      "letters": "ναυτικ",
+      "coreGloss": "naval"
+    },
+    {
+      "id": "σπονδ",
+      "letters": "σπονδ",
+      "coreGloss": "treaty, libation"
+    },
+    {
+      "id": "βαρβαρ",
+      "letters": "βαρβαρ",
+      "coreGloss": "non-Greek"
+    },
+    {
+      "id": "ἑκαστ",
+      "letters": "ἑκαστ",
+      "coreGloss": "each"
+    },
+    {
+      "id": "ὁσ",
+      "letters": "ὁσ",
+      "coreGloss": "as much as"
+    },
+    {
+      "id": "οἱ",
+      "letters": "οἱ",
+      "coreGloss": "of what sort"
+    },
+    {
+      "id": "θαλασσ",
+      "letters": "θαλασσ",
+      "coreGloss": "sea"
+    },
+    {
+      "id": "ἀθηναι",
+      "letters": "ἀθηναι",
+      "coreGloss": "Athenian"
+    },
+    {
+      "id": "χρημ",
+      "letters": "χρημ",
+      "coreGloss": "thing, money"
+    },
+    {
+      "id": "νεωτερ",
+      "letters": "νεωτερ",
+      "coreGloss": "new, young"
+    },
+    {
+      "id": "μεγα",
+      "letters": "μεγα",
+      "coreGloss": "great"
+    },
+    {
+      "id": "λεγ",
+      "letters": "λεγ",
+      "coreGloss": "say, speak"
+    },
+    {
+      "id": "ἐχ",
+      "letters": "ἐχ",
+      "coreGloss": "have, hold"
+    },
+    {
+      "id": "ποιε",
+      "letters": "ποιε",
+      "coreGloss": "make, do",
+      "notes": "A contract verb. Behind English “poet” — one who makes."
+    },
+    {
+      "id": "ἡγε",
+      "letters": "ἡγε",
+      "coreGloss": "lead, consider"
+    }
+  ],
+  "words": [
+    {
+      "id": "polis",
+      "familyId": "πολ",
+      "text": "πόλις",
+      "translit": "polis",
+      "gloss": "city, city-state",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          3,
+          4
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "f"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "house",
+        "field",
+        "ship"
+      ],
+      "_freq": 152,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "polemos",
+      "familyId": "πολεμ",
+      "text": "πόλεμος",
+      "translit": "polemos",
+      "gloss": "war",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          5,
+          6
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "peace",
+        "law",
+        "council"
+      ],
+      "_freq": 110,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "theos",
+      "familyId": "θε",
+      "text": "θεός",
+      "translit": "theos",
+      "gloss": "god",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          2,
+          3
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "man",
+        "king",
+        "hero"
+      ],
+      "_freq": 73,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "logos",
+      "familyId": "λογ",
+      "text": "λόγος",
+      "translit": "logos",
+      "gloss": "word, argument, account",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          3,
+          4
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "deed",
+        "law",
+        "custom"
+      ],
+      "notes": "In Plato λόγος is usually “argument” or “account”, not simply “word”.",
+      "_freq": 58,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "nomos",
+      "familyId": "νομ",
+      "text": "νόμος",
+      "translit": "nomos",
+      "gloss": "law, custom",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          3,
+          4
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "war",
+        "city",
+        "justice"
+      ],
+      "_freq": 54,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "dike",
+      "familyId": "δικ",
+      "text": "δίκη",
+      "translit": "dikē",
+      "gloss": "justice, lawsuit",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          3
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "f"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "war",
+        "wealth",
+        "honour"
+      ],
+      "_freq": 52,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "ergon",
+      "familyId": "ἐργ",
+      "text": "ἔργον",
+      "translit": "ergon",
+      "gloss": "work, deed",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          3,
+          4
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "accusative",
+        "number": "s",
+        "gender": "n"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "word",
+        "rest",
+        "plan"
+      ],
+      "_freq": 48,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "anthropos",
+      "familyId": "ἀνθρωπ",
+      "text": "ἄνθρωπος",
+      "translit": "anthrōpos",
+      "gloss": "human being",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          6,
+          7
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "god",
+        "beast",
+        "city"
+      ],
+      "_freq": 46,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "chronos",
+      "familyId": "χρον",
+      "text": "χρόνος",
+      "translit": "chronos",
+      "gloss": "time",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          4,
+          5
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "place",
+        "war",
+        "year"
+      ],
+      "_freq": 58,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "arche",
+      "familyId": "ἀρχ",
+      "text": "ἀρχή",
+      "translit": "archē",
+      "gloss": "beginning, rule",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          3
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "f"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "end",
+        "middle",
+        "law"
+      ],
+      "_freq": 29,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "gnome",
+      "familyId": "γνωμ",
+      "text": "γνώμη",
+      "translit": "gnōmē",
+      "gloss": "judgement, opinion",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          4
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "f"
+      },
+      "attestations": [
+        "Thucydides",
+        "Lysias"
+      ],
+      "distractors": [
+        "fear",
+        "hope",
+        "custom"
+      ],
+      "_freq": 41,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "philos",
+      "familyId": "φιλ",
+      "text": "φίλος",
+      "translit": "philos",
+      "gloss": "friend; dear",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          3,
+          4
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "enemy",
+        "stranger",
+        "slave"
+      ],
+      "_freq": 37,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "dikaios",
+      "familyId": "δικ",
+      "text": "δίκαιος",
+      "translit": "dikaios",
+      "gloss": "just",
+      "partOfSpeech": "adjective",
+      "morphology": {
+        "highlight": [
+          5,
+          6
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "unjust",
+        "wise",
+        "brave"
+      ],
+      "_freq": 55,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "dikastes",
+      "familyId": "δικ",
+      "text": "δικαστής",
+      "translit": "dikastēs",
+      "gloss": "juror, judge",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          6,
+          7
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "general",
+        "orator",
+        "priest"
+      ],
+      "_freq": 36,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "hosios",
+      "familyId": "ὁσι",
+      "text": "ὅσιος",
+      "translit": "hosios",
+      "gloss": "holy, pious",
+      "partOfSpeech": "adjective",
+      "morphology": {
+        "highlight": [
+          3,
+          4
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro"
+      ],
+      "distractors": [
+        "unholy",
+        "just",
+        "wise"
+      ],
+      "_freq": 73,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "protos",
+      "familyId": "πρωτ",
+      "text": "πρῶτος",
+      "translit": "prōtos",
+      "gloss": "first",
+      "partOfSpeech": "adjective",
+      "morphology": {
+        "highlight": [
+          4,
+          5
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "last",
+        "many",
+        "few"
+      ],
+      "_freq": 59,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "oligos",
+      "familyId": "ὀλιγ",
+      "text": "ὀλίγος",
+      "translit": "oligos",
+      "gloss": "few, little",
+      "partOfSpeech": "adjective",
+      "morphology": {
+        "highlight": [
+          4,
+          5
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "many",
+        "great",
+        "whole"
+      ],
+      "_freq": 31,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "monos",
+      "familyId": "μον",
+      "text": "μόνος",
+      "translit": "monos",
+      "gloss": "alone, only",
+      "partOfSpeech": "adjective",
+      "morphology": {
+        "highlight": [
+          3,
+          4
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "all",
+        "both",
+        "each"
+      ],
+      "_freq": 35,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "chorion",
+      "familyId": "χωρι",
+      "text": "χωρίον",
+      "translit": "chōrion",
+      "gloss": "place, district",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          4,
+          5
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "accusative",
+        "number": "s",
+        "gender": "n"
+      },
+      "attestations": [
+        "Thucydides",
+        "Lysias"
+      ],
+      "distractors": [
+        "time",
+        "army",
+        "wall"
+      ],
+      "_freq": 29,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "dynamis",
+      "familyId": "δυναμ",
+      "text": "δύναμις",
+      "translit": "dynamis",
+      "gloss": "power, force",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          5,
+          6
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "f"
+      },
+      "attestations": [
+        "Thucydides",
+        "Lysias"
+      ],
+      "distractors": [
+        "weakness",
+        "wealth",
+        "fame"
+      ],
+      "_freq": 41,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "basileus",
+      "familyId": "βασιλε",
+      "text": "βασιλεύς",
+      "translit": "basileus",
+      "gloss": "king",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          6,
+          7
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "citizen",
+        "slave",
+        "general"
+      ],
+      "_freq": 38,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "aner",
+      "familyId": "ἀν",
+      "text": "ἀνήρ",
+      "translit": "anēr",
+      "gloss": "man",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          2,
+          3
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "woman",
+        "child",
+        "god"
+      ],
+      "_freq": 103,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "pater",
+      "familyId": "πατ",
+      "text": "πατήρ",
+      "translit": "patēr",
+      "gloss": "father",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          3,
+          4
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "mother",
+        "son",
+        "brother"
+      ],
+      "_freq": 35,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "pas",
+      "familyId": "πα",
+      "text": "πᾶς",
+      "translit": "pas",
+      "gloss": "all, every",
+      "partOfSpeech": "adjective",
+      "morphology": {
+        "highlight": [
+          2
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "none",
+        "few",
+        "some"
+      ],
+      "_freq": 131,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "nautikos",
+      "familyId": "ναυτικ",
+      "text": "ναυτικός",
+      "translit": "nautikos",
+      "gloss": "naval; a fleet",
+      "partOfSpeech": "adjective",
+      "morphology": {
+        "highlight": [
+          6,
+          7
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides"
+      ],
+      "distractors": [
+        "infantry",
+        "civic",
+        "sacred"
+      ],
+      "_freq": 31,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "sponde",
+      "familyId": "σπονδ",
+      "text": "σπονδή",
+      "translit": "spondē",
+      "gloss": "treaty, truce",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          5
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides"
+      ],
+      "distractors": [
+        "battle",
+        "speech",
+        "tribute"
+      ],
+      "_freq": 31,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "polemios",
+      "familyId": "πολεμ",
+      "text": "πολέμιος",
+      "translit": "polemios",
+      "gloss": "hostile; enemy",
+      "partOfSpeech": "adjective",
+      "morphology": {
+        "highlight": [
+          6,
+          7
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides",
+        "Lysias"
+      ],
+      "distractors": [
+        "friendly",
+        "neutral",
+        "allied"
+      ],
+      "_freq": 30,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "barbaros",
+      "familyId": "βαρβαρ",
+      "text": "βάρβαρος",
+      "translit": "barbaros",
+      "gloss": "foreign; a foreigner",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          6,
+          7
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides"
+      ],
+      "distractors": [
+        "Greek",
+        "noble",
+        "free"
+      ],
+      "_freq": 31,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "hekastos",
+      "familyId": "ἑκαστ",
+      "text": "ἕκαστος",
+      "translit": "hekastos",
+      "gloss": "each",
+      "partOfSpeech": "adjective",
+      "morphology": {
+        "highlight": [
+          5,
+          6
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "all",
+        "none",
+        "both"
+      ],
+      "_freq": 41,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "hosos",
+      "familyId": "ὁσ",
+      "text": "ὅσος",
+      "translit": "hosos",
+      "gloss": "as much as, how great",
+      "partOfSpeech": "adjective",
+      "morphology": {
+        "highlight": [
+          2,
+          3
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "who",
+        "where",
+        "when"
+      ],
+      "_freq": 68,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "hoios",
+      "familyId": "οἱ",
+      "text": "οἷος",
+      "translit": "hoios",
+      "gloss": "such as, what sort of",
+      "partOfSpeech": "adjective",
+      "morphology": {
+        "highlight": [
+          2,
+          3
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "how many",
+        "how often",
+        "whether"
+      ],
+      "_freq": 29,
+      "_stemSource": "derived"
+    },
+    {
+      "id": "thalassa",
+      "familyId": "θαλασσ",
+      "text": "θάλασσα",
+      "translit": "thalassa",
+      "gloss": "sea",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          6
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "f"
+      },
+      "attestations": [
+        "Thucydides",
+        "Lysias"
+      ],
+      "distractors": [
+        "land",
+        "river",
+        "mountain"
+      ],
+      "notes": "Stem supplied by hand: the corpus invariant stopped at θάλα-, which is not the standard analysis.",
+      "_freq": 40,
+      "_stemSource": "override"
+    },
+    {
+      "id": "athenaios",
+      "familyId": "ἀθηναι",
+      "text": "Ἀθηναῖος",
+      "translit": "Athēnaios",
+      "gloss": "Athenian",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          6,
+          7
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "Spartan",
+        "Corinthian",
+        "Persian"
+      ],
+      "_freq": 89,
+      "_stemSource": "override"
+    },
+    {
+      "id": "chrema",
+      "familyId": "χρημ",
+      "text": "χρῆμα",
+      "translit": "chrēma",
+      "gloss": "thing; (plural) money",
+      "partOfSpeech": "noun",
+      "morphology": {
+        "highlight": [
+          4
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "word",
+        "deed",
+        "place"
+      ],
+      "notes": "3rd declension: the stem is really χρηματ-, visible in the genitive χρήματος. The nominative hides the tau.",
+      "_freq": 45,
+      "_stemSource": "override"
+    },
+    {
+      "id": "neoteros",
+      "familyId": "νεωτερ",
+      "text": "νεώτερος",
+      "translit": "neōteros",
+      "gloss": "newer, younger",
+      "partOfSpeech": "adjective",
+      "morphology": {
+        "highlight": [
+          6,
+          7
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro"
+      ],
+      "distractors": [
+        "older",
+        "greater",
+        "fewer"
+      ],
+      "notes": "Comparative of νέος. The corpus invariant stopped inside the comparative suffix -τερ-, so the stem is supplied by hand.",
+      "_freq": 5,
+      "_stemSource": "override"
+    },
+    {
+      "id": "megas",
+      "familyId": "μεγα",
+      "text": "μέγας",
+      "translit": "megas",
+      "gloss": "great, large",
+      "partOfSpeech": "adjective",
+      "morphology": {
+        "highlight": [
+          4
+        ],
+        "kind": "ending"
+      },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "small",
+        "few",
+        "swift"
+      ],
+      "notes": "Irregular: most forms use the stem μεγαλ-, as in μεγάλου.",
+      "_freq": 100,
+      "_stemSource": "override"
+    },
+    {
+      "id": "lego",
+      "familyId": "λεγ",
+      "text": "λέγω",
+      "translit": "legō",
+      "gloss": "I say, I speak",
+      "partOfSpeech": "verb",
+      "morphology": {
+        "highlight": [
+          3
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "I hear",
+        "I write",
+        "I ask"
+      ],
+      "_freq": 135,
+      "_stemSource": "override"
+    },
+    {
+      "id": "echo",
+      "familyId": "ἐχ",
+      "text": "ἔχω",
+      "translit": "echō",
+      "gloss": "I have, I hold",
+      "partOfSpeech": "verb",
+      "morphology": {
+        "highlight": [
+          2
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "I give",
+        "I lose",
+        "I take"
+      ],
+      "_freq": 187,
+      "_stemSource": "override"
+    },
+    {
+      "id": "poieo",
+      "familyId": "ποιε",
+      "text": "ποιέω",
+      "translit": "poieō",
+      "gloss": "I make, I do",
+      "partOfSpeech": "verb",
+      "morphology": {
+        "highlight": [
+          4
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "I destroy",
+        "I find",
+        "I send"
+      ],
+      "_freq": 148,
+      "_stemSource": "override"
+    },
+    {
+      "id": "hegeomai",
+      "familyId": "ἡγε",
+      "text": "ἡγέομαι",
+      "translit": "hēgeomai",
+      "gloss": "I lead; I consider",
+      "partOfSpeech": "verb",
+      "morphology": {
+        "highlight": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "I follow",
+        "I flee",
+        "I fear"
+      ],
+      "notes": "Deponent: middle in form, active in meaning.",
+      "_freq": 63,
+      "_stemSource": "override"
+    },
+    {
+      "id": "parecho",
+      "familyId": "ἐχ",
+      "text": "παρέχω",
+      "translit": "parechō",
+      "gloss": "I provide, I furnish",
+      "partOfSpeech": "verb",
+      "morphology": {
+        "highlight": [
+          5
+        ],
+        "kind": "ending"
+      },
+      "attestations": [
+        "Thucydides",
+        "Plato, Euthyphro",
+        "Lysias"
+      ],
+      "distractors": [
+        "I withhold",
+        "I demand",
+        "I destroy"
+      ],
+      "notes": "παρά (beside) prefixed to ἔχω — “hold out to”, hence “provide”.",
+      "_freq": 32,
+      "_stemSource": "override"
+    }
+  ],
+  "passages": [
+    {
+      "id": "euthyphro-opening",
+      "reference": "Plato, Euthyphro 2a",
+      "translation": "What's new, Socrates?",
+      "notes": "The opening line of the dialogue. τί νεώτερον is literally “what newer thing?” — Greek uses a comparative where English would not.",
+      "tokens": [
+        {
+          "text": "τί",
+          "translit": "ti",
+          "gloss": "what",
+          "wordId": null,
+          "familyId": null,
+          "morphology": null,
+          "parse": {
+            "case": "nominative",
+            "number": "s",
+            "gender": "n"
+          }
+        },
+        {
+          "text": "νεώτερον",
+          "translit": "neōteron",
+          "gloss": "newer thing",
+          "wordId": "neoteros",
+          "familyId": "νεωτερ",
+          "morphology": {
+            "highlight": [
+              6,
+              7
+            ],
+            "kind": "ending"
+          },
+          "parse": {
+            "case": "nominative",
+            "number": "s",
+            "gender": "n"
+          }
+        },
+        {
+          "text": "ὦ",
+          "translit": "ō",
+          "gloss": "O (addressing someone)",
+          "wordId": null,
+          "familyId": null,
+          "morphology": null
+        },
+        {
+          "text": "Σώκρατες",
+          "translit": "Sōkrates",
+          "gloss": "Socrates",
+          "wordId": null,
+          "familyId": null,
+          "morphology": null,
+          "parse": {
+            "case": "vocative",
+            "number": "s",
+            "gender": "m"
+          }
+        },
+        {
+          "text": "γέγονεν",
+          "translit": "gegonen",
+          "gloss": "has happened",
+          "wordId": null,
+          "familyId": null,
+          "morphology": null,
+          "parse": {
+            "person": "3",
+            "tense": "perfect",
+            "voice": "active",
+            "mood": "indicative",
+            "number": "s"
+          }
+        }
+      ]
+    },
+    {
+      "id": "thucydides-opening",
+      "reference": "Thucydides, Histories 1.1",
+      "translation": "Thucydides the Athenian wrote up the war of the Peloponnesians and the Athenians.",
+      "notes": "The first sentence of the Histories. Thucydides names himself in the third person — a convention of Greek historiography.",
+      "tokens": [
+        {
+          "text": "Θουκυδίδης",
+          "translit": "Thoukydidēs",
+          "gloss": "Thucydides",
+          "wordId": null,
+          "familyId": null,
+          "morphology": null,
+          "parse": {
+            "case": "nominative",
+            "number": "s",
+            "gender": "m"
+          }
+        },
+        {
+          "text": "Ἀθηναῖος",
+          "translit": "Athēnaios",
+          "gloss": "the Athenian",
+          "wordId": "athenaios",
+          "familyId": "ἀθηναι",
+          "morphology": {
+            "highlight": [
+              6,
+              7
+            ],
+            "kind": "ending"
+          },
+          "parse": {
+            "case": "nominative",
+            "number": "s",
+            "gender": "m"
+          }
+        },
+        {
+          "text": "ξυνέγραψε",
+          "translit": "xynegrapse",
+          "gloss": "wrote up",
+          "wordId": null,
+          "familyId": null,
+          "morphology": null,
+          "parse": {
+            "person": "3",
+            "tense": "aorist",
+            "voice": "active",
+            "mood": "indicative",
+            "number": "s"
+          }
+        },
+        {
+          "text": "τὸν",
+          "translit": "ton",
+          "gloss": "the",
+          "wordId": null,
+          "familyId": null,
+          "morphology": null
+        },
+        {
+          "text": "πόλεμον",
+          "translit": "polemon",
+          "gloss": "war",
+          "wordId": "polemos",
+          "familyId": "πολεμ",
+          "morphology": {
+            "highlight": [
+              5,
+              6
+            ],
+            "kind": "ending"
+          },
+          "parse": {
+            "case": "accusative",
+            "number": "s",
+            "gender": "m"
+          }
+        },
+        {
+          "text": "τῶν",
+          "translit": "tōn",
+          "gloss": "of the",
+          "wordId": null,
+          "familyId": null,
+          "morphology": null
+        },
+        {
+          "text": "Πελοποννησίων",
+          "translit": "Peloponnēsiōn",
+          "gloss": "of the Peloponnesians",
+          "wordId": null,
+          "familyId": null,
+          "morphology": null,
+          "parse": {
+            "case": "genitive",
+            "number": "p",
+            "gender": "m"
+          }
+        },
+        {
+          "text": "καὶ",
+          "translit": "kai",
+          "gloss": "and",
+          "wordId": null,
+          "familyId": null,
+          "morphology": null
+        },
+        {
+          "text": "Ἀθηναίων",
+          "translit": "Athēnaiōn",
+          "gloss": "of the Athenians",
+          "wordId": "athenaios",
+          "familyId": "ἀθηναι",
+          "morphology": {
+            "highlight": [
+              6,
+              7
+            ],
+            "kind": "ending"
+          },
+          "parse": {
+            "case": "genitive",
+            "number": "p",
+            "gender": "m"
+          }
+        }
+      ]
+    }
+  ],
+  "skipped": []
+}

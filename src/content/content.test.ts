@@ -57,21 +57,29 @@ describe.each(COURSES)("course: %s", (courseId: CourseId) => {
       (_id, w) => {
         const familyLetters = Array.from(script.fold(w.familyId));
         if (w.morphology.kind === "ending") {
-          // Greek highlights the ENDING, so the highlight is the part that is
-          // NOT the family — the unhighlighted prefix must be the stem.
-          const stem = w.morphology.highlight.length
-            ? script.fold(
-                script
-                  .toLetterClusters(w.text)
-                  .filter((_, i) => !w.morphology.highlight.includes(i))
-                  .map((c) => c.text)
-                  .join(""),
-              )
-            : "";
+          // Greek highlights the ENDING, so what is left unhighlighted is the
+          // stem. It must be non-empty — an ending covering the whole word is
+          // the χάρις failure from greek-build-plan.md §7.
+          const family = familyLetters.join("");
+          const stem = script.fold(
+            script
+              .toLetterClusters(w.text)
+              .filter((_, i) => !w.morphology.highlight.includes(i))
+              .map((c) => c.text)
+              .join(""),
+          );
+          expect(stem.length, `${w.text}: ending covers the whole word`).toBeGreaterThan(0);
+
+          // The stem normally IS the family. It legitimately differs where a
+          // family was grouped by curation rather than derived — λόγος and
+          // λέγω share a family across an ο/ε ablaut, so no string relation
+          // holds. Those must be genuine multi-word families, not typos.
+          const consistent = stem.startsWith(family) || family.startsWith(stem);
+          const curated = (wordsByFamily[w.familyId] ?? []).length > 1;
           expect(
-            stem,
-            `${w.text}: unhighlighted prefix "${stem}" should be the family "${familyLetters.join("")}"`,
-          ).toBe(familyLetters.join(""));
+            consistent || curated,
+            `${w.text}: stem "${stem}" is unrelated to family "${family}", and that family has only one word — so this is a mistake, not a curation decision`,
+          ).toBe(true);
         } else {
           // Hebrew highlights the ROOT: the highlighted letters ARE the family.
           const picked = lettersAt(script, w.text, w.morphology.highlight).map((l) => script.fold(l));

@@ -1,43 +1,48 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { Link } from "react-router-dom";
-import { useActiveCourseId, useCourseContent } from "@/state/useCourse";
+import { useActiveCourseId, useCourse, useCourseContent } from "@/state/useCourse";
 import { ScriptWord } from "@/components/ScriptWord";
 import { Sheet } from "@/components/ui";
-import { scriptOf } from "@/content/course";
+import { morphemeLabel, parseFieldsOf, scriptOf } from "@/content/course";
 import { db } from "@/db";
 
 
 /**
- * The root card (spec §4 Phase 4): every word in the app built on this root,
- * every verse it appears in, and how well the learner knows each form.
+ * The word-family card (spec §4 Phase 4): every word in the app built on this
+ * family's morpheme, every verse it appears in, and how well the learner knows
+ * each form.
  *
  * This is the screen that makes the product's central claim visible — you learn
- * a root once and it pays off across a family of words.
+ * one morpheme and it pays off across a family of words. It was called the
+ * "root card", but Hebrew teaches roots and Greek teaches stems, so all copy
+ * here comes from `morphemeLabel`.
  */
-export function RootSheet({ rootId, onClose }: { rootId: string | null; onClose: () => void }) {
+export function FamilySheet({ familyId, onClose }: { familyId: string | null; onClose: () => void }) {
   const { familyById, wordsByFamily, passagesByFamily, unitByWordId, passageById } =
     useCourseContent();
   const courseId = useActiveCourseId();
-  const root = rootId ? familyById.get(rootId) : undefined;
-  const family = rootId ? (wordsByFamily[rootId] ?? []) : [];
+  const course = useCourse();
+  const morpheme = morphemeLabel(course);
+  const entry = familyId ? familyById.get(familyId) : undefined;
+  const family = familyId ? (wordsByFamily[familyId] ?? []) : [];
   const cards = useLiveQuery(
-    async () => (rootId ? db.srsCards.bulkGet(family.map((w) => [courseId, w.id] as [typeof courseId, string])) : []),
-    [rootId, family.length, courseId],
+    async () => (familyId ? db.srsCards.bulkGet(family.map((w) => [courseId, w.id] as [typeof courseId, string])) : []),
+    [familyId, family.length, courseId],
   );
 
   const cardFor = (wordId: string) => cards?.find((c) => c?.wordId === wordId) ?? undefined;
-  const verses = rootId ? (passagesByFamily[rootId] ?? []) : [];
+  const verses = familyId ? (passagesByFamily[familyId] ?? []) : [];
 
   return (
-    <Sheet open={!!root} onClose={onClose} title={root ? `Root ${root.letters}` : undefined}>
-      {root && (
+    <Sheet open={!!entry} onClose={onClose} title={entry ? `${morpheme.One} ${entry.letters}` : undefined}>
+      {entry && (
         <>
           <div className="center" style={{ paddingBottom: 8 }}>
-            <ScriptWord word={scriptOf().joinLetters(root.letters)} size={38} showHighlight={false} />
-            <p style={{ margin: "8px 0 0", fontSize: 17, fontWeight: 600 }}>{root.coreGloss}</p>
-            {root.notes && (
+            <ScriptWord word={scriptOf(course).joinLetters(entry.letters)} size={38} showHighlight={false} />
+            <p style={{ margin: "8px 0 0", fontSize: 17, fontWeight: 600 }}>{entry.coreGloss}</p>
+            {entry.notes && (
               <p className="small muted" style={{ marginTop: 8, lineHeight: 1.6 }}>
-                {root.notes}
+                {entry.notes}
               </p>
             )}
           </div>
@@ -45,7 +50,7 @@ export function RootSheet({ rootId, onClose }: { rootId: string | null; onClose:
           <hr className="divider" />
 
           <span className="label">
-            {family.length} word{family.length === 1 ? "" : "s"} from this root
+            {family.length} word{family.length === 1 ? "" : "s"} from this {morpheme.one}
           </span>
           <div className="stack" style={{ marginTop: 10 }}>
             {family.map((w) => {
@@ -75,7 +80,8 @@ export function RootSheet({ rootId, onClose }: { rootId: string | null; onClose:
                   </div>
                   {w.parse && (
                     <div className="small muted" style={{ marginTop: 8 }}>
-                      {[w.parse.binyan, w.parse.tense, w.parse.person, w.parse.gender, w.parse.number]
+                      {parseFieldsOf(course)
+                        .map((f) => w.parse?.[f.id])
                         .filter(Boolean)
                         .join(" · ")}
                     </div>

@@ -49,7 +49,7 @@ export function ScriptWord({
 
   const content = (
     <span
-      className={`hebrew ${className}`}
+      className={`script ${className}`}
       style={{ fontSize: size }}
       dir={script.direction}
       lang={script.lang}
@@ -58,8 +58,8 @@ export function ScriptWord({
       {letters.map((letter, i) => (
         <span
           key={i}
-          className={`hebrew__letter${
-            showHighlight && highlight?.includes(i) ? " hebrew__letter--root" : ""
+          className={`script__letter${
+            showHighlight && highlight?.includes(i) ? " script__letter--highlight" : ""
           }`}
         >
           {letter.text}

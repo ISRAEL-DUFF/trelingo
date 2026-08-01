@@ -141,7 +141,14 @@ describe("script module contract", () => {
     expect(greekScript.fade(ARCHE, 6)).toBe(ARCHE);
   });
 
-  it("joins stem letters with a hyphen, not a maqqef", () => {
-    expect(greekScript.joinLetters("λυ")).toBe("λ-υ");
+  it("writes a stem contiguous with a trailing hyphen, not interspersed", () => {
+    // λ-υ is the Hebrew root convention, where the consonants are a
+    // discontinuous pattern. A Greek stem is a literal substring: λυ-.
+    expect(greekScript.joinLetters("λυ")).toBe("λυ-");
+    expect(greekScript.joinLetters("δικ")).toBe("δικ-");
+  });
+
+  it("keeps accents on the stem it is given", () => {
+    expect(greekScript.joinLetters("πόλ")).toBe("πόλ-");
   });
 });

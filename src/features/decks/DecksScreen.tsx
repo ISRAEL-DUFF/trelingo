@@ -5,16 +5,17 @@ import { api } from "@/api/client";
 import { ApiError, NetworkError, type Deck } from "@/api/types";
 import { Banner, Button, Empty, Sheet, TopBar } from "@/components/ui";
 import { ScriptWord } from "@/components/ScriptWord";
-import { useCourseContent } from "@/state/useCourse";
+import { useCourse, useCourseContent } from "@/state/useCourse";
 import { db } from "@/db";
 import { putLocalDecks } from "@/db/repo";
-import { scriptOf, textProps } from "@/content/course";
+import { morphemeLabel, scriptOf, textProps } from "@/content/course";
 import { useSession } from "@/state/session";
 import { DEFAULT_COURSE_ID } from "@/content/course";
 
 /** Custom decks (spec §4 Phase 7): review any subset independently of the path. */
 export function DecksScreen() {
   const { families, words, wordsByFamily } = useCourseContent();
+  const morpheme = morphemeLabel(useCourse());
   const navigate = useNavigate();
   const user = useSession((s) => s.user);
   const decks = useLiveQuery(() => db.decks.toArray(), []) ?? [];
@@ -42,10 +43,10 @@ export function DecksScreen() {
       return next;
     });
 
-  const addRoot = (rootId: string) =>
+  const addFamily = (familyId: string) =>
     setPicked((p) => {
       const next = new Set(p);
-      for (const w of wordsByFamily[rootId] ?? []) next.add(w.id);
+      for (const w of wordsByFamily[familyId] ?? []) next.add(w.id);
       return next;
     });
 
@@ -99,7 +100,7 @@ export function DecksScreen() {
           <Empty
             icon="🗂"
             title="No custom decks"
-            hint="Build a deck from any words — say, everything on one root — and review it on its own."
+            hint={`Build a deck from any words — say, everything on one ${morpheme.one} — and review it on its own.`}
           />
         )}
 
@@ -144,12 +145,12 @@ export function DecksScreen() {
           </div>
 
           <div>
-            <span className="label">Add a whole root</span>
+            <span className="label">Add a whole {morpheme.one}</span>
             <div className="chips" style={{ marginTop: 8 }}>
               {families
                 .filter((r) => (wordsByFamily[r.id]?.length ?? 0) > 1)
                 .map((r) => (
-                  <button key={r.id} className="chip" onClick={() => addRoot(r.id)}>
+                  <button key={r.id} className="chip" onClick={() => addFamily(r.id)}>
                     <span {...textProps()}>
                       {scriptOf().joinLetters(r.letters)}
                     </span>

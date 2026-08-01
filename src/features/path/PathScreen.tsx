@@ -87,9 +87,9 @@ export function PathScreen() {
           <button
             className="btn"
             style={{
-              border: "2px solid var(--root)",
-              background: "var(--root-wash)",
-              color: "var(--root)",
+              border: "2px solid var(--attention)",
+              background: "var(--attention-wash)",
+              color: "var(--attention)",
             }}
             onClick={() => navigate("/review")}
           >

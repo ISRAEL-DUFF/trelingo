@@ -98,10 +98,16 @@ export const greekScript: ScriptModule = {
   stripDiacritics,
   fold,
   isLetter: isGreekLetter,
+  /*
+   * A Greek stem is written contiguous with a trailing hyphen — πολ-, δικ-,
+   * λυ-. Hebrew interposes a maqqef (שׁ־מ־ר) because a Semitic root is a
+   * discontinuous pattern of consonants; a Greek stem is a literal substring,
+   * so interposing anything misrepresents it.
+   */
   joinLetters: (letters) =>
     toLetterClusters(letters)
       .map((c) => c.text)
-      .join(HYPHEN),
+      .join("") + HYPHEN,
 };
 
 registerScript(greekScript);

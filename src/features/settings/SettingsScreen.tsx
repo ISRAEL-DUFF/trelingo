@@ -2,19 +2,21 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Banner, Button, Sheet, Switch, TopBar } from "@/components/ui";
 import { useSession } from "@/state/session";
-import { CONTENT_REVIEW_NOTES } from "@/content";
-import { useCourseContent } from "@/state/useCourse";
+import { reviewNotesFor } from "@/content";
+import { useActiveCourseId, useCourse, useCourseContent } from "@/state/useCourse";
 import { requestPersistentStorage, storageEstimate } from "@/db";
 import { api } from "@/api/client";
 import { useSyncState } from "@/features/sync/SyncIndicator";
 import { sync } from "@/sync/sync";
 import { installState, promptInstall } from "@/lib/pwa";
 import { THEME_LABELS, systemTheme } from "@/lib/theme";
-import { getCourse } from "@/content/course";
+import { getCourse, morphemeLabel } from "@/content/course";
 import { notificationState, requestNotificationPermission } from "@/lib/notifications";
 
 export function SettingsScreen() {
   const { families, units, words } = useCourseContent();
+  const courseId = useActiveCourseId();
+  const morpheme = morphemeLabel(useCourse());
   const navigate = useNavigate();
   const { user, settings, updateSettings, logout } = useSession();
   const syncStatus = useSyncState();
@@ -293,12 +295,12 @@ export function SettingsScreen() {
       <Sheet open={provenanceOpen} onClose={() => setProvenanceOpen(false)} title="Content provenance">
         <h2 className="title h2">Content provenance</h2>
         <p className="small muted" style={{ lineHeight: 1.6 }}>
-          Every word's root indices are machine-verified to land on real consonants, and the whole
-          bundle is schema-validated in CI. The items below are judgement calls a Hebraist should
-          review before this reaches learners.
+          Every word's {morpheme.one} indices are machine-verified to land on real letters, and
+          the whole bundle is schema-validated in CI. The items below are judgement calls a
+          specialist should review before this reaches learners.
         </p>
         <div className="stack" style={{ marginTop: 14 }}>
-          {CONTENT_REVIEW_NOTES.map((n) => (
+          {reviewNotesFor(courseId).map((n) => (
             <div key={n.id} className="card card--flat">
               <div className="translit" style={{ marginBottom: 4 }}>
                 {n.id}

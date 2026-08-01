@@ -1,12 +1,12 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useCourseContent } from "@/state/useCourse";
+import { useCourse, useCourseContent } from "@/state/useCourse";
 import { db } from "@/db";
 import { PassageReader } from "./PassageReader";
-import { RootSheet } from "./RootSheet";
+import { FamilySheet } from "./FamilySheet";
 import { Empty, TopBar } from "@/components/ui";
 import { ScriptWord } from "@/components/ScriptWord";
-import { scriptOf } from "@/content/course";
+import { morphemeLabel, scriptOf } from "@/content/course";
 import { useState } from "react";
 import { useSession } from "@/state/session";
 
@@ -14,7 +14,9 @@ import { useSession } from "@/state/session";
 export function LibraryScreen() {
   const { passages, families, units, wordsByFamily } = useCourseContent();
   const [tab, setTab] = useState<"verses" | "families">("verses");
-  const [rootSheet, setRootSheet] = useState<string | null>(null);
+  const [familySheet, setFamilySheet] = useState<string | null>(null);
+  const course = useCourse();
+  const morpheme = morphemeLabel(course);
 
   const completed = useLiveQuery(
     async () => new Set((await db.unitProgress.toArray()).map((p) => p.unitId)),
@@ -40,7 +42,7 @@ export function LibraryScreen() {
           className={`chip${tab === "families" ? " chip--selected" : ""}`}
           onClick={() => setTab("families")}
         >
-          Roots
+          {morpheme.Many}
         </button>
       </div>
 
@@ -96,10 +98,10 @@ export function LibraryScreen() {
                 key={r.id}
                 className="card card--flat"
                 style={{ textAlign: "start", border: "1px solid var(--border)" }}
-                onClick={() => setRootSheet(r.id)}
+                onClick={() => setFamilySheet(r.id)}
               >
                 <div className="row row--between">
-                  <ScriptWord word={scriptOf().joinLetters(r.letters)} size={24} showHighlight={false} />
+                  <ScriptWord word={scriptOf(course).joinLetters(r.letters)} size={24} showHighlight={false} />
                   <div style={{ textAlign: "end" }}>
                     <div className="small">{r.coreGloss}</div>
                     <div className="small muted">
@@ -113,12 +115,12 @@ export function LibraryScreen() {
         </div>
       )}
 
-      <RootSheet rootId={rootSheet} onClose={() => setRootSheet(null)} />
+      <FamilySheet familyId={familySheet} onClose={() => setFamilySheet(null)} />
     </div>
   );
 }
 
-/** A single verse, opened from the library or a root card. */
+/** A single verse, opened from the library or a word-family card. */
 export function PassageScreen() {
   const { passageId } = useParams<{ passageId: string }>();
   const navigate = useNavigate();
