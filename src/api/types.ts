@@ -21,7 +21,7 @@ export interface ApiUser {
   createdAt: string; // ISO
   timezone: string;
   pronunciationPref: PronunciationVariant;
-  niqqudPref: "always" | "fading" | "off";
+  diacriticsPref: "always" | "fading" | "off";
   placementLevel: number | null;
 }
 

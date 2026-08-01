@@ -40,7 +40,7 @@ export interface Settings {
   key: "settings";
   /** "system" is resolved to a concrete palette in lib/theme.ts. */
   themePref: ThemePref;
-  niqqudPref: "always" | "fading" | "off";
+  diacriticsPref: "always" | "fading" | "off";
   pronunciationPref: PronunciationVariant;
   dailyGoal: number;
   soundEnabled: boolean;
@@ -146,6 +146,26 @@ export function createDb(name = "shoresh"): ShoreshDb {
   // v3 — drop the superseded tables, now that v2 has copied out of them.
   database.version(3).stores({ cards: null, progress: null });
 
+  /**
+   * v4 — `niqqudPref` → `diacriticsPref`.
+   *
+   * Niqqud are Hebrew vowel points specifically; the setting governs diacritic
+   * display in whatever script the course uses, and Greek has accents and
+   * breathings rather than niqqud. The primary key is unchanged here, so unlike
+   * v2 this is a plain in-place rename.
+   */
+  database.version(4).upgrade(async (tx) => {
+    await tx
+      .table("settings")
+      .toCollection()
+      .modify((row: Record<string, unknown>) => {
+        if ("niqqudPref" in row) {
+          row.diacriticsPref ??= row.niqqudPref;
+          delete row.niqqudPref;
+        }
+      });
+  });
+
   return database;
 }
 
@@ -176,7 +196,7 @@ export async function getDeviceId(): Promise<string> {
 export const DEFAULT_SETTINGS: Settings = {
   key: "settings",
   themePref: DEFAULT_THEME,
-  niqqudPref: "fading",
+  diacriticsPref: "fading",
   pronunciationPref: "sephardic",
   dailyGoal: 20,
   soundEnabled: true,

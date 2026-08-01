@@ -172,7 +172,7 @@ export const handlers = [
       createdAt: new Date().toISOString(),
       timezone: body.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
       pronunciationPref: "sephardic",
-      niqqudPref: "fading",
+      diacriticsPref: "fading",
       placementLevel: null,
     });
     return json(authResponse(id), { status: 201 });
@@ -206,7 +206,7 @@ export const handlers = [
         createdAt: new Date().toISOString(),
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         pronunciationPref: "sephardic",
-        niqqudPref: "fading",
+        diacriticsPref: "fading",
         placementLevel: null,
       });
       user = mockDb.findUserByEmail(email)!;
@@ -245,7 +245,7 @@ export const handlers = [
     const user = mockDb.findUserById(id)!;
     Object.assign(user, {
       displayName: patch.displayName ?? user.displayName,
-      niqqudPref: patch.niqqudPref ?? user.niqqudPref,
+      diacriticsPref: patch.diacriticsPref ?? user.diacriticsPref,
       pronunciationPref: patch.pronunciationPref ?? user.pronunciationPref,
     });
     mockDb.save();

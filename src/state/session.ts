@@ -128,7 +128,7 @@ export const useSession = create<SessionState>((set, get) => ({
     if (get().user) {
       try {
         await api.updateMe({
-          niqqudPref: settings.niqqudPref,
+          diacriticsPref: settings.diacriticsPref,
           pronunciationPref: settings.pronunciationPref,
         });
       } catch {

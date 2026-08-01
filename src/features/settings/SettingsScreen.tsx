@@ -9,6 +9,7 @@ import { useSyncState } from "@/features/sync/SyncIndicator";
 import { sync } from "@/sync/sync";
 import { installState, promptInstall } from "@/lib/pwa";
 import { THEME_LABELS, systemTheme } from "@/lib/theme";
+import { getCourse } from "@/content/course";
 import { notificationState, requestNotificationPermission } from "@/lib/notifications";
 
 export function SettingsScreen() {
@@ -19,6 +20,7 @@ export function SettingsScreen() {
   const [persisted, setPersisted] = useState<boolean | null>(null);
   const [provenanceOpen, setProvenanceOpen] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
+  const course = getCourse();
   const install = installState();
   const notif = notificationState();
 
@@ -133,25 +135,25 @@ export function SettingsScreen() {
         <div className="card stack">
           <span className="label">Reading</span>
           <div className="field">
-            <span className="small">Vowel points (niqqud)</span>
+            {/* Label and copy come from the course: "vowel points (niqqud)" is
+                meaningless for Greek, which has accents and breathings. */}
+            <span className="small">{course.diacriticsCopy.label}</span>
             <div className="chips">
-              {(["always", "fading", "off"] as const).map((v) => (
-                <button
-                  key={v}
-                  className={`chip${settings.niqqudPref === v ? " chip--selected" : ""}`}
-                  onClick={() => void updateSettings({ niqqudPref: v })}
-                >
-                  {v === "always" ? "Always show" : v === "fading" ? "Fade as I learn" : "Hide"}
-                </button>
-              ))}
+              {(["always", "fading", "off"] as const)
+                // Fading is only offered where the script has an honest
+                // progression to fade along (Hebrew yes, Greek no — §4.5).
+                .filter((v) => v !== "fading" || course.supportsFading)
+                .map((v) => (
+                  <button
+                    key={v}
+                    className={`chip${settings.diacriticsPref === v ? " chip--selected" : ""}`}
+                    onClick={() => void updateSettings({ diacriticsPref: v })}
+                  >
+                    {v === "always" ? "Always show" : v === "fading" ? "Fade as I learn" : "Hide"}
+                  </button>
+                ))}
             </div>
-            <span className="small muted">
-              {settings.niqqudPref === "fading"
-                ? "Points drop away in stages as each word's card matures, so you're weaned onto unpointed text."
-                : settings.niqqudPref === "off"
-                  ? "Consonants only, as in a Torah scroll."
-                  : "Full pointing everywhere."}
-            </span>
+            <span className="small muted">{course.diacriticsCopy[settings.diacriticsPref]}</span>
           </div>
 
           <div className="field">

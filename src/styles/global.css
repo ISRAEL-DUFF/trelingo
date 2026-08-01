@@ -155,6 +155,28 @@ button:disabled {
   }
 }
 
+/* ---------- Per-course accent (D7) ---------- */
+/*
+ * The ONE visual override a course gets. The shared light/dark palette is
+ * reused unchanged; only this hue differs, driving the header and per-course
+ * highlights. Set from the active course's `accentColor`.
+ *
+ * The morpheme colour (--root) is deliberately NOT overridden: it means "the
+ * morpheme this course teaches" — the root in Hebrew, the ending in Greek — and
+ * stays reserved in every course so it never reads as an error state.
+ */
+:root {
+  --accent: var(--gold);
+}
+
+:root[data-course="greek-koine"] {
+  --accent: #2b5876; /* aegean */
+}
+
+:root[data-course="greek-attic"] {
+  --accent: #211d1a; /* charcoal */
+}
+
 /* ---------- App shell ---------- */
 
 .app-shell {
@@ -179,10 +201,24 @@ button:disabled {
 
 /* ---------- Hebrew ---------- */
 
+/*
+ * Script text.
+ *
+ * Direction is deliberately ABSENT. It comes from the `dir` attribute that
+ * ScriptWord sets from the course's script module, so the same component renders
+ * Hebrew right-to-left and Greek left-to-right. A `direction: rtl` here would
+ * win over the attribute (an author rule beats the UA's [dir] rule) and silently
+ * force Greek into RTL — the same class of bug that reversed verse word order
+ * in `.passage`.
+ *
+ * `unicode-bidi: isolate`, never `bidi-override`: isolating keeps a script run
+ * from disturbing its surroundings, while overriding forces visual order and
+ * corrupts mixed-direction content such as a Hebrew word beside an English gloss.
+ */
 .hebrew {
-  font-family: var(--font-hebrew);
-  direction: rtl;
-  unicode-bidi: isolate; /* isolate, never override — see lib/hebrew.ts */
+  /* Set per course from Course.fontStack; the Hebrew face is the fallback. */
+  font-family: var(--script-font, var(--font-hebrew));
+  unicode-bidi: isolate;
   line-height: 1.7;
 }
 

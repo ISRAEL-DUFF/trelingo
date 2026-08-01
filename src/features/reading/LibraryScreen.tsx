@@ -122,7 +122,7 @@ export function PassageScreen() {
   const { passageId } = useParams<{ passageId: string }>();
   const navigate = useNavigate();
   const settings = useSession((s) => s.settings);
-  const [fade, setFade] = useState(settings?.niqqudPref === "off" ? 6 : 0);
+  const [fade, setFade] = useState(settings?.diacriticsPref === "off" ? 6 : 0);
 
   if (!passageId) return null;
 

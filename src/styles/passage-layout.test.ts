@@ -57,4 +57,14 @@ describe(".hebrew text rendering", () => {
     expect(body).toMatch(/unicode-bidi\s*:\s*isolate/);
     expect(body).not.toMatch(/bidi-override/);
   });
+
+  it("does not hardcode a direction — Greek and Latin read left to right", () => {
+    // An author rule here would beat the `dir` attribute ScriptWord sets from
+    // the course, silently forcing Greek into RTL.
+    expect(body).not.toMatch(/[^-]direction\s*:/);
+  });
+
+  it("takes its font from the course rather than hardcoding the Hebrew face", () => {
+    expect(body).toMatch(/--script-font/);
+  });
 });

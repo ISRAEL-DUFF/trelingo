@@ -27,7 +27,7 @@ export interface MockUser {
   createdAt: string;
   timezone: string;
   pronunciationPref: PronunciationVariant;
-  niqqudPref: "always" | "fading" | "off";
+  diacriticsPref: "always" | "fading" | "off";
   placementLevel: number | null;
 }
 
@@ -132,6 +132,14 @@ const LEGACY_COURSE_ID = "hebrew-biblical";
  */
 function backfillCourseIds(db: MockDb): { db: MockDb; changed: boolean } {
   let changed = false;
+  // `niqqudPref` → `diacriticsPref`, mirroring the client's Dexie v4 upgrade.
+  for (const user of db.users as unknown as Record<string, unknown>[]) {
+    if ("niqqudPref" in user) {
+      user.diacriticsPref ??= user.niqqudPref;
+      delete user.niqqudPref;
+      changed = true;
+    }
+  }
   for (const data of Object.values(db.data)) {
     for (const log of data.reviewLogs) {
       if (!log.courseId) {

@@ -8,6 +8,7 @@ import type { GradeResult } from "./grade";
 import { completeUnit, recordReview } from "@/db/repo";
 import { addXp, touchStreak } from "@/db/repo";
 import { useSession } from "@/state/session";
+import { scriptOf } from "@/content/course";
 import { sync } from "@/sync/sync";
 import { PassageReader } from "@/features/reading/PassageReader";
 
@@ -160,7 +161,7 @@ export function LessonScreen() {
           key={current.id}
           exercise={current}
           onAnswer={(r) => void onAnswer(r)}
-          fadeStage={settings?.niqqudPref === "off" ? 6 : 0}
+          fadeStage={settings?.diacriticsPref === "off" ? scriptOf().stages : 0}
           soundEnabled={settings?.soundEnabled ?? true}
         />
       )}

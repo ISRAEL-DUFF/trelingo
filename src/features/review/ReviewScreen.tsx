@@ -143,12 +143,15 @@ export function ReviewScreen() {
   }
 
   const previews = previewIntervals(card, Date.now());
-  // Fading niqqud: points drop away as the card matures (spec §4 Phase 4).
+  // Diacritic fading: marks drop away as the card matures (spec §4 Phase 4).
+  // Clamped to the script's own stage count — Greek declares 0, so its fade is
+  // a no-op however this resolves.
+  const stages = scriptOf().stages;
   const fadeStage =
-    settings?.niqqudPref === "off"
-      ? 6
-      : settings?.niqqudPref === "fading"
-        ? fadeStageForInterval(card.intervalDays, scriptOf().stages)
+    settings?.diacriticsPref === "off"
+      ? stages
+      : settings?.diacriticsPref === "fading"
+        ? fadeStageForInterval(card.intervalDays, stages)
         : 0;
 
   return (

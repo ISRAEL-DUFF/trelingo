@@ -201,6 +201,22 @@ describe("v1 → v2 upgrade with existing data", () => {
     db.close();
   });
 
+  it("renames niqqudPref to diacriticsPref, preserving the value (v4)", async () => {
+    await seedV1(dbName);
+
+    const db = createDb(dbName);
+    await db.open();
+    const settings = (await db.settings.get("settings")) as unknown as Record<string, unknown>;
+    db.close();
+
+    // Niqqud are Hebrew vowel points; the setting governs diacritics generally.
+    expect(settings.diacriticsPref).toBe("fading");
+    expect("niqqudPref" in settings).toBe(false);
+    // Unrelated settings must survive the rename untouched.
+    expect(settings.themePref).toBe("dark");
+    expect(settings.soundEnabled).toBe(true);
+  });
+
   it("creates a fresh database at v2 with no upgrade path needed", async () => {
     const db = createDb(dbName);
     await db.open();

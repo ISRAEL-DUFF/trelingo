@@ -20,6 +20,7 @@ import { startSyncTriggers } from "@/sync/sync";
 import { getDueCounts } from "@/db/repo";
 import { loadAudioManifest } from "@/lib/audio";
 import { applyTheme, watchSystemTheme } from "@/lib/theme";
+import { applyCourse, getCourse } from "@/content/course";
 import { Spinner } from "@/components/ui";
 
 /** Routes that take over the whole screen and hide the tab bar. */
@@ -69,6 +70,12 @@ export default function App() {
   }, [init]);
 
   useEffect(() => startSyncTriggers(), []);
+
+  // Course presentation: accent hue and script font. Phase 4 will re-run this
+  // when the learner switches course.
+  useEffect(() => {
+    applyCourse(getCourse());
+  }, []);
 
   useEffect(() => {
     if (settings) void loadAudioManifest(settings.pronunciationPref);

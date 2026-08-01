@@ -157,7 +157,7 @@ export const api = {
     request<AuthResponse>("/auth/oauth", { method: "POST", body, anonymous: true }),
   logout: () => request<void>("/auth/logout", { method: "POST" }),
   me: () => request<ApiUser>("/me"),
-  updateMe: (body: Partial<Pick<ApiUser, "displayName" | "niqqudPref" | "pronunciationPref">>) =>
+  updateMe: (body: Partial<Pick<ApiUser, "displayName" | "diacriticsPref" | "pronunciationPref">>) =>
     request<ApiUser>("/me", { method: "PATCH", body }),
   exportData: () => request<unknown>("/me/export"),
   deleteAccount: () => request<void>("/me", { method: "DELETE" }),
