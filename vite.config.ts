@@ -4,24 +4,29 @@ import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 import { fileURLToPath, URL } from "node:url";
 
-// NOTE ON SERVICE WORKERS — read before enabling the PWA SW.
-// A page can only be controlled by one service worker per scope. While the
-// backend is mocked, that slot belongs to MSW's worker (public/mockServiceWorker.js),
-// which is what makes the API mocks real HTTP interception rather than a stubbed
-// client. So the Workbox SW below is registered as `injectRegister: null` and is
-// only activated when VITE_ENABLE_PWA_SW=true (which in turn disables mocking).
-// The manifest, icons and install metadata always ship, and offline still works
-// because every read/write in the app goes through Dexie, not the network.
-// See README.md § Service worker trade-off.
-const enablePwaSw = process.env.VITE_ENABLE_PWA_SW === "true";
+// NOTE ON SERVICE WORKERS.
+// A page is controlled by exactly one service worker per scope. That slot used
+// to belong to MSW, so the generated Workbox `sw.js` was never registered — the
+// app precached nothing and could not be installed, because Chrome will not
+// offer a real install (or fire `beforeinstallprompt`) without a registered
+// worker. Both now live in one worker, src/sw.ts, which is why this uses
+// `injectManifest` rather than `generateSW`. See the header of that file for
+// why the registration order in it matters.
+//
+// Dev keeps MSW's own standalone worker: `devOptions.enabled` is false, so
+// there is no PWA worker to share with, and installability is not a dev concern.
 
 export default defineConfig({
   plugins: [
     react(),
     VitePWA({
       registerType: "prompt",
-      injectRegister: enablePwaSw ? "auto" : null,
-      strategies: "generateSW",
+      // Registration is explicit, in main.tsx, because it has to be sequenced
+      // against MSW's client handshake.
+      injectRegister: null,
+      strategies: "injectManifest",
+      srcDir: "src",
+      filename: "sw.ts",
       manifest: {
         id: "/",
         name: "Shoresh — Learn Biblical Hebrew by the Root",
@@ -43,22 +48,12 @@ export default defineConfig({
           { src: "/icons/icon-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
         ],
       },
-      workbox: {
+      injectManifest: {
         globPatterns: ["**/*.{js,css,html,woff2}"],
-        // Audio is runtime-cached, never precached — it would bloat the install.
-        // Matches spec §2 "runtime cache, cache-first" for audio assets.
-        runtimeCaching: [
-          {
-            urlPattern: /\/api\/audio\/.*/,
-            handler: "CacheFirst",
-            options: {
-              cacheName: "shoresh-audio",
-              expiration: { maxEntries: 500, maxAgeSeconds: 60 * 60 * 24 * 90 },
-              cacheableResponse: { statuses: [0, 200] },
-            },
-          },
-        ],
-        navigateFallback: "index.html",
+        // MSW's worker must stay a separately fetchable script: sw.ts pulls it
+        // in with importScripts, and precaching it would also make Workbox try
+        // to serve it as a cached asset.
+        globIgnores: ["**/mockServiceWorker.js"],
       },
       devOptions: { enabled: false },
     }),

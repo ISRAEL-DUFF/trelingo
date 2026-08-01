@@ -92,3 +92,22 @@ export async function promptInstall(): Promise<boolean> {
   notify();
   return outcome === "accepted";
 }
+
+/**
+ * Register the app's service worker.
+ *
+ * Only needed when mocks are off: MSW's `worker.start()` registers the same
+ * `/sw.js` and awaits activation, so calling both would be redundant. A missing
+ * registration is exactly what made the app uninstallable — the worker was
+ * built into `dist/` and referenced by nothing.
+ */
+export async function registerServiceWorker(): Promise<void> {
+  if (!("serviceWorker" in navigator)) return;
+  try {
+    await navigator.serviceWorker.register("/sw.js", { scope: "/" });
+  } catch (e) {
+    // Not fatal: the app is local-first and runs without a worker. It just
+    // cannot be installed or precache its shell.
+    console.warn("[shoresh] service worker registration failed", e);
+  }
+}

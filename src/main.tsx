@@ -28,10 +28,21 @@ ${(e as Error).message}
     return;
   }
 
+  // Register the service worker BEFORE rendering.
+  //
+  // In a built app there is one worker doing both jobs (see src/sw.ts). Whoever
+  // starts it must win the race, so this is awaited: starting MSW registers
+  // /sw.js and waits for it to activate, which also satisfies the PWA. With
+  // mocks off there is no MSW, so register it directly — without this the
+  // worker is built and never registered, which is what made the app
+  // uninstallable.
   const useMocks = import.meta.env.VITE_USE_MOCK_API !== "false";
   if (useMocks) {
     const { startMockServer } = await import("./mocks/browser");
     await startMockServer();
+  } else if (import.meta.env.PROD) {
+    const { registerServiceWorker } = await import("./lib/pwa");
+    await registerServiceWorker();
   }
 
   // Ask the browser not to evict our IndexedDB (spec §2.1). Fire-and-forget:

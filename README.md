@@ -134,13 +134,25 @@ Visit **`/dev`** (also linked from Settings). It drives the mock server's simula
 
 ## Known trade-offs
 
-**Service worker.** A page can only be controlled by one service worker per scope. While the
-backend is mocked, that slot belongs to MSW's worker — that is what makes the API mocks real
-HTTP interception rather than a stubbed client. The Workbox PWA service worker is configured
-and built, but only registers when `VITE_ENABLE_PWA_SW=true`. The manifest, icons and install
-metadata always ship. Offline still works because all state lives in Dexie, not in an
-HTTP cache. **Once the real backend lands and `src/mocks/` is deleted, turn the flag on and
-the precaching service worker takes over.**
+**Service worker.** A page can only be controlled by one service worker per scope, and the
+app needs that slot twice over: MSW's worker is what makes the API mocks real HTTP
+interception rather than a stubbed client, and a registered worker is what makes the app
+installable at all.
+
+This used to be resolved by giving the slot to MSW, which meant the Workbox worker was built
+into `dist/` and registered by nothing — so the app precached nothing and **could not be
+installed**. Chrome will not fire `beforeinstallprompt` without a registered worker; its menu
+offers "create shortcut" instead, which produces a bookmark and no app.
+
+Both now live in one worker, [`src/sw.ts`](src/sw.ts), built with `injectManifest`. Workbox's
+routes are registered first and MSW is pulled in with `importScripts` after — that order is
+load-bearing and is explained in the file's header, and guarded by `src/pwa-install.test.ts`.
+`VITE_USE_MOCK_API=false` compiles MSW out of the worker entirely, so a real backend never
+ships with an interceptor in front of it. Deleting `src/mocks/` later needs no flag flip.
+
+*Not yet built:* nothing sends the worker a `SKIP_WAITING` message, so there is no "new
+version available, reload?" prompt. An installed app picks up an update only after all of its
+windows are closed.
 
 **Audio is synthesised.** No recordings exist yet. The manifest fetch and per-word URLs go
 through the API exactly as they will with a real CDN (so that data path is exercised now),
