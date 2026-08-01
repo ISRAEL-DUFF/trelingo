@@ -14,7 +14,7 @@ export function PathScreen() {
 
   const data = useLiveQuery(async () => {
     const [progress, counts, xp, streak, unlocked] = await Promise.all([
-      db.progress.toArray(),
+      db.unitProgress.toArray(),
       getDueCounts(),
       getXp(),
       getStreak(),

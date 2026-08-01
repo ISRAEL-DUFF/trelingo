@@ -31,7 +31,7 @@ export function DevPanel() {
 
   const refresh = async () => {
     setCounts({
-      cards: await db.cards.count(),
+      cards: await db.srsCards.count(),
       logs: await db.reviewLogs.count(),
       unsynced: await db.reviewLogs.where("synced").equals(0).count(),
     });

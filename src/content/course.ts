@@ -10,6 +10,7 @@
  * colour and reuse the shared light/dark theme.
  */
 import { scriptFor, type ScriptId, type ScriptModule } from "@/lib/script";
+import { HEBREW_PARSE_FIELDS, type ParseFieldDef } from "./parse-fields";
 import "@/lib/script/hebrew"; // registers the Hebrew script module
 
 export type CourseId = "hebrew-biblical" | "greek-koine" | "greek-attic" | "latin";
@@ -29,8 +30,11 @@ export interface Course {
    */
   accentColor: string;
 
-  /** Whether this course has an honest diacritic-fading progression (D: Hebrew yes, Greek no). */
+  /** Whether this course has an honest diacritic-fading progression (Hebrew yes, Greek no). */
   supportsFading: boolean;
+
+  /** Morphological fields this language uses, with their legal values. */
+  parseFields: ParseFieldDef[];
 }
 
 export const HEBREW_BIBLICAL: Course = {
@@ -41,6 +45,7 @@ export const HEBREW_BIBLICAL: Course = {
   fontStack: "'Frank Ruhl Libre', 'Times New Roman', serif",
   accentColor: "var(--gold)",
   supportsFading: true,
+  parseFields: HEBREW_PARSE_FIELDS,
 };
 
 export const courses: Course[] = [HEBREW_BIBLICAL];
@@ -62,6 +67,10 @@ export function getCourse(id: CourseId = DEFAULT_COURSE_ID): Course {
 
 export function scriptOf(course: Course = getCourse()): ScriptModule {
   return scriptFor(course.script);
+}
+
+export function parseFieldsOf(course: Course = getCourse()): ParseFieldDef[] {
+  return course.parseFields;
 }
 
 /** Props to spread onto any element rendering this course's text. */

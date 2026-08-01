@@ -97,9 +97,14 @@ function authResponse(userId: string): AuthResponse {
   return { user: toApiUser(userId)!, accessToken, refreshToken, expiresIn: 900 };
 }
 
-/** Cards, derived from the log stream. The heart of the sync contract. */
-function deriveCards(userId: string): SyncedCard[] {
-  const logs = mockDb.userData(userId).reviewLogs;
+/**
+ * Cards, derived from the log stream. The heart of the sync contract.
+ *
+ * Partitioned by course: word ids are unique only within a course, so deriving
+ * across all of them would merge Attic λόγος with Koine λόγος.
+ */
+function deriveCards(userId: string, courseId: string): SyncedCard[] {
+  const logs = mockDb.userData(userId).reviewLogs.filter((l) => l.courseId === courseId);
   const events: ReviewEvent[] = logs.map((l) => ({
     wordId: l.wordId,
     rating: l.rating,
@@ -301,10 +306,11 @@ export const handlers = [
     const id = authUserId(request);
     if (!id) return err(401, "unauthorized", "Sign in to continue.");
 
+    const courseId = new URL(request.url).searchParams.get("courseId") ?? "hebrew-biblical";
     const data = mockDb.userData(id);
     return json<SyncStateResponse>({
-      cards: deriveCards(id),
-      progress: data.progress,
+      cards: deriveCards(id, courseId),
+      progress: data.progress.filter((p) => p.courseId === courseId),
       streak: data.streak,
       gems: gemBalance(id),
       xp: data.xp,
@@ -321,18 +327,19 @@ export const handlers = [
 
     const body = (await request.json()) as PushProgressRequest;
     const data = mockDb.userData(id);
-    const byUnit = new Map(data.progress.map((p) => [p.unitId, p]));
-    const alreadyDone = new Set(data.progress.map((p) => p.unitId));
+    const byUnit = new Map(data.progress.map((p) => [`${p.courseId}:${p.unitId}`, p]));
+    const alreadyDone = new Set(data.progress.map((p) => `${p.courseId}:${p.unitId}`));
     for (const p of body.progress) {
-      const existing = byUnit.get(p.unitId);
+      const key = `${p.courseId}:${p.unitId}`;
+      const existing = byUnit.get(key);
       // Keep the best score rather than letting a later replay lower it.
-      if (!existing || p.score > existing.score) byUnit.set(p.unitId, p);
+      if (!existing || p.score > existing.score) byUnit.set(key, p);
     }
     data.progress = [...byUnit.values()];
 
     // Gems are minted server-side only, on genuinely new unit completions, so a
     // client replaying an old payload cannot farm currency.
-    const newlyCompleted = body.progress.filter((p) => !alreadyDone.has(p.unitId));
+    const newlyCompleted = body.progress.filter((p) => !alreadyDone.has(`${p.courseId}:${p.unitId}`));
     for (const p of newlyCompleted) {
       data.gems.push({
         id: crypto.randomUUID(),

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { db } from "@/db";
 import { getLeeches, getRecentEvents, getStats } from "@/db/repo";
 import { retentionRate, adaptiveNewCardLimit, DEFAULT_CONFIG } from "@/srs/engine";
-import { wordById, roots } from "@/content";
+import { wordById, families } from "@/content";
 import { ScriptWord } from "@/components/ScriptWord";
 import { Empty, TopBar } from "@/components/ui";
 
@@ -23,7 +23,7 @@ export function StatsScreen() {
     };
   }, []);
 
-  const cards = useLiveQuery(() => db.cards.toArray(), []);
+  const cards = useLiveQuery(() => db.srsCards.toArray(), []);
 
   if (!data) return <div className="empty">Loading…</div>;
   const { stats } = data;
@@ -33,7 +33,7 @@ export function StatsScreen() {
     { label: "XP", value: stats.xp },
     { label: "Units done", value: stats.unitsCompleted },
     { label: "Words seen", value: stats.counts.total },
-    { label: "Roots met", value: `${stats.rootsSeen} / ${roots.length}` },
+    { label: "Roots met", value: `${stats.familiesSeen} / ${families.length}` },
     { label: "Known well", value: stats.known, hint: "interval ≥ 21d" },
   ];
 
@@ -118,7 +118,7 @@ export function StatsScreen() {
                 if (!w) return null;
                 return (
                   <div key={c.wordId} className="row row--between">
-                    <ScriptWord word={w.text} highlight={w.rootIndices} size={22} showHighlight />
+                    <ScriptWord word={w.text} highlight={w.morphology.highlight} size={22} showHighlight />
                     <span className="small muted">
                       {w.gloss} · {c.lapses} lapses
                     </span>

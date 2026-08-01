@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Banner, Button, Sheet, Switch, TopBar } from "@/components/ui";
 import { useSession } from "@/state/session";
-import { CONTENT_REVIEW_NOTES, roots, units, words } from "@/content";
+import { CONTENT_REVIEW_NOTES, families, units, words } from "@/content";
 import { requestPersistentStorage, storageEstimate } from "@/db";
 import { api } from "@/api/client";
 import { useSyncState } from "@/features/sync/SyncIndicator";
@@ -262,7 +262,7 @@ export function SettingsScreen() {
             <div>
               <div style={{ fontWeight: 600 }}>Content provenance</div>
               <div className="small muted">
-                {units.length} units · {words.length} words · {roots.length} roots
+                {units.length} units · {words.length} words · {families.length} families
               </div>
             </div>
             <span className="muted">›</span>

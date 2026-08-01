@@ -58,6 +58,8 @@ export interface OAuthRequest {
 export interface ReviewLogEntry {
   /** Client-generated UUID. Makes the push idempotent under retry. */
   id: string;
+  /** Which course this review belongs to. Word ids are unique per course only. */
+  courseId: string;
   wordId: string;
   rating: Rating;
   reviewedAt: number; // epoch ms
@@ -99,6 +101,7 @@ export interface SyncStateResponse {
 }
 
 export interface UnitProgress {
+  courseId: string;
   unitId: string;
   completedAt: number;
   score: number;
@@ -112,7 +115,9 @@ export interface StreakState {
 }
 
 export interface PushProgressRequest {
+  courseId: string;
   progress: UnitProgress[];
+  /** Streak and XP are global across courses (decision D2). */
   streak: StreakState;
   xp: number;
 }

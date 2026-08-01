@@ -506,13 +506,26 @@ button:disabled {
 
 /* ---------- Passage reader ---------- */
 
+/*
+ * Verse layout.
+ *
+ * Word order comes ENTIRELY from the `dir` attribute, which the course supplies
+ * (see content/course.ts → textProps). Two things must never come back here:
+ *
+ *   direction: rtl        — hardcodes Hebrew and breaks Greek/Latin.
+ *   flex-direction: row-reverse — under `dir="rtl"` a flex row ALREADY runs
+ *                         right-to-left, so reversing it a second time lays the
+ *                         verse out backwards. Both together cancelled out and
+ *                         rendered Genesis 1:1 left-to-right.
+ *
+ * Source order stays reading order, so screen readers and copy-paste get the
+ * verse in the right sequence regardless of script.
+ */
 .passage {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row-reverse;
   justify-content: center;
   gap: 6px 12px;
-  direction: rtl;
   padding: 8px 0;
 }
 

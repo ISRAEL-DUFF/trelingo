@@ -7,6 +7,7 @@ import { api } from "@/api/client";
 import { Banner, Button, Empty, TopBar } from "@/components/ui";
 import { ScriptWord } from "@/components/ScriptWord";
 import type { AssessmentResult } from "@/api/types";
+import { textProps } from "@/content/course";
 
 type Phase = "pick" | "reading" | "questions" | "done";
 
@@ -28,7 +29,7 @@ export function FluencyScreen() {
   const [error, setError] = useState<string | null>(null);
 
   const completed = useLiveQuery(
-    async () => new Set((await db.progress.toArray()).map((p) => p.unitId)),
+    async () => new Set((await db.unitProgress.toArray()).map((p) => p.unitId)),
     [],
   );
   const available = units
@@ -146,7 +147,7 @@ export function FluencyScreen() {
         <TopBar left={<span className="small">Reading…</span>} right={<span className="translit">{(elapsedMs / 1000).toFixed(1)}s</span>} />
         <div className="pad">
           <div className="card" style={{ padding: "26px 16px" }}>
-            <div className="passage">
+            <div className="passage" {...textProps()}>
               {passage.tokens.map((t, i) => (
                 <span key={i}>
                   <ScriptWord word={t.text} size={30} showHighlight={false} />

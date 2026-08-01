@@ -114,17 +114,65 @@ function freshDb(): MockDb {
   };
 }
 
-let db: MockDb = load();
+let db: MockDb = null as unknown as MockDb;
+
+/** Rows written before courses existed belong to the only course there was. */
+const LEGACY_COURSE_ID = "hebrew-biblical";
+
+/**
+ * Server-side backfill, the mirror of the client's Dexie v1 → v2 upgrade.
+ *
+ * Review logs and progress rows pushed before `courseId` existed have no such
+ * field, and the course-partitioned derivation would silently match none of
+ * them — a learner's entire history would appear to vanish on the next sync.
+ *
+ * A real backend needs exactly this migration. It is modelled here rather than
+ * glossed over, because this is the reference implementation of the sync
+ * contract (see greek-build-plan.md §5.2).
+ */
+function backfillCourseIds(db: MockDb): { db: MockDb; changed: boolean } {
+  let changed = false;
+  for (const data of Object.values(db.data)) {
+    for (const log of data.reviewLogs) {
+      if (!log.courseId) {
+        log.courseId = LEGACY_COURSE_ID;
+        changed = true;
+      }
+    }
+    for (const p of data.progress) {
+      if (!p.courseId) {
+        p.courseId = LEGACY_COURSE_ID;
+        changed = true;
+      }
+    }
+  }
+  return { db, changed };
+}
+
+/** Set when load() migrated rows, so the result is written back once. */
+let needsPersistAfterMigration = false;
 
 function load(): MockDb {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return { ...freshDb(), ...(JSON.parse(raw) as MockDb) };
+    if (raw) {
+      const { db: migrated, changed } = backfillCourseIds({
+        ...freshDb(),
+        ...(JSON.parse(raw) as MockDb),
+      });
+      needsPersistAfterMigration = changed;
+      return migrated;
+    }
   } catch {
     // Corrupt mock state should never wedge the app — start clean.
   }
   return freshDb();
 }
+
+db = load();
+// A migration that is not written back would re-run on every load and, worse,
+// leave the stored data inconsistent with what the server is serving.
+if (needsPersistAfterMigration) persist();
 
 function persist() {
   try {

@@ -1,11 +1,13 @@
-import type { Root } from "./schema";
+import type { WordFamily } from "../../schema";
 
 /**
- * Triliteral roots taught by the app. `id` is the bare consonantal root with no
- * points and no maqqef — it is the join key for every word, exercise and
- * passage token, so it must stay stable.
+ * Word families taught by this course. For Hebrew these are triliteral roots;
+ * for Greek they will be verb stems and lemmas.
+ *
+ * `id` is the bare letters with no points and no separators — it is the join key
+ * for every word, exercise and passage token, so it must stay stable.
  */
-export const roots: Root[] = [
+export const families: WordFamily[] = [
   { id: "ברא", letters: "ברא", coreGloss: "create", notes: "Used in the Hebrew Bible only with God as subject." },
   { id: "ראשׁ", letters: "ראשׁ", coreGloss: "head, first", notes: "Behind רֹאשׁ (head), רִאשׁוֹן (first) and בְּרֵאשִׁית (in the beginning)." },
   { id: "אלה", letters: "אלה", coreGloss: "god, deity", notes: "אֱלֹהִים is grammatically plural but takes singular verbs when it denotes the God of Israel." },
@@ -38,4 +40,4 @@ export const roots: Root[] = [
   { id: "ברך", letters: "ברך", coreGloss: "bless, kneel", notes: "The noun בֶּרֶךְ (knee) shares this root — blessing and kneeling are the same idea." },
 ];
 
-export const rootById = new Map(roots.map((r) => [r.id, r]));
+export const familyById = new Map(families.map((f) => [f.id, f]));

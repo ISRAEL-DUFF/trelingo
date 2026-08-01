@@ -177,7 +177,7 @@ export function ReviewScreen() {
           <div className="center">
             <ScriptWord
               word={word?.text ?? card.wordId}
-              highlight={word?.rootIndices}
+              highlight={word?.morphology.highlight}
               size={46}
               showHighlight={flipped}
               fadeStage={fadeStage}
@@ -207,10 +207,10 @@ export function ReviewScreen() {
                       className="tag tag--root"
                       onClick={(e) => {
                         e.stopPropagation();
-                        setRootSheet(word.rootId);
+                        setRootSheet(word.familyId);
                       }}
                     >
-                      {word.rootId}
+                      {word.familyId}
                     </button>
                   )}
                 </div>

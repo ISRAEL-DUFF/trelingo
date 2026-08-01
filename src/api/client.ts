@@ -165,8 +165,11 @@ export const api = {
   // --- sync ---
   pushReviewLogs: (body: PushReviewLogsRequest) =>
     request<PushReviewLogsResponse>("/sync/review-logs", { method: "POST", body }),
-  getSyncState: (since?: string) =>
-    request<SyncStateResponse>(`/sync/state${since ? `?since=${encodeURIComponent(since)}` : ""}`),
+  getSyncState: (courseId: string, since?: string) => {
+    const q = new URLSearchParams({ courseId });
+    if (since) q.set("since", since);
+    return request<SyncStateResponse>(`/sync/state?${q}`);
+  },
   pushProgress: (body: PushProgressRequest) =>
     request<void>("/sync/progress", { method: "POST", body }),
 

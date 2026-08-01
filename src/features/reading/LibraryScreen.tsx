@@ -1,6 +1,6 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { passages, roots, units, wordsByRoot } from "@/content";
+import { passages, families, units, wordsByFamily } from "@/content";
 import { db } from "@/db";
 import { PassageReader } from "./PassageReader";
 import { RootSheet } from "./RootSheet";
@@ -12,11 +12,11 @@ import { useSession } from "@/state/session";
 
 /** Every verse the learner has unlocked, re-readable at any time. */
 export function LibraryScreen() {
-  const [tab, setTab] = useState<"verses" | "roots">("verses");
+  const [tab, setTab] = useState<"verses" | "families">("verses");
   const [rootSheet, setRootSheet] = useState<string | null>(null);
 
   const completed = useLiveQuery(
-    async () => new Set((await db.progress.toArray()).map((p) => p.unitId)),
+    async () => new Set((await db.unitProgress.toArray()).map((p) => p.unitId)),
     [],
   );
 
@@ -36,8 +36,8 @@ export function LibraryScreen() {
           Verses
         </button>
         <button
-          className={`chip${tab === "roots" ? " chip--selected" : ""}`}
-          onClick={() => setTab("roots")}
+          className={`chip${tab === "families" ? " chip--selected" : ""}`}
+          onClick={() => setTab("families")}
         >
           Roots
         </button>
@@ -86,10 +86,10 @@ export function LibraryScreen() {
         </div>
       )}
 
-      {tab === "roots" && (
+      {tab === "families" && (
         <div className="stack pad" style={{ marginTop: 4 }}>
-          {roots
-            .filter((r) => (wordsByRoot[r.id]?.length ?? 0) > 0)
+          {families
+            .filter((r) => (wordsByFamily[r.id]?.length ?? 0) > 0)
             .map((r) => (
               <button
                 key={r.id}
@@ -102,8 +102,8 @@ export function LibraryScreen() {
                   <div style={{ textAlign: "end" }}>
                     <div className="small">{r.coreGloss}</div>
                     <div className="small muted">
-                      {wordsByRoot[r.id]?.length ?? 0} word
-                      {(wordsByRoot[r.id]?.length ?? 0) === 1 ? "" : "s"}
+                      {wordsByFamily[r.id]?.length ?? 0} word
+                      {(wordsByFamily[r.id]?.length ?? 0) === 1 ? "" : "s"}
                     </div>
                   </div>
                 </div>

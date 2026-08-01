@@ -1,5 +1,15 @@
 import { describe, it, expect } from "vitest";
-import { rawBundle, getContent, units, words, roots, passages, wordsByRoot } from "./index";
+import {
+  rawBundle,
+  getContent,
+  getBundle,
+  availableCourseIds,
+  units,
+  words,
+  families,
+  passages,
+  wordsByFamily,
+} from "./index";
 import { validateBundle } from "./schema";
 import { lettersAt, validateLetterIndices } from "@/lib/morphology";
 import { scriptOf } from "./course";
@@ -11,7 +21,7 @@ const script = scriptOf();
  * These tests are the gate. If content is wrong, the build fails.
  */
 
-/** Is `small` a subsequence of `big`? Weak roots legitimately show fewer letters. */
+/** Is `small` a subsequence of `big`? Weak families legitimately show fewer letters. */
 function isSubsequence(small: string[], big: string[]): boolean {
   let i = 0;
   for (const c of big) if (i < small.length && small[i] === c) i++;
@@ -19,13 +29,20 @@ function isSubsequence(small: string[], big: string[]): boolean {
 }
 
 describe("content bundle", () => {
-  it("passes schema validation with no referential-integrity errors", () => {
-    const { errors } = validateBundle(rawBundle);
+  // Every registered course is validated, not just the active one — otherwise
+  // adding Koine would ship unvalidated until someone switched to it.
+  it.each(availableCourseIds())("%s: passes schema and referential-integrity validation", (id) => {
+    const { errors } = validateBundle(getBundle(id));
     expect(errors).toEqual([]);
   });
 
-  it("loads without throwing", () => {
-    expect(() => getContent()).not.toThrow();
+  it.each(availableCourseIds())("%s: loads without throwing", (id) => {
+    expect(() => getContent(id)).not.toThrow();
+  });
+
+  it("has at least one course registered", () => {
+    expect(availableCourseIds().length).toBeGreaterThan(0);
+    expect(rawBundle.words.length).toBeGreaterThan(0);
   });
 
   it("has the breadth the roadmap assumes", () => {
@@ -39,7 +56,7 @@ describe("root indices — the product's core claim", () => {
   it.each(words.map((w) => [w.id, w] as const))(
     "%s: every root index lands on a real consonant",
     (_id, w) => {
-      const check = validateLetterIndices(script, w.text, w.rootIndices);
+      const check = validateLetterIndices(script, w.text, w.morphology.highlight);
       expect(check.ok, check.ok ? "" : check.reason).toBe(true);
     },
   );
@@ -47,12 +64,12 @@ describe("root indices — the product's core claim", () => {
   it.each(words.map((w) => [w.id, w] as const))(
     "%s: highlighted letters are actually the declared root's letters",
     (_id, w) => {
-      // Catches both mis-indexed roots and words filed under the wrong root.
-      const picked = lettersAt(script, w.text, w.rootIndices);
-      const rootLetters = Array.from(script.stripDiacritics(w.rootId));
+      // Catches both mis-indexed families and words filed under the wrong root.
+      const picked = lettersAt(script, w.text, w.morphology.highlight);
+      const rootLetters = Array.from(script.stripDiacritics(w.familyId));
       expect(
         isSubsequence(picked, rootLetters),
-        `${w.text} indices [${w.rootIndices}] select "${picked.join("")}", not a subsequence of root "${rootLetters.join("")}"`,
+        `${w.text} indices [${w.morphology.highlight}] select "${picked.join("")}", not a subsequence of root "${rootLetters.join("")}"`,
       ).toBe(true);
     },
   );
@@ -60,22 +77,24 @@ describe("root indices — the product's core claim", () => {
   it("never highlights the whole word (that would teach nothing)", () => {
     for (const w of words) {
       if (script.toLetterClusters(w.text).length > 3) {
-        expect(w.rootIndices.length).toBeLessThan(script.toLetterClusters(w.text).length);
+        expect(w.morphology.highlight.length).toBeLessThan(script.toLetterClusters(w.text).length);
       }
     }
   });
 
   it("keeps root indices in ascending order, matching reading order", () => {
     for (const w of words) {
-      expect(w.rootIndices, `${w.id}`).toEqual([...w.rootIndices].sort((a, b) => a - b));
+      expect(w.morphology.highlight, `${w.id}`).toEqual([...w.morphology.highlight].sort((a, b) => a - b));
     }
   });
 });
 
 describe("passage tokens", () => {
-  it.each(passages.map((p) => [p.id, p] as const))("%s: token root indices are valid", (_id, p) => {
+  it.each(passages.map((p) => [p.id, p] as const))("%s: token morphemes are valid", (_id, p) => {
     for (const t of p.tokens) {
-      const check = validateLetterIndices(script, t.text, t.rootIndices);
+      // Function words legitimately have no morpheme to highlight.
+      if (!t.morphology) continue;
+      const check = validateLetterIndices(script, t.text, t.morphology.highlight);
       expect(check.ok, check.ok ? "" : `${t.text}: ${!check.ok && check.reason}`).toBe(true);
     }
   });
@@ -86,11 +105,11 @@ describe("passage tokens", () => {
     }
   });
 
-  it("only links tokens to roots that exist", () => {
-    const rootIds = new Set(roots.map((r) => r.id));
+  it("only links tokens to families that exist", () => {
+    const rootIds = new Set(families.map((r) => r.id));
     for (const p of passages) {
       for (const t of p.tokens) {
-        if (t.rootId) expect(rootIds.has(t.rootId), `${p.id}: ${t.rootId}`).toBe(true);
+        if (t.familyId) expect(rootIds.has(t.familyId), `${p.id}: ${t.familyId}`).toBe(true);
       }
     }
   });
@@ -217,10 +236,10 @@ describe("vocabulary quality", () => {
     for (const w of words) expect(new Set(w.distractors).size, w.id).toBe(w.distractors.length);
   });
 
-  it("groups multiple words under the teaching roots, so the root browser is not empty", () => {
+  it("groups multiple words under the teaching families, so the root browser is not empty", () => {
     const taught = ["שׁמר", "אהב", "דבר", "גדל", "רעה", "אלה", "קרא"];
     for (const r of taught) {
-      expect(wordsByRoot[r]?.length ?? 0, `root ${r}`).toBeGreaterThanOrEqual(2);
+      expect(wordsByFamily[r]?.length ?? 0, `root ${r}`).toBeGreaterThanOrEqual(2);
     }
   });
 

@@ -1,10 +1,11 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { Link } from "react-router-dom";
-import { passageById, passagesByRoot, rootById, unitByWordId, wordsByRoot } from "@/content";
+import { passageById, passagesByFamily, familyById, unitByWordId, wordsByFamily } from "@/content";
 import { ScriptWord } from "@/components/ScriptWord";
 import { Sheet } from "@/components/ui";
 import { scriptOf } from "@/content/course";
 import { db } from "@/db";
+import { DEFAULT_COURSE_ID } from "@/content/course";
 
 /**
  * The root card (spec §4 Phase 4): every word in the app built on this root,
@@ -14,15 +15,15 @@ import { db } from "@/db";
  * a root once and it pays off across a family of words.
  */
 export function RootSheet({ rootId, onClose }: { rootId: string | null; onClose: () => void }) {
-  const root = rootId ? rootById.get(rootId) : undefined;
-  const family = rootId ? (wordsByRoot[rootId] ?? []) : [];
+  const root = rootId ? familyById.get(rootId) : undefined;
+  const family = rootId ? (wordsByFamily[rootId] ?? []) : [];
   const cards = useLiveQuery(
-    async () => (rootId ? db.cards.bulkGet(family.map((w) => w.id)) : []),
+    async () => (rootId ? db.srsCards.bulkGet(family.map((w) => [DEFAULT_COURSE_ID, w.id] as [typeof DEFAULT_COURSE_ID, string])) : []),
     [rootId, family.length],
   );
 
   const cardFor = (wordId: string) => cards?.find((c) => c?.wordId === wordId) ?? undefined;
-  const verses = rootId ? (passagesByRoot[rootId] ?? []) : [];
+  const verses = rootId ? (passagesByFamily[rootId] ?? []) : [];
 
   return (
     <Sheet open={!!root} onClose={onClose} title={root ? `Root ${root.letters}` : undefined}>
@@ -51,7 +52,7 @@ export function RootSheet({ rootId, onClose }: { rootId: string | null; onClose:
                 <div key={w.id} className="card card--flat">
                   <div className="row row--between">
                     <div>
-                      <ScriptWord word={w.text} highlight={w.rootIndices} size={26} showHighlight />
+                      <ScriptWord word={w.text} highlight={w.morphology.highlight} size={26} showHighlight />
                       <div className="translit" style={{ marginTop: 3 }}>
                         {w.translit}
                       </div>

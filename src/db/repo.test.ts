@@ -2,6 +2,7 @@ import "fake-indexeddb/auto";
 import { describe, it, expect, beforeEach } from "vitest";
 import { db, clearLocalData, getMeta } from "./index";
 import {
+  getCard,
   adoptServerCards,
   completeUnit,
   ensureCards,
@@ -25,14 +26,14 @@ import { newCard, scheduleCard, type SrsCard } from "@/srs/engine";
 
 beforeEach(async () => {
   await clearLocalData();
-  await db.cards.clear();
+  await db.srsCards.clear();
 });
 
 describe("recordReview", () => {
   it("writes an immutable log entry and the derived card together", async () => {
     await recordReview("bara", 2, Date.now());
     expect(await db.reviewLogs.count()).toBe(1);
-    const card = await db.cards.get("bara");
+    const card = await getCard("bara");
     expect(card?.repetitions).toBe(1);
     expect(card?.state).toBe("review");
   });
@@ -49,7 +50,7 @@ describe("recordReview", () => {
     await recordReview("bara", 2, t);
     await recordReview("bara", 0, t + 1000);
     expect(await db.reviewLogs.count()).toBe(2);
-    expect((await db.cards.get("bara"))?.intervalDays).toBe(0); // last rating was Again
+    expect((await getCard("bara"))?.intervalDays).toBe(0); // last rating was Again
   });
 });
 
@@ -58,11 +59,11 @@ describe("rebuildCardsFromLogs", () => {
     const t = Date.now();
     await recordReview("bara", 2, t);
     await recordReview("bara", 3, t + 86400000);
-    const before = await db.cards.get("bara");
+    const before = await getCard("bara");
 
-    await db.cards.clear();
+    await db.srsCards.clear();
     await rebuildCardsFromLogs();
-    expect(await db.cards.get("bara")).toEqual(before);
+    expect(await getCard("bara")).toEqual(before);
   });
 });
 
@@ -73,13 +74,13 @@ describe("adoptServerCards — the reinstall path", () => {
       { ...newCard("bara"), state: "review", repetitions: 3, intervalDays: 8, dueAt: Date.now() + 8e8 },
       { ...newCard("shamar"), state: "lapsed", lapses: 2, intervalDays: 0, dueAt: Date.now() },
     ];
-    expect(await db.cards.count()).toBe(0);
+    expect(await db.srsCards.count()).toBe(0);
 
     await adoptServerCards(server);
 
-    expect(await db.cards.count()).toBe(2);
-    expect((await db.cards.get("bara"))?.intervalDays).toBe(8);
-    expect((await db.cards.get("shamar"))?.lapses).toBe(2);
+    expect(await db.srsCards.count()).toBe(2);
+    expect((await getCard("bara"))?.intervalDays).toBe(8);
+    expect((await getCard("shamar"))?.lapses).toBe(2);
   });
 
   it("replays unsynced local reviews on top of the server's state", async () => {
@@ -89,7 +90,7 @@ describe("adoptServerCards — the reinstall path", () => {
     const serverVersion: SrsCard = { ...newCard("bara") }; // server hasn't seen it
     await adoptServerCards([serverVersion]);
 
-    const card = await db.cards.get("bara");
+    const card = await getCard("bara");
     // The local review must still be reflected, exactly once.
     expect(card?.repetitions).toBe(1);
     expect(card?.intervalDays).toBe(1);
@@ -104,7 +105,7 @@ describe("adoptServerCards — the reinstall path", () => {
     const serverCard = scheduleCard(newCard("bara"), 2, t);
     await adoptServerCards([serverCard]);
 
-    const card = await db.cards.get("bara");
+    const card = await getCard("bara");
     expect(card?.repetitions).toBe(1); // not 2
     expect(card?.intervalDays).toBe(1);
   });
@@ -112,7 +113,7 @@ describe("adoptServerCards — the reinstall path", () => {
   it("keeps words the server has never seen", async () => {
     await recordReview("offline-only", 2, Date.now());
     await adoptServerCards([]); // server knows nothing
-    expect(await db.cards.get("offline-only")).toBeDefined();
+    expect(await getCard("offline-only")).toBeDefined();
   });
 
   it("is idempotent — syncing twice changes nothing", async () => {
@@ -120,9 +121,9 @@ describe("adoptServerCards — the reinstall path", () => {
       { ...newCard("bara"), state: "review", repetitions: 2, intervalDays: 3 },
     ];
     await adoptServerCards(server);
-    const first = await db.cards.get("bara");
+    const first = await getCard("bara");
     await adoptServerCards(server);
-    expect(await db.cards.get("bara")).toEqual(first);
+    expect(await getCard("bara")).toEqual(first);
   });
 });
 
@@ -130,21 +131,21 @@ describe("completeUnit", () => {
   it("records progress and seeds cards for the unit's vocabulary", async () => {
     await completeUnit("u01", 0.8);
     expect(await getCompletedUnitIds()).toContain("u01");
-    expect(await db.cards.count()).toBeGreaterThan(0);
+    expect(await db.srsCards.count()).toBeGreaterThan(0);
   });
 
   it("keeps the best score when a unit is replayed", async () => {
     await completeUnit("u01", 0.9);
     await completeUnit("u01", 0.4);
-    expect((await db.progress.get("u01"))?.score).toBe(0.9);
+    expect((await db.unitProgress.get(["hebrew-biblical", "u01"]))?.score).toBe(0.9);
   });
 
   it("does not reset cards for words already being learned", async () => {
     await ensureCards(["bara"]);
     await recordReview("bara", 2);
-    const before = await db.cards.get("bara");
+    const before = await getCard("bara");
     await completeUnit("u01", 1);
-    expect(await db.cards.get("bara")).toEqual(before);
+    expect(await getCard("bara")).toEqual(before);
   });
 });
 
@@ -216,7 +217,7 @@ describe("clearLocalData", () => {
     const deviceId = await getMeta<string | null>("deviceId", null);
     await clearLocalData();
     expect(await db.reviewLogs.count()).toBe(0);
-    expect(await db.cards.count()).toBe(0);
+    expect(await db.srsCards.count()).toBe(0);
     expect(await getMeta<string | null>("deviceId", null)).toBe(deviceId);
   });
 });

@@ -5,11 +5,12 @@ import { api } from "@/api/client";
 import { ApiError, NetworkError, type Deck } from "@/api/types";
 import { Banner, Button, Empty, Sheet, TopBar } from "@/components/ui";
 import { ScriptWord } from "@/components/ScriptWord";
-import { roots, words, wordsByRoot } from "@/content";
+import { families, words, wordsByFamily } from "@/content";
 import { db } from "@/db";
 import { putLocalDecks } from "@/db/repo";
 import { scriptOf, textProps } from "@/content/course";
 import { useSession } from "@/state/session";
+import { DEFAULT_COURSE_ID } from "@/content/course";
 
 /** Custom decks (spec §4 Phase 7): review any subset independently of the path. */
 export function DecksScreen() {
@@ -43,7 +44,7 @@ export function DecksScreen() {
   const addRoot = (rootId: string) =>
     setPicked((p) => {
       const next = new Set(p);
-      for (const w of wordsByRoot[rootId] ?? []) next.add(w.id);
+      for (const w of wordsByFamily[rootId] ?? []) next.add(w.id);
       return next;
     });
 
@@ -52,7 +53,7 @@ export function DecksScreen() {
     setError(null);
     try {
       const deck = await api.createDeck({ name, wordIds: [...picked] });
-      await db.decks.put(deck);
+      await db.decks.put({ ...deck, courseId: DEFAULT_COURSE_ID });
       setCreating(false);
       setName("");
       setPicked(new Set());
@@ -65,7 +66,7 @@ export function DecksScreen() {
           wordIds: [...picked],
           createdAt: Date.now(),
         };
-        await db.decks.put(local);
+        await db.decks.put({ ...local, courseId: DEFAULT_COURSE_ID });
         setCreating(false);
         setName("");
         setPicked(new Set());
@@ -144,8 +145,8 @@ export function DecksScreen() {
           <div>
             <span className="label">Add a whole root</span>
             <div className="chips" style={{ marginTop: 8 }}>
-              {roots
-                .filter((r) => (wordsByRoot[r.id]?.length ?? 0) > 1)
+              {families
+                .filter((r) => (wordsByFamily[r.id]?.length ?? 0) > 1)
                 .map((r) => (
                   <button key={r.id} className="chip" onClick={() => addRoot(r.id)}>
                     <span {...textProps()}>
@@ -166,7 +167,7 @@ export function DecksScreen() {
                   onClick={() => toggle(w.id)}
                 >
                   <span className="row row--between">
-                    <ScriptWord word={w.text} highlight={w.rootIndices} size={20} showHighlight />
+                    <ScriptWord word={w.text} highlight={w.morphology.highlight} size={20} showHighlight />
                     <span className="small muted">{w.gloss}</span>
                   </span>
                 </button>

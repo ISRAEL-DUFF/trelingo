@@ -169,7 +169,7 @@ export function LessonScreen() {
         <div className="pad" style={{ paddingTop: 24 }}>
           {word && (
             <div className="center" style={{ marginBottom: 14 }}>
-              <ScriptWord word={word.text} highlight={word.rootIndices} size={22} showHighlight />
+              <ScriptWord word={word.text} highlight={word.morphology.highlight} size={22} showHighlight />
               <span className="small muted" style={{ marginInlineStart: 8 }}>
                 {word.gloss}
               </span>

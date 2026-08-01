@@ -10,7 +10,8 @@
  */
 import { z } from "zod";
 import { validateLetterIndices } from "@/lib/morphology";
-import { scriptOf } from "./course";
+import { scriptOf, parseFieldsOf } from "./course";
+import { isValidParseValue, type ParseFieldId } from "./parse-fields";
 
 export const CONTENT_SCHEMA_VERSION = 1;
 
@@ -38,55 +39,98 @@ export const PartOfSpeechSchema = z.enum([
   "proper_noun",
 ]);
 
-export const PersonSchema = z.enum(["1", "2", "3"]);
-export const GenderSchema = z.enum(["m", "f", "c"]);
-export const NumberSchema = z.enum(["s", "p", "d"]);
-export const TenseSchema = z.enum([
-  "perfect",
-  "imperfect",
-  "imperative",
-  "participle",
-  "infinitive_construct",
-  "infinitive_absolute",
-  "cohortative",
-  "jussive",
+/** Every parse field any supported language uses. See parse-fields.ts. */
+export const ParseFieldIdSchema = z.enum([
+  "binyan",
+  "tense",
+  "voice",
+  "mood",
+  "case",
+  "person",
+  "gender",
+  "number",
+  "declension",
 ]);
 
-/** Full morphological parse — the answer key for parsing exercises. */
+/**
+ * A morphological parse — the answer key for parsing exercises.
+ *
+ * Values are plain strings, not enums, because the legal set is PER LANGUAGE:
+ * a Greek "optative" and a Hebrew "qal" cannot share one enum, and Hebrew's
+ * common gender does not exist in Greek. Validation therefore moves out of the
+ * type system and into `validateBundle`, which checks each value against the
+ * COURSE's declared fields. That is a stronger check, not a weaker one — it
+ * also rejects a field the language does not have at all.
+ */
 export const ParseSchema = z.object({
-  binyan: BinyanSchema.optional(),
-  tense: TenseSchema.optional(),
-  person: PersonSchema.optional(),
-  gender: GenderSchema.optional(),
-  number: NumberSchema.optional(),
+  binyan: z.string().optional(),
+  tense: z.string().optional(),
+  voice: z.string().optional(),
+  mood: z.string().optional(),
+  case: z.string().optional(),
+  person: z.string().optional(),
+  gender: z.string().optional(),
+  number: z.string().optional(),
+  declension: z.string().optional(),
 });
-export type Parse = z.infer<typeof ParseSchema>;
+export type Parse = Partial<Record<ParseFieldId, string>>;
 
-export const RootSchema = z.object({
-  /** Bare consonants, no maqqef, e.g. "שׁמר". Used as the stable id. */
+/**
+ * Which morpheme a course teaches by highlighting it.
+ *
+ * Hebrew highlights the ROOT — the invariant core that survives inflection.
+ * Greek highlights the ENDING — the part that changes and carries the grammar.
+ * They are opposite emphases over the same mechanism, which is why this is a
+ * discriminant rather than two separate systems.
+ */
+export const MorphemeKindSchema = z.enum(["root", "ending", "stem"]);
+export type MorphemeKind = z.infer<typeof MorphemeKindSchema>;
+
+/**
+ * The highlighted morpheme, as LETTER indices (see lib/script), never
+ * code-point positions.
+ *
+ * A set of indices rather than a split point, because Hebrew families can be
+ * discontiguous: מִזְמוֹר carries ז־מ־ר at letters [1,2,4] — index 3 is the
+ * holam vav and is not a root letter. Greek stem/ending is contiguous, so a
+ * course authoring tool may expose a simple split index and expand it here.
+ */
+export const MorphologySchema = z.object({
+  highlight: z.array(z.number().int().nonnegative()).min(1).max(6),
+  kind: MorphemeKindSchema,
+});
+export type Morphology = z.infer<typeof MorphologySchema>;
+
+/**
+ * A family of words sharing a morphological core — a triliteral root in Hebrew,
+ * a verb stem or lemma in Greek. This is what the family sheet browses, and the
+ * product's central claim: learn the core once, and it pays off across a family.
+ */
+export const WordFamilySchema = z.object({
+  /** Bare letters, no separators, e.g. "שׁמר". Used as the stable id. */
   id: z.string().min(2),
   letters: z.string().min(2),
   coreGloss: z.string().min(1),
   notes: z.string().optional(),
 });
-export type Root = z.infer<typeof RootSchema>;
+export type WordFamily = z.infer<typeof WordFamilySchema>;
 
 /**
- * A vocabulary item. `rootIndices` are LETTER positions (see lib/script), never
- * code-point positions — the refinement below makes that impossible to get wrong
- * silently.
+ * A vocabulary item. `morphology.highlight` holds LETTER positions (see
+ * lib/script), never code-point positions — the refinement below makes that
+ * impossible to get wrong silently.
  */
 export const WordSchema = z
   .object({
     id: z.string().min(1),
-    rootId: z.string().min(2),
-    /** Pointed form as it appears in the text. */
+    familyId: z.string().min(2),
+    /** Pointed/accented form as it appears in the text. */
     text: z.string().min(1),
     translit: z.string().min(1),
     gloss: z.string().min(1),
     partOfSpeech: PartOfSpeechSchema,
-    /** Letter indices within `text` that carry the root consonants. */
-    rootIndices: z.array(z.number().int().nonnegative()).min(2).max(4),
+    /** The morpheme this course highlights on this word. */
+    morphology: MorphologySchema,
     parse: ParseSchema.optional(),
     /** Verse references where this exact form occurs. */
     attestations: z.array(z.string()).default([]),
@@ -94,14 +138,14 @@ export const WordSchema = z
     distractors: z.array(z.string()).min(3),
     notes: z.string().optional(),
   })
-  // The guard that makes the original prototype's bug unrepresentable: a word
-  // whose root indices land on vowel points instead of consonants cannot parse.
+  // The guard that makes both prototypes' bug unrepresentable: a word whose
+  // highlight lands on vowel points, or off the end of the word, cannot parse.
   .superRefine((w, ctx) => {
-    const check = validateLetterIndices(scriptOf(), w.text, w.rootIndices);
+    const check = validateLetterIndices(scriptOf(), w.text, w.morphology.highlight);
     if (!check.ok) {
       ctx.addIssue({
         code: "custom",
-        path: ["rootIndices"],
+        path: ["morphology", "highlight"],
         message: `word "${w.id}" (${w.text}): ${check.reason}`,
       });
     }
@@ -125,7 +169,7 @@ export const McVocabExercise = z.object({
 export const ConjugationExercise = z.object({
   ...ExerciseBase,
   type: z.literal("conjugation"),
-  rootId: z.string(),
+  familyId: z.string(),
   choices: z.array(z.string()).min(2),
   answer: z.string(),
   note: z.string().optional(),
@@ -136,11 +180,11 @@ export const ParsingExercise = z.object({
   ...ExerciseBase,
   type: z.literal("parsing"),
   text: z.string(),
-  rootId: z.string(),
-  rootIndices: z.array(z.number().int().nonnegative()),
+  familyId: z.string(),
+  morphology: MorphologySchema,
   answer: ParseSchema,
   /** Which fields the learner must fill in; others are hidden. */
-  fields: z.array(z.enum(["binyan", "tense", "person", "gender", "number"])).min(1),
+  fields: z.array(ParseFieldIdSchema).min(1),
   note: z.string().optional(),
 });
 
@@ -148,7 +192,7 @@ export const ParsingExercise = z.object({
 export const BinyanCompareExercise = z.object({
   ...ExerciseBase,
   type: z.literal("binyan_compare"),
-  rootId: z.string(),
+  familyId: z.string(),
   forms: z
     .array(
       z.object({
@@ -168,7 +212,7 @@ export const ConstructChainExercise = z.object({
   type: z.literal("construct_chain"),
   choices: z.array(z.string()).min(2),
   answer: z.string(),
-  rootId: z.string().optional(),
+  familyId: z.string().optional(),
   note: z.string().optional(),
 });
 
@@ -210,8 +254,9 @@ export const PassageTokenSchema = z.object({
   gloss: z.string(),
   /** Null for function words we do not teach as vocabulary. */
   wordId: z.string().nullable().default(null),
-  rootId: z.string().nullable().default(null),
-  rootIndices: z.array(z.number().int().nonnegative()).default([]),
+  familyId: z.string().nullable().default(null),
+  /** Null for function words, which carry no morpheme worth highlighting. */
+  morphology: MorphologySchema.nullable().default(null),
   parse: ParseSchema.optional(),
 });
 export type PassageToken = z.infer<typeof PassageTokenSchema>;
@@ -250,7 +295,7 @@ export type Unit = z.infer<typeof UnitSchema>;
 
 export const ContentBundleSchema = z.object({
   schemaVersion: z.literal(CONTENT_SCHEMA_VERSION),
-  roots: z.array(RootSchema),
+  families: z.array(WordFamilySchema),
   words: z.array(WordSchema),
   units: z.array(UnitSchema),
   passages: z.array(PassageSchema),
@@ -265,7 +310,7 @@ export function validateBundle(bundle: unknown): { bundle: ContentBundle; errors
   const parsed = ContentBundleSchema.parse(bundle);
   const errors: string[] = [];
 
-  const rootIds = new Set(parsed.roots.map((r) => r.id));
+  const familyIds = new Set(parsed.families.map((f) => f.id));
   const wordIds = new Set(parsed.words.map((w) => w.id));
   const unitIds = new Set(parsed.units.map((u) => u.id));
   const passageIds = new Set(parsed.passages.map((p) => p.id));
@@ -273,10 +318,27 @@ export function validateBundle(bundle: unknown): { bundle: ContentBundle; errors
   const dupes = <T>(xs: T[]) => xs.filter((x, i) => xs.indexOf(x) !== i);
   for (const d of dupes(parsed.words.map((w) => w.id))) errors.push(`duplicate word id: ${d}`);
   for (const d of dupes(parsed.units.map((u) => u.id))) errors.push(`duplicate unit id: ${d}`);
-  for (const d of dupes(parsed.roots.map((r) => r.id))) errors.push(`duplicate root id: ${d}`);
+  for (const d of dupes(parsed.families.map((f) => f.id))) errors.push(`duplicate family id: ${d}`);
+
+  const parseFields = parseFieldsOf();
+  const knownFieldIds = new Set(parseFields.map((f) => f.id));
+
+  /** Every parse value must be legal for THIS course's language. */
+  const checkParse = (where: string, parse: Record<string, string | undefined> | undefined) => {
+    if (!parse) return;
+    for (const [field, value] of Object.entries(parse)) {
+      if (value === undefined) continue;
+      if (!knownFieldIds.has(field as ParseFieldId)) {
+        errors.push(`${where}: field "${field}" is not used by this course's language`);
+      } else if (!isValidParseValue(parseFields, field, value)) {
+        errors.push(`${where}: "${value}" is not a valid ${field} for this course`);
+      }
+    }
+  };
 
   for (const w of parsed.words) {
-    if (!rootIds.has(w.rootId)) errors.push(`word ${w.id} references unknown root ${w.rootId}`);
+    if (!familyIds.has(w.familyId)) errors.push(`word ${w.id} references unknown family ${w.familyId}`);
+    checkParse(`word ${w.id}`, w.parse);
     if (w.distractors.includes(w.gloss)) {
       errors.push(`word ${w.id} lists its own gloss "${w.gloss}" as a distractor`);
     }
@@ -296,8 +358,16 @@ export function validateBundle(bundle: unknown): { bundle: ContentBundle; errors
       if ("wordId" in ex && !wordIds.has(ex.wordId)) {
         errors.push(`exercise ${ex.id} references unknown word ${ex.wordId}`);
       }
-      if ("rootId" in ex && ex.rootId && !rootIds.has(ex.rootId)) {
-        errors.push(`exercise ${ex.id} references unknown root ${ex.rootId}`);
+      if ("familyId" in ex && ex.familyId && !familyIds.has(ex.familyId)) {
+        errors.push(`exercise ${ex.id} references unknown family ${ex.familyId}`);
+      }
+      if (ex.type === "parsing") {
+        checkParse(`exercise ${ex.id}`, ex.answer);
+        for (const f of ex.fields) {
+          if (!knownFieldIds.has(f)) {
+            errors.push(`exercise ${ex.id} asks for "${f}", which this course's language does not use`);
+          }
+        }
       }
       if (ex.type === "conjugation" && !ex.choices.includes(ex.answer)) {
         errors.push(`exercise ${ex.id}: answer is not among its choices`);
@@ -313,17 +383,21 @@ export function validateBundle(bundle: unknown): { bundle: ContentBundle; errors
       if (t.wordId && !wordIds.has(t.wordId)) {
         errors.push(`passage ${p.id} token references unknown word ${t.wordId}`);
       }
-      if (t.rootId && !rootIds.has(t.rootId)) {
-        errors.push(`passage ${p.id} token references unknown root ${t.rootId}`);
+      if (t.familyId && !familyIds.has(t.familyId)) {
+        errors.push(`passage ${p.id} token references unknown family ${t.familyId}`);
       }
-      const check = validateLetterIndices(scriptOf(), t.text, t.rootIndices);
-      if (!check.ok) errors.push(`passage ${p.id} token "${t.text}": ${check.reason}`);
+      // Function words legitimately have no morpheme to highlight.
+      if (t.morphology) {
+        const check = validateLetterIndices(scriptOf(), t.text, t.morphology.highlight);
+        if (!check.ok) errors.push(`passage ${p.id} token "${t.text}": ${check.reason}`);
+      }
+      checkParse(`passage ${p.id} token "${t.text}"`, t.parse);
     }
   }
 
   // Unit graph must be a chain with no cycles and exactly one entry point.
-  const roots = parsed.units.filter((u) => u.requires === null);
-  if (roots.length === 0) errors.push("no starting unit (every unit has a prerequisite)");
+  const entryPoints = parsed.units.filter((u) => u.requires === null);
+  if (entryPoints.length === 0) errors.push("no starting unit (every unit has a prerequisite)");
 
   return { bundle: parsed, errors };
 }

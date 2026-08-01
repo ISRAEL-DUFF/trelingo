@@ -1,12 +1,19 @@
 /**
  * Repository layer — every domain operation the UI needs, all local-first.
  *
- * The rule these functions enforce: recording a review writes an immutable log
- * entry AND updates the derived card in one transaction. The log is the truth
- * (spec §5.2); the card table is a cache of the derivation so the path screen
- * doesn't have to replay history on every render.
+ * Two rules this layer enforces:
+ *
+ *  1. Recording a review writes an immutable log entry AND updates the derived
+ *     card in one transaction. The log is the truth (spec §5.2); the card table
+ *     is a cache of the derivation so the path screen need not replay history.
+ *  2. Every learning row is scoped to a course (D1). Functions take an optional
+ *     `courseId` defaulting to the active course, so call sites read naturally
+ *     while multi-course support is available where it matters.
+ *
+ * XP and streak are deliberately NOT scoped (D2): a streak measures showing up,
+ * which is one habit across every course.
  */
-import { db, getDeviceId, getMeta, setMeta } from "./index";
+import { db, getDeviceId, getMeta, setMeta, type LocalCard, type LocalDeck } from "./index";
 import {
   DEFAULT_CONFIG,
   buildReviewQueue,
@@ -19,64 +26,87 @@ import {
   type SrsCard,
 } from "@/srs/engine";
 import { unitById, words } from "@/content";
+import { DEFAULT_COURSE_ID, type CourseId } from "@/content/course";
 import type { StreakState, UnitProgress } from "@/api/types";
+
+/** Pass this instead of a course id to work across every course (D4). */
+export const ALL_COURSES = "all" as const;
+export type CourseScope = CourseId | typeof ALL_COURSES;
+
+const scoped = (courseId: CourseScope) =>
+  courseId === ALL_COURSES ? db.srsCards.toArray() : db.srsCards.where({ courseId }).toArray();
 
 // ---------- cards ----------
 
-export async function getAllCards(): Promise<SrsCard[]> {
-  return db.cards.toArray();
+export async function getAllCards(courseId: CourseScope = DEFAULT_COURSE_ID): Promise<LocalCard[]> {
+  return scoped(courseId);
 }
 
-export async function getCard(wordId: string): Promise<SrsCard | undefined> {
-  return db.cards.get(wordId);
+export async function getCard(
+  wordId: string,
+  courseId: CourseId = DEFAULT_COURSE_ID,
+): Promise<LocalCard | undefined> {
+  return db.srsCards.get([courseId, wordId]);
 }
 
 /** Introduce vocabulary as new cards, skipping any the learner already has. */
-export async function ensureCards(wordIds: string[]): Promise<void> {
-  const existing = new Set((await db.cards.bulkGet(wordIds)).filter(Boolean).map((c) => c!.wordId));
-  const fresh = wordIds.filter((id) => !existing.has(id)).map((id) => newCard(id));
-  if (fresh.length) await db.cards.bulkPut(fresh);
+export async function ensureCards(
+  wordIds: string[],
+  courseId: CourseId = DEFAULT_COURSE_ID,
+): Promise<void> {
+  const keys = wordIds.map((id) => [courseId, id] as [CourseId, string]);
+  const existing = new Set((await db.srsCards.bulkGet(keys)).filter(Boolean).map((c) => c!.wordId));
+  const fresh = wordIds
+    .filter((id) => !existing.has(id))
+    .map((id) => ({ ...newCard(id), courseId }));
+  if (fresh.length) await db.srsCards.bulkPut(fresh);
 }
 
 /**
  * Record one review. Writes the event log and the derived card atomically, so a
  * crash between them cannot leave the two disagreeing.
  */
-export async function recordReview(wordId: string, rating: Rating, now = Date.now()): Promise<SrsCard> {
+export async function recordReview(
+  wordId: string,
+  rating: Rating,
+  now = Date.now(),
+  courseId: CourseId = DEFAULT_COURSE_ID,
+): Promise<LocalCard> {
   const deviceId = await getDeviceId();
-  const existing = (await db.cards.get(wordId)) ?? newCard(wordId);
-  const updated = scheduleCard(existing, rating, now);
+  const existing = (await db.srsCards.get([courseId, wordId])) ?? { ...newCard(wordId), courseId };
+  const updated: LocalCard = { ...scheduleCard(existing, rating, now), courseId };
 
-  await db.transaction("rw", [db.cards, db.reviewLogs], async () => {
+  await db.transaction("rw", [db.srsCards, db.reviewLogs], async () => {
     await db.reviewLogs.add({
       id: crypto.randomUUID(),
+      courseId,
       wordId,
       rating,
       reviewedAt: now,
       deviceId,
       synced: 0,
     });
-    await db.cards.put(updated);
+    await db.srsCards.put(updated);
   });
 
   return updated;
 }
 
 /**
- * Rebuild every card from the local log. Used after a sync pulls down events
- * from another device, and as a repair path if the cache is ever suspect.
+ * Rebuild every card in a course from its local log. Used as a repair path if
+ * the derived cache is ever suspect.
  */
-export async function rebuildCardsFromLogs(): Promise<void> {
-  const logs = await db.reviewLogs.toArray();
+export async function rebuildCardsFromLogs(courseId: CourseId = DEFAULT_COURSE_ID): Promise<void> {
+  const logs = await db.reviewLogs.where({ courseId }).toArray();
   const events: ReviewEvent[] = logs.map((l) => ({
     wordId: l.wordId,
     rating: l.rating,
     reviewedAt: l.reviewedAt,
   }));
-  const existing = await db.cards.toArray();
+  const existing = await db.srsCards.where({ courseId }).toArray();
   const wordIds = new Set([...existing.map((c) => c.wordId), ...logs.map((l) => l.wordId)]);
-  const rebuilt = [...wordIds].map((id) => deriveCard(id, events));
-  await db.cards.bulkPut(rebuilt);
+  const rebuilt = [...wordIds].map((id) => ({ ...deriveCard(id, events), courseId }));
+  if (rebuilt.length) await db.srsCards.bulkPut(rebuilt);
 }
 
 /**
@@ -88,16 +118,20 @@ export async function rebuildCardsFromLogs(): Promise<void> {
  * unsynced local events are by definition absent from that derivation, so they
  * are applied on top rather than being lost or double-counted.
  */
-export async function adoptServerCards(serverCards: readonly SrsCard[]): Promise<void> {
+export async function adoptServerCards(
+  serverCards: readonly SrsCard[],
+  courseId: CourseId = DEFAULT_COURSE_ID,
+): Promise<void> {
   const unsynced = await db.reviewLogs.where("synced").equals(0).toArray();
   const pendingByWord = new Map<string, ReviewEvent[]>();
   for (const l of unsynced) {
+    if (l.courseId !== courseId) continue;
     const list = pendingByWord.get(l.wordId) ?? [];
     list.push({ wordId: l.wordId, rating: l.rating, reviewedAt: l.reviewedAt });
     pendingByWord.set(l.wordId, list);
   }
 
-  const merged: SrsCard[] = serverCards.map((incoming) => {
+  const merged: LocalCard[] = serverCards.map((incoming) => {
     let card: SrsCard = { ...incoming };
     const pending = pendingByWord.get(card.wordId);
     if (pending) {
@@ -106,86 +140,124 @@ export async function adoptServerCards(serverCards: readonly SrsCard[]): Promise
       }
       pendingByWord.delete(card.wordId);
     }
-    return card;
+    return { ...card, courseId };
   });
 
   // Words the server has never seen (reviewed offline on this device only).
   for (const [wordId, events] of pendingByWord) {
-    merged.push(deriveCard(wordId, events));
+    merged.push({ ...deriveCard(wordId, events), courseId });
   }
 
-  if (merged.length) await db.cards.bulkPut(merged);
+  if (merged.length) await db.srsCards.bulkPut(merged);
 }
 
-export async function getReviewQueue(now = Date.now(), newCardLimit?: number): Promise<SrsCard[]> {
-  const cards = await db.cards.toArray();
+/**
+ * Build a review session queue.
+ *
+ * Defaults to the active course (D4). Passing ALL_COURSES merges every course
+ * into one session — offered as an explicit opt-in rather than the default,
+ * because alternating between right-to-left pointed Hebrew and left-to-right
+ * polytonic Greek mid-session carries a real cognitive cost.
+ */
+export async function getReviewQueue(
+  now = Date.now(),
+  newCardLimit?: number,
+  courseId: CourseScope = DEFAULT_COURSE_ID,
+): Promise<LocalCard[]> {
+  const cards = await scoped(courseId);
   return buildReviewQueue(cards, now, {
     newCardLimit: newCardLimit ?? DEFAULT_CONFIG.newCardsPerDay,
-  });
+  }) as LocalCard[];
 }
 
 /** A session limited to one custom deck (spec §4 Phase 7). */
-export async function getDeckQueue(wordIds: string[], now = Date.now()): Promise<SrsCard[]> {
-  const cards = (await db.cards.bulkGet(wordIds))
-    .map((c, i) => c ?? newCard(wordIds[i]!))
-    .filter(Boolean);
-  return buildReviewQueue(cards, now, { newCardLimit: cards.length });
+export async function getDeckQueue(
+  wordIds: string[],
+  now = Date.now(),
+  courseId: CourseId = DEFAULT_COURSE_ID,
+): Promise<LocalCard[]> {
+  const keys = wordIds.map((id) => [courseId, id] as [CourseId, string]);
+  const cards = (await db.srsCards.bulkGet(keys)).map(
+    (c, i) => c ?? { ...newCard(wordIds[i]!), courseId },
+  );
+  return buildReviewQueue(cards, now, { newCardLimit: cards.length }) as LocalCard[];
 }
 
-export async function getDueCounts(now = Date.now()) {
-  return dueCounts(await db.cards.toArray(), now);
+export async function getDueCounts(now = Date.now(), courseId: CourseScope = DEFAULT_COURSE_ID) {
+  return dueCounts(await scoped(courseId), now);
 }
 
-export async function getRecentEvents(sinceDays = 30): Promise<ReviewEvent[]> {
+export async function getRecentEvents(
+  sinceDays = 30,
+  courseId: CourseScope = DEFAULT_COURSE_ID,
+): Promise<ReviewEvent[]> {
   const cutoff = Date.now() - sinceDays * 24 * 60 * 60 * 1000;
   const logs = await db.reviewLogs.where("reviewedAt").aboveOrEqual(cutoff).toArray();
-  return logs.map((l) => ({ wordId: l.wordId, rating: l.rating, reviewedAt: l.reviewedAt }));
+  return logs
+    .filter((l) => courseId === ALL_COURSES || l.courseId === courseId)
+    .map((l) => ({ wordId: l.wordId, rating: l.rating, reviewedAt: l.reviewedAt }));
 }
 
 /** Cards flagged as leeches, for the "needs attention" screen. */
-export async function getLeeches(): Promise<SrsCard[]> {
-  return db.cards.filter((c) => c.isLeech).toArray();
+export async function getLeeches(courseId: CourseScope = DEFAULT_COURSE_ID): Promise<LocalCard[]> {
+  return (await scoped(courseId)).filter((c) => c.isLeech);
 }
 
 // ---------- progress ----------
 
-export async function getProgress(): Promise<UnitProgress[]> {
-  return db.progress.toArray();
+export async function getProgress(courseId: CourseScope = DEFAULT_COURSE_ID): Promise<UnitProgress[]> {
+  return courseId === ALL_COURSES
+    ? db.unitProgress.toArray()
+    : db.unitProgress.where({ courseId }).toArray();
 }
 
-export async function getCompletedUnitIds(): Promise<string[]> {
-  return (await db.progress.toArray()).map((p) => p.unitId);
+export async function getCompletedUnitIds(
+  courseId: CourseId = DEFAULT_COURSE_ID,
+): Promise<string[]> {
+  return (await db.unitProgress.where({ courseId }).toArray()).map((p) => p.unitId);
 }
 
-export async function completeUnit(unitId: string, score: number): Promise<void> {
+export async function completeUnit(
+  unitId: string,
+  score: number,
+  courseId: CourseId = DEFAULT_COURSE_ID,
+): Promise<void> {
   const unit = unitById.get(unitId);
-  await db.transaction("rw", [db.progress, db.cards], async () => {
-    const existing = await db.progress.get(unitId);
-    await db.progress.put({
+  await db.transaction("rw", [db.unitProgress, db.srsCards], async () => {
+    const existing = await db.unitProgress.get([courseId, unitId]);
+    await db.unitProgress.put({
+      courseId,
       unitId,
       completedAt: existing?.completedAt ?? Date.now(),
       score: Math.max(score, existing?.score ?? 0),
       synced: 0,
     });
     if (unit) {
-      const ids = unit.wordIds;
-      const have = new Set((await db.cards.bulkGet(ids)).filter(Boolean).map((c) => c!.wordId));
-      const fresh = ids.filter((id) => !have.has(id)).map((id) => newCard(id));
-      if (fresh.length) await db.cards.bulkPut(fresh);
+      const keys = unit.wordIds.map((id) => [courseId, id] as [CourseId, string]);
+      const have = new Set((await db.srsCards.bulkGet(keys)).filter(Boolean).map((c) => c!.wordId));
+      const fresh = unit.wordIds
+        .filter((id) => !have.has(id))
+        .map((id) => ({ ...newCard(id), courseId }));
+      if (fresh.length) await db.srsCards.bulkPut(fresh);
     }
   });
 }
 
 /** Placement can unlock units without the learner completing them. */
-export async function unlockUnits(unitIds: string[]): Promise<void> {
-  await setMeta("placementUnlocked", unitIds);
+export async function unlockUnits(
+  unitIds: string[],
+  courseId: CourseId = DEFAULT_COURSE_ID,
+): Promise<void> {
+  await setMeta(`placementUnlocked:${courseId}`, unitIds);
 }
 
-export async function getPlacementUnlocked(): Promise<string[]> {
-  return getMeta<string[]>("placementUnlocked", []);
+export async function getPlacementUnlocked(
+  courseId: CourseId = DEFAULT_COURSE_ID,
+): Promise<string[]> {
+  return getMeta<string[]>(`placementUnlocked:${courseId}`, []);
 }
 
-// ---------- xp & streak ----------
+// ---------- xp & streak (global — D2) ----------
 
 export async function getXp(): Promise<number> {
   return getMeta<number>("xp", 0);
@@ -214,6 +286,7 @@ export async function getStreak(): Promise<StreakState> {
  *
  * Unlike the prototype (which incremented per lesson), this increments at most
  * once per day, and a gap of more than one day either burns a freeze or resets.
+ * Global across courses: studying Greek keeps a Hebrew streak alive (D2).
  */
 export async function touchStreak(now = new Date()): Promise<StreakState> {
   const streak = await getStreak();
@@ -251,36 +324,40 @@ export async function setStreak(streak: StreakState): Promise<void> {
 
 // ---------- decks ----------
 
-export async function listLocalDecks() {
-  return db.decks.toArray();
+export async function listLocalDecks(courseId: CourseScope = DEFAULT_COURSE_ID): Promise<LocalDeck[]> {
+  return courseId === ALL_COURSES ? db.decks.toArray() : db.decks.where({ courseId }).toArray();
 }
 
-export async function putLocalDecks(decks: Awaited<ReturnType<typeof listLocalDecks>>) {
-  await db.decks.clear();
-  await db.decks.bulkPut(decks);
+export async function putLocalDecks(
+  decks: readonly { id: string; name: string; wordIds: string[]; createdAt: number }[],
+  courseId: CourseId = DEFAULT_COURSE_ID,
+): Promise<void> {
+  await db.decks.where({ courseId }).delete();
+  await db.decks.bulkPut(decks.map((d) => ({ ...d, courseId })));
 }
 
 // ---------- stats ----------
 
-export async function getStats(now = Date.now()) {
-  const [cards, logs, progress, xp, streak] = await Promise.all([
-    db.cards.toArray(),
+export async function getStats(now = Date.now(), courseId: CourseScope = DEFAULT_COURSE_ID) {
+  const [cards, allLogs, progress, xp, streak] = await Promise.all([
+    scoped(courseId),
     db.reviewLogs.toArray(),
-    db.progress.toArray(),
+    getProgress(courseId),
     getXp(),
     getStreak(),
   ]);
+  const logs = allLogs.filter((l) => courseId === ALL_COURSES || l.courseId === courseId);
 
   const known = cards.filter((c) => c.state === "review" && c.intervalDays >= 21).length;
-  const rootsSeen = new Set(
-    cards.map((c) => words.find((w) => w.id === c.wordId)?.rootId).filter(Boolean),
+  const familiesSeen = new Set(
+    cards.map((c) => words.find((w) => w.id === c.wordId)?.familyId).filter(Boolean),
   ).size;
 
   return {
     counts: dueCounts(cards, now),
     totalReviews: logs.length,
     known,
-    rootsSeen,
+    familiesSeen,
     unitsCompleted: progress.length,
     xp,
     streak,

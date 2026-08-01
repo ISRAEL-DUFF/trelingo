@@ -1,7 +1,8 @@
 import { useMemo, useState, type ReactNode } from "react";
 import { ScriptWord } from "@/components/ScriptWord";
 import { Button } from "@/components/ui";
-import { scriptOf } from "@/content/course";
+import { scriptOf, parseFieldsOf } from "@/content/course";
+import { findField } from "@/content/parse-fields";
 import { playWord } from "@/lib/audio";
 import { wordById, words as allWords, type Exercise, type Parse } from "@/content";
 import { gradeChoice, gradeMatching, gradeParse, gradeTranslation, type GradeResult } from "./grade";
@@ -83,9 +84,9 @@ function McVocabExerciseView({
   const choices = useMemo(() => {
     if (!word) return [];
     if (!production) return seededShuffle([word.gloss, ...word.distractors.slice(0, 3)], exercise.id);
-    // Production: pick the Hebrew form. Distractors come from other roots so the
+    // Production: pick the Hebrew form. Distractors come from other families so the
     // answer can't be guessed from letter shape alone.
-    const others = allWords.filter((w) => w.id !== word.id && w.rootId !== word.rootId);
+    const others = allWords.filter((w) => w.id !== word.id && w.familyId !== word.familyId);
     const picked = seededShuffle(others, exercise.id)
       .slice(0, 3)
       .map((w) => w.text);
@@ -113,7 +114,7 @@ function McVocabExerciseView({
           <>
             <ScriptWord
               word={word.text}
-              highlight={word.rootIndices}
+              highlight={word.morphology.highlight}
               size={52}
               showHighlight={revealed}
               fadeStage={fadeStage}
@@ -168,7 +169,7 @@ function ConjugationExerciseView({
       <div className="center" style={{ padding: "30px 24px 10px" }}>
         <Prompt>Grammar drill</Prompt>
         <p style={{ fontSize: 16, lineHeight: 1.55, margin: "0 0 14px" }}>{exercise.prompt}</p>
-        <span className="tag tag--root">{scriptOf().joinLetters(exercise.rootId)}</span>
+        <span className="tag tag--root">{scriptOf().joinLetters(exercise.familyId)}</span>
       </div>
       <div
         style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center", padding: "14px 20px" }}
@@ -251,48 +252,6 @@ function ConstructChainExerciseView({
 
 // ---------- Parsing (tap-to-tag) ----------
 
-const FIELD_OPTIONS: Record<string, { value: string; label: string }[]> = {
-  binyan: [
-    { value: "qal", label: "Qal" },
-    { value: "niphal", label: "Niphal" },
-    { value: "piel", label: "Piel" },
-    { value: "pual", label: "Pual" },
-    { value: "hiphil", label: "Hiphil" },
-    { value: "hophal", label: "Hophal" },
-    { value: "hitpael", label: "Hitpael" },
-  ],
-  tense: [
-    { value: "perfect", label: "Perfect" },
-    { value: "imperfect", label: "Imperfect" },
-    { value: "imperative", label: "Imperative" },
-    { value: "participle", label: "Participle" },
-    { value: "infinitive_construct", label: "Inf. construct" },
-    { value: "jussive", label: "Jussive" },
-  ],
-  person: [
-    { value: "1", label: "1st" },
-    { value: "2", label: "2nd" },
-    { value: "3", label: "3rd" },
-  ],
-  gender: [
-    { value: "m", label: "Masc." },
-    { value: "f", label: "Fem." },
-    { value: "c", label: "Common" },
-  ],
-  number: [
-    { value: "s", label: "Singular" },
-    { value: "p", label: "Plural" },
-  ],
-};
-
-const FIELD_LABELS: Record<string, string> = {
-  binyan: "Stem (binyan)",
-  tense: "Form",
-  person: "Person",
-  gender: "Gender",
-  number: "Number",
-};
-
 function ParsingExerciseView({
   exercise,
   onAnswer,
@@ -300,6 +259,9 @@ function ParsingExerciseView({
 }: BaseProps & { exercise: Of<"parsing"> }) {
   const [picks, setPicks] = useState<Partial<Parse>>({});
   const [result, setResult] = useState<GradeResult | null>(null);
+  // Chips come from the course's language, not a hardcoded table — Hebrew shows
+  // binyan and common gender, Greek will show case, voice, mood and neuter.
+  const fields = parseFieldsOf();
   const complete = exercise.fields.every((f) => picks[f] !== undefined);
 
   const submit = () => {
@@ -315,22 +277,22 @@ function ParsingExerciseView({
         <Prompt>{exercise.prompt}</Prompt>
         <ScriptWord
           word={exercise.text}
-          highlight={exercise.rootIndices}
+          highlight={exercise.morphology.highlight}
           size={46}
           showHighlight
           fadeStage={fadeStage}
         />
         <div style={{ marginTop: 10 }}>
-          <span className="tag tag--root">{scriptOf().joinLetters(exercise.rootId)}</span>
+          <span className="tag tag--root">{scriptOf().joinLetters(exercise.familyId)}</span>
         </div>
       </div>
 
       <div className="stack pad-x" style={{ marginTop: 12 }}>
         {exercise.fields.map((field) => (
           <div key={field} className="field">
-            <span className="label">{FIELD_LABELS[field] ?? field}</span>
+            <span className="label">{findField(fields, field)?.label ?? field}</span>
             <div className="chips">
-              {(FIELD_OPTIONS[field] ?? []).map((opt) => {
+              {(findField(fields, field)?.options ?? []).map((opt) => {
                 const chosen = picks[field] === opt.value;
                 let cls = chosen ? " chip--selected" : "";
                 if (result) {
@@ -416,7 +378,7 @@ function BinyanCompareExerciseView({
     <div>
       <div className="center" style={{ padding: "26px 24px 6px" }}>
         <Prompt>{exercise.prompt}</Prompt>
-        <span className="tag tag--root">{scriptOf().joinLetters(exercise.rootId)}</span>
+        <span className="tag tag--root">{scriptOf().joinLetters(exercise.familyId)}</span>
       </div>
 
       <div className="stack pad-x" style={{ marginTop: 16 }}>
@@ -544,7 +506,7 @@ function ListeningExerciseView({
         )}
         {revealed && (
           <div style={{ marginTop: 16 }}>
-            <ScriptWord word={word.text} highlight={word.rootIndices} size={40} showHighlight />
+            <ScriptWord word={word.text} highlight={word.morphology.highlight} size={40} showHighlight />
             <div className="translit" style={{ marginTop: 6 }}>
               {word.translit}
             </div>

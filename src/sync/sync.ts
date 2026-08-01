@@ -12,6 +12,7 @@
 import { api, tokenStore } from "@/api/client";
 import { NetworkError, ApiError, type ReviewLogEntry } from "@/api/types";
 import { db, getMeta, setMeta } from "@/db";
+import { DEFAULT_COURSE_ID } from "@/content/course";
 import { adoptServerCards, getProgress, getStreak, getXp, setStreak } from "@/db/repo";
 
 export type SyncStatus = "idle" | "syncing" | "offline" | "error" | "unauthenticated";
@@ -88,22 +89,26 @@ async function runSync(): Promise<void> {
     const unsyncedProgress = progress.filter((p) => (p as { synced?: 0 | 1 }).synced === 0);
     if (unsyncedProgress.length) {
       await api.pushProgress({
+        courseId: DEFAULT_COURSE_ID,
         progress: unsyncedProgress.map(({ unitId, completedAt, score }) => ({
+          courseId: DEFAULT_COURSE_ID,
           unitId,
           completedAt,
           score,
         })),
+        // Global across courses (D2).
         streak,
         xp,
       });
-      await db.transaction("rw", db.progress, async () => {
-        for (const p of unsyncedProgress) await db.progress.update(p.unitId, { synced: 1 });
+      await db.transaction("rw", db.unitProgress, async () => {
+        for (const p of unsyncedProgress)
+          await db.unitProgress.update([DEFAULT_COURSE_ID, p.unitId], { synced: 1 });
       });
     }
 
     // 3. Pull server state.
     const cursor = await getMeta<string | undefined>("syncCursor", undefined);
-    const server = await api.getSyncState(cursor);
+    const server = await api.getSyncState(DEFAULT_COURSE_ID, cursor);
 
     // Server-authoritative fields: streak freezes and progress it knows about
     // that this device does not (i.e. earned on another device).
@@ -114,7 +119,9 @@ async function runSync(): Promise<void> {
     const localUnits = new Set((await getProgress()).map((p) => p.unitId));
     const incoming = server.progress.filter((p) => !localUnits.has(p.unitId));
     if (incoming.length) {
-      await db.progress.bulkPut(incoming.map((p) => ({ ...p, synced: 1 as const })));
+      await db.unitProgress.bulkPut(
+        incoming.map((p) => ({ ...p, courseId: DEFAULT_COURSE_ID, synced: 1 as const })),
+      );
     }
 
     // Adopt the server's derived cards, replaying any not-yet-pushed local

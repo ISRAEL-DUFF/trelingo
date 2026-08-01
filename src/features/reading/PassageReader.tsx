@@ -47,7 +47,7 @@ export function PassageReader({
             >
               <ScriptWord
                 word={t.text}
-                highlight={t.rootIndices}
+                highlight={t.morphology?.highlight}
                 size={30}
                 showHighlight={activeIndex === i}
                 fadeStage={fadeStage}
@@ -79,9 +79,9 @@ export function PassageReader({
                   >
                     🔊
                   </button>
-                  {active.rootId && (
-                    <button className="tag tag--root" onClick={() => setRootSheet(active.rootId)}>
-                      {active.rootId}
+                  {active.familyId && (
+                    <button className="tag tag--root" onClick={() => setRootSheet(active.familyId)}>
+                      {active.familyId}
                     </button>
                   )}
                 </div>
