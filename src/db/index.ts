@@ -7,6 +7,7 @@
  * than aspirational.
  */
 import Dexie, { type EntityTable } from "dexie";
+import { DEFAULT_THEME, type ThemePref } from "@/lib/theme";
 import type { SrsCard } from "@/srs/engine";
 import type {
   AssessmentResult,
@@ -28,6 +29,8 @@ export interface LocalProgress extends UnitProgress {
 
 export interface Settings {
   key: "settings";
+  /** "system" is resolved to a concrete palette in lib/theme.ts. */
+  themePref: ThemePref;
   niqqudPref: "always" | "fading" | "off";
   pronunciationPref: PronunciationVariant;
   dailyGoal: number;
@@ -88,6 +91,7 @@ export async function getDeviceId(): Promise<string> {
 
 export const DEFAULT_SETTINGS: Settings = {
   key: "settings",
+  themePref: DEFAULT_THEME,
   niqqudPref: "fading",
   pronunciationPref: "sephardic",
   dailyGoal: 20,
@@ -100,8 +104,13 @@ export const DEFAULT_SETTINGS: Settings = {
   },
 };
 
+/**
+ * Settings rows written before a field existed are missing it, so merge over
+ * the defaults rather than returning the stored row directly.
+ */
 export async function getSettings(): Promise<Settings> {
-  return (await db.settings.get("settings")) ?? DEFAULT_SETTINGS;
+  const stored = await db.settings.get("settings");
+  return { ...DEFAULT_SETTINGS, ...stored, key: "settings" };
 }
 
 export async function saveSettings(patch: Partial<Settings>): Promise<Settings> {

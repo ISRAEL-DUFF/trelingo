@@ -19,6 +19,7 @@ import { useSession } from "@/state/session";
 import { startSyncTriggers } from "@/sync/sync";
 import { getDueCounts } from "@/db/repo";
 import { loadAudioManifest } from "@/lib/audio";
+import { applyTheme, watchSystemTheme } from "@/lib/theme";
 import { Spinner } from "@/components/ui";
 
 /** Routes that take over the whole screen and hide the tab bar. */
@@ -72,6 +73,13 @@ export default function App() {
   useEffect(() => {
     if (settings) void loadAudioManifest(settings.pronunciationPref);
   }, [settings?.pronunciationPref]);
+
+  // Only follow the OS while the preference is actually "system"; an explicit
+  // Dark or Light choice must not be overridden when the device flips at dusk.
+  useEffect(() => {
+    if (settings?.themePref !== "system") return;
+    return watchSystemTheme(() => applyTheme("system", { animate: true }));
+  }, [settings?.themePref]);
 
   // Each route change starts at the top; without this a long lesson leaves the
   // next screen scrolled halfway down.

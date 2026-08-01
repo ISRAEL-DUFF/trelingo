@@ -1,9 +1,59 @@
 /* ---------- Design tokens ---------- */
-/* Carried over from the prototype: parchment, ink, gold, with a single red
-   reserved exclusively for root letters. That reservation matters — if red is
-   also used for errors, the root highlighting stops reading as meaningful. */
+/*
+ * Two themes, one set of semantic variables. Nothing below this block ever
+ * references a raw colour — swapping themes is purely a matter of which values
+ * these names resolve to.
+ *
+ * DARK is the default and lives on :root, so it applies even before JavaScript
+ * runs. LIGHT is the prototype's original palette (parchment, ink, gold) and is
+ * opted into with data-theme="light" on <html>.
+ *
+ * The red is reserved exclusively for root letters in both themes. That
+ * reservation matters — if red also meant "error", the root highlighting would
+ * stop reading as meaningful.
+ *
+ * `data-theme` is always resolved to "light" or "dark" by src/lib/theme.ts;
+ * the user-facing "system" option is resolved in JS rather than in CSS, so
+ * there is exactly one place that decides which palette is active.
+ */
 
-:root {
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ink: #cbd5ec;
+  --ink-deep: #0b1020;
+  --parchment: #1a1c24;
+  --parchment-deep: #2b2f3d;
+  --gold: #b8863b;
+  --gold-bright: #e0b768;
+  --sage: #9db98a;
+  --text: #e8e2d4;
+  --text-soft: #a49c88;
+  --root: #e5766a;
+  --root-wash: #3d2320;
+  --white: #23262f;
+  --sage-wash: #26301f;
+  --gold-wash: #362c17;
+  --ink-wash: #212736;
+
+  --surface: var(--white);
+  --bg: var(--parchment);
+  --border: var(--parchment-deep);
+
+  /* App chrome is dark in both themes — it is the frame, not the page. */
+  --chrome-bg: #12172a;
+  --chrome-fg: #e8e2d4;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* The prototype's palette, preserved exactly. */
+:root[data-theme="light"] {
+  color-scheme: light;
+
   --ink: #1b2a4a;
   --ink-deep: #0f1b33;
   --parchment: #f3e9d2;
@@ -24,10 +74,15 @@
   --bg: var(--parchment);
   --border: var(--parchment-deep);
 
-  /* Chrome stays dark in both themes; --ink inverts in dark mode. */
   --chrome-bg: #1b2a4a;
   --chrome-fg: #fff9ee;
 
+  --shadow-sm: 0 1px 3px rgba(27, 42, 74, 0.1);
+  --shadow: 0 4px 14px rgba(27, 42, 74, 0.12);
+  --shadow-lg: 0 8px 30px rgba(27, 42, 74, 0.25);
+}
+
+:root {
   --font-hebrew: "Frank Ruhl Libre", "Times New Roman", serif;
   --font-body: "Crimson Pro", Georgia, serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -36,38 +91,19 @@
   --radius-lg: 18px;
   --radius-pill: 999px;
 
-  --shadow-sm: 0 1px 3px rgba(27, 42, 74, 0.1);
-  --shadow: 0 4px 14px rgba(27, 42, 74, 0.12);
-  --shadow-lg: 0 8px 30px rgba(27, 42, 74, 0.25);
-
   --tap: 44px; /* minimum touch target */
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --nav-height: calc(58px + var(--safe-bottom));
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --parchment: #1a1c24;
-    --parchment-deep: #2b2f3d;
-    --white: #23262f;
-    --text: #e8e2d4;
-    --text-soft: #a49c88;
-    --ink: #cbd5ec;
-    --ink-deep: #0b1020;
-    --gold-bright: #e0b768;
-    --root: #e5766a;
-    --root-wash: #3d2320;
-    --sage: #9db98a;
-    --sage-wash: #26301f;
-    --gold-wash: #362c17;
-    --ink-wash: #212736;
-    --surface: var(--white);
-    --bg: var(--parchment);
-    --border: var(--parchment-deep);
-    --chrome-bg: #12172a;
-    --chrome-fg: #e8e2d4;
-    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
-  }
+/* Theme changes animate, so switching in Settings doesn't feel like a reload.
+   Suppressed under reduced-motion by the rule further down. */
+html.theme-transition,
+html.theme-transition * {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease !important;
 }
 
 * {

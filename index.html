@@ -21,6 +21,32 @@
     />
 
     <title>Shoresh — Learn Biblical Hebrew by the Root</title>
+
+    <!--
+      Apply the saved theme before first paint. Settings live in IndexedDB,
+      which is async — without this a light-theme user gets a dark flash on
+      every cold start. Kept deliberately tiny and dependency-free; the real
+      logic is in src/lib/theme.ts.
+    -->
+    <script>
+      (function () {
+        try {
+          var pref = localStorage.getItem("shoresh.theme") || "dark";
+          var resolved =
+            pref === "system"
+              ? window.matchMedia("(prefers-color-scheme: light)").matches
+                ? "light"
+                : "dark"
+              : pref;
+          document.documentElement.dataset.theme = resolved;
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute("content", resolved === "light" ? "#1b2a4a" : "#12172a");
+        } catch (e) {
+          document.documentElement.dataset.theme = "dark";
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

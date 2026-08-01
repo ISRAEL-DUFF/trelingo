@@ -15,7 +15,7 @@ mock server that persists to `localStorage`.
 |---|---|
 | `npm run dev` | Dev server with the mock API |
 | `npm run build` | Typecheck + production build |
-| `npm test` | Full suite (214 tests) |
+| `npm test` | Full suite (230 tests) |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run validate:content` | Content schema + root-index validation only |
 
@@ -37,6 +37,27 @@ that the highlighted letters are actually a subsequence of the declared root. Th
 error cannot reach a learner without failing the build.
 
 ---
+
+## Theming
+
+Two themes over one set of semantic CSS variables — no component references a raw colour.
+
+- **Dark** is the default. It lives on `:root`, so it is correct before any JavaScript runs.
+- **Light** is the original prototype palette (parchment `#f3e9d2`, ink `#1b2a4a`, gold, and
+  the reserved root red `#b23a2e`), applied via `data-theme="light"`.
+- **System** follows the OS, and keeps following it if the device flips at dusk.
+
+Settings → Appearance. The choice persists in IndexedDB with a `localStorage` mirror that a
+tiny inline script in [`index.html`](index.html) reads before first paint — otherwise a
+light-theme user gets a dark flash on every cold start.
+
+`data-theme` is only ever `light` or `dark`; "system" is resolved in
+[`src/lib/theme.ts`](src/lib/theme.ts) so exactly one place decides which palette is active.
+The app chrome (top bar, celebration screens) stays dark in both themes — it is the frame,
+not the page.
+
+Red is reserved exclusively for root letters in both themes. If red also meant "error", the
+root highlighting would stop reading as meaningful.
 
 ## Architecture
 

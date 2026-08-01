@@ -8,6 +8,7 @@ import { api } from "@/api/client";
 import { useSyncState } from "@/features/sync/SyncIndicator";
 import { sync } from "@/sync/sync";
 import { installState, promptInstall } from "@/lib/pwa";
+import { THEME_LABELS, systemTheme } from "@/lib/theme";
 import { notificationState, requestNotificationPermission } from "@/lib/notifications";
 
 export function SettingsScreen() {
@@ -98,6 +99,34 @@ export function SettingsScreen() {
               </Link>
             </>
           )}
+        </div>
+
+        {/* ---- appearance ---- */}
+        <div className="card stack">
+          <span className="label">Appearance</span>
+          <div className="field">
+            <span className="small">Theme</span>
+            <div className="chips">
+              {(["dark", "light", "system"] as const).map((v) => (
+                <button
+                  key={v}
+                  className={`chip${settings.themePref === v ? " chip--selected" : ""}`}
+                  onClick={() => void updateSettings({ themePref: v })}
+                  aria-pressed={settings.themePref === v}
+                >
+                  {v === "dark" ? "🌙 " : v === "light" ? "☀️ " : "🖥 "}
+                  {THEME_LABELS[v]}
+                </button>
+              ))}
+            </div>
+            <span className="small muted">
+              {settings.themePref === "system"
+                ? `Following your device, which is currently ${systemTheme()}.`
+                : settings.themePref === "light"
+                  ? "Parchment and ink — the original Shoresh palette."
+                  : "Dark parchment. Easier on the eyes at night."}
+            </span>
+          </div>
         </div>
 
         {/* ---- reading ---- */}

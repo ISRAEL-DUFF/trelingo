@@ -3,6 +3,7 @@ import { api, tokenStore } from "@/api/client";
 import { ApiError, NetworkError, type ApiUser } from "@/api/types";
 import { clearLocalData, getMeta, getSettings, saveSettings, setMeta, type Settings } from "@/db";
 import { sync } from "@/sync/sync";
+import { applyTheme } from "@/lib/theme";
 
 interface SessionState {
   user: ApiUser | null;
@@ -28,6 +29,9 @@ export const useSession = create<SessionState>((set, get) => ({
 
   async init() {
     const settings = await getSettings();
+    // Re-assert the stored preference: the boot script in index.html reads a
+    // localStorage mirror, and IndexedDB is the source of truth.
+    applyTheme(settings.themePref);
     // The app is fully usable signed-out; a failed /me is not an error state.
     if (!tokenStore.access) {
       set({ settings, status: "ready", user: null });
@@ -119,6 +123,7 @@ export const useSession = create<SessionState>((set, get) => ({
 
   async updateSettings(patch) {
     const settings = await saveSettings(patch);
+    if (patch.themePref) applyTheme(patch.themePref, { animate: true });
     set({ settings });
     if (get().user) {
       try {
