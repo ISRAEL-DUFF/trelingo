@@ -137,7 +137,7 @@ describe("completeUnit", () => {
   it("keeps the best score when a unit is replayed", async () => {
     await completeUnit("u01", 0.9);
     await completeUnit("u01", 0.4);
-    expect((await db.unitProgress.get(["hebrew-biblical", "u01"]))?.score).toBe(0.9);
+    expect((await db.unitProgress.get(["shoresh", "u01"]))?.score).toBe(0.9);
   });
 
   it("does not reset cards for words already being learned", async () => {

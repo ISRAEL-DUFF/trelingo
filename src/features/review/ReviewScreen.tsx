@@ -193,7 +193,7 @@ export function ReviewScreen() {
           <div className="center">
             <ScriptWord
               word={word?.text ?? card.wordId}
-              highlight={word?.morphology.highlight}
+              highlight={word?.morphology?.highlight}
               size={46}
               showHighlight={flipped}
               fadeStage={fadeStage}
@@ -218,7 +218,9 @@ export function ReviewScreen() {
                   >
                     🔊
                   </button>
-                  {word && (
+                  {/* No chip for a word whose morpheme is unknown — there is
+                      no family sheet to open. */}
+                  {word?.familyId && (
                     <button
                       className="tag tag--family"
                       onClick={(e) => {

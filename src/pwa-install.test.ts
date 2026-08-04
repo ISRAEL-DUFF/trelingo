@@ -76,18 +76,102 @@ describe("the shared worker's listener order", () => {
   });
 });
 
+describe("the deployed build", () => {
+  const pkg = JSON.parse(read("package.json")) as { scripts: Record<string, string> };
+
+  it("emits a 200.html so a static host can serve deep links", () => {
+    // Surge (and Netlify's legacy behaviour) fall back to 200.html for unknown
+    // paths. Without it a first visit to /library 404s — the service worker's
+    // navigation route only helps once the worker already exists.
+    expect(pkg.scripts.build).toMatch(/200\.html/);
+  });
+});
+
+describe("the install prompt is captured before the bundle loads", () => {
+  /*
+   * `beforeinstallprompt` fires once and never replays. On a repeat visit the
+   * service worker is already active and the manifest already known, so Chrome
+   * fires it at navigation — long before ~590 KB of module bundle evaluates on
+   * a phone. A listener registered from React code misses it entirely.
+   *
+   * The symptom is exact and misleading: Chrome's own menu offers "Install app"
+   * while the page reports that no prompt was ever offered, so the app's own
+   * install button never appears. Desktop hides it, because the address-bar
+   * icon works whether or not the page captured anything.
+   */
+  const html = read("index.html");
+
+  it("registers the listener in inline HTML, not in the bundle", () => {
+    const inlineEnd = html.indexOf('<script type="module"');
+    const listener = html.indexOf("beforeinstallprompt");
+    expect(listener).toBeGreaterThan(-1);
+    expect(listener).toBeLessThan(inlineEnd);
+  });
+
+  it("stashes the event somewhere the app can collect it later", () => {
+    expect(html).toMatch(/__trelingoInstall/);
+    expect(read("src/lib/pwa.ts")).toMatch(/__trelingoInstall/);
+  });
+
+  it("does not re-register a late listener that would shadow the early one", () => {
+    // Two listeners both calling preventDefault is harmless, but a second
+    // source of truth for the deferred event is how this broke the first time.
+    const pwa = read("src/lib/pwa.ts");
+    expect(pwa).not.toMatch(/addEventListener\(\s*"beforeinstallprompt"/);
+  });
+});
+
+describe("a deploy actually reaches returning visitors", () => {
+  /*
+   * A waiting worker keeps serving the PREVIOUS index.html out of the precache.
+   * The failure is invisible from outside — curl shows the new file while every
+   * browser shows the old one — and for an installed PWA, whose windows are
+   * rarely all closed, it means updates never land at all. Verified by shipping
+   * a marked index.html over a live worker and reloading: stale before, current
+   * after.
+   */
+  it("takes over immediately instead of waiting", () => {
+    expect(sw).toMatch(/self\.skipWaiting\(\)/);
+    expect(sw).toMatch(/clientsClaim\(\)/);
+    expect(viteConfig).toMatch(/registerType:\s*"autoUpdate"/);
+  });
+
+  it("drops precaches from previous builds", () => {
+    expect(sw).toMatch(/cleanupOutdatedCaches\(\)/);
+  });
+});
+
 describe("the manifest meets the install criteria", () => {
   const manifest = viteConfig.slice(viteConfig.indexOf("manifest: {"));
 
   it("declares a standalone display and a scoped start url", () => {
     expect(manifest).toMatch(/display:\s*"standalone"/);
     expect(manifest).toMatch(/start_url:\s*"\//);
-    expect(manifest).toMatch(/id:\s*"\//);
+    expect(manifest).toMatch(/scope:\s*"\//);
   });
 
-  it("ships the icon sizes Chrome requires, including a maskable one", () => {
+  it("ships the icon sizes Chrome requires", () => {
     expect(manifest).toMatch(/192x192/);
     expect(manifest).toMatch(/512x512/);
-    expect(manifest).toMatch(/purpose:\s*"maskable"/);
   });
+
+  /*
+   * The manifest must stay minimal.
+   *
+   * With `id`, `orientation`, `dir`, `categories` and icon `purpose` declared,
+   * Chrome accepted the app as installable and showed the prompt, but the
+   * Android install then produced nothing at all — no app, no shortcut. Android
+   * mints a WebAPK through Play Services, which happens outside the page and
+   * reports nothing back on failure, so there is no error to find. Two
+   * known-good PWAs on the same device install with plain manifests.
+   *
+   * A richer manifest is not a better one if it cannot be installed. Anything
+   * added back here has to be re-tested on a real Android device.
+   */
+  it.each(["id", "orientation", "dir", "categories", "purpose"])(
+    "does not declare %s",
+    (member) => {
+      expect(manifest).not.toMatch(new RegExp(`\\b${member}:`));
+    },
+  );
 });

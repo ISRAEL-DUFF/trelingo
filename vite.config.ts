@@ -20,40 +20,80 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "prompt",
+      // A stale precached shell is worse than a mid-session asset swap: see sw.ts.
+      registerType: "autoUpdate",
       // Registration is explicit, in main.tsx, because it has to be sequenced
       // against MSW's client handshake.
       injectRegister: null,
       strategies: "injectManifest",
       srcDir: "src",
       filename: "sw.ts",
+      /*
+       * Deliberately minimal, and it must stay that way.
+       *
+       * This manifest previously also declared `id`, `orientation`, `dir`,
+       * `lang`, `categories` and an icon `purpose` (including a maskable
+       * entry). Chrome accepted all of it — the install criteria passed and the
+       * prompt appeared — but on Android the install then produced nothing at
+       * all: no app, no shortcut. Android does not install a PWA directly; it
+       * asks Play Services to mint a WebAPK, and that step happens outside the
+       * page and reports nothing back when it fails.
+       *
+       * Two known-good PWAs on the same device install fine with plain
+       * manifests: name, short_name, description, icons, start_url, display,
+       * colours, scope. Nothing else. This now matches that shape.
+       *
+       * Do not add members back without testing an Android install afterwards.
+       * A richer manifest is not a better one if it cannot be installed.
+       */
       manifest: {
-        id: "/",
-        name: "Shoresh — Learn Biblical Hebrew by the Root",
-        short_name: "Shoresh",
+        name: "Trelingo — Learn Ancient Hebrew and Greek",
+        short_name: "Trelingo",
         description:
-          "Learn Biblical Hebrew through the triliteral root system, with spaced repetition and real unedited verses.",
-        theme_color: "#1B2A4A",
-        background_color: "#F3E9D2",
-        display: "standalone",
-        orientation: "portrait",
-        start_url: "/",
-        scope: "/",
-        lang: "en",
-        dir: "ltr",
-        categories: ["education", "books"],
+          "Read ancient Hebrew and Greek by their morphology — roots and stems — with spaced repetition and real unedited texts.",
         icons: [
-          { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
-          { src: "/icons/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
-          { src: "/icons/icon-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+          { src: "/icons/icon-48.png", sizes: "48x48", type: "image/png" },
+          { src: "/icons/icon-72.png", sizes: "72x72", type: "image/png" },
+          { src: "/icons/icon-96.png", sizes: "96x96", type: "image/png" },
+          { src: "/icons/icon-128.png", sizes: "128x128", type: "image/png" },
+          { src: "/icons/icon-144.png", sizes: "144x144", type: "image/png" },
+          { src: "/icons/icon-152.png", sizes: "152x152", type: "image/png" },
+          { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+          { src: "/icons/icon-256.png", sizes: "256x256", type: "image/png" },
+          { src: "/icons/icon-384.png", sizes: "384x384", type: "image/png" },
+          { src: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
         ],
+        start_url: "/",
+        display: "standalone",
+        background_color: "#F3E9D2",
+        theme_color: "#1B2A4A",
+        scope: "/",
       },
       injectManifest: {
         globPatterns: ["**/*.{js,css,html,woff2}"],
         // MSW's worker must stay a separately fetchable script: sw.ts pulls it
         // in with importScripts, and precaching it would also make Workbox try
         // to serve it as a cached asset.
-        globIgnores: ["**/mockServiceWorker.js"],
+        globIgnores: ["**/mockServiceWorker.js", "probe/**"],
+        /*
+         * Workbox refuses to precache a file over 2 MiB and FAILS THE BUILD
+         * rather than warning. Our one chunk is 7.2 MB because the tracks are
+         * compiled into it: measured, the shell alone is 529 KB and content is
+         * 93% of the bundle. Every whole book added moves this number — John
+         * alone is 3.1 MB of the total, Mark 2.6 MB.
+         *
+         * Raised rather than worked around, because the alternative is to drop
+         * the chunk from the precache, and then the tracks stop working offline
+         * — which is most of the point of the PWA. The cost is a ~7 MB (1 MB
+         * over the wire, gzipped) first install.
+         *
+         * THIS IS A HOLDING MEASURE. It cannot keep being raised: content
+         * belongs behind an API, fetched per book and runtime-cached the way
+         * sw.ts already caches audio. See the "WHY NOT LAZY" header in
+         * src/content/index.ts, which names that as the destination and the
+         * content version stamp that has to land with it.
+         */
+        maximumFileSizeToCacheInBytes: 12 * 1024 * 1024,
       },
       devOptions: { enabled: false },
     }),

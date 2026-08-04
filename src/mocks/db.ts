@@ -54,7 +54,7 @@ export interface MockDb {
   cohortEndsAt: number;
 }
 
-const STORAGE_KEY = "shoresh.mockdb.v1";
+const STORAGE_KEY = "trelingo.mockdb";
 
 export function emptyUserData(): MockUserData {
   return {
@@ -117,7 +117,7 @@ function freshDb(): MockDb {
 let db: MockDb = null as unknown as MockDb;
 
 /** Rows written before courses existed belong to the only course there was. */
-const LEGACY_COURSE_ID = "hebrew-biblical";
+const LEGACY_COURSE_ID = "shoresh";
 
 /**
  * Server-side backfill, the mirror of the client's Dexie v1 → v2 upgrade.

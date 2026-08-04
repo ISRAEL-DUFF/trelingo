@@ -15,7 +15,7 @@ export interface MockConfig {
   offline: boolean;
 }
 
-const STORAGE_KEY = "shoresh.mockconfig.v1";
+const STORAGE_KEY = "trelingo.mockconfig";
 
 const DEFAULTS: MockConfig = { latencyMs: 250, failureRate: 0, offline: false };
 

@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { GREEK_ATTIC, GREEK_KOINE, HEBREW_BIBLICAL, courses, getCourse, morphemeLabel, scriptOf } from "./course";
+import { GREEK_ATTIC, GREEK_KOINE, HEBREW_BIBLICAL, HEBREW_JONAH, courses, getCourse, languageOf, morphemeLabel, scriptOf, tracksOf, varietyOf } from "./course";
+import { GREEK, HEBREW, languages } from "./language";
+import { BIBLICAL_HEBREW, KOINE_GREEK, varieties, varietiesByLanguage } from "./variety";
 import { reviewNotesFor } from "./index";
 
 /**
@@ -19,7 +21,7 @@ describe("course registry", () => {
   });
 
   it("defaults to the Hebrew course", () => {
-    expect(getCourse().id).toBe("hebrew-biblical");
+    expect(getCourse().id).toBe("shoresh");
   });
 
   it("throws on an unknown course rather than silently falling back", () => {
@@ -40,18 +42,84 @@ describe("script wiring", () => {
   });
 });
 
-describe("the two Greek courses share language-level configuration", () => {
-  // D1 makes them separate courses; this is what stops them drifting apart.
-  it.each(["script", "fontStack", "parseFields", "supportsFading", "diacriticsCopy"] as const)(
-    "agree on %s",
-    (key) => {
-      expect(GREEK_KOINE[key]).toEqual(GREEK_ATTIC[key]);
-    },
-  );
+/**
+ * The hierarchy is Language › Variety › Track › Unit.
+ *
+ * These four tracks were once four peers in one list, which put Koine and Attic
+ * — which are VARIETIES of Greek — at the same level as Shoresh and Jonah,
+ * which are two curricula inside a single variety of Hebrew. Adding Modern
+ * Hebrew is what exposes the error: it belongs beside Biblical Hebrew, not
+ * beside Jonah.
+ *
+ * These assertions pin each fact to the level that owns it.
+ */
+describe("the three-level hierarchy", () => {
+  /** Owned by the language: facts about the writing system. */
+  const FROM_LANGUAGE = ["script", "fontStack"] as const;
+  /** Owned by the variety: facts about that form of the language. */
+  const FROM_VARIETY = ["parseFields", "supportsFading", "morphemeNoun", "diacriticsCopy"] as const;
 
-  it("differ only in identity and accent", () => {
-    expect(GREEK_KOINE.id).not.toBe(GREEK_ATTIC.id);
-    expect(GREEK_KOINE.accentColor).not.toBe(GREEK_ATTIC.accentColor);
+  it("nests varieties under languages", () => {
+    const grouped = varietiesByLanguage();
+    expect(grouped.map((g) => g.language.name)).toEqual(["Hebrew", "Greek"]);
+    expect(grouped.flatMap((g) => g.varieties).map((v) => v.name)).toEqual([
+      "Biblical Hebrew",
+      "Koine Greek",
+      "Attic Greek",
+    ]);
+  });
+
+  it("nests tracks under varieties, never directly under a language", () => {
+    for (const t of courses) {
+      expect(varietyOf(t).id, t.id).toBe(t.variety);
+      expect(varietyOf(t).language, t.id).toBe(t.language);
+    }
+    expect(tracksOf("biblical-hebrew").map((t) => t.name)).toEqual(["Shoresh", "Jonah", "Ruth", "Esther"]);
+    // Koine now has two tracks and Attic one — the asymmetry the third level
+    // exposes rather than creates, and the reason adding 1 John beside The
+    // Gospels needed no structural change at all.
+    expect(tracksOf("koine-greek").map((t) => t.name)).toEqual(["The Gospels", "1 John", "Mark", "John"]);
+    expect(tracksOf("attic-greek").length).toBe(1);
+  });
+
+  it.each(FROM_LANGUAGE)("takes %s from the language", (key) => {
+    for (const t of courses) expect(t[key], t.id).toEqual(languageOf(t)[key]);
+  });
+
+  it.each(FROM_VARIETY)("takes %s from the variety", (key) => {
+    for (const t of courses) expect(t[key], t.id).toEqual(varietyOf(t)[key]);
+  });
+
+  it("lets two tracks of ONE variety differ only in curriculum and accent", () => {
+    // Shoresh and Jonah are the same Biblical Hebrew taught two ways.
+    for (const key of [...FROM_LANGUAGE, ...FROM_VARIETY]) {
+      expect(HEBREW_BIBLICAL[key]).toEqual(HEBREW_JONAH[key]);
+    }
+    expect(HEBREW_BIBLICAL.variety).toBe(HEBREW_JONAH.variety);
+    expect(HEBREW_BIBLICAL.id).not.toBe(HEBREW_JONAH.id);
+    expect(HEBREW_BIBLICAL.accentColor).not.toBe(HEBREW_JONAH.accentColor);
+  });
+
+  it("keeps two VARIETIES of one language independently changeable", () => {
+    // Koine and Attic agree on everything today. That is a fact about the
+    // content, not a rule — they share a language, not a variety, so nothing
+    // here may assume one follows the other.
+    expect(GREEK_KOINE.language).toBe(GREEK_ATTIC.language);
+    expect(GREEK_KOINE.variety).not.toBe(GREEK_ATTIC.variety);
+    for (const key of FROM_LANGUAGE) expect(GREEK_KOINE[key]).toEqual(GREEK_ATTIC[key]);
+  });
+
+  it("keeps Hebrew and Greek distinct at the level that owns each fact", () => {
+    expect(HEBREW.script).not.toBe(GREEK.script);
+    expect(BIBLICAL_HEBREW.morphemeNoun).not.toBe(KOINE_GREEK.morphemeNoun);
+    expect(BIBLICAL_HEBREW.supportsFading).not.toBe(KOINE_GREEK.supportsFading);
+  });
+
+  it("registers nothing orphaned at any level", () => {
+    const usedLanguages = new Set(varieties.map((v) => v.language));
+    for (const l of languages) expect(usedLanguages.has(l.id), `${l.id} has no varieties`).toBe(true);
+    const usedVarieties = new Set(courses.map((c) => c.variety));
+    for (const v of varieties) expect(usedVarieties.has(v.id), `${v.id} has no tracks`).toBe(true);
   });
 });
 
@@ -137,18 +205,18 @@ describe("morpheme label", () => {
 describe("content provenance is per course", () => {
   // The settings sheet showed Hebrew's notes for every course, which hid the
   // Attic licence blocker — the single most important note in the project.
-  it("gives every course its own notes", () => {
+  it("gives every track its own notes", () => {
     for (const c of courses) expect(reviewNotesFor(c.id).length, c.id).toBeGreaterThan(0);
   });
 
-  it("does not show one course's caveats under another", () => {
-    const hebrew = reviewNotesFor("hebrew-biblical").map((n) => n.id);
-    const attic = reviewNotesFor("greek-attic").map((n) => n.id);
+  it("does not show one track's caveats under another", () => {
+    const hebrew = reviewNotesFor("shoresh").map((n) => n.id);
+    const attic = reviewNotesFor("attic-prose").map((n) => n.id);
     expect(new Set(hebrew)).not.toEqual(new Set(attic));
   });
 
   it("surfaces the Attic licence blocker in the app, not only in the repo", () => {
-    const notes = reviewNotesFor("greek-attic");
+    const notes = reviewNotesFor("attic-prose");
     expect(notes[0]!.id).toBe("licence");
     expect(notes[0]!.note).toMatch(/NonCommercial/);
   });

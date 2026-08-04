@@ -1,0 +1,2511 @@
+{
+  "_readme": [
+    "Curation layer for Jonah chapter 1. Everything else is derived by",
+    "scripts/import-oshb.mjs from OSHB + Strong's.",
+    "",
+    "Generated from scripts/build-jonah-glossary.mjs — edit the table there, not",
+    "this file, so the judgement stays in one reviewable place.",
+    "",
+    "NEEDS SPECIALIST REVIEW. Glosses are short teaching meanings chosen for a",
+    "beginner reading Jonah, not lexicon entries. Hand-supplied roots are the",
+    "least certain content here and should be checked first.",
+    "",
+    "Roots are deliberately WITHHELD from פָּנִים, עִיר, אֵת and מַלָּח even",
+    "though Strong's offers derivations, because those derivations are guesses.",
+    "See jonah-spike-findings.md §3."
+  ],
+  "words": [
+    {
+      "lemma": "H413",
+      "gloss": "to, unto",
+      "distractors": [
+        "from",
+        "with",
+        "under"
+      ],
+      "text": "אֶל",
+      "pos": "preposition"
+    },
+    {
+      "lemma": "H3068",
+      "gloss": "the LORD (YHWH)",
+      "distractors": [
+        "God",
+        "king",
+        "Israel"
+      ],
+      "pos": "noun",
+      "notes": "The divine name. Hebrew manuscripts point it with the vowels of אֲדֹנָי “Lord”, which is what is read aloud; JPS renders it “the LORD” in small capitals."
+    },
+    {
+      "lemma": "H3220",
+      "gloss": "sea",
+      "distractors": [
+        "river",
+        "sky",
+        "desert"
+      ]
+    },
+    {
+      "lemma": "H559",
+      "gloss": "to say",
+      "distractors": [
+        "to hear",
+        "to write",
+        "to ask"
+      ]
+    },
+    {
+      "lemma": "H3588",
+      "gloss": "because, that, for",
+      "distractors": [
+        "but",
+        "or",
+        "unless"
+      ]
+    },
+    {
+      "lemma": "H5921",
+      "gloss": "on, upon, against",
+      "distractors": [
+        "under",
+        "inside",
+        "before"
+      ]
+    },
+    {
+      "lemma": "H376",
+      "gloss": "man",
+      "distractors": [
+        "woman",
+        "child",
+        "servant"
+      ]
+    },
+    {
+      "lemma": "H1419",
+      "gloss": "great, large",
+      "distractors": [
+        "small",
+        "holy",
+        "distant"
+      ],
+      "root": "גדל",
+      "familyGloss": "great, to grow"
+    },
+    {
+      "lemma": "H853",
+      "gloss": "(marks the direct object)",
+      "distractors": [
+        "and",
+        "to",
+        "from"
+      ],
+      "pos": "particle",
+      "notes": "Untranslatable: it marks a definite direct object rather than meaning anything itself. Strong's derives it from אוֹת “sign”, which is not correct — see the family note."
+    },
+    {
+      "lemma": "H3124",
+      "gloss": "Jonah",
+      "distractors": [
+        "Amittai",
+        "Nineveh",
+        "Tarshish"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H4100",
+      "gloss": "what?",
+      "distractors": [
+        "who?",
+        "where?",
+        "when?"
+      ],
+      "pos": "particle"
+    },
+    {
+      "lemma": "H6440",
+      "gloss": "face, presence",
+      "distractors": [
+        "hand",
+        "voice",
+        "name"
+      ],
+      "pos": "noun",
+      "notes": "Plural in form, singular in sense. Strong's files it under פנה “to turn”; that is an etymological guess, so no root is highlighted here."
+    },
+    {
+      "lemma": "H2904",
+      "gloss": "to hurl",
+      "distractors": [
+        "to lift",
+        "to hide",
+        "to bind"
+      ],
+      "familyGloss": "to hurl"
+    },
+    {
+      "lemma": "H430",
+      "gloss": "God; gods",
+      "distractors": [
+        "king",
+        "lord",
+        "spirit"
+      ],
+      "pos": "noun",
+      "notes": "Plural in form. Used of the God of Israel with singular verbs, and of other gods with plural ones — Jonah 1:5 has the sailors crying to their own אֱלֹהִים."
+    },
+    {
+      "lemma": "H6213",
+      "gloss": "to do, to make",
+      "distractors": [
+        "to say",
+        "to give",
+        "to see"
+      ]
+    },
+    {
+      "lemma": "H6965",
+      "gloss": "to arise, to stand up",
+      "distractors": [
+        "to sit",
+        "to sleep",
+        "to fall"
+      ]
+    },
+    {
+      "lemma": "H7121",
+      "gloss": "to call, to proclaim",
+      "distractors": [
+        "to listen",
+        "to run",
+        "to send"
+      ]
+    },
+    {
+      "lemma": "H7451",
+      "gloss": "evil, calamity",
+      "distractors": [
+        "good",
+        "peace",
+        "joy"
+      ],
+      "root": "רעע",
+      "familyGloss": "evil, to be bad"
+    },
+    {
+      "lemma": "H8659",
+      "gloss": "Tarshish",
+      "distractors": [
+        "Nineveh",
+        "Joppa",
+        "Jerusalem"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H3381",
+      "gloss": "to go down",
+      "distractors": [
+        "to go up",
+        "to enter",
+        "to remain"
+      ],
+      "notes": "Jonah goes down repeatedly in this chapter — down to Joppa, down into the ship, down into its hold — and in 2:6 down to the roots of the mountains."
+    },
+    {
+      "lemma": "H591",
+      "gloss": "ship",
+      "distractors": [
+        "house",
+        "city",
+        "cart"
+      ]
+    },
+    {
+      "lemma": "H935",
+      "gloss": "to come, to go in",
+      "distractors": [
+        "to leave",
+        "to stand",
+        "to fear"
+      ]
+    },
+    {
+      "lemma": "H3372",
+      "gloss": "to fear",
+      "distractors": [
+        "to love",
+        "to trust",
+        "to forget"
+      ],
+      "familyGloss": "fear, to revere"
+    },
+    {
+      "lemma": "H5307",
+      "gloss": "to fall",
+      "distractors": [
+        "to rise",
+        "to fly",
+        "to run"
+      ]
+    },
+    {
+      "lemma": "H1486",
+      "gloss": "lot (cast to decide)",
+      "distractors": [
+        "stone",
+        "gift",
+        "share"
+      ],
+      "notes": "Literally a pebble, from the practice of casting stones to decide a matter — Jonah 1:7."
+    },
+    {
+      "lemma": "H3045",
+      "gloss": "to know",
+      "distractors": [
+        "to forget",
+        "to seek",
+        "to believe"
+      ]
+    },
+    {
+      "lemma": "H2063",
+      "gloss": "this (feminine)",
+      "distractors": [
+        "that",
+        "these",
+        "which"
+      ],
+      "pos": "pronoun"
+    },
+    {
+      "lemma": "H2088",
+      "gloss": "this (masculine)",
+      "distractors": [
+        "that",
+        "those",
+        "who"
+      ],
+      "pos": "pronoun"
+    },
+    {
+      "lemma": "H3373",
+      "gloss": "fearing, reverent",
+      "distractors": [
+        "fearless",
+        "faithful",
+        "wicked"
+      ],
+      "pos": "adjective",
+      "root": "ירא",
+      "notes": "An adjective, not the verb. Jonah 1:9: “I am a Hebrew, and I fear (יָרֵא) the LORD” — same consonants as H3372, different word class."
+    },
+    {
+      "lemma": "H1961",
+      "gloss": "to be, to happen",
+      "distractors": [
+        "to do",
+        "to go",
+        "to see"
+      ]
+    },
+    {
+      "lemma": "H3212",
+      "gloss": "to go, to walk",
+      "distractors": [
+        "to stop",
+        "to sit",
+        "to return"
+      ]
+    },
+    {
+      "lemma": "H1272",
+      "gloss": "to flee",
+      "distractors": [
+        "to chase",
+        "to hide",
+        "to wait"
+      ]
+    },
+    {
+      "lemma": "H5414",
+      "gloss": "to give",
+      "distractors": [
+        "to take",
+        "to sell",
+        "to keep"
+      ]
+    },
+    {
+      "lemma": "H5591",
+      "gloss": "storm, tempest",
+      "distractors": [
+        "calm",
+        "breeze",
+        "current"
+      ],
+      "root": "סער",
+      "familyGloss": "storm, to rage",
+      "familyNotes": "The noun סַעַר and the verb סָעַר both appear in Jonah 1 — the sea storms, and there is a storm."
+    },
+    {
+      "lemma": "H834",
+      "gloss": "who, which, that",
+      "distractors": [
+        "and",
+        "but",
+        "because"
+      ],
+      "pos": "particle"
+    },
+    {
+      "lemma": "H7290",
+      "gloss": "to sleep soundly",
+      "distractors": [
+        "to wake",
+        "to dream",
+        "to rest"
+      ]
+    },
+    {
+      "lemma": "H3808",
+      "gloss": "not",
+      "distractors": [
+        "yes",
+        "also",
+        "again"
+      ],
+      "pos": "particle"
+    },
+    {
+      "lemma": "H6",
+      "gloss": "to perish",
+      "distractors": [
+        "to grow",
+        "to find",
+        "to build"
+      ]
+    },
+    {
+      "lemma": "H4310",
+      "gloss": "who?",
+      "distractors": [
+        "what?",
+        "where?",
+        "why?"
+      ],
+      "pos": "particle"
+    },
+    {
+      "lemma": "H5046",
+      "gloss": "to tell, to declare",
+      "distractors": [
+        "to hide",
+        "to ask",
+        "to hear"
+      ]
+    },
+    {
+      "lemma": "H4994",
+      "gloss": "please, pray (entreaty)",
+      "distractors": [
+        "not",
+        "again",
+        "indeed"
+      ],
+      "pos": "particle"
+    },
+    {
+      "lemma": "H859",
+      "gloss": "you (masc. sing.)",
+      "distractors": [
+        "I",
+        "he",
+        "we"
+      ],
+      "pos": "pronoun"
+    },
+    {
+      "lemma": "H589",
+      "gloss": "I",
+      "distractors": [
+        "you",
+        "he",
+        "they"
+      ],
+      "pos": "pronoun"
+    },
+    {
+      "lemma": "H3004",
+      "gloss": "dry land",
+      "distractors": [
+        "deep water",
+        "island",
+        "shore"
+      ],
+      "root": "יבשׁ",
+      "familyGloss": "dry, to be dry"
+    },
+    {
+      "lemma": "H8367",
+      "gloss": "to be calm, to grow quiet",
+      "distractors": [
+        "to roar",
+        "to rise",
+        "to break"
+      ]
+    },
+    {
+      "lemma": "H1980",
+      "gloss": "to walk, to go",
+      "distractors": [
+        "to stand",
+        "to fall",
+        "to speak"
+      ],
+      "notes": "Overlaps with יָלַךְ (H3212); the two share a paradigm between them, הָלַךְ supplying some forms and יָלַךְ others."
+    },
+    {
+      "lemma": "H5590",
+      "gloss": "to storm, to rage",
+      "distractors": [
+        "to calm",
+        "to freeze",
+        "to shine"
+      ],
+      "root": "סער"
+    },
+    {
+      "lemma": "H5375",
+      "gloss": "to lift, to carry",
+      "distractors": [
+        "to drop",
+        "to push",
+        "to hide"
+      ]
+    },
+    {
+      "lemma": "H408",
+      "gloss": "do not (with a command)",
+      "distractors": [
+        "not",
+        "no",
+        "never"
+      ],
+      "pos": "particle",
+      "notes": "Used with commands, where לֹא negates statements. Jonah 1:14: “let us not perish”."
+    },
+    {
+      "lemma": "H1697",
+      "gloss": "word, thing, matter",
+      "distractors": [
+        "silence",
+        "deed",
+        "place"
+      ],
+      "root": "דבר",
+      "familyGloss": "word, to speak",
+      "familyNotes": "One of the clearest root families in Hebrew: דָּבָר a word, דִּבֶּר to speak, מִדְבָּר wilderness (disputed)."
+    },
+    {
+      "lemma": "H1121",
+      "gloss": "son",
+      "distractors": [
+        "daughter",
+        "father",
+        "brother"
+      ]
+    },
+    {
+      "lemma": "H573",
+      "gloss": "Amittai",
+      "distractors": [
+        "Jonah",
+        "Nineveh",
+        "Joppa"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H5210",
+      "gloss": "Nineveh",
+      "distractors": [
+        "Tarshish",
+        "Joppa",
+        "Jerusalem"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H5892",
+      "gloss": "city",
+      "distractors": [
+        "village",
+        "field",
+        "gate"
+      ],
+      "notes": "Strong's derives it from עוּר “to awake”, glossing a city as “a place guarded by waking”. That is folk etymology, so no root is marked."
+    },
+    {
+      "lemma": "H5927",
+      "gloss": "to go up",
+      "distractors": [
+        "to go down",
+        "to sit",
+        "to send"
+      ]
+    },
+    {
+      "lemma": "H3305",
+      "gloss": "Joppa",
+      "distractors": [
+        "Tarshish",
+        "Nineveh",
+        "Sidon"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H4672",
+      "gloss": "to find",
+      "distractors": [
+        "to lose",
+        "to seek",
+        "to hide"
+      ]
+    },
+    {
+      "lemma": "H7939",
+      "gloss": "fare, wages",
+      "distractors": [
+        "debt",
+        "gift",
+        "toll"
+      ],
+      "root": "שׂכר",
+      "familyGloss": "wages, to hire"
+    },
+    {
+      "lemma": "H5973",
+      "gloss": "with",
+      "distractors": [
+        "without",
+        "from",
+        "toward"
+      ],
+      "pos": "preposition"
+    },
+    {
+      "lemma": "H7307",
+      "gloss": "wind, breath, spirit",
+      "distractors": [
+        "fire",
+        "water",
+        "cloud"
+      ],
+      "root": "רוח",
+      "familyGloss": "wind, breath, spirit",
+      "familyNotes": "One word covers wind, breath and spirit. Jonah 1:4 has the LORD hurling a great רוּחַ onto the sea — wind, plainly, but the same word carries the other senses elsewhere."
+    },
+    {
+      "lemma": "H2803",
+      "gloss": "to think, to reckon",
+      "distractors": [
+        "to forget",
+        "to speak",
+        "to build"
+      ]
+    },
+    {
+      "lemma": "H7665",
+      "gloss": "to break",
+      "distractors": [
+        "to mend",
+        "to lift",
+        "to carry"
+      ]
+    },
+    {
+      "lemma": "H4419",
+      "gloss": "sailor, mariner",
+      "distractors": [
+        "captain",
+        "merchant",
+        "fisherman"
+      ],
+      "notes": "Related to מֶלַח “salt” — a salt-water man. Not marked as a root here, since the connection is a plausible guess rather than a paradigm."
+    },
+    {
+      "lemma": "H2199",
+      "gloss": "to cry out",
+      "distractors": [
+        "to whisper",
+        "to laugh",
+        "to listen"
+      ]
+    },
+    {
+      "lemma": "H3627",
+      "gloss": "vessel, article, gear",
+      "distractors": [
+        "rope",
+        "sail",
+        "food"
+      ],
+      "notes": "Very general: any made object. In Jonah 1:5 it is the ship's cargo and tackle, thrown overboard."
+    },
+    {
+      "lemma": "H7043",
+      "gloss": "to be light; to lighten",
+      "distractors": [
+        "to be heavy",
+        "to darken",
+        "to fill"
+      ],
+      "notes": "In Jonah 1:5 the sailors lighten the ship by throwing the cargo out."
+    },
+    {
+      "lemma": "H3411",
+      "gloss": "hinder part, recesses",
+      "distractors": [
+        "deck",
+        "prow",
+        "mast"
+      ],
+      "root": "ירכ"
+    },
+    {
+      "lemma": "H5600",
+      "gloss": "ship, decked vessel",
+      "distractors": [
+        "raft",
+        "anchor",
+        "oar"
+      ],
+      "notes": "Occurs only here in the Hebrew Bible. Jonah is asleep in its יַרְכְּתֵי — its innermost part."
+    },
+    {
+      "lemma": "H7901",
+      "gloss": "to lie down",
+      "distractors": [
+        "to stand",
+        "to run",
+        "to sit"
+      ]
+    },
+    {
+      "lemma": "H7126",
+      "gloss": "to draw near",
+      "distractors": [
+        "to depart",
+        "to fall",
+        "to look"
+      ]
+    },
+    {
+      "lemma": "H7227",
+      "gloss": "great, many, chief",
+      "distractors": [
+        "few",
+        "small",
+        "weak"
+      ],
+      "root": "רבב",
+      "familyGloss": "many, to be much"
+    },
+    {
+      "lemma": "H2259",
+      "gloss": "sailor; (with רַב) captain",
+      "distractors": [
+        "merchant",
+        "priest",
+        "soldier"
+      ],
+      "root": "חבל",
+      "notes": "רַב הַחֹבֵל in Jonah 1:6 is “the chief of the sailors” — the captain."
+    },
+    {
+      "lemma": "H194",
+      "gloss": "perhaps",
+      "distractors": [
+        "surely",
+        "never",
+        "always"
+      ],
+      "pos": "adverb"
+    },
+    {
+      "lemma": "H6245",
+      "gloss": "to give thought",
+      "distractors": [
+        "to sleep",
+        "to sail",
+        "to eat"
+      ],
+      "notes": "Rare and uncertain. Jonah 1:6: “perhaps God will give thought to us”."
+    },
+    {
+      "lemma": "H7453",
+      "gloss": "companion, fellow",
+      "distractors": [
+        "enemy",
+        "stranger",
+        "master"
+      ]
+    },
+    {
+      "lemma": "H4399",
+      "gloss": "work, occupation, business",
+      "distractors": [
+        "rest",
+        "journey",
+        "wealth"
+      ]
+    },
+    {
+      "lemma": "H370",
+      "gloss": "from where?",
+      "distractors": [
+        "where to?",
+        "when?",
+        "how?"
+      ],
+      "pos": "particle"
+    },
+    {
+      "lemma": "H776",
+      "gloss": "land, earth",
+      "distractors": [
+        "sea",
+        "sky",
+        "city"
+      ]
+    },
+    {
+      "lemma": "H335",
+      "gloss": "where?",
+      "distractors": [
+        "what?",
+        "who?",
+        "why?"
+      ],
+      "pos": "particle"
+    },
+    {
+      "lemma": "H5971",
+      "gloss": "people",
+      "distractors": [
+        "king",
+        "land",
+        "army"
+      ]
+    },
+    {
+      "lemma": "H5680",
+      "gloss": "Hebrew",
+      "distractors": [
+        "Egyptian",
+        "Assyrian",
+        "Philistine"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H595",
+      "gloss": "I",
+      "distractors": [
+        "you",
+        "we",
+        "he"
+      ],
+      "pos": "pronoun",
+      "notes": "A longer, weightier alternative to אֲנִי. Jonah uses it in 1:9 to answer who he is."
+    },
+    {
+      "lemma": "H8064",
+      "gloss": "heavens, sky",
+      "distractors": [
+        "earth",
+        "sea",
+        "dust"
+      ],
+      "notes": "Dual in form, like several natural pairs in Hebrew."
+    },
+    {
+      "lemma": "H1931",
+      "gloss": "he, that",
+      "distractors": [
+        "she",
+        "I",
+        "they"
+      ],
+      "pos": "pronoun"
+    },
+    {
+      "lemma": "H7945",
+      "gloss": "on account of, because of",
+      "distractors": [
+        "with",
+        "before",
+        "after"
+      ],
+      "pos": "particle"
+    },
+    {
+      "lemma": "H2864",
+      "gloss": "to row (literally, to dig)",
+      "distractors": [
+        "to sail",
+        "to swim",
+        "to anchor"
+      ],
+      "notes": "Jonah 1:13: the men “dug” to bring the ship back to land — Hebrew for rowing hard against a sea."
+    },
+    {
+      "lemma": "H3201",
+      "gloss": "to be able",
+      "distractors": [
+        "to refuse",
+        "to try",
+        "to fail"
+      ]
+    },
+    {
+      "lemma": "H577",
+      "gloss": "we beseech you!",
+      "distractors": [
+        "behold",
+        "surely",
+        "no"
+      ],
+      "pos": "particle"
+    },
+    {
+      "lemma": "H5315",
+      "gloss": "soul, life, person",
+      "distractors": [
+        "body",
+        "mind",
+        "grave"
+      ],
+      "root": "נפשׁ",
+      "familyGloss": "life, breath",
+      "familyNotes": "Not “soul” in the later philosophical sense: נֶפֶשׁ is the living, breathing self. Jonah 1:14 asks not to perish for this man's נֶפֶשׁ — his life."
+    },
+    {
+      "lemma": "H1818",
+      "gloss": "blood",
+      "distractors": [
+        "water",
+        "wine",
+        "dust"
+      ],
+      "notes": "דָּם נָקִי “innocent blood” in Jonah 1:14 is a fixed legal phrase for unpunished killing."
+    },
+    {
+      "lemma": "H5355",
+      "gloss": "innocent, clean",
+      "distractors": [
+        "guilty",
+        "wicked",
+        "foolish"
+      ],
+      "root": "נקה",
+      "familyGloss": "clean, to be innocent"
+    },
+    {
+      "lemma": "H2654",
+      "gloss": "to delight in, to please",
+      "distractors": [
+        "to hate",
+        "to fear",
+        "to forget"
+      ]
+    },
+    {
+      "lemma": "H5975",
+      "gloss": "to stand",
+      "distractors": [
+        "to sit",
+        "to run",
+        "to fall"
+      ]
+    },
+    {
+      "lemma": "H2197",
+      "gloss": "raging, fury",
+      "distractors": [
+        "calm",
+        "silence",
+        "mercy"
+      ],
+      "pos": "noun",
+      "root": "זעפ",
+      "familyGloss": "rage"
+    },
+    {
+      "lemma": "H2076",
+      "gloss": "to sacrifice",
+      "distractors": [
+        "to build",
+        "to pray",
+        "to sing"
+      ],
+      "familyGloss": "sacrifice",
+      "familyNotes": "Verb and noun together in Jonah 1:16: וַיִּזְבְּחוּ זֶבַח — “they sacrificed a sacrifice”. Hebrew does this often, and it is not redundancy but emphasis."
+    },
+    {
+      "lemma": "H2077",
+      "gloss": "sacrifice",
+      "distractors": [
+        "offering",
+        "feast",
+        "altar"
+      ],
+      "root": "זבח"
+    },
+    {
+      "lemma": "H5087",
+      "gloss": "to vow",
+      "distractors": [
+        "to swear",
+        "to bless",
+        "to beg"
+      ],
+      "familyGloss": "vow",
+      "familyNotes": "The same pairing as זבח, in the same verse: וַיִּדְּרוּ נְדָרִים — “they vowed vows”."
+    },
+    {
+      "lemma": "H5088",
+      "gloss": "vow",
+      "distractors": [
+        "oath",
+        "gift",
+        "debt"
+      ],
+      "root": "נדר"
+    },
+    {
+      "lemma": "H5704",
+      "gloss": "as far as, until",
+      "distractors": [
+        "from",
+        "beside",
+        "without"
+      ],
+      "pos": "preposition"
+    },
+    {
+      "lemma": "H1709",
+      "gloss": "fish",
+      "distractors": [
+        "bird",
+        "beast",
+        "serpent"
+      ],
+      "root": "דג",
+      "familyGloss": "fish"
+    },
+    {
+      "lemma": "H1710",
+      "gloss": "fish (feminine)",
+      "distractors": [
+        "bird",
+        "flock",
+        "herd"
+      ],
+      "root": "דג",
+      "notes": "The same word as דָּג in a feminine form. Jonah 2:2 uses the masculine, 2:1 the feminine, for the same creature."
+    },
+    {
+      "lemma": "H3117",
+      "gloss": "day",
+      "distractors": [
+        "night",
+        "year",
+        "hour"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H3915",
+      "gloss": "night",
+      "distractors": [
+        "day",
+        "dawn",
+        "noon"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H7969",
+      "gloss": "three",
+      "distractors": [
+        "two",
+        "four",
+        "seven"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "lemma": "H6419",
+      "gloss": "to pray",
+      "distractors": [
+        "to curse",
+        "to boast",
+        "to sleep"
+      ],
+      "familyGloss": "to pray, intercede"
+    },
+    {
+      "lemma": "H4578",
+      "gloss": "innards, belly",
+      "distractors": [
+        "mouth",
+        "hand",
+        "back"
+      ],
+      "pos": "noun",
+      "notes": "Plural in form. Used for the seat of feeling as well as the physical gut — Jonah prays from the מֵעֵי of the fish."
+    },
+    {
+      "lemma": "H6869",
+      "gloss": "distress, trouble",
+      "distractors": [
+        "ease",
+        "wealth",
+        "joy"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H6030",
+      "gloss": "to answer",
+      "distractors": [
+        "to ask",
+        "to ignore",
+        "to shout"
+      ],
+      "familyGloss": "to answer"
+    },
+    {
+      "lemma": "H990",
+      "gloss": "belly, womb",
+      "distractors": [
+        "head",
+        "shoulder",
+        "foot"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H7585",
+      "gloss": "Sheol, the grave",
+      "distractors": [
+        "heaven",
+        "temple",
+        "wilderness"
+      ],
+      "pos": "noun",
+      "notes": "The realm of the dead. Not 'hell' in the later sense — Sheol is where everyone goes, without moral sorting."
+    },
+    {
+      "lemma": "H7768",
+      "gloss": "to cry for help",
+      "distractors": [
+        "to whisper",
+        "to sing",
+        "to laugh"
+      ],
+      "familyGloss": "to cry out"
+    },
+    {
+      "lemma": "H6963",
+      "gloss": "voice, sound",
+      "distractors": [
+        "silence",
+        "word",
+        "name"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H8085",
+      "gloss": "to hear, to listen",
+      "distractors": [
+        "to see",
+        "to speak",
+        "to forget"
+      ],
+      "familyGloss": "to hear"
+    },
+    {
+      "lemma": "H7993",
+      "gloss": "to throw, to cast",
+      "distractors": [
+        "to catch",
+        "to lift",
+        "to hold"
+      ],
+      "familyGloss": "to throw"
+    },
+    {
+      "lemma": "H4688",
+      "gloss": "the deep, a deep place",
+      "distractors": [
+        "shore",
+        "shallows",
+        "riverbank"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H3824",
+      "gloss": "heart, inner self",
+      "distractors": [
+        "hand",
+        "eye",
+        "voice"
+      ],
+      "pos": "noun",
+      "notes": "In Hebrew the heart is where thinking and deciding happen, not primarily feeling."
+    },
+    {
+      "lemma": "H5104",
+      "gloss": "river, stream",
+      "distractors": [
+        "desert",
+        "mountain",
+        "well"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H3605",
+      "gloss": "all, every, whole",
+      "distractors": [
+        "some",
+        "none",
+        "few"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H4867",
+      "gloss": "breaker, wave",
+      "distractors": [
+        "calm",
+        "shore",
+        "current"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H1530",
+      "gloss": "wave, billow",
+      "distractors": [
+        "stone",
+        "sand",
+        "foam"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H1644",
+      "gloss": "to drive out, to expel",
+      "distractors": [
+        "to gather",
+        "to welcome",
+        "to hide"
+      ],
+      "familyGloss": "to drive out"
+    },
+    {
+      "lemma": "H5048",
+      "gloss": "before, in front of",
+      "distractors": [
+        "behind",
+        "beneath",
+        "within"
+      ],
+      "pos": "preposition"
+    },
+    {
+      "lemma": "H5869",
+      "gloss": "eye",
+      "distractors": [
+        "ear",
+        "hand",
+        "mouth"
+      ],
+      "pos": "noun",
+      "notes": "Also means a spring of water — the same word, from the shape of the opening."
+    },
+    {
+      "lemma": "H389",
+      "gloss": "surely, yet",
+      "distractors": [
+        "never",
+        "perhaps",
+        "also"
+      ],
+      "pos": "particle"
+    },
+    {
+      "lemma": "H3254",
+      "gloss": "to add, to do again",
+      "distractors": [
+        "to stop",
+        "to lessen",
+        "to begin"
+      ],
+      "familyGloss": "to add"
+    },
+    {
+      "lemma": "H5027",
+      "gloss": "to look, to gaze",
+      "distractors": [
+        "to turn away",
+        "to close",
+        "to hide"
+      ],
+      "familyGloss": "to look"
+    },
+    {
+      "lemma": "H1964",
+      "gloss": "temple, palace",
+      "distractors": [
+        "house",
+        "tent",
+        "gate"
+      ],
+      "pos": "noun",
+      "notes": "One word for both, because a temple is a god's palace."
+    },
+    {
+      "lemma": "H6944",
+      "gloss": "holiness, a holy place",
+      "distractors": [
+        "profane",
+        "common",
+        "ruin"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H661",
+      "gloss": "to encompass, to surround",
+      "distractors": [
+        "to release",
+        "to open",
+        "to flee"
+      ],
+      "familyGloss": "to surround"
+    },
+    {
+      "lemma": "H4325",
+      "gloss": "water",
+      "distractors": [
+        "fire",
+        "dust",
+        "wind"
+      ],
+      "pos": "noun",
+      "notes": "Dual in form, like שָׁמַיִם — Hebrew treats water as inherently plural."
+    },
+    {
+      "lemma": "H8415",
+      "gloss": "the deep, the abyss",
+      "distractors": [
+        "shore",
+        "sky",
+        "hill"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H5437",
+      "gloss": "to surround, to encircle",
+      "distractors": [
+        "to abandon",
+        "to divide",
+        "to open"
+      ],
+      "familyGloss": "to surround"
+    },
+    {
+      "lemma": "H5488",
+      "gloss": "reeds, seaweed",
+      "distractors": [
+        "stone",
+        "sand",
+        "coral"
+      ],
+      "pos": "noun",
+      "notes": "The same word as in יַם־סוּף, the Sea of Reeds."
+    },
+    {
+      "lemma": "H2280",
+      "gloss": "to bind, to wrap",
+      "distractors": [
+        "to loosen",
+        "to tear",
+        "to lift"
+      ],
+      "familyGloss": "to bind"
+    },
+    {
+      "lemma": "H7095",
+      "gloss": "base, extremity",
+      "distractors": [
+        "summit",
+        "middle",
+        "edge"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H2022",
+      "gloss": "mountain",
+      "distractors": [
+        "valley",
+        "plain",
+        "sea"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H1280",
+      "gloss": "bar, bolt",
+      "distractors": [
+        "door",
+        "key",
+        "gate"
+      ],
+      "pos": "noun",
+      "notes": "Jonah 2:7: the earth's bars closed behind him — the underworld imagined as a barred gate."
+    },
+    {
+      "lemma": "H1157",
+      "gloss": "behind, about",
+      "distractors": [
+        "before",
+        "within",
+        "above"
+      ],
+      "pos": "preposition"
+    },
+    {
+      "lemma": "H5769",
+      "gloss": "forever, long duration",
+      "distractors": [
+        "a moment",
+        "yesterday",
+        "tomorrow"
+      ],
+      "pos": "noun",
+      "notes": "Not 'eternity' in the abstract; it means a horizon so distant it cannot be seen past."
+    },
+    {
+      "lemma": "H7845",
+      "gloss": "the pit",
+      "distractors": [
+        "the height",
+        "the road",
+        "the field"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H5848",
+      "gloss": "to grow faint",
+      "distractors": [
+        "to strengthen",
+        "to wake",
+        "to rise"
+      ],
+      "familyGloss": "to faint"
+    },
+    {
+      "lemma": "H2142",
+      "gloss": "to remember",
+      "distractors": [
+        "to forget",
+        "to invent",
+        "to doubt"
+      ],
+      "familyGloss": "to remember"
+    },
+    {
+      "lemma": "H8605",
+      "gloss": "prayer",
+      "distractors": [
+        "curse",
+        "song",
+        "oath"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H8104",
+      "gloss": "to keep, to guard",
+      "distractors": [
+        "to abandon",
+        "to destroy",
+        "to lose"
+      ],
+      "familyGloss": "to guard, keep"
+    },
+    {
+      "lemma": "H1892",
+      "gloss": "vanity, a vapour",
+      "distractors": [
+        "substance",
+        "truth",
+        "treasure"
+      ],
+      "pos": "noun",
+      "notes": "Literally a breath or vapour. The keyword of Ecclesiastes, used here of worthless idols."
+    },
+    {
+      "lemma": "H7723",
+      "gloss": "falsehood, emptiness",
+      "distractors": [
+        "truth",
+        "wisdom",
+        "wealth"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H5800",
+      "gloss": "to forsake, to abandon",
+      "distractors": [
+        "to keep",
+        "to seek",
+        "to hold"
+      ],
+      "familyGloss": "to forsake"
+    },
+    {
+      "lemma": "H2617",
+      "gloss": "steadfast love, mercy",
+      "distractors": [
+        "cruelty",
+        "anger",
+        "silence"
+      ],
+      "pos": "noun",
+      "notes": "Hard to translate: covenant loyalty and kindness together. Often rendered lovingkindness or steadfast love."
+    },
+    {
+      "lemma": "H8426",
+      "gloss": "thanksgiving",
+      "distractors": [
+        "complaint",
+        "request",
+        "warning"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H3444",
+      "gloss": "salvation, deliverance",
+      "distractors": [
+        "ruin",
+        "capture",
+        "exile"
+      ],
+      "pos": "noun",
+      "notes": "The noun behind the name Joshua, and behind Jesus."
+    },
+    {
+      "lemma": "H6958",
+      "gloss": "to vomit",
+      "distractors": [
+        "to swallow",
+        "to chew",
+        "to drink"
+      ],
+      "familyGloss": "to vomit"
+    },
+    {
+      "lemma": "H1104",
+      "gloss": "to swallow up",
+      "distractors": [
+        "to spit out",
+        "to chew",
+        "to refuse"
+      ],
+      "familyGloss": "to swallow"
+    },
+    {
+      "lemma": "H8145",
+      "gloss": "second",
+      "distractors": [
+        "first",
+        "third",
+        "last"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "lemma": "H7150",
+      "gloss": "proclamation, message",
+      "distractors": [
+        "question",
+        "secret",
+        "song"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H4109",
+      "gloss": "a journey, a walk",
+      "distractors": [
+        "a rest",
+        "a house",
+        "a border"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H1870",
+      "gloss": "way, road",
+      "distractors": [
+        "wall",
+        "field",
+        "river"
+      ],
+      "pos": "noun",
+      "notes": "Also a way of living — 'their evil way' in Jonah 3:10 is conduct, not a road."
+    },
+    {
+      "lemma": "H2490",
+      "gloss": "to begin",
+      "distractors": [
+        "to finish",
+        "to pause",
+        "to repeat"
+      ],
+      "familyGloss": "to begin"
+    },
+    {
+      "lemma": "H259",
+      "gloss": "one",
+      "distractors": [
+        "two",
+        "many",
+        "none"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "lemma": "H5750",
+      "gloss": "still, yet, again",
+      "distractors": [
+        "never",
+        "already",
+        "seldom"
+      ],
+      "pos": "adverb"
+    },
+    {
+      "lemma": "H705",
+      "gloss": "forty",
+      "distractors": [
+        "four",
+        "fourteen",
+        "four hundred"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "lemma": "H2015",
+      "gloss": "to overturn, to overthrow",
+      "distractors": [
+        "to build",
+        "to preserve",
+        "to raise"
+      ],
+      "familyGloss": "to overturn",
+      "notes": "Jonah's whole message is one word of this verb — נֶהְפָּכֶת, 'is being overthrown'."
+    },
+    {
+      "lemma": "H539",
+      "gloss": "to believe, to trust",
+      "distractors": [
+        "to doubt",
+        "to mock",
+        "to forget"
+      ],
+      "familyGloss": "to believe",
+      "notes": "The root behind אָמֵן — to be firm, to rely on."
+    },
+    {
+      "lemma": "H6685",
+      "gloss": "a fast",
+      "distractors": [
+        "a feast",
+        "a march",
+        "a sacrifice"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H3847",
+      "gloss": "to put on, to clothe",
+      "distractors": [
+        "to strip",
+        "to wash",
+        "to tear"
+      ],
+      "familyGloss": "to clothe"
+    },
+    {
+      "lemma": "H8242",
+      "gloss": "sackcloth",
+      "distractors": [
+        "linen",
+        "wool",
+        "silk"
+      ],
+      "pos": "noun",
+      "notes": "Coarse cloth worn in mourning. Jonah 3:8 puts it on the cattle too."
+    },
+    {
+      "lemma": "H6996",
+      "gloss": "small, young",
+      "distractors": [
+        "great",
+        "old",
+        "strong"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "lemma": "H4428",
+      "gloss": "king",
+      "distractors": [
+        "servant",
+        "priest",
+        "prophet"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H3678",
+      "gloss": "throne",
+      "distractors": [
+        "table",
+        "bed",
+        "gate"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H155",
+      "gloss": "robe, mantle",
+      "distractors": [
+        "crown",
+        "sandal",
+        "belt"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H665",
+      "gloss": "ashes",
+      "distractors": [
+        "oil",
+        "grain",
+        "water"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H2940",
+      "gloss": "decree, taste",
+      "distractors": [
+        "custom",
+        "rumour",
+        "wish"
+      ],
+      "root": "טעמ",
+      "familyGloss": "taste, judgement",
+      "familyNotes": "The verb טָעַם means to taste; the noun means both a taste and a considered decision. Jonah 3:7 has the king's טַעַם — his decree — and 3:7 also forbids anyone to taste (טָעַם) anything."
+    },
+    {
+      "lemma": "H120",
+      "gloss": "human being, mankind",
+      "distractors": [
+        "angel",
+        "beast",
+        "god"
+      ],
+      "pos": "noun",
+      "notes": "Related to אֲדָמָה, the ground — the human is the earth-creature."
+    },
+    {
+      "lemma": "H929",
+      "gloss": "beast, cattle",
+      "distractors": [
+        "bird",
+        "fish",
+        "human"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H1241",
+      "gloss": "herd, oxen",
+      "distractors": [
+        "flock",
+        "swarm",
+        "pack"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H6629",
+      "gloss": "flock, sheep",
+      "distractors": [
+        "herd",
+        "swarm",
+        "pack"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H2938",
+      "gloss": "to taste",
+      "distractors": [
+        "to smell",
+        "to touch",
+        "to hear"
+      ],
+      "root": "טעמ"
+    },
+    {
+      "lemma": "H3972",
+      "gloss": "anything, a whit",
+      "distractors": [
+        "everything",
+        "nothing at all",
+        "much"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H7462",
+      "gloss": "to graze, to feed",
+      "distractors": [
+        "to hunt",
+        "to starve",
+        "to slaughter"
+      ],
+      "familyGloss": "to graze, shepherd",
+      "notes": "Same consonants as רַע 'evil' and רֵעַ 'companion' but a different word. Unpointed Hebrew cannot tell them apart; context and vowels can."
+    },
+    {
+      "lemma": "H8354",
+      "gloss": "to drink",
+      "distractors": [
+        "to eat",
+        "to pour",
+        "to thirst"
+      ],
+      "familyGloss": "to drink"
+    },
+    {
+      "lemma": "H2394",
+      "gloss": "force, violence",
+      "distractors": [
+        "gentleness",
+        "silence",
+        "patience"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H3709",
+      "gloss": "palm, hand",
+      "distractors": [
+        "foot",
+        "head",
+        "arm"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H2555",
+      "gloss": "violence, wrong",
+      "distractors": [
+        "justice",
+        "peace",
+        "mercy"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H7725",
+      "gloss": "to turn back, to repent",
+      "distractors": [
+        "to continue",
+        "to depart",
+        "to remain"
+      ],
+      "familyGloss": "to return",
+      "notes": "Turning back physically and turning from wrongdoing are the same verb — the pivot of the whole book."
+    },
+    {
+      "lemma": "H2740",
+      "gloss": "burning anger",
+      "distractors": [
+        "calm",
+        "delight",
+        "pity"
+      ],
+      "root": "חרה",
+      "familyGloss": "to burn, anger"
+    },
+    {
+      "lemma": "H5162",
+      "gloss": "to relent, to be sorry",
+      "distractors": [
+        "to insist",
+        "to rejoice",
+        "to forget"
+      ],
+      "familyGloss": "to relent, comfort",
+      "notes": "The same verb means to comfort and to change one's mind. Jonah 3:10: God relented of the evil he had said he would do."
+    },
+    {
+      "lemma": "H3415",
+      "gloss": "to be displeasing",
+      "distractors": [
+        "to please",
+        "to delight",
+        "to satisfy"
+      ],
+      "familyGloss": "to be displeasing"
+    },
+    {
+      "lemma": "H2734",
+      "gloss": "to burn with anger",
+      "distractors": [
+        "to cool",
+        "to forgive",
+        "to laugh"
+      ],
+      "root": "חרה",
+      "familyGloss": "to burn, anger"
+    },
+    {
+      "lemma": "H639",
+      "gloss": "anger; nose",
+      "distractors": [
+        "joy",
+        "patience",
+        "mercy"
+      ],
+      "pos": "noun",
+      "notes": "The same word for nose and for anger — from the flaring of the nostrils. אֶרֶךְ אַפַּיִם, 'long of nose', means slow to anger."
+    },
+    {
+      "lemma": "H6258",
+      "gloss": "now",
+      "distractors": [
+        "then",
+        "never",
+        "soon"
+      ],
+      "pos": "adverb"
+    },
+    {
+      "lemma": "H3947",
+      "gloss": "to take",
+      "distractors": [
+        "to give",
+        "to leave",
+        "to lose"
+      ],
+      "familyGloss": "to take"
+    },
+    {
+      "lemma": "H4194",
+      "gloss": "death",
+      "distractors": [
+        "life",
+        "birth",
+        "sleep"
+      ],
+      "root": "מות",
+      "familyGloss": "death, to die"
+    },
+    {
+      "lemma": "H4191",
+      "gloss": "to die",
+      "distractors": [
+        "to live",
+        "to rise",
+        "to heal"
+      ],
+      "root": "מות"
+    },
+    {
+      "lemma": "H2896",
+      "gloss": "good",
+      "distractors": [
+        "evil",
+        "small",
+        "hard"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "lemma": "H3190",
+      "gloss": "to do well, to be good",
+      "distractors": [
+        "to do harm",
+        "to fail",
+        "to worsen"
+      ],
+      "familyGloss": "to do well"
+    },
+    {
+      "lemma": "H3318",
+      "gloss": "to go out",
+      "distractors": [
+        "to enter",
+        "to stay",
+        "to return"
+      ],
+      "familyGloss": "to go out"
+    },
+    {
+      "lemma": "H6924",
+      "gloss": "east, front",
+      "distractors": [
+        "west",
+        "north",
+        "south"
+      ],
+      "root": "קדמ",
+      "familyGloss": "east, front, before"
+    },
+    {
+      "lemma": "H6923",
+      "gloss": "to go before, to anticipate",
+      "distractors": [
+        "to follow",
+        "to delay",
+        "to forget"
+      ],
+      "root": "קדמ"
+    },
+    {
+      "lemma": "H6921",
+      "gloss": "east wind",
+      "distractors": [
+        "west wind",
+        "sea breeze",
+        "storm"
+      ],
+      "root": "קדמ",
+      "notes": "The sirocco off the desert — dry, scorching, and in Jonah 4:8 sent deliberately."
+    },
+    {
+      "lemma": "H8033",
+      "gloss": "there",
+      "distractors": [
+        "here",
+        "everywhere",
+        "nowhere"
+      ],
+      "pos": "adverb"
+    },
+    {
+      "lemma": "H5521",
+      "gloss": "booth, shelter",
+      "distractors": [
+        "tent",
+        "house",
+        "cave"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H8478",
+      "gloss": "under, beneath",
+      "distractors": [
+        "above",
+        "beside",
+        "within"
+      ],
+      "pos": "preposition"
+    },
+    {
+      "lemma": "H6738",
+      "gloss": "shade, shadow",
+      "distractors": [
+        "light",
+        "heat",
+        "glare"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H7200",
+      "gloss": "to see",
+      "distractors": [
+        "to hear",
+        "to speak",
+        "to hide"
+      ],
+      "familyGloss": "to see"
+    },
+    {
+      "lemma": "H4487",
+      "gloss": "to appoint, to allot",
+      "distractors": [
+        "to remove",
+        "to forbid",
+        "to delay"
+      ],
+      "familyGloss": "to appoint",
+      "notes": "Four times in the book God 'appoints' something: the fish, the gourd, the worm and the wind."
+    },
+    {
+      "lemma": "H7021",
+      "gloss": "the gourd (a plant)",
+      "distractors": [
+        "a vine",
+        "a thorn",
+        "a palm"
+      ],
+      "pos": "noun",
+      "notes": "The plant is unidentified. Strong's guesses the castor-oil plant; the text only says it grew fast and died faster."
+    },
+    {
+      "lemma": "H5337",
+      "gloss": "to deliver, to snatch away",
+      "distractors": [
+        "to abandon",
+        "to capture",
+        "to bind"
+      ],
+      "familyGloss": "to deliver"
+    },
+    {
+      "lemma": "H8055",
+      "gloss": "to rejoice",
+      "distractors": [
+        "to grieve",
+        "to fear",
+        "to rage"
+      ],
+      "root": "שׂמח",
+      "familyGloss": "joy, to rejoice"
+    },
+    {
+      "lemma": "H8057",
+      "gloss": "joy, gladness",
+      "distractors": [
+        "sorrow",
+        "anger",
+        "fear"
+      ],
+      "root": "שׂמח"
+    },
+    {
+      "lemma": "H8438",
+      "gloss": "worm",
+      "distractors": [
+        "bird",
+        "fish",
+        "beetle"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H7837",
+      "gloss": "dawn",
+      "distractors": [
+        "dusk",
+        "midnight",
+        "noon"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H4283",
+      "gloss": "the next day",
+      "distractors": [
+        "yesterday",
+        "this evening",
+        "long ago"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H5221",
+      "gloss": "to strike, to smite",
+      "distractors": [
+        "to heal",
+        "to spare",
+        "to lift"
+      ],
+      "familyGloss": "to strike"
+    },
+    {
+      "lemma": "H3001",
+      "gloss": "to wither, to dry up",
+      "distractors": [
+        "to bloom",
+        "to grow",
+        "to spread"
+      ],
+      "root": "יבשׁ",
+      "familyGloss": "dry, to be dry",
+      "familyNotes": "The same root as יַבָּשָׁה, dry land, in chapter 1 — a plant withers by the same word the sea does not cover."
+    },
+    {
+      "lemma": "H2224",
+      "gloss": "to rise (of the sun)",
+      "distractors": [
+        "to set",
+        "to darken",
+        "to hide"
+      ],
+      "familyGloss": "to rise, shine"
+    },
+    {
+      "lemma": "H8121",
+      "gloss": "sun",
+      "distractors": [
+        "moon",
+        "star",
+        "cloud"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H2759",
+      "gloss": "sultry, scorching",
+      "distractors": [
+        "cool",
+        "damp",
+        "gentle"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "lemma": "H5968",
+      "gloss": "to grow faint",
+      "distractors": [
+        "to revive",
+        "to strengthen",
+        "to wake"
+      ],
+      "familyGloss": "to faint"
+    },
+    {
+      "lemma": "H7592",
+      "gloss": "to ask, to request",
+      "distractors": [
+        "to answer",
+        "to refuse",
+        "to command"
+      ],
+      "familyGloss": "to ask"
+    },
+    {
+      "lemma": "H2416",
+      "gloss": "life; alive",
+      "distractors": [
+        "death",
+        "sleep",
+        "dust"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H2347",
+      "gloss": "to pity, to spare",
+      "distractors": [
+        "to destroy",
+        "to ignore",
+        "to punish"
+      ],
+      "familyGloss": "to pity",
+      "notes": "The book's last word turns on it: should God not pity Nineveh?"
+    },
+    {
+      "lemma": "H5998",
+      "gloss": "to labour, to toil",
+      "distractors": [
+        "to rest",
+        "to play",
+        "to sleep"
+      ],
+      "familyGloss": "to labour"
+    },
+    {
+      "lemma": "H1431",
+      "gloss": "to grow, to make great",
+      "distractors": [
+        "to shrink",
+        "to ruin",
+        "to hide"
+      ],
+      "root": "גדל"
+    },
+    {
+      "lemma": "H3426",
+      "gloss": "there is",
+      "distractors": [
+        "there is not",
+        "perhaps",
+        "always"
+      ],
+      "pos": "particle"
+    },
+    {
+      "lemma": "H7235",
+      "gloss": "to be many, to increase",
+      "distractors": [
+        "to lessen",
+        "to vanish",
+        "to divide"
+      ],
+      "familyGloss": "to be many"
+    },
+    {
+      "lemma": "H8147",
+      "gloss": "two",
+      "distractors": [
+        "one",
+        "three",
+        "ten"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "lemma": "H6240",
+      "gloss": "-teen (in compounds)",
+      "distractors": [
+        "-ty",
+        "hundred",
+        "thousand"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "lemma": "H7239",
+      "gloss": "myriad, ten thousand",
+      "distractors": [
+        "dozen",
+        "hundred",
+        "handful"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "lemma": "H996",
+      "gloss": "between",
+      "distractors": [
+        "beyond",
+        "within",
+        "around"
+      ],
+      "pos": "preposition"
+    },
+    {
+      "lemma": "H3225",
+      "gloss": "right hand",
+      "distractors": [
+        "left hand",
+        "head",
+        "foot"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H8040",
+      "gloss": "left hand",
+      "distractors": [
+        "right hand",
+        "head",
+        "foot"
+      ],
+      "pos": "noun",
+      "notes": "Jonah 4:11: Nineveh's people cannot tell right hand from left — either children, or moral ignorance, or both."
+    },
+    {
+      "lemma": "H127",
+      "gloss": "ground, soil",
+      "distractors": [
+        "sky",
+        "sea",
+        "stone"
+      ],
+      "pos": "noun",
+      "notes": "Related to אָדָם, the human — the creature made from it."
+    },
+    {
+      "lemma": "H3651",
+      "gloss": "so, thus",
+      "distractors": [
+        "never",
+        "perhaps",
+        "instead"
+      ],
+      "pos": "particle"
+    },
+    {
+      "lemma": "H410",
+      "gloss": "God, a god",
+      "distractors": [
+        "king",
+        "spirit",
+        "idol"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H2587",
+      "gloss": "gracious",
+      "distractors": [
+        "harsh",
+        "distant",
+        "silent"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "lemma": "H7349",
+      "gloss": "compassionate",
+      "distractors": [
+        "ruthless",
+        "proud",
+        "cold"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "lemma": "H750",
+      "gloss": "long, slow",
+      "distractors": [
+        "short",
+        "quick",
+        "sudden"
+      ],
+      "pos": "adjective",
+      "notes": "אֶרֶךְ אַפַּיִם — 'long of nostrils', i.e. slow to anger. Jonah quotes the formula at God as a complaint."
+    },
+    {
+      "lemma": "H1696",
+      "gloss": "to speak",
+      "distractors": [
+        "to listen",
+        "to write",
+        "to be silent"
+      ],
+      "root": "דבר"
+    },
+    {
+      "lemma": "H7489",
+      "gloss": "to be evil, to do harm",
+      "distractors": [
+        "to do good",
+        "to heal",
+        "to build"
+      ],
+      "root": "רעע"
+    },
+    {
+      "lemma": "H4639",
+      "gloss": "deed, work",
+      "distractors": [
+        "word",
+        "thought",
+        "plan"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H4480",
+      "gloss": "from, out of",
+      "distractors": [
+        "to",
+        "with",
+        "toward"
+      ],
+      "pos": "preposition"
+    },
+    {
+      "lemma": "H7218",
+      "gloss": "head, top",
+      "distractors": [
+        "foot",
+        "hand",
+        "side"
+      ],
+      "pos": "noun"
+    },
+    {
+      "lemma": "H3427",
+      "gloss": "to sit, to dwell",
+      "distractors": [
+        "to stand",
+        "to travel",
+        "to flee"
+      ],
+      "familyGloss": "to sit, dwell"
+    },
+    {
+      "lemma": "H5674",
+      "gloss": "to pass over, to cross",
+      "distractors": [
+        "to remain",
+        "to return",
+        "to stop"
+      ],
+      "familyGloss": "to cross over"
+    },
+    {
+      "lemma": "H3680",
+      "gloss": "to cover",
+      "distractors": [
+        "to uncover",
+        "to open",
+        "to burn"
+      ],
+      "familyGloss": "to cover"
+    },
+    {
+      "lemma": "H5060",
+      "gloss": "to reach, to touch",
+      "distractors": [
+        "to withdraw",
+        "to miss",
+        "to drop"
+      ],
+      "familyGloss": "to touch"
+    },
+    {
+      "lemma": "H7999",
+      "gloss": "to pay, to fulfil",
+      "distractors": [
+        "to owe",
+        "to borrow",
+        "to refuse"
+      ],
+      "familyGloss": "to complete, make whole",
+      "notes": "Same root as שָׁלוֹם: to make whole, hence to pay what is owed. Jonah 2:10 — “what I have vowed I will pay”."
+    }
+  ]
+}

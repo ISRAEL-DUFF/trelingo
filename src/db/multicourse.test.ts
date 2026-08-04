@@ -26,8 +26,8 @@ import { getActiveCourseId, setActiveCourse } from "@/content/course";
  * overwrote the first.
  */
 
-const HE = "hebrew-biblical";
-const KOINE = "greek-koine";
+const HE = "shoresh";
+const KOINE = "koine-gospels";
 
 beforeEach(async () => {
   setActiveCourse(HE);
@@ -38,10 +38,10 @@ beforeEach(async () => {
 describe("course isolation", () => {
   it("keeps identically-named cards in different courses apart", async () => {
     await recordReview("logos", 2, Date.now(), KOINE);
-    await recordReview("logos", 0, Date.now(), "greek-attic");
+    await recordReview("logos", 0, Date.now(), "attic-prose");
 
     const koine = await getCard("logos", KOINE);
-    const attic = await getCard("logos", "greek-attic");
+    const attic = await getCard("logos", "attic-prose");
 
     expect(koine!.repetitions).toBe(1); // rated Good
     expect(attic!.repetitions).toBe(0); // rated Again

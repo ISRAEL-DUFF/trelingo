@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { availableCourseIds, contentFor, getBundle, getContent } from "./index";
-import { validateBundle } from "./schema";
+import { passagesOf, validateBundle } from "./schema";
 import { lettersAt, validateLetterIndices } from "@/lib/morphology";
-import { getCourse, scriptOf, type CourseId } from "./course";
+import { getCourse, languageOf, scriptOf, type CourseId } from "./course";
 
 /**
  * Spec §5.3: "Content schema validation: CI-blocking, not just a warning."
@@ -44,19 +44,23 @@ describe.each(COURSES)("course: %s", (courseId: CourseId) => {
   });
 
   describe("morphology — the product's core claim", () => {
-    it.each(words.map((w) => [w.id, w] as const))(
+    // Words with no established root carry no morphology; there is nothing to
+    // check on them, and asserting over them would only assert that null is null.
+    const marked = words.filter((w) => w.morphology);
+
+    it.each(marked.map((w) => [w.id, w] as const))(
       "%s: every highlighted index lands on a real letter",
       (_id, w) => {
-        const check = validateLetterIndices(script, w.text, w.morphology.highlight);
+        const check = validateLetterIndices(script, w.text, w.morphology!.highlight);
         expect(check.ok, check.ok ? "" : check.reason).toBe(true);
       },
     );
 
-    it.each(words.map((w) => [w.id, w] as const))(
+    it.each(marked.map((w) => [w.id, w] as const))(
       "%s: the highlight agrees with the declared family",
       (_id, w) => {
-        const familyLetters = Array.from(script.fold(w.familyId));
-        if (w.morphology.kind === "ending") {
+        const familyLetters = Array.from(script.fold(w.familyId!));
+        if (w.morphology!.kind === "ending") {
           // Greek highlights the ENDING, so what is left unhighlighted is the
           // stem. It must be non-empty — an ending covering the whole word is
           // the χάρις failure from greek-build-plan.md §7.
@@ -64,7 +68,7 @@ describe.each(COURSES)("course: %s", (courseId: CourseId) => {
           const stem = script.fold(
             script
               .toLetterClusters(w.text)
-              .filter((_, i) => !w.morphology.highlight.includes(i))
+              .filter((_, i) => !w.morphology!.highlight.includes(i))
               .map((c) => c.text)
               .join(""),
           );
@@ -75,14 +79,14 @@ describe.each(COURSES)("course: %s", (courseId: CourseId) => {
           // λέγω share a family across an ο/ε ablaut, so no string relation
           // holds. Those must be genuine multi-word families, not typos.
           const consistent = stem.startsWith(family) || family.startsWith(stem);
-          const curated = (wordsByFamily[w.familyId] ?? []).length > 1;
+          const curated = (wordsByFamily[w.familyId!] ?? []).length > 1;
           expect(
             consistent || curated,
             `${w.text}: stem "${stem}" is unrelated to family "${family}", and that family has only one word — so this is a mistake, not a curation decision`,
           ).toBe(true);
         } else {
           // Hebrew highlights the ROOT: the highlighted letters ARE the family.
-          const picked = lettersAt(script, w.text, w.morphology.highlight).map((l) => script.fold(l));
+          const picked = lettersAt(script, w.text, w.morphology!.highlight).map((l) => script.fold(l));
           expect(
             isSubsequence(picked, familyLetters),
             `${w.text} selects "${picked.join("")}", not a subsequence of "${familyLetters.join("")}"`,
@@ -92,31 +96,36 @@ describe.each(COURSES)("course: %s", (courseId: CourseId) => {
     );
 
     it("leaves something unhighlighted, where the morpheme kind requires it", () => {
-      for (const w of words) {
+      for (const w of marked) {
         const len = script.toLetterClusters(w.text).length;
-        if (w.morphology.kind === "ending") {
+        if (w.morphology!.kind === "ending") {
           // An ending covering the whole word would leave no stem — that is the
           // χάρις failure from greek-build-plan.md §7, inverted.
-          expect(w.morphology.highlight.length, w.id).toBeLessThan(len);
+          expect(w.morphology!.highlight.length, w.id).toBeLessThan(len);
         } else {
           // A bare Hebrew triliteral IS entirely root (בָּרָא = ב־ר־א), so equal
           // is legitimate here; more than the word is not.
-          expect(w.morphology.highlight.length, w.id).toBeLessThanOrEqual(len);
+          expect(w.morphology!.highlight.length, w.id).toBeLessThanOrEqual(len);
         }
       }
     });
 
     it("keeps highlight indices in ascending order", () => {
-      for (const w of words) {
-        expect(w.morphology.highlight, w.id).toEqual(
-          [...w.morphology.highlight].sort((a, b) => a - b),
+      for (const w of marked) {
+        expect(w.morphology!.highlight, w.id).toEqual(
+          [...w.morphology!.highlight].sort((a, b) => a - b),
         );
       }
     });
 
     it("uses the morpheme kind the course actually teaches", () => {
-      const expected = courseId.startsWith("greek") ? "ending" : "root";
-      for (const w of words) expect(w.morphology.kind, w.id).toBe(expected);
+      // Asked of the LANGUAGE, not scraped off the track id. Track ids used to
+      // begin with the language ("greek-attic"), and this read that prefix —
+      // which broke the moment ids were named for the track instead. Hebrew
+      // highlights the root, Greek the ending; that is a fact about the
+      // language and now comes from it.
+      const expected = languageOf(getCourse(courseId)).id === "greek" ? "ending" : "root";
+      for (const w of marked) expect(w.morphology!.kind, w.id).toBe(expected);
     });
   });
 
@@ -171,7 +180,13 @@ describe.each(COURSES)("course: %s", (courseId: CourseId) => {
     });
 
     it("gives every unit something to do", () => {
-      for (const u of units) expect(u.exercises.length, u.id).toBeGreaterThan(0);
+      // Exercises OR text to read. A continuous book eventually produces a unit
+      // that introduces no new vocabulary at all — Ruth 3:5–6 is two verses of
+      // words the learner already knows — and that is a reading unit, not an
+      // empty one. What must never happen is a unit with neither.
+      for (const u of units) {
+        expect(u.exercises.length + passagesOf(u).length, u.id).toBeGreaterThan(0);
+      }
     });
 
     it("introduces each word in exactly one unit", () => {
@@ -181,6 +196,30 @@ describe.each(COURSES)("course: %s", (courseId: CourseId) => {
           expect(seen.has(id), `${id} in both ${seen.get(id)} and ${u.id}`).toBe(false);
           seen.set(id, u.id);
         }
+      }
+    });
+
+    /**
+     * Every verse must belong to a unit, or it is content that ships in the
+     * bundle and is displayed nowhere.
+     *
+     * Jonah's units cover two verses each but recorded only the milestone they
+     * ended on, so 24 of the book's 48 verses were unlocked by nothing, shown by
+     * no screen, and invisible to the cloze builder — including 1:3 and 1:5,
+     * which carry three of the four occurrences of ירד. `passagesOf` is the fix;
+     * this is the guard that stops it happening to the next book.
+     */
+    it("leaves no passage unreachable", () => {
+      const reachable = new Set(units.flatMap(passagesOf));
+      const orphaned = passages.filter((p) => !reachable.has(p.id)).map((p) => p.reference);
+      expect(orphaned, `${orphaned.length} verse(s) no unit teaches`).toEqual([]);
+    });
+
+    it("ends each multi-verse unit on the last verse it covers", () => {
+      for (const u of units) {
+        const all = passagesOf(u);
+        if (all.length < 2) continue;
+        expect(u.passageId, u.id).toBe(all[all.length - 1]);
       }
     });
   });
@@ -253,9 +292,20 @@ describe.each(COURSES)("course: %s", (courseId: CourseId) => {
     });
 
     it("links every word to a family that exists", () => {
+      // A word may legitimately have no family — a derived corpus cannot always
+      // establish a root, and inventing one is the guess the importers refuse
+      // to make. What must never happen is a link to a family that isn't there.
       const ids = new Set(families.map((f) => f.id));
-      for (const w of words) expect(ids.has(w.familyId), `${w.id} -> ${w.familyId}`).toBe(true);
+      for (const w of words) {
+        if (w.familyId) expect(ids.has(w.familyId), `${w.id} -> ${w.familyId}`).toBe(true);
+      }
       expect(Object.keys(wordsByFamily).length).toBeGreaterThan(0);
+    });
+
+    it("never highlights a morpheme without saying which family it belongs to", () => {
+      for (const w of words) {
+        if (w.morphology) expect(w.familyId, `${w.id} highlights but has no family`).toBeTruthy();
+      }
     });
   });
 });
@@ -266,7 +316,7 @@ describe("registry", () => {
   });
 
   it("keeps the Hebrew course at the breadth the roadmap assumes", () => {
-    const c = contentFor("hebrew-biblical");
+    const c = contentFor("shoresh");
     expect(c.units.length).toBeGreaterThanOrEqual(12);
     expect(c.words.length).toBeGreaterThanOrEqual(40);
     expect(c.passages.length).toBeGreaterThanOrEqual(5);

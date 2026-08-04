@@ -2,6 +2,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useCourse, useCourseContent } from "@/state/useCourse";
 import { db } from "@/db";
+import { passagesOf } from "@/content/schema";
 import { PassageReader } from "./PassageReader";
 import { FamilySheet } from "./FamilySheet";
 import { Empty, TopBar } from "@/components/ui";
@@ -24,7 +25,7 @@ export function LibraryScreen() {
   );
 
   const unlockedPassageIds = new Set(
-    units.filter((u) => completed?.has(u.id) && u.passageId).map((u) => u.passageId!),
+    units.filter((u) => completed?.has(u.id)).flatMap(passagesOf),
   );
 
   return (

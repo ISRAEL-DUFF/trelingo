@@ -5,3 +5,13 @@ dev-dist
 .env.*.local
 *.log
 .DS_Store
+
+# Corpus downloads — re-fetchable build inputs, not source.
+#
+# 27MB of WLC XML and 2MB of Strong's are inputs to the importers, not things
+# the app ships. The DERIVED table (corpora/hebrew-frequency.json, 172KB) IS
+# committed, so a build reproduces without re-downloading the whole Tanakh.
+scripts/corpora/wlc/
+scripts/corpora/strongs-hebrew-dictionary.js
+scripts/corpora/*.xml
+scripts/corpora/greek/

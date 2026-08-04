@@ -23,6 +23,15 @@ const DAGESH = /[\u05BC]/u; // dagesh / mapiq
 const METEG_RAFE = /[\u05BD\u05BF]/u;
 const SHIN_SIN_DOT = /[\u05C1\u05C2]/u; // shin dot / sin dot
 
+/** Final (sofit) forms and the letters they are positional variants of. */
+const FINAL_FORMS: Record<string, string> = {
+  "\u05DA": "\u05DB", // ך → כ
+  "\u05DD": "\u05DE", // ם → מ
+  "\u05DF": "\u05E0", // ן → נ
+  "\u05E3": "\u05E4", // ף → פ
+  "\u05E5": "\u05E6", // ץ → צ
+};
+
 const MAQQEF = "\u05BE"; // ־
 
 /**
@@ -101,9 +110,18 @@ export const hebrewScript: ScriptModule = {
 
   toLetterClusters,
   stripDiacritics: stripNiqqud,
-  // Hebrew has no case or positional-form equivalences, so folding is just
-  // diacritic removal. (Greek will additionally fold final sigma.)
-  fold: stripNiqqud,
+  // Diacritic removal PLUS the five final forms.
+  //
+  // The note here used to claim Hebrew had no positional-form equivalences.
+  // It has exactly five: כ/ך, מ/ם, נ/ן, פ/ף, צ/ץ are the same consonants,
+  // written differently at the end of a word. This is the direct analogue of
+  // Greek's ς/σ, which the Greek module has always folded.
+  //
+  // It matters because a root is a set of consonants irrespective of position:
+  // קוּם ends in ם but its root is ק־ו־מ, and without folding the two never
+  // compare equal. Surfaced by the Jonah content, where seven verbs ending in
+  // a final form failed the highlight-agrees-with-family check.
+  fold: (word) => stripNiqqud(word).replace(/[ךםןףץ]/g, (c) => FINAL_FORMS[c]!),
   isLetter: isHebrewLetter,
   fade: fadeNiqqud,
   joinLetters: (letters) =>

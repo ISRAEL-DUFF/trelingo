@@ -133,7 +133,7 @@ function gemBalance(userId: string): number {
 
 // Placement questions are drawn from real content so the test actually measures
 // the thing the path teaches.
-function buildPlacementQuestions(courseId = "hebrew-biblical" as const): PlacementQuestion[] {
+function buildPlacementQuestions(courseId = "shoresh" as const): PlacementQuestion[] {
   const { words } = contentFor(courseId);
   const picks = ["bara", "shamar", "mishmeret", "vayomer", "echsar", "dibber", "higdil", "shofet"];
   return picks.flatMap((id, i) => {
@@ -307,7 +307,7 @@ export const handlers = [
     const id = authUserId(request);
     if (!id) return err(401, "unauthorized", "Sign in to continue.");
 
-    const courseId = new URL(request.url).searchParams.get("courseId") ?? "hebrew-biblical";
+    const courseId = new URL(request.url).searchParams.get("courseId") ?? "shoresh";
     const data = mockDb.userData(id);
     return json<SyncStateResponse>({
       cards: deriveCards(id, courseId),
@@ -365,7 +365,7 @@ export const handlers = [
     const variant = (new URL(request.url).searchParams.get("variant") ??
       "sephardic") as AudioManifestEntry["variant"];
     return json({
-      entries: contentFor("hebrew-biblical").words.map<AudioManifestEntry>((w) => ({
+      entries: contentFor("shoresh").words.map<AudioManifestEntry>((w) => ({
         wordId: w.id,
         variant,
         url: url(`/audio/clip/${w.id}.${variant}.mp3`),
@@ -487,7 +487,7 @@ export const handlers = [
     // Score bands map onto unit placement levels.
     const ratio = questions.length ? correct / questions.length : 0;
     const levelAssigned = ratio >= 0.9 ? 4 : ratio >= 0.7 ? 3 : ratio >= 0.5 ? 2 : ratio >= 0.3 ? 1 : 0;
-    const unlockedUnitIds = contentFor("hebrew-biblical")
+    const unlockedUnitIds = contentFor("shoresh")
       .units.filter((u) => u.placementLevel <= levelAssigned)
       .map((u) => u.id);
 

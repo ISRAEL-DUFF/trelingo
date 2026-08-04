@@ -20,7 +20,7 @@ export const DEFAULT_THEME: ThemePref = "dark";
  * the theme synchronously. Settings themselves live in IndexedDB, which is
  * async and would flash the wrong palette on every cold start.
  */
-export const THEME_STORAGE_KEY = "shoresh.theme";
+export const THEME_STORAGE_KEY = "trelingo.theme";
 
 const CHROME_COLOR: Record<ResolvedTheme, string> = {
   dark: "#12172a",

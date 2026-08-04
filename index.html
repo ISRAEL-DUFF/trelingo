@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#1B2A4A" />
-    <meta name="description" content="Learn Biblical Hebrew through the triliteral root system, with spaced repetition and real unedited verses." />
+    <meta name="description" content="Read ancient Hebrew and Greek by their morphology — roots and stems — with spaced repetition and real unedited texts." />
 
     <!-- iOS standalone hints. iOS Safari ignores the manifest's display mode,
          so these are what make "Add to Home Screen" open chromeless. -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Shoresh" />
+    <meta name="apple-mobile-web-app-title" content="Trelingo" />
     <link rel="apple-touch-icon" href="/icons/icon-192.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,7 +20,7 @@
       rel="stylesheet"
     />
 
-    <title>Shoresh — Learn Biblical Hebrew by the Root</title>
+    <title>Trelingo — Learn Ancient Hebrew and Greek</title>
 
     <!--
       Apply the saved theme before first paint. Settings live in IndexedDB,
@@ -31,7 +31,7 @@
     <script>
       (function () {
         try {
-          var pref = localStorage.getItem("shoresh.theme") || "dark";
+          var pref = localStorage.getItem("trelingo.theme") || "dark";
           var resolved =
             pref === "system"
               ? window.matchMedia("(prefers-color-scheme: light)").matches
@@ -45,6 +45,39 @@
         } catch (e) {
           document.documentElement.dataset.theme = "dark";
         }
+      })();
+    </script>
+
+    <!--
+      Catch `beforeinstallprompt` before the app bundle exists.
+
+      This has to be inline. The event fires once, never replays, and on a
+      repeat visit Chrome can decide the app is installable the moment the page
+      navigates — the service worker is already active and the manifest already
+      known. That is far sooner than ~590 KB of module bundle downloads and
+      evaluates on a phone, so a listener registered from React code misses it
+      outright. The symptom is precise and misleading: Chrome's own menu offers
+      "Install app" while the app believes no prompt was ever offered, so its
+      own install button never appears.
+
+      Desktop hides this. There the address-bar install icon works regardless of
+      whether the page captured the event, so the bug only shows on Android.
+    -->
+    <script>
+      (function () {
+        var state = (window.__trelingoInstall = { event: null, installed: false, seenAt: null });
+        window.addEventListener("beforeinstallprompt", function (e) {
+          // Suppress the browser's own banner; the app offers its own button.
+          e.preventDefault();
+          state.event = e;
+          state.seenAt = Date.now();
+          window.dispatchEvent(new Event("trelingo:installchange"));
+        });
+        window.addEventListener("appinstalled", function () {
+          state.event = null;
+          state.installed = true;
+          window.dispatchEvent(new Event("trelingo:installchange"));
+        });
       })();
     </script>
   </head>

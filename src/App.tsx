@@ -11,6 +11,7 @@ import { LeagueScreen } from "@/features/gamification/LeagueScreen";
 import { DecksScreen } from "@/features/decks/DecksScreen";
 import { PlacementScreen } from "@/features/placement/PlacementScreen";
 import { FluencyScreen } from "@/features/assessment/FluencyScreen";
+import { ScanScreen } from "@/features/scan/ScanScreen";
 import { SettingsScreen } from "@/features/settings/SettingsScreen";
 import { AuthScreen } from "@/features/auth/AuthScreen";
 import { DevPanel } from "@/features/dev/DevPanel";
@@ -117,6 +118,8 @@ export default function App() {
         <Route path="/decks" element={<DecksScreen />} />
         <Route path="/placement" element={<PlacementScreen />} />
         <Route path="/assessment" element={<FluencyScreen />} />
+        <Route path="/scan" element={<ScanScreen />} />
+        <Route path="/scan/:sectionId" element={<ScanScreen />} />
         <Route path="/courses" element={<CourseScreen />} />
         <Route path="/settings" element={<SettingsScreen />} />
         <Route path="/auth" element={<AuthScreen />} />

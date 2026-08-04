@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trelingo Install Probe</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="theme-color" content="#1B2A4A" />
+    <style>
+      body { font: 16px/1.6 system-ui, sans-serif; margin: 0; padding: 24px; }
+      #install { font-size: 18px; padding: 14px 20px; margin: 16px 0; }
+      li { margin: 4px 0; }
+      code { background: #eee; padding: 1px 4px; }
+    </style>
+  </head>
+  <body>
+    <h1>Install probe</h1>
+    <p>
+      The smallest PWA that satisfies Chrome's install criteria. If <em>this</em> installs on
+      the phone but Trelingo does not, the fault is in Trelingo. If this fails too, the fault is
+      on the device or in Chrome, and no change to Trelingo can fix it.
+    </p>
+    <button id="install" disabled>Waiting for install prompt…</button>
+    <ul id="log"></ul>
+
+    <script>
+      var deferred = null;
+      var log = function (msg) {
+        var li = document.createElement("li");
+        li.textContent = msg;
+        document.getElementById("log").appendChild(li);
+      };
+      var btn = document.getElementById("install");
+
+      // Captured before anything else runs, for the same reason Trelingo does it.
+      window.addEventListener("beforeinstallprompt", function (e) {
+        e.preventDefault();
+        deferred = e;
+        btn.disabled = false;
+        btn.textContent = "Install this probe";
+        log("beforeinstallprompt FIRED — Chrome considers this installable");
+      });
+
+      window.addEventListener("appinstalled", function () {
+        log("appinstalled FIRED — Chrome reports the install completed");
+      });
+
+      btn.addEventListener("click", function () {
+        if (!deferred) return;
+        deferred.prompt();
+        deferred.userChoice.then(function (c) {
+          log("userChoice: " + c.outcome);
+        });
+      });
+
+      log("secure context: " + window.isSecureContext);
+      log("standalone: " + window.matchMedia("(display-mode: standalone)").matches);
+
+      navigator.serviceWorker
+        .register("./sw.js")
+        .then(function (r) {
+          log("service worker registered, scope " + r.scope);
+          return navigator.serviceWorker.ready;
+        })
+        .then(function () { log("service worker ACTIVE"); })
+        .catch(function (e) { log("service worker FAILED: " + e.message); });
+
+      setTimeout(function () {
+        if (!deferred) log("no beforeinstallprompt after 10s — use Chrome ⋮ menu and report what it says");
+      }, 10000);
+    </script>
+  </body>
+</html>

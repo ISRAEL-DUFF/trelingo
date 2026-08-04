@@ -39,8 +39,8 @@ import {
 
 export const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "/api";
 
-const ACCESS_TOKEN_KEY = "shoresh.accessToken";
-const REFRESH_TOKEN_KEY = "shoresh.refreshToken";
+const ACCESS_TOKEN_KEY = "trelingo.accessToken";
+const REFRESH_TOKEN_KEY = "trelingo.refreshToken";
 
 export const tokenStore = {
   get access() {

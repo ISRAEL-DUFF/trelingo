@@ -17,9 +17,48 @@ const data = JSON.parse(readFileSync(resolve(HERE, "generated-koine.json"), "utf
 
 const j = (v) => JSON.stringify(v);
 
+/**
+ * Corpus frequencies, keyed by LEMMA — which is exactly what our headword
+ * text is, so every headword matches by construction (verified: all of them).
+ */
+let corpusFreq = null;
+try {
+  corpusFreq = JSON.parse(readFileSync(resolve(HERE, "corpora/greek-nt-frequency.json"), "utf8"));
+} catch {
+  console.log("no corpora/greek-nt-frequency.json — shipping in-track counts only");
+}
+
+/** How often each word appears in the verses this track actually shows. */
+const trackOccurrences = new Map();
+for (const p of data.passages) {
+  for (const t of p.tokens) {
+    if (t.wordId) trackOccurrences.set(t.wordId, (trackOccurrences.get(t.wordId) ?? 0) + 1);
+  }
+}
+
 const words = data.words.map((w) => {
   const { _freq, _stemSource, ...rest } = w;
-  return `  // ${_stemSource === "derived" ? "derived" : `stem ${_stemSource}`} · ${_freq} occurrences in the sampled corpus\n  ${j(rest)},`;
+  // Absent from the shown verses is a real answer; do not floor it to 1.
+  const inTrack = trackOccurrences.get(w.id) ?? 0;
+  const corpusCount = corpusFreq?.frequency?.[w.text];
+  // The whole NT is a COMPLETE corpus, so a lemma occurring once in it is a
+  // genuine New Testament hapax legomenon — a category commentaries name.
+  // The badge is earned here, unlike Attic's treebank sample.
+  const withFreq = {
+    ...rest,
+    frequency: {
+      ...(inTrack ? { inTrack } : {}),
+      ...(corpusCount
+        ? {
+            inCorpus: Math.max(corpusCount, inTrack),
+            corpus: "the New Testament",
+            corpusComplete: true,
+            ...(corpusFreq.books?.[w.text] > 1 ? { corpusBooks: corpusFreq.books[w.text] } : {}),
+          }
+        : {}),
+    },
+  };
+  return `  // ${_stemSource === "derived" ? "derived" : `stem ${_stemSource}`} · ${_freq} occurrences in the sampled corpus\n  ${j(withFreq)},`;
 });
 
 const families = data.families.map((f) => `  ${j(f)},`);

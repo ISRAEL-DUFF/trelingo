@@ -1,7 +1,7 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { Fragment, useMemo, useState, type ReactNode } from "react";
 import { ScriptWord } from "@/components/ScriptWord";
 import { Button } from "@/components/ui";
-import { scriptOf, parseFieldsOf } from "@/content/course";
+import { scriptOf, parseFieldsOf, textProps } from "@/content/course";
 import { findField } from "@/content/parse-fields";
 import { playWord } from "@/lib/audio";
 import { type Exercise, type Parse } from "@/content";
@@ -40,6 +40,35 @@ function seededShuffle<T>(items: readonly T[], seed: string): T[] {
   for (let i = out.length - 1; i > 0; i--) {
     const j = Math.floor(rand() * (i + 1));
     [out[i], out[j]] = [out[j]!, out[i]!];
+  }
+  return out;
+}
+
+/**
+ * A shuffle with NO fixed point: nothing ends up where it started.
+ *
+ * A plain shuffle of the gloss column does not guarantee this. A random
+ * permutation leaves one item in place on average, so a matching grid regularly
+ * hands the learner a free pair sitting on its own row — two of them at once in
+ * a six-pair grid, observed in the browser once grids grew past four.
+ *
+ * Exported for the test that pins it across every grid size the budget can ask
+ * for, since the failure is intermittent by nature and easy to miss by eye.
+ */
+export function seededDerangement<T>(items: readonly T[], seed: string): T[] {
+  if (items.length < 2) return [...items];
+  const out = seededShuffle(items, seed);
+  for (let i = 0; i < out.length; i++) {
+    if (out[i] !== items[i]) continue;
+    // Any other position works: its occupant cannot be items[i] (permutations
+    // hold distinct entries), and it cannot itself be left holding its own item.
+    for (let d = 1; d < out.length; d++) {
+      const j = (i + d) % out.length;
+      if (out[j] !== items[i] && out[i] !== items[j]) {
+        [out[i], out[j]] = [out[j]!, out[i]!];
+        break;
+      }
+    }
   }
   return out;
 }
@@ -88,7 +117,11 @@ function McVocabExerciseView({
     if (!production) return seededShuffle([word.gloss, ...word.distractors.slice(0, 3)], exercise.id);
     // Production: pick the Hebrew form. Distractors come from other families so the
     // answer can't be guessed from letter shape alone.
-    const others = allWords.filter((w) => w.id !== word.id && w.familyId !== word.familyId);
+    // Same-family words make confusing distractors, but "no family" is not a
+    // family: two rootless words are unrelated and may sit beside each other.
+    const others = allWords.filter(
+      (w) => w.id !== word.id && !(w.familyId && word.familyId && w.familyId === word.familyId),
+    );
     const picked = seededShuffle(others, exercise.id)
       .slice(0, 3)
       .map((w) => w.text);
@@ -116,7 +149,7 @@ function McVocabExerciseView({
           <>
             <ScriptWord
               word={word.text}
-              highlight={word.morphology.highlight}
+              highlight={word.morphology?.highlight}
               size={52}
               showHighlight={revealed}
               fadeStage={fadeStage}
@@ -509,7 +542,7 @@ function ListeningExerciseView({
         )}
         {revealed && (
           <div style={{ marginTop: 16 }}>
-            <ScriptWord word={word.text} highlight={word.morphology.highlight} size={40} showHighlight />
+            <ScriptWord word={word.text} highlight={word.morphology?.highlight} size={40} showHighlight />
             <div className="translit" style={{ marginTop: 6 }}>
               {word.translit}
             </div>
@@ -628,6 +661,246 @@ function TranslationExerciseView({
   );
 }
 
+// ---------- Match pairs ----------
+
+/**
+ * Tap a word, tap its meaning; correct pairs disappear.
+ *
+ * Wrong pairs are shown briefly and then released rather than penalised
+ * outright — the point is speed of recognition, and a single mis-tap on a
+ * six-tile grid says less about knowledge than hesitation does.
+ *
+ * Reported correct only if the learner clears the grid with no wrong pairing,
+ * so the SRS still hears an honest signal.
+ */
+function MatchPairsExerciseView({
+  exercise,
+  onAnswer,
+  fadeStage,
+}: BaseProps & { exercise: Of<"match_pairs"> }) {
+  const { wordById } = useCourseContent();
+  const words = useMemo(
+    () => exercise.wordIds.map((id) => wordById.get(id)).filter((w) => !!w),
+    [exercise.wordIds, wordById],
+  );
+
+  // Deranged, not merely shuffled, so no tile ever sits opposite its own answer.
+  const glosses = useMemo(
+    () => seededDerangement(words.map((w) => w.id), `${exercise.id}-gloss`),
+    [words, exercise.id],
+  );
+
+  const [pickedWord, setPickedWord] = useState<string | null>(null);
+  const [pickedGloss, setPickedGloss] = useState<string | null>(null);
+  const [matched, setMatched] = useState<Set<string>>(new Set());
+  const [wrong, setWrong] = useState<string | null>(null);
+  const [mistakes, setMistakes] = useState(0);
+  const [done, setDone] = useState(false);
+
+  const attempt = (wordId: string | null, glossId: string | null) => {
+    if (!wordId || !glossId) return;
+    if (wordId === glossId) {
+      const next = new Set(matched).add(wordId);
+      setMatched(next);
+      setPickedWord(null);
+      setPickedGloss(null);
+      if (next.size === words.length && !done) {
+        setDone(true);
+        onAnswer({ verdict: mistakes === 0 ? "correct" : "incorrect", confidence: 1 });
+      }
+      return;
+    }
+    setWrong(`${wordId}|${glossId}`);
+    setMistakes((m) => m + 1);
+    window.setTimeout(() => {
+      setWrong(null);
+      setPickedWord(null);
+      setPickedGloss(null);
+    }, 550);
+  };
+
+  const tile = (id: string, selected: boolean, isWrong: boolean, onClick: () => void, body: ReactNode) => (
+    <button
+      key={id}
+      className="card card--flat"
+      onClick={onClick}
+      disabled={matched.has(id)}
+      style={{
+        textAlign: "center",
+        padding: "12px 8px",
+        // Fill the grid cell rather than hugging the content, so a short gloss
+        // and a tall Hebrew word occupy the same box.
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        opacity: matched.has(id) ? 0.25 : 1,
+        borderColor: isWrong ? "var(--danger)" : selected ? "var(--accent)" : undefined,
+        borderWidth: isWrong || selected ? 2 : 1,
+        transition: "opacity .2s ease",
+      }}
+    >
+      {body}
+    </button>
+  );
+
+  return (
+    // `pad` like every other exercise view. Without it the grid ran edge to
+    // edge while the rest of the lesson sat inset, which reads as a different
+    // screen rather than a different question.
+    <div className="pad stack">
+      <p className="small muted" style={{ margin: 0 }}>
+        {exercise.prompt}
+      </p>
+      {/*
+        ONE grid, not two columns of independently-sized cards.
+        Two stacks let each tile size to its own content, so a Hebrew word at
+        22px stood taller than a one-line gloss and the columns drifted out of
+        step — rows stopped lining up, which makes pairing harder to read.
+        A single grid gives every row a shared height, and `1fr` rows make every
+        row equal to the tallest.
+      */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gridAutoRows: "1fr",
+          gap: 10,
+          marginTop: 10,
+          alignItems: "stretch",
+        }}
+      >
+        {words.map((w, i) => {
+          const glossId = glosses[i]!;
+          return (
+            <Fragment key={w.id}>
+              {tile(
+                w.id,
+                pickedWord === w.id,
+                wrong?.startsWith(`${w.id}|`) ?? false,
+                () => {
+                  setPickedWord(w.id);
+                  attempt(w.id, pickedGloss);
+                },
+                <ScriptWord word={w.text} size={22} showHighlight={false} fadeStage={fadeStage} />,
+              )}
+              {tile(
+                glossId,
+                pickedGloss === glossId,
+                wrong?.endsWith(`|${glossId}`) ?? false,
+                () => {
+                  setPickedGloss(glossId);
+                  attempt(pickedWord, glossId);
+                },
+                <span className="small">{wordById.get(glossId)?.gloss}</span>,
+              )}
+            </Fragment>
+          );
+        })}
+      </div>
+      {done && (
+        <p className="small muted" style={{ marginTop: 10 }}>
+          {mistakes === 0 ? "Cleared with no mistakes." : `Cleared with ${mistakes} mistake${mistakes === 1 ? "" : "s"}.`}
+        </p>
+      )}
+    </div>
+  );
+}
+
+// ---------- Cloze ----------
+
+/**
+ * A verse already read, with one word removed.
+ *
+ * The whole verse stays on screen: this tests whether the learner can supply a
+ * word from context, which is what reading actually requires, rather than
+ * whether they can recognise it in isolation.
+ */
+function ClozeExerciseView({
+  exercise,
+  onAnswer,
+  fadeStage,
+}: BaseProps & { exercise: Of<"cloze"> }) {
+  const { passageById } = useCourseContent();
+  const passage = passageById.get(exercise.passageId);
+  const [picked, setPicked] = useState<string | null>(null);
+
+  const choices = useMemo(
+    () => seededShuffle(exercise.choices, exercise.id),
+    [exercise.choices, exercise.id],
+  );
+
+  const choose = (choice: string) => {
+    if (picked) return;
+    setPicked(choice);
+    onAnswer(gradeChoice(choice, exercise.answer));
+  };
+
+  return (
+    <div className="pad stack">
+      <p className="small muted" style={{ margin: 0 }}>
+        {exercise.prompt}
+      </p>
+
+      <div className="passage" {...textProps()} style={{ marginTop: 12 }}>
+        {(passage?.tokens ?? []).map((t, i) => (
+          <span key={i} className="passage__token">
+            {i === exercise.tokenIndex ? (
+              <span
+                style={{
+                  display: "inline-block",
+                  minWidth: 68,
+                  borderBottom: "2px solid var(--accent)",
+                  color: picked ? "var(--ink)" : "transparent",
+                }}
+              >
+                <ScriptWord word={picked ?? t.text} size={26} showHighlight={false} />
+              </span>
+            ) : (
+              <ScriptWord word={t.text} size={26} showHighlight={false} fadeStage={fadeStage} />
+            )}
+          </span>
+        ))}
+      </div>
+
+      {passage && (
+        <p className="small muted" style={{ margin: "6px 0 0", fontStyle: "italic" }}>
+          {passage.translation}
+        </p>
+      )}
+
+      <div className="stack" style={{ marginTop: 12 }}>
+        {choices.map((c) => (
+          <button
+            key={c}
+            className="choice"
+            disabled={!!picked}
+            onClick={() => choose(c)}
+            style={{
+              borderColor:
+                picked == null
+                  ? undefined
+                  : c === exercise.answer
+                    ? "var(--sage)"
+                    : c === picked
+                      ? "var(--danger)"
+                      : undefined,
+            }}
+          >
+            <ScriptWord word={c} size={24} showHighlight={false} />
+          </button>
+        ))}
+      </div>
+
+      {picked && exercise.note && (
+        <p className="small muted" style={{ marginTop: 10, lineHeight: 1.55 }}>
+          {exercise.note}
+        </p>
+      )}
+    </div>
+  );
+}
+
 // ---------- Dispatcher ----------
 
 export function ExerciseView({ exercise, ...rest }: ExerciseProps) {
@@ -649,5 +922,9 @@ export function ExerciseView({ exercise, ...rest }: ExerciseProps) {
       return <ListeningExerciseView exercise={exercise} {...rest} />;
     case "translation":
       return <TranslationExerciseView exercise={exercise} {...rest} />;
+    case "match_pairs":
+      return <MatchPairsExerciseView exercise={exercise} {...rest} />;
+    case "cloze":
+      return <ClozeExerciseView exercise={exercise} {...rest} />;
   }
 }

@@ -33,7 +33,7 @@ export function notificationState(): NotificationState {
       supported: false,
       permission: Notification.permission,
       reason:
-        "On iOS, reminders only work once Shoresh is on your home screen. Tap Share → Add to Home Screen, then come back.",
+        "On iOS, reminders only work once Trelingo is on your home screen. Tap Share → Add to Home Screen, then come back.",
     };
   }
 
@@ -72,9 +72,9 @@ export async function showDueNotification(count: number): Promise<boolean> {
     const reg = await navigator.serviceWorker.getRegistration();
     const body = `${count} card${count === 1 ? "" : "s"} ready to review.`;
     if (reg) {
-      await reg.showNotification("Shoresh", { body, icon: "/icons/icon-192.png", tag: "due" });
+      await reg.showNotification("Trelingo", { body, icon: "/icons/icon-192.png", tag: "due" });
     } else {
-      new Notification("Shoresh", { body, icon: "/icons/icon-192.png" });
+      new Notification("Trelingo", { body, icon: "/icons/icon-192.png" });
     }
     return true;
   } catch {

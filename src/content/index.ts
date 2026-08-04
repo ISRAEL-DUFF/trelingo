@@ -1,38 +1,69 @@
 /**
  * Content loader.
  *
- * Bundles are per course (D1). Everything a screen needs is resolved through
- * `contentFor(courseId)`, which defaults to the **active** course — so switching
- * course switches the path, vocabulary, families and passages together, with no
- * call site branching on language.
+ * Bundles are per track, imported statically. Everything a screen needs is
+ * resolved through `contentFor(trackId)`, which defaults to the active track —
+ * so switching track switches path, vocabulary, families and passages together,
+ * with no call site branching on language.
  *
- * Derived lookups are memoised per course: they are pure functions of a bundle,
- * and rebuilding them on every render of the path screen would be wasteful.
+ * WHY NOT LAZY. Content is the largest thing the app ships — Jonah's 48 verses
+ * compile to 195 KB — and a whole-book track like Genesis would be several MB,
+ * which makes per-track code splitting look obviously right. It was tried and
+ * reverted, for two reasons:
+ *
+ *   1. Today there is no problem. Four tracks, ~300 KB in total.
+ *   2. Content belongs behind an API, not in the JS bundle. Once it is fetched
+ *      rather than compiled in, per-track chunks are moot — and the book is the
+ *      natural unit to fetch, since a learner reads one for weeks and then has
+ *      it offline for good.
+ *
+ * When that lands, the loading concern moves to the API layer and needs a
+ * content version stamp so a corrected gloss can invalidate a cached book.
+ *
+ * Derived lookups are memoised per track: they are pure functions of a bundle.
  */
 import { validateBundle, type ContentBundle } from "./schema";
 import { getActiveCourseId, type CourseId } from "./course";
 import { hebrewBiblicalBundle, CONTENT_REVIEW_NOTES } from "./courses/hebrew-biblical";
+import { hebrewJonahBundle, JONAH_REVIEW_NOTES } from "./courses/hebrew-jonah";
+import { hebrewRuthBundle, RUTH_REVIEW_NOTES } from "./courses/hebrew-ruth";
+import { hebrewEstherBundle, ESTHER_REVIEW_NOTES } from "./courses/hebrew-esther";
 import { greekKoineBundle, KOINE_REVIEW_NOTES } from "./courses/greek-koine";
+import { greek1JohnBundle, ONE_JOHN_REVIEW_NOTES } from "./courses/greek-1john";
+import { greekMarkBundle, MARK_REVIEW_NOTES } from "./courses/greek-mark";
+import { greekJohnBundle, JOHN_REVIEW_NOTES } from "./courses/greek-john";
 import { greekAtticBundle, ATTIC_REVIEW_NOTES } from "./courses/greek-attic";
 
 const BUNDLES: Partial<Record<CourseId, ContentBundle>> = {
-  "hebrew-biblical": hebrewBiblicalBundle,
-  "greek-koine": greekKoineBundle,
-  "greek-attic": greekAtticBundle,
+  "shoresh": hebrewBiblicalBundle,
+  "jonah": hebrewJonahBundle,
+  "ruth": hebrewRuthBundle,
+  "esther": hebrewEstherBundle,
+  "koine-gospels": greekKoineBundle,
+  "1john": greek1JohnBundle,
+  "mark": greekMarkBundle,
+  "john": greekJohnBundle,
+  "attic-prose": greekAtticBundle,
 };
 
-/** What a specialist should check before a course reaches learners. */
+/** What a specialist should check before a track reaches learners. */
 export type ReviewNote = { id: string; note: string };
 
 /*
- * Each course carries its own caveats, and the settings screen used to show
- * Hebrew's for every course — which meant the Attic licence blocker, the single
+ * Each track carries its own caveats, and the settings screen used to show
+ * Hebrew's for every track — which meant the Attic licence blocker, the single
  * most important note in the project, was written down and never displayed.
  */
 const REVIEW_NOTES: Partial<Record<CourseId, ReviewNote[]>> = {
-  "hebrew-biblical": CONTENT_REVIEW_NOTES,
-  "greek-koine": KOINE_REVIEW_NOTES,
-  "greek-attic": ATTIC_REVIEW_NOTES,
+  "shoresh": CONTENT_REVIEW_NOTES,
+  "jonah": JONAH_REVIEW_NOTES,
+  "ruth": RUTH_REVIEW_NOTES,
+  "esther": ESTHER_REVIEW_NOTES,
+  "koine-gospels": KOINE_REVIEW_NOTES,
+  "1john": ONE_JOHN_REVIEW_NOTES,
+  "mark": MARK_REVIEW_NOTES,
+  "john": JOHN_REVIEW_NOTES,
+  "attic-prose": ATTIC_REVIEW_NOTES,
 };
 
 export function reviewNotesFor(courseId: CourseId = getActiveCourseId()): ReviewNote[] {
@@ -41,16 +72,16 @@ export function reviewNotesFor(courseId: CourseId = getActiveCourseId()): Review
 
 export function getBundle(courseId: CourseId = getActiveCourseId()): ContentBundle {
   const bundle = BUNDLES[courseId];
-  if (!bundle) throw new Error(`No content bundle registered for course "${courseId}"`);
+  if (!bundle) throw new Error(`No content bundle registered for track "${courseId}"`);
   return bundle;
 }
 
-/** True when a course has content and can actually be entered. */
+/** True when a track has content and can actually be entered. */
 export function hasContent(courseId: CourseId): boolean {
   return BUNDLES[courseId] !== undefined;
 }
 
-/** Every course that has content, for the picker. */
+/** Every track that has content, for the picker. */
 export function availableCourseIds(): CourseId[] {
   return Object.keys(BUNDLES) as CourseId[];
 }
@@ -71,8 +102,30 @@ export interface CourseContent extends ContentBundle {
 const cache = new Map<CourseId, CourseContent>();
 
 function build(bundle: ContentBundle): CourseContent {
+  /**
+   * In-track counts for hand-authored courses that have no importer.
+   *
+   * Shoresh's 44 words were written by hand and carry no Strong's key, so no
+   * pipeline ever counted them and they arrive with no frequency at all. The
+   * whole-Bible figure genuinely cannot be supplied — assigning Strong's
+   * numbers by hand is the risky manual step lexeme-spike-findings.md §5 warns
+   * about — but "how often does this appear in what I am reading" needs no
+   * lexicon, only the passages already in the bundle.
+   *
+   * Filled only where the word actually occurs, so a word taught but not yet
+   * met in any verse stays silent rather than claiming zero.
+   */
+  const inTrack = bundle.passages.reduce<Record<string, number>>((acc, p) => {
+    for (const t of p.tokens) if (t.wordId) acc[t.wordId] = (acc[t.wordId] ?? 0) + 1;
+    return acc;
+  }, {});
+  const words = bundle.words.map((w) =>
+    w.frequency || !inTrack[w.id] ? w : { ...w, frequency: { inTrack: inTrack[w.id]! } },
+  );
+  bundle = { ...bundle, words };
+
   const wordsByFamily = bundle.words.reduce<Record<string, ContentBundle["words"]>>((acc, w) => {
-    (acc[w.familyId] ??= []).push(w);
+    if (w.familyId) (acc[w.familyId] ??= []).push(w);
     return acc;
   }, {});
 
@@ -113,8 +166,9 @@ export function contentFor(courseId: CourseId = getActiveCourseId()): CourseCont
   return built;
 }
 
+
+
 export * from "./schema";
-export { CONTENT_REVIEW_NOTES };
 
 /**
  * Validate a course's bundle. Throws with every error at once rather than the

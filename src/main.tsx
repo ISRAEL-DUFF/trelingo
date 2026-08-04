@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./styles/global.css";
 import { getContent } from "./content";
-import { requestPersistentStorage } from "./db";
+import { deleteOrphanedDatabases, requestPersistentStorage } from "./db";
 
 /**
  * Boot order matters:
@@ -16,6 +16,10 @@ import { requestPersistentStorage } from "./db";
  *  3. Render.
  */
 async function bootstrap() {
+  // Databases from before the rename. Nothing to preserve — there are no users
+  // — but a stale IndexedDB under an old name is invisible clutter.
+  await deleteOrphanedDatabases();
+
   try {
     getContent();
   } catch (e) {

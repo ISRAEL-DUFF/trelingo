@@ -1,125 +1,217 @@
 /**
- * Course definitions (greek-build-plan.md §4.1).
+ * Tracks — a curriculum inside a variety, and the leaf of the hierarchy.
  *
- * A `Course` carries everything the UI needs in order to stop asking "which
- * language is this?". Components read direction, lang, fonts and the script
- * module from here and never branch on language themselves.
+ *   Language   Hebrew, Greek                    → content/language.ts
+ *     Variety    Biblical Hebrew, Koine, Attic  → content/variety.ts
+ *       Track      Shoresh, Jonah               ← this file
+ *         Unit       a lesson
  *
- * Per decision D1 there is no `Track` type — Koine and Attic will be separate
- * courses. Per D7 courses do not carry a palette; they carry a single accent
- * colour and reuse the shared light/dark theme.
+ * A track carries ONLY what distinguishes one curriculum from another within
+ * the same variety: which texts, which vocabulary, in which order, and an
+ * accent colour. Script and font come from the language; parse fields, the word
+ * "root" versus "stem", fading and diacritics copy come from the variety. A
+ * track cannot disagree with either, because it declares neither.
+ *
+ * NAMING. The type is still `Course` and ids are still `CourseId`, because that
+ * is what the storage layer and API call this level — `courseId` is half of the
+ * Dexie primary key for every SRS card and unit progress row.
+ *
+ * The ids themselves are now named for the TRACK (`shoresh`, `jonah`,
+ * `koine-gospels`, `attic-prose`) rather than for the language. They used to be
+ * language-first — `hebrew-biblical` was Shoresh, inside a variety called
+ * `biblical-hebrew`, the same words reversed meaning different things. Renamed
+ * in Dexie v5; see TRACK_ID_RENAMES.
  */
-import { scriptFor, type ScriptId, type ScriptModule } from "@/lib/script";
-import { GREEK_PARSE_FIELDS, HEBREW_PARSE_FIELDS, type ParseFieldDef } from "./parse-fields";
-import "@/lib/script/hebrew"; // registers the Hebrew script module
-import "@/lib/script/greek"; // registers the Greek script module
+import { getLanguage, type Language } from "./language";
+import {
+  ATTIC_GREEK,
+  BIBLICAL_HEBREW,
+  KOINE_GREEK,
+  getVariety,
+  type Variety,
+  type VarietyId,
+} from "./variety";
+import { type ScriptModule } from "@/lib/script";
+import { scriptOfLanguage } from "./language";
+import { type ParseFieldDef } from "./parse-fields";
 
-export type CourseId = "hebrew-biblical" | "greek-koine" | "greek-attic" | "latin";
+export type CourseId = "shoresh" | "jonah" | "ruth" | "esther" | "koine-gospels" | "1john" | "mark" | "john" | "attic-prose" | "latin";
 
-export interface Course {
+/** Fields a track inherits rather than declares. */
+type Inherited = Pick<Variety, "supportsFading" | "morphemeNoun" | "diacriticsCopy" | "parseFields"> &
+  Pick<Language, "script" | "fontStack">;
+
+export interface Course extends Inherited {
   id: CourseId;
+  /** The variety this track belongs to. */
+  variety: VarietyId;
+  /** The variety's language, denormalised for convenience. */
+  language: Language["id"];
+  /** Track name, shown under the variety: "Shoresh", "Jonah". */
   name: string;
   subtitle: string;
 
-  /** Which script module supplies clustering, folding and direction. */
-  script: ScriptId;
-  fontStack: string;
-
   /**
-   * The only visual override per course (D7). The shared palette is reused
-   * unchanged; this drives the header and per-course highlights.
+   * The only visual override a track gets (D7). The shared palette is reused
+   * unchanged; this drives the header and per-track highlights.
    */
   accentColor: string;
+}
 
-  /** Whether this course has an honest diacritic-fading progression (Hebrew yes, Greek no). */
-  supportsFading: boolean;
-
-  /** What this course calls the morpheme it teaches: "root", "stem", "ending". */
-  morphemeNoun: string;
-
-  /** How this language's diacritics are described to the learner. */
-  diacriticsCopy: {
-    /** Field label, e.g. "Vowel points (niqqud)". */
-    label: string;
-    always: string;
-    fading: string;
-    off: string;
+/**
+ * Pull every inherited field down from the variety and its language.
+ *
+ * Spread rather than looked up through `course.variety` so the call sites that
+ * read `course.script` or `course.parseFields` keep working — and so it is
+ * impossible to construct a track that declares a script its language does not
+ * have, or parse fields its variety does not use.
+ */
+function inherit(v: Variety): Inherited & { variety: VarietyId; language: Language["id"] } {
+  const l = getLanguage(v.language);
+  return {
+    variety: v.id,
+    language: l.id,
+    script: l.script,
+    fontStack: l.fontStack,
+    supportsFading: v.supportsFading,
+    morphemeNoun: v.morphemeNoun,
+    diacriticsCopy: v.diacriticsCopy,
+    parseFields: v.parseFields,
   };
-
-  /** Morphological fields this language uses, with their legal values. */
-  parseFields: ParseFieldDef[];
 }
 
 export const HEBREW_BIBLICAL: Course = {
-  id: "hebrew-biblical",
+  ...inherit(BIBLICAL_HEBREW),
+  id: "shoresh",
   name: "Shoresh",
-  subtitle: "Biblical Hebrew · Genesis, Psalms, Ruth",
-  script: "hebrew",
-  fontStack: "'Frank Ruhl Libre', 'Times New Roman', serif",
+  subtitle: "Genesis, Psalms, Ruth",
   accentColor: "var(--gold)",
-  morphemeNoun: "root",
-  supportsFading: true,
-  parseFields: HEBREW_PARSE_FIELDS,
-  diacriticsCopy: {
-    label: "Vowel points (niqqud)",
-    always: "Full pointing everywhere.",
-    fading:
-      "Points drop away in stages as each word's card matures, so you're weaned onto unpointed text.",
-    off: "Consonants only, as in a Torah scroll.",
-  },
+};
+
+export const HEBREW_JONAH: Course = {
+  ...inherit(BIBLICAL_HEBREW),
+  id: "jonah",
+  name: "Jonah",
+  subtitle: "One whole book, start to finish",
+  accentColor: "var(--sage)",
 };
 
 /**
- * Language-level configuration, shared BY REFERENCE across every course of that
- * language. Defining it once is what stops the two Greek courses drifting apart
- * on script, font or parse fields — they may differ only in curriculum,
- * vocabulary and accent colour (D1).
+ * The second whole book, and the first that cost no engineering.
+ *
+ * Jonah proved the shape; Ruth proved the pipeline, which took a book name and
+ * nothing else. Placed after Jonah because finishing Jonah leaves a reader at
+ * 52% of Ruth (coverage-findings.md §4) — a step up rather than a restart.
  */
-const GREEK_COMMON = {
-  script: "greek",
-  // Gentium Plus has full polytonic coverage. Frank Ruhl Libre has no Greek
-  // glyphs at all — measured, not assumed (greek-build-plan.md §3.5).
-  fontStack: "'Gentium Plus', 'New Athena Unicode', 'Times New Roman', serif",
-  parseFields: GREEK_PARSE_FIELDS,
-  morphemeNoun: "stem",
-  // Unaccented Greek is not a reading target — see §4.5.
-  supportsFading: false,
-  diacriticsCopy: {
-    label: "Accents and breathings",
-    always: "Accents and breathings shown, as in every printed edition.",
-    // Offered, but not as a learning ramp: unaccented Greek is not a target, and
-    // accents can be contrastive (τίς "who?" vs τις "someone").
-    fading: "Not available for Greek — accents carry meaning and are never dropped.",
-    off: "Bare letters, as in an inscription or an early manuscript.",
-  },
-} as const satisfies Pick<
-  Course,
-  "script" | "fontStack" | "parseFields" | "supportsFading" | "diacriticsCopy" | "morphemeNoun"
->;
+export const HEBREW_RUTH: Course = {
+  ...inherit(BIBLICAL_HEBREW),
+  id: "ruth",
+  name: "Ruth",
+  subtitle: "Four chapters, the easiest narrative in the canon",
+  accentColor: "var(--sage)",
+};
 
+/**
+ * The third whole book, and the first where CURATION compounded rather than
+ * only the pipeline.
+ *
+ * Esther's glossary inherits Jonah's and Ruth's at build time, so 164 of its
+ * 464 lexemes cost nothing. Placed last of the three because it is twice Ruth's
+ * length and front-loads a third of its vocabulary into chapter 1 — the Persian
+ * court has to be described before anything happens in it.
+ */
+export const HEBREW_ESTHER: Course = {
+  ...inherit(BIBLICAL_HEBREW),
+  id: "esther",
+  name: "Esther",
+  subtitle: "Ten chapters in a Persian court",
+  accentColor: "var(--sage)",
+};
+
+/**
+ * Koine and Attic each have exactly one track today.
+ *
+ * That is the asymmetry the third level exposes rather than creates: Biblical
+ * Hebrew has two curricula and the Greek varieties have one apiece. A second
+ * Koine track slots in beside this one without touching anything else.
+ */
 export const GREEK_KOINE: Course = {
-  id: "greek-koine",
-  name: "Koine Greek",
-  subtitle: "New Testament · Septuagint",
+  ...inherit(KOINE_GREEK),
+  id: "koine-gospels",
+  name: "The Gospels",
+  subtitle: "John, Mark and the letters",
   accentColor: "#2b5876", // aegean — the one hue the Greek demo added (D7)
-  ...GREEK_COMMON,
+};
+
+/**
+ * The first whole Koine book, and the end of a long asymmetry.
+ *
+ * Greek held four verses against Hebrew's 133 until this landed. 1 John was
+ * chosen on measured grounds rather than tradition — though tradition happens
+ * to agree — see units.ts.
+ */
+export const GREEK_1JOHN: Course = {
+  ...inherit(KOINE_GREEK),
+  id: "1john",
+  name: "1 John",
+  subtitle: "One whole letter, the densest repetition in the New Testament",
+  accentColor: "var(--sage)",
+};
+
+/**
+ * The whole gospel — 673 verses, the longest track in the app by some distance.
+ * Shipped as chapters 1–4 first and completed in a second pass; the staging is
+ * recorded in courses/greek-mark rather than hidden.
+ */
+export const GREEK_MARK: Course = {
+  ...inherit(KOINE_GREEK),
+  id: "mark",
+  name: "Mark",
+  subtitle: "A whole gospel, chapter by chapter",
+  accentColor: "var(--sage)",
+};
+
+/**
+ * The fourth Koine track, and the cheapest to build. 341 new glosses against
+ * Mark's 1,158, on more text — because Mark, 1 John and the Gospels already
+ * covered two-thirds of its vocabulary.
+ */
+export const GREEK_JOHN: Course = {
+  ...inherit(KOINE_GREEK),
+  id: "john",
+  name: "John",
+  subtitle: "A whole gospel, and the smallest vocabulary in the New Testament",
+  accentColor: "var(--sage)",
 };
 
 export const GREEK_ATTIC: Course = {
-  id: "greek-attic",
-  name: "Attic Greek",
+  ...inherit(ATTIC_GREEK),
+  id: "attic-prose",
   // Named for what the corpus actually contains. Xenophon was in the original
   // plan, but AGDT 2.1 has no Xenophon at all — see ATTIC_REVIEW_NOTES.
-  subtitle: "Plato · Thucydides · classical prose",
+  name: "Prose Readings",
+  subtitle: "Plato · Thucydides · Lysias",
   accentColor: "#211d1a", // charcoal
-  ...GREEK_COMMON,
 };
 
-export const courses: Course[] = [HEBREW_BIBLICAL, GREEK_KOINE, GREEK_ATTIC];
+export const courses: Course[] = [HEBREW_BIBLICAL, HEBREW_JONAH, HEBREW_RUTH, HEBREW_ESTHER, GREEK_KOINE, GREEK_1JOHN, GREEK_MARK, GREEK_JOHN, GREEK_ATTIC];
+
+/** The tracks belonging to one variety. */
+export function tracksOf(varietyId: VarietyId): Course[] {
+  return courses.filter((c) => c.variety === varietyId);
+}
+
+export function varietyOf(course: Course = getCourse()): Variety {
+  return getVariety(course.variety);
+}
+
+export function languageOf(course: Course = getCourse()): Language {
+  return getLanguage(course.language);
+}
 
 export const courseById = new Map(courses.map((c) => [c.id, c]));
 
-export const DEFAULT_COURSE_ID: CourseId = "hebrew-biblical";
+export const DEFAULT_COURSE_ID: CourseId = "shoresh";
 
 /**
  * The active course.
@@ -130,7 +222,7 @@ export const DEFAULT_COURSE_ID: CourseId = "hebrew-biblical";
  * Mirrored into localStorage so the boot script can apply the right accent and
  * font before first paint — the same reason the theme is mirrored.
  */
-const ACTIVE_COURSE_KEY = "shoresh.course";
+const ACTIVE_COURSE_KEY = "trelingo.activeTrack";
 
 function readStoredCourseId(): CourseId {
   try {
@@ -178,7 +270,7 @@ export function getCourse(id: CourseId = activeCourseId): Course {
 }
 
 export function scriptOf(course: Course = getCourse()): ScriptModule {
-  return scriptFor(course.script);
+  return scriptOfLanguage(languageOf(course));
 }
 
 export function parseFieldsOf(course: Course = getCourse()): ParseFieldDef[] {

@@ -29,7 +29,7 @@ export async function startMockServer() {
   });
   // eslint-disable-next-line no-console
   console.info(
-    "%c[shoresh] mock API active",
+    "%c[trelingo] mock API active",
     "color:#B8863B;font-weight:bold",
     "— set VITE_USE_MOCK_API=false to talk to a real backend.",
   );

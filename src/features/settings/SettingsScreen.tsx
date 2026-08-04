@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Banner, Button, Sheet, Switch, TopBar } from "@/components/ui";
 import { useSession } from "@/state/session";
 import { reviewNotesFor } from "@/content";
 import { useActiveCourseId, useCourse, useCourseContent } from "@/state/useCourse";
 import { requestPersistentStorage, storageEstimate } from "@/db";
-import { api } from "@/api/client";
+import { backupFilename, exportBackup, importBackup, readBackupFile } from "@/db/backup";
 import { useSyncState } from "@/features/sync/SyncIndicator";
 import { sync } from "@/sync/sync";
-import { installState, promptInstall } from "@/lib/pwa";
+import { installDiagnostics, installState, promptInstall, type InstallCheck } from "@/lib/pwa";
 import { THEME_LABELS, systemTheme } from "@/lib/theme";
-import { getCourse, morphemeLabel } from "@/content/course";
+import { getCourse, morphemeLabel, varietyOf } from "@/content/course";
 import { notificationState, requestNotificationPermission } from "@/lib/notifications";
 
 export function SettingsScreen() {
@@ -24,6 +24,9 @@ export function SettingsScreen() {
   const [persisted, setPersisted] = useState<boolean | null>(null);
   const [provenanceOpen, setProvenanceOpen] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
+  const [checks, setChecks] = useState<InstallCheck[] | null>(null);
+  const [importing, setImporting] = useState(false);
+  const fileInput = useRef<HTMLInputElement>(null);
   const course = getCourse();
   const install = installState();
   const notif = notificationState();
@@ -32,17 +35,43 @@ export function SettingsScreen() {
     void storageEstimate().then(setStorage);
   }, []);
 
+  /*
+   * Backup is entirely local — no account, no network. It used to call
+   * api.exportData() against a server that does not exist, so the button
+   * always failed and the people who most needed it (everyone without an
+   * account, which is everyone) could not take a copy of their own data.
+   */
   const exportData = async () => {
     try {
-      const data = await api.exportData();
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const backup = await exportBackup();
+      const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = "shoresh-export.json";
+      a.download = backupFilename();
       a.click();
       URL.revokeObjectURL(a.href);
+      setNotice(`Saved ${backup.reviewLogs.length} reviews to ${a.download}.`);
     } catch {
-      setNotice("Export needs a connection and an account.");
+      setNotice("Could not write the backup file.");
+    }
+  };
+
+  const importData = async (file: File) => {
+    setImporting(true);
+    setNotice(null);
+    try {
+      const summary = await importBackup(await readBackupFile(file));
+      // Counts are of what was ADDED, not what the file held — importing onto a
+      // device that already has the data should say so rather than claim work.
+      setNotice(
+        summary.reviewLogs === 0 && summary.progress === 0
+          ? "Nothing new in that backup — this device already has all of it."
+          : `Restored ${summary.reviewLogs} reviews and ${summary.progress} completed units. Reload to see them.`,
+      );
+    } catch (e) {
+      setNotice(e instanceof Error ? e.message : "That backup could not be imported.");
+    } finally {
+      setImporting(false);
     }
   };
 
@@ -75,9 +104,6 @@ export function SettingsScreen() {
                 <Button variant="secondary" onClick={() => void sync()}>
                   Sync now
                 </Button>
-                <Button variant="secondary" onClick={() => void exportData()}>
-                  Export data
-                </Button>
               </div>
               <div style={{ marginTop: 10 }}>
                 <Button
@@ -95,7 +121,7 @@ export function SettingsScreen() {
           ) : (
             <>
               <p className="small muted" style={{ marginTop: 8, lineHeight: 1.6 }}>
-                You're using Shoresh without an account. Everything works, but progress lives only
+                You're using Trelingo without an account. Everything works, but progress lives only
                 on this device.
               </p>
               <Link to="/auth">
@@ -111,8 +137,12 @@ export function SettingsScreen() {
         <Link to="/courses" className="card" style={{ display: "block", textDecoration: "none", color: "inherit" }}>
           <div className="row row--between">
             <div>
+              {/* The full path, because "Shoresh" alone does not say which
+                  language or variety it belongs to. */}
               <span className="label">Course</span>
-              <div style={{ fontWeight: 600, marginTop: 4 }}>{course.name}</div>
+              <div style={{ fontWeight: 600, marginTop: 4 }}>
+                {varietyOf(course).name} › {course.name}
+              </div>
               <div className="small muted">{course.subtitle}</div>
             </div>
             <span className="muted">›</span>
@@ -141,7 +171,7 @@ export function SettingsScreen() {
               {settings.themePref === "system"
                 ? `Following your device, which is currently ${systemTheme()}.`
                 : settings.themePref === "light"
-                  ? "Parchment and ink — the original Shoresh palette."
+                  ? "Parchment and ink — the original palette."
                   : "Dark parchment. Easier on the eyes at night."}
             </span>
           </div>
@@ -238,7 +268,7 @@ export function SettingsScreen() {
             {install.canPrompt ? (
               <>
                 <p className="small muted" style={{ marginTop: 6 }}>
-                  Install Shoresh for offline access and a home-screen icon.
+                  Install Trelingo for offline access and a home-screen icon.
                 </p>
                 <Button block style={{ marginTop: 10 }} onClick={() => void promptInstall()}>
                   Install app
@@ -251,8 +281,84 @@ export function SettingsScreen() {
                   : "Your browser will offer an install option when it's ready."}
               </p>
             )}
+
+            {/*
+              Runs on the device that is failing, which is the only place the
+              answer exists. Desktop Chrome installs almost any page as an app,
+              so a desktop success says nothing about whether the criteria are
+              actually met — Android is the honest test, and this reports the
+              criteria rather than either browser's menu wording.
+            */}
+            {!install.isIos && (
+              <>
+                <button
+                  className="btn btn--ghost"
+                  style={{ marginTop: 8 }}
+                  onClick={() => void installDiagnostics().then(setChecks)}
+                >
+                  {checks ? "Re-check" : "Why can't I install?"}
+                </button>
+                {checks && (
+                  <div className="stack" style={{ marginTop: 10, gap: 6 }}>
+                    {checks.map((c) => (
+                      <div key={c.id} className="row" style={{ gap: 8, alignItems: "start" }}>
+                        <span aria-hidden style={{ color: c.ok ? "var(--sage)" : "var(--danger)" }}>
+                          {c.ok ? "✓" : "✗"}
+                        </span>
+                        <div>
+                          <div className="small">{c.label}</div>
+                          <div className="small muted" style={{ wordBreak: "break-word" }}>
+                            {c.detail}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
           </div>
         )}
+
+        {/* ---- backup ----
+            Sits directly above Storage on purpose: that card explains that
+            browsers can evict this data, and this one is what you do about it. */}
+        <div className="card">
+          <span className="label">Backup</span>
+          <p className="small muted" style={{ marginTop: 6, lineHeight: 1.55 }}>
+            Save everything you've learned to a file on this device — reviews, completed units,
+            streak and settings. No account needed, and it never leaves your machine.
+          </p>
+          <div className="row" style={{ gap: 8, marginTop: 10 }}>
+            <Button variant="secondary" onClick={() => void exportData()}>
+              Save a backup
+            </Button>
+            <Button
+              variant="secondary"
+              disabled={importing}
+              onClick={() => fileInput.current?.click()}
+            >
+              {importing ? "Restoring…" : "Restore a backup"}
+            </Button>
+          </div>
+          <p className="small muted" style={{ marginTop: 8, lineHeight: 1.55 }}>
+            Restoring merges — it adds what the file has without removing anything already here, so
+            it is safe to run on a device you're still using.
+          </p>
+          <input
+            ref={fileInput}
+            type="file"
+            accept="application/json,.json"
+            hidden
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              // Cleared so picking the SAME file twice still fires onChange —
+              // which a learner retrying after an error will absolutely do.
+              e.target.value = "";
+              if (file) void importData(file);
+            }}
+          />
+        </div>
 
         {/* ---- storage ---- */}
         <div className="card">

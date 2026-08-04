@@ -27,6 +27,10 @@ export const greekKoineBundle = {
 /** What a Koine specialist should check before this reaches real learners. */
 export const KOINE_REVIEW_NOTES: { id: string; note: string }[] = [
   {
+    id: "frequency",
+    note: "Every word carries two counts: occurrences in this track's four verses, and occurrences across the whole New Testament, counted from MorphGNT by scripts/build-greek-frequency.mjs (137,554 tokens, 5,461 lemmas). Spot-checked against standard figures: λόγος 330 and ζωή 135 and ἀρχή 55 are exact; θεός reads 1,307 against the usual ~1,317 because SBLGNT differs from the editions those counts are quoted from. The NT is a COMPLETE corpus, so a lemma occurring once in it is a genuine hapax legomenon and the badge is earned — none of this track's 47 words is one, since they were chosen for frequency.",
+  },
+  {
     id: "glosses",
     note: "Glosses are standard short NT lexical meanings chosen for teaching. They flatten real semantic range and are not lexicon entries. λόγος in particular carries far more than “word”.",
   },
@@ -44,6 +48,6 @@ export const KOINE_REVIEW_NOTES: { id: string; note: string }[] = [
   },
   {
     id: "attic",
-    note: "The Attic course is now built from AGDT 2.1 by its own spike and pipeline, but is NOT cleared to ship: its corpus licence is contradictory at source. See ATTIC_REVIEW_NOTES in courses/greek-attic. Nothing there affects Koine, whose licences are clean.",
+    note: "The Attic course is built from AGDT 2.1 by its own spike and pipeline and is cleared to ship — see ATTIC_REVIEW_NOTES in courses/greek-attic. Nothing there affects Koine. Koine's own licences carry no NonCommercial clause, but they are not obligation-free: MorphGNT is CC BY-SA, so this course's derived parses inherit ShareAlike and must be redistributed under a compatible licence. See NOTICE.md.",
   },
 ];

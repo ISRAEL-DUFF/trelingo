@@ -5,6 +5,7 @@ import { ScriptWord } from "@/components/ScriptWord";
 import { Sheet } from "@/components/ui";
 import { morphemeLabel, parseFieldsOf, scriptOf } from "@/content/course";
 import { db } from "@/db";
+import { WordFrequency } from "@/components/WordFrequency";
 
 
 /**
@@ -60,7 +61,7 @@ export function FamilySheet({ familyId, onClose }: { familyId: string | null; on
                 <div key={w.id} className="card card--flat">
                   <div className="row row--between">
                     <div>
-                      <ScriptWord word={w.text} highlight={w.morphology.highlight} size={26} showHighlight />
+                      <ScriptWord word={w.text} highlight={w.morphology?.highlight} size={26} showHighlight />
                       <div className="translit" style={{ marginTop: 3 }}>
                         {w.translit}
                       </div>
@@ -78,6 +79,11 @@ export function FamilySheet({ familyId, onClose }: { familyId: string | null; on
                       </div>
                     </div>
                   </div>
+                  {w.frequency && (
+                    <div style={{ marginTop: 8 }}>
+                      <WordFrequency frequency={w.frequency} />
+                    </div>
+                  )}
                   {w.parse && (
                     <div className="small muted" style={{ marginTop: 8 }}>
                       {parseFieldsOf(course)

@@ -261,7 +261,14 @@
         "world",
         "truth"
       ],
-      "_freq": 619,
+      "frequency": {
+        "inTrack": 1307,
+        "inCorpus": 1307,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 27
+      },
+      "_freq": 1307,
       "_stemSource": "derived"
     },
     {
@@ -294,7 +301,14 @@
         "flesh"
       ],
       "notes": "2nd declension. The -ος ending marks nominative singular; the accusative is λόγον.",
-      "_freq": 202,
+      "frequency": {
+        "inTrack": 330,
+        "inCorpus": 330,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 24
+      },
+      "_freq": 330,
       "_stemSource": "derived"
     },
     {
@@ -325,7 +339,14 @@
         "word",
         "light"
       ],
-      "_freq": 24,
+      "frequency": {
+        "inTrack": 55,
+        "inCorpus": 55,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 17
+      },
+      "_freq": 55,
       "_stemSource": "derived"
     },
     {
@@ -349,7 +370,6 @@
       },
       "attestations": [
         "Matthew 13:38",
-        "Romans 3:19",
         "John 1:10"
       ],
       "distractors": [
@@ -357,7 +377,14 @@
         "heaven",
         "sin"
       ],
-      "_freq": 102,
+      "frequency": {
+        "inTrack": 185,
+        "inCorpus": 185,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 20
+      },
+      "_freq": 185,
       "_stemSource": "derived"
     },
     {
@@ -380,15 +407,21 @@
       },
       "attestations": [
         "Luke 12:15",
-        "Acts 8:33",
-        "Romans 6:23"
+        "John 1:4"
       ],
       "distractors": [
         "death",
         "peace",
         "joy"
       ],
-      "_freq": 74,
+      "frequency": {
+        "inTrack": 135,
+        "inCorpus": 135,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 22
+      },
+      "_freq": 135,
       "_stemSource": "derived"
     },
     {
@@ -410,16 +443,23 @@
         "gender": "f"
       },
       "attestations": [
-        "Romans 3:7",
         "John 1:17",
-        "John 8:32"
+        "John 8:32",
+        "John 8:44"
       ],
       "distractors": [
         "lie",
         "grace",
         "hope"
       ],
-      "_freq": 43,
+      "frequency": {
+        "inTrack": 109,
+        "inCorpus": 109,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 23
+      },
+      "_freq": 109,
       "_stemSource": "derived"
     },
     {
@@ -442,15 +482,22 @@
       },
       "attestations": [
         "Matthew 24:12",
-        "Romans 5:5",
-        "Romans 12:9"
+        "John 17:26",
+        "Romans 5:5"
       ],
       "distractors": [
         "fear",
         "faith",
         "mercy"
       ],
-      "_freq": 18,
+      "frequency": {
+        "inTrack": 116,
+        "inCorpus": 116,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 24
+      },
+      "_freq": 116,
       "_stemSource": "derived"
     },
     {
@@ -473,15 +520,22 @@
       },
       "attestations": [
         "Matthew 12:31",
-        "Romans 5:12",
-        "Romans 5:13"
+        "John 9:41",
+        "Romans 5:12"
       ],
       "distractors": [
         "law",
         "death",
         "flesh"
       ],
-      "_freq": 97,
+      "frequency": {
+        "inTrack": 172,
+        "inCorpus": 172,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 20
+      },
+      "_freq": 172,
       "_stemSource": "derived"
     },
     {
@@ -513,7 +567,14 @@
         "river",
         "soul"
       ],
-      "_freq": 398,
+      "frequency": {
+        "inTrack": 550,
+        "inCorpus": 550,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 24
+      },
+      "_freq": 550,
       "_stemSource": "derived"
     },
     {
@@ -545,7 +606,14 @@
         "prophet",
         "priest"
       ],
-      "_freq": 402,
+      "frequency": {
+        "inTrack": 713,
+        "inCorpus": 713,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 23
+      },
+      "_freq": 713,
       "_stemSource": "derived"
     },
     {
@@ -577,7 +645,14 @@
         "father",
         "servant"
       ],
-      "_freq": 287,
+      "frequency": {
+        "inTrack": 375,
+        "inCorpus": 375,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 20
+      },
+      "_freq": 375,
       "_stemSource": "derived"
     },
     {
@@ -608,7 +683,14 @@
         "year",
         "hour"
       ],
-      "_freq": 291,
+      "frequency": {
+        "inTrack": 389,
+        "inCorpus": 389,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 23
+      },
+      "_freq": 389,
       "_stemSource": "derived"
     },
     {
@@ -640,7 +722,14 @@
         "sea",
         "mountain"
       ],
-      "_freq": 181,
+      "frequency": {
+        "inTrack": 273,
+        "inCorpus": 273,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 19
+      },
+      "_freq": 273,
       "_stemSource": "derived"
     },
     {
@@ -671,7 +760,14 @@
         "eye",
         "mind"
       ],
-      "_freq": 91,
+      "frequency": {
+        "inTrack": 156,
+        "inCorpus": 156,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 22
+      },
+      "_freq": 156,
       "_stemSource": "derived"
     },
     {
@@ -702,7 +798,14 @@
         "power",
         "peace"
       ],
-      "_freq": 61,
+      "frequency": {
+        "inTrack": 165,
+        "inCorpus": 165,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 23
+      },
+      "_freq": 165,
       "_stemSource": "derived"
     },
     {
@@ -732,7 +835,14 @@
         "joy",
         "hope"
       ],
-      "_freq": 41,
+      "frequency": {
+        "inTrack": 91,
+        "inCorpus": 91,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 26
+      },
+      "_freq": 91,
       "_stemSource": "derived"
     },
     {
@@ -755,14 +865,22 @@
       },
       "attestations": [
         "Acts 9:31",
-        "Acts 19:32"
+        "Acts 19:32",
+        "1 Corinthians 14:5"
       ],
       "distractors": [
         "temple",
         "city",
         "household"
       ],
-      "_freq": 31,
+      "frequency": {
+        "inTrack": 114,
+        "inCorpus": 114,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 17
+      },
+      "_freq": 114,
       "_stemSource": "derived"
     },
     {
@@ -794,7 +912,14 @@
         "sin",
         "promise"
       ],
-      "_freq": 122,
+      "frequency": {
+        "inTrack": 193,
+        "inCorpus": 193,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 12
+      },
+      "_freq": 193,
       "_stemSource": "derived"
     },
     {
@@ -826,6 +951,13 @@
         "crowd",
         "brother"
       ],
+      "frequency": {
+        "inTrack": 262,
+        "inCorpus": 262,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 5
+      },
       "_freq": 262,
       "_stemSource": "derived"
     },
@@ -857,7 +989,14 @@
         "nation",
         "throne"
       ],
-      "_freq": 135,
+      "frequency": {
+        "inTrack": 162,
+        "inCorpus": 162,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 17
+      },
+      "_freq": 162,
       "_stemSource": "derived"
     },
     {
@@ -889,7 +1028,14 @@
         "faith",
         "rest"
       ],
-      "_freq": 62,
+      "frequency": {
+        "inTrack": 169,
+        "inCorpus": 169,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 26
+      },
+      "_freq": 169,
       "_stemSource": "derived"
     },
     {
@@ -920,7 +1066,14 @@
         "year",
         "moment"
       ],
-      "_freq": 88,
+      "frequency": {
+        "inTrack": 106,
+        "inCorpus": 106,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 13
+      },
+      "_freq": 106,
       "_stemSource": "derived"
     },
     {
@@ -951,7 +1104,14 @@
         "son",
         "friend"
       ],
-      "_freq": 173,
+      "frequency": {
+        "inTrack": 342,
+        "inCorpus": 342,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 25
+      },
+      "_freq": 342,
       "_stemSource": "derived"
     },
     {
@@ -982,7 +1142,14 @@
         "servant",
         "woman"
       ],
-      "_freq": 52,
+      "frequency": {
+        "inTrack": 99,
+        "inCorpus": 99,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 23
+      },
+      "_freq": 99,
       "_stemSource": "derived"
     },
     {
@@ -1014,7 +1181,14 @@
         "friend",
         "king"
       ],
-      "_freq": 82,
+      "frequency": {
+        "inTrack": 126,
+        "inCorpus": 126,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 21
+      },
+      "_freq": 126,
       "_stemSource": "derived"
     },
     {
@@ -1046,7 +1220,14 @@
         "hour",
         "age"
       ],
-      "_freq": 46,
+      "frequency": {
+        "inTrack": 85,
+        "inCorpus": 85,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 19
+      },
+      "_freq": 85,
       "_stemSource": "derived"
     },
     {
@@ -1078,7 +1259,14 @@
         "wall",
         "field"
       ],
-      "_freq": 85,
+      "frequency": {
+        "inTrack": 101,
+        "inCorpus": 101,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 13
+      },
+      "_freq": 101,
       "_stemSource": "derived"
     },
     {
@@ -1110,7 +1298,14 @@
         "commandment",
         "parable"
       ],
-      "_freq": 22,
+      "frequency": {
+        "inTrack": 75,
+        "inCorpus": 75,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 17
+      },
+      "_freq": 75,
       "_stemSource": "derived"
     },
     {
@@ -1141,7 +1336,14 @@
         "cloud",
         "night"
       ],
-      "_freq": 11,
+      "frequency": {
+        "inTrack": 17,
+        "inCorpus": 17,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 4
+      },
+      "_freq": 17,
       "_stemSource": "derived"
     },
     {
@@ -1173,7 +1375,14 @@
         "far",
         "old"
       ],
-      "_freq": 62,
+      "frequency": {
+        "inTrack": 101,
+        "inCorpus": 101,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 21
+      },
+      "_freq": 101,
       "_stemSource": "derived"
     },
     {
@@ -1198,14 +1407,21 @@
       "attestations": [
         "Mark 1:24",
         "Luke 4:34",
-        "Romans 7:12"
+        "John 6:69"
       ],
       "distractors": [
         "great",
         "faithful",
         "wise"
       ],
-      "_freq": 115,
+      "frequency": {
+        "inTrack": 233,
+        "inCorpus": 233,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 23
+      },
+      "_freq": 233,
       "_stemSource": "derived"
     },
     {
@@ -1237,7 +1453,14 @@
         "wise",
         "strong"
       ],
-      "_freq": 16,
+      "frequency": {
+        "inTrack": 67,
+        "inCorpus": 67,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 19
+      },
+      "_freq": 67,
       "_stemSource": "derived"
     },
     {
@@ -1260,7 +1483,14 @@
         "first",
         "last"
       ],
-      "_freq": 18,
+      "frequency": {
+        "inTrack": 42,
+        "inCorpus": 42,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 14
+      },
+      "_freq": 42,
       "_stemSource": "derived"
     },
     {
@@ -1292,7 +1522,14 @@
         "great",
         "few"
       ],
-      "_freq": 98,
+      "frequency": {
+        "inTrack": 153,
+        "inCorpus": 153,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 20
+      },
+      "_freq": 153,
       "_stemSource": "derived"
     },
     {
@@ -1315,9 +1552,9 @@
         "gender": "f"
       },
       "attestations": [
-        "Romans 6:23",
         "John 12:50",
-        "John 17:3"
+        "John 17:3",
+        "Romans 6:23"
       ],
       "distractors": [
         "temporary",
@@ -1325,7 +1562,14 @@
         "hidden"
       ],
       "notes": "Every attested ending here begins with omicron, so the corpus invariant looks like αἰωνιο-. The standard analysis is stem αἰωνι- with the 2nd-declension -ος ending.",
-      "_freq": 37,
+      "frequency": {
+        "inTrack": 69,
+        "inCorpus": 69,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 19
+      },
+      "_freq": 69,
       "_stemSource": "override"
     },
     {
@@ -1343,8 +1587,8 @@
       },
       "attestations": [
         "Mark 9:24",
-        "Acts 27:25",
-        "John 9:38"
+        "John 9:38",
+        "Acts 27:25"
       ],
       "distractors": [
         "I hear",
@@ -1352,7 +1596,14 @@
         "I know"
       ],
       "notes": "The -ω ending marks 1st person singular present; -ει marks 3rd person.",
-      "_freq": 190,
+      "frequency": {
+        "inTrack": 241,
+        "inCorpus": 241,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 21
+      },
+      "_freq": 241,
       "_stemSource": "manual"
     },
     {
@@ -1378,7 +1629,14 @@
         "I see",
         "I write"
       ],
-      "_freq": 324,
+      "frequency": {
+        "inTrack": 427,
+        "inCorpus": 427,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 23
+      },
+      "_freq": 427,
       "_stemSource": "manual"
     },
     {
@@ -1387,20 +1645,31 @@
       "text": "γράφω",
       "translit": "graphō",
       "gloss": "I write",
-      "partOfSpeech": "noun",
+      "partOfSpeech": "verb",
       "morphology": {
         "highlight": [
           4
         ],
         "kind": "ending"
       },
-      "attestations": [],
+      "attestations": [
+        "1 Corinthians 4:14",
+        "1 Corinthians 14:37",
+        "2 Corinthians 13:10"
+      ],
       "distractors": [
         "I read",
         "I send",
         "I ask"
       ],
-      "_freq": 94,
+      "frequency": {
+        "inTrack": 190,
+        "inCorpus": 190,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 22
+      },
+      "_freq": 190,
       "_stemSource": "manual"
     },
     {
@@ -1418,15 +1687,22 @@
       },
       "attestations": [
         "Mark 8:24",
-        "Romans 7:23",
-        "John 9:15"
+        "John 9:15",
+        "John 9:25"
       ],
       "distractors": [
         "I hear",
         "I find",
         "I follow"
       ],
-      "_freq": 88,
+      "frequency": {
+        "inTrack": 133,
+        "inCorpus": 133,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 16
+      },
+      "_freq": 133,
       "_stemSource": "manual"
     },
     {
@@ -1450,7 +1726,14 @@
         "I come",
         "I fall"
       ],
-      "_freq": 66,
+      "frequency": {
+        "inTrack": 118,
+        "inCorpus": 118,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 16
+      },
+      "_freq": 118,
       "_stemSource": "manual"
     },
     {
@@ -1475,7 +1758,14 @@
         "I lose",
         "I carry"
       ],
-      "_freq": 178,
+      "frequency": {
+        "inTrack": 258,
+        "inCorpus": 258,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 21
+      },
+      "_freq": 258,
       "_stemSource": "manual"
     },
     {
@@ -1493,15 +1783,22 @@
       },
       "attestations": [
         "Luke 1:34",
-        "Acts 19:15",
-        "Romans 7:15"
+        "John 10:14",
+        "John 10:15"
       ],
       "distractors": [
         "I forget",
         "I teach",
         "I ask"
       ],
-      "_freq": 141,
+      "frequency": {
+        "inTrack": 221,
+        "inCorpus": 221,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 20
+      },
+      "_freq": 221,
       "_stemSource": "manual"
     },
     {
@@ -1519,15 +1816,22 @@
       },
       "attestations": [
         "Luke 19:22",
-        "Acts 15:19",
-        "John 5:30"
+        "John 5:30",
+        "John 8:15"
       ],
       "distractors": [
         "I forgive",
         "I rule",
         "I choose"
       ],
-      "_freq": 70,
+      "frequency": {
+        "inTrack": 114,
+        "inCorpus": 114,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 15
+      },
+      "_freq": 114,
       "_stemSource": "manual"
     },
     {
@@ -1549,7 +1853,14 @@
         "I burn",
         "I fall"
       ],
-      "_freq": 20,
+      "frequency": {
+        "inTrack": 31,
+        "inCorpus": 31,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 13
+      },
+      "_freq": 31,
       "_stemSource": "manual"
     },
     {
@@ -1571,7 +1882,14 @@
         "I lose",
         "I heal"
       ],
-      "_freq": 74,
+      "frequency": {
+        "inTrack": 106,
+        "inCorpus": 106,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 18
+      },
+      "_freq": 106,
       "_stemSource": "manual"
     },
     {
@@ -1597,7 +1915,14 @@
         "I write",
         "I ask"
       ],
-      "_freq": 2082,
+      "frequency": {
+        "inTrack": 2345,
+        "inCorpus": 2345,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 25
+      },
+      "_freq": 2345,
       "_stemSource": "manual"
     },
     {
@@ -1619,7 +1944,14 @@
         "I fear",
         "I seek"
       ],
-      "_freq": 71,
+      "frequency": {
+        "inTrack": 143,
+        "inCorpus": 143,
+        "corpus": "the New Testament",
+        "corpusComplete": true,
+        "corpusBooks": 22
+      },
+      "_freq": 143,
       "_stemSource": "manual"
     }
   ],
@@ -2101,9 +2433,15 @@
           "text": "φαίνει",
           "translit": "phainei",
           "gloss": "shines",
-          "wordId": null,
-          "familyId": null,
-          "morphology": null,
+          "wordId": "phaino",
+          "familyId": "φαιν",
+          "morphology": {
+            "highlight": [
+              4,
+              5
+            ],
+            "kind": "ending"
+          },
           "parse": {
             "person": "3",
             "tense": "present",

@@ -7,9 +7,10 @@
  *                 scripts/import-agdt.mjs. Do not edit by hand — regenerate.
  *   units.ts      the learning path, HAND-AUTHORED.
  *
- * ⚠️ This course is BUILT BUT NOT CLEARED TO SHIP. See ATTIC_REVIEW_NOTES
- * below and attic-spike-findings.md §2 — the corpus licence is contradictory
- * at source and no engineer can resolve it.
+ * LICENCE: CC BY-SA 3.0 US, from the upstream Perseus treebank. This content
+ * is an adaptation and inherits ShareAlike — see NOTICE.md and the `licence`
+ * entry in ATTIC_REVIEW_NOTES. The remaining caveats below are about CONTENT
+ * QUALITY (corpus size, Thucydides weighting, hand-supplied stems), not rights.
  */
 import { CONTENT_SCHEMA_VERSION, type ContentBundle } from "../../schema";
 import { families, words, passages } from "./generated";
@@ -27,7 +28,7 @@ export const greekAtticBundle = {
 export const ATTIC_REVIEW_NOTES: { id: string; note: string }[] = [
   {
     id: "licence",
-    note: "BLOCKING, AND NOT AN ENGINEERING QUESTION. Upstream AGDT 2.1 states CC BY-SA 3.0 US; the Universal Dependencies conversion of the same data states CC BY-NC-SA 2.5. ShareAlike forbids adding a NonCommercial restriction, so the two cannot both be correct. Content here is built from the upstream XML only — never the UD conversion — but that narrows the risk, it does not remove it. Someone qualified must confirm the upstream terms before this course ships.",
+    note: "RESOLVED — the course may ship. Content is built from the UPSTREAM AGDT 2.1 XML, whose repository is the copyright holder's own (Perseus Digital Library, Tufts University) and states CC BY-SA 3.0 US. The Universal Dependencies conversion of the same treebank is labelled CC BY-NC-SA 2.5; a downstream converter cannot add a NonCommercial restriction to BY-SA material, so that label is the conversion's problem, and we never use it. Trelingo is free and non-commercial besides, so our use is permitted under either reading. What remains is an obligation rather than a blocker: credit Perseus, and redistribute this derived content under BY-SA 3.0 US or a later compatible version. See NOTICE.md.",
   },
   {
     id: "corpus-narrowness",
@@ -56,5 +57,9 @@ export const ATTIC_REVIEW_NOTES: { id: string; note: string }[] = [
   {
     id: "glosses",
     note: "As with Koine, glosses are short teaching meanings, not lexicon entries. δίκη ranges from “custom” to “penalty”; λόγος in Plato is usually “argument”, not “word”.",
+  },
+  {
+    id: "frequency",
+    note: "Frequencies are counted across the WHOLE Perseus treebank — 33 works, 549,289 tokens — not merely the Attic prose subset this course reads from, because a broader reference is a more useful number. It is still a SAMPLE of Greek, so it is marked incomplete and no Attic word can ever be labelled a hapax legomenon: a lemma occurring once in half a million tokens may be perfectly ordinary in a literature of millions. Koine gets the badge because the New Testament is a complete corpus; Attic has no equivalent and does not pretend to.",
   },
 ];

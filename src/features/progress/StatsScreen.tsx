@@ -121,7 +121,7 @@ export function StatsScreen() {
                 if (!w) return null;
                 return (
                   <div key={c.wordId} className="row row--between">
-                    <ScriptWord word={w.text} highlight={w.morphology.highlight} size={22} showHighlight />
+                    <ScriptWord word={w.text} highlight={w.morphology?.highlight} size={22} showHighlight />
                     <span className="small muted">
                       {w.gloss} · {c.lapses} lapses
                     </span>

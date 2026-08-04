@@ -8,6 +8,7 @@ import { Banner, Button, Empty, TopBar } from "@/components/ui";
 import { ScriptWord } from "@/components/ScriptWord";
 import type { AssessmentResult } from "@/api/types";
 import { textProps } from "@/content/course";
+import { passagesOf } from "@/content/schema";
 
 type Phase = "pick" | "reading" | "questions" | "done";
 
@@ -34,8 +35,8 @@ export function FluencyScreen() {
     [],
   );
   const available = units
-    .filter((u) => completed?.has(u.id) && u.passageId)
-    .map((u) => u.passageId!);
+    .filter((u) => completed?.has(u.id))
+    .flatMap(passagesOf);
 
   const passage = passageId ? passageById.get(passageId) : undefined;
 

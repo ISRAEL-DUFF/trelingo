@@ -24,8 +24,9 @@
  * MSW ignores navigation requests entirely, so the app-shell route below is
  * never contested.
  */
-import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
+import { precacheAndRoute, createHandlerBoundToURL, cleanupOutdatedCaches } from "workbox-precaching";
 import { NavigationRoute, registerRoute } from "workbox-routing";
+import { clientsClaim } from "workbox-core";
 import { CacheFirst } from "workbox-strategies";
 import { ExpirationPlugin } from "workbox-expiration";
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
@@ -34,15 +35,27 @@ declare const self: ServiceWorkerGlobalScope & {
   __WB_MANIFEST: Array<{ url: string; revision: string | null }>;
 };
 
-// 1. Precache the app shell. Injected at build time by vite-plugin-pwa.
+// 1. Take over as soon as a new build is available.
+//
+//    Without this a new worker installs and then waits forever: every visit
+//    keeps being served the PREVIOUS index.html out of the precache, so a
+//    deploy has no visible effect until the user closes every window of the
+//    app. That is invisible from the server side — curl shows the new file
+//    while the browser shows the old one — and for an installed PWA, whose
+//    windows are rarely all closed, it means updates effectively never land.
+self.skipWaiting();
+clientsClaim();
+cleanupOutdatedCaches();
+
+// 2. Precache the app shell. Injected at build time by vite-plugin-pwa.
 precacheAndRoute(self.__WB_MANIFEST);
 
-// 2. Audio is runtime-cached, never precached — it would bloat the install.
+// 3. Audio is runtime-cached, never precached — it would bloat the install.
 //    Spec §2: "runtime cache, cache-first" for audio assets.
 registerRoute(
   /\/api\/audio\/.*/,
   new CacheFirst({
-    cacheName: "shoresh-audio",
+    cacheName: "trelingo-audio",
     plugins: [
       new ExpirationPlugin({ maxEntries: 500, maxAgeSeconds: 60 * 60 * 24 * 90 }),
       new CacheableResponsePlugin({ statuses: [0, 200] }),
@@ -50,27 +63,25 @@ registerRoute(
   }),
 );
 
-// 3. Client-side routing: every navigation resolves to the precached shell.
+// 4. Client-side routing: every navigation resolves to the precached shell.
 //    /api/ is denied so a navigation-shaped API request is not fed index.html.
+//    /probe/ is a self-contained minimal PWA with its own worker and manifest,
+//    used to isolate an Android install failure. It must be left entirely alone
+//    or it stops being an independent control.
 registerRoute(
-  new NavigationRoute(createHandlerBoundToURL("index.html"), { denylist: [/^\/api\//] }),
+  new NavigationRoute(createHandlerBoundToURL("index.html"), {
+    denylist: [/^\/api\//, /^\/probe\//],
+  }),
 );
 
-// 4. MSW last, so Workbox has already claimed what it owns. Compiled out of the
+// 5. MSW last, so Workbox has already claimed what it owns. Compiled out of the
 //    bundle entirely when mocks are off — a real backend must never ship with
 //    an interceptor sitting in front of it.
 if (import.meta.env.VITE_USE_MOCK_API !== "false") {
   self.importScripts("/mockServiceWorker.js");
 }
 
-// `registerType: "prompt"` — a new worker waits rather than taking over, so a
-// running lesson is never swapped out from under the learner.
-//
-// NOTE: nothing in the app sends this message yet. There is no "a new version
-// is available, reload?" prompt, which means an installed app picks up an
-// update only after every one of its windows is closed. That is the standard
-// receiving half of the protocol and vite-plugin-pwa's `registerSW` sends
-// exactly this — the UI half is simply not built.
+// Kept for an explicit "update now" control, should one ever be added.
 self.addEventListener("message", (event: ExtendableMessageEvent) => {
   if ((event.data as { type?: string } | null)?.type === "SKIP_WAITING") void self.skipWaiting();
 });

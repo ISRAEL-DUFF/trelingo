@@ -1,0 +1,14 @@
+{
+  "name": "Trelingo Install Probe",
+  "short_name": "Probe",
+  "description": "Minimal PWA used to isolate an Android install failure.",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1B2A4A",
+  "scope": "./"
+}

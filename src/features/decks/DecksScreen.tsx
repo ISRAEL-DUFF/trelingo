@@ -169,7 +169,7 @@ export function DecksScreen() {
                   onClick={() => toggle(w.id)}
                 >
                   <span className="row row--between">
-                    <ScriptWord word={w.text} highlight={w.morphology.highlight} size={20} showHighlight />
+                    <ScriptWord word={w.text} highlight={w.morphology?.highlight} size={20} showHighlight />
                     <span className="small muted">{w.gloss}</span>
                   </span>
                 </button>

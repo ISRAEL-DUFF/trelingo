@@ -1,4 +1,4 @@
-# Shoresh — frontend
+# Trelingo — frontend
 
 A mobile-first PWA for learning **Biblical** Hebrew through the triliteral root system.
 Implements the client side of [`../spec.md`](../spec.md), Phases 1–8, against a **fully mocked API**.
@@ -150,9 +150,33 @@ load-bearing and is explained in the file's header, and guarded by `src/pwa-inst
 `VITE_USE_MOCK_API=false` compiles MSW out of the worker entirely, so a real backend never
 ships with an interceptor in front of it. Deleting `src/mocks/` later needs no flag flip.
 
-*Not yet built:* nothing sends the worker a `SKIP_WAITING` message, so there is no "new
-version available, reload?" prompt. An installed app picks up an update only after all of its
-windows are closed.
+**Test installability on Android, not on desktop.** Desktop Chrome will "install" almost any
+page as an app whether or not it is a PWA, so a successful desktop install proves nothing
+about the manifest or the service worker. Android Chrome only offers a real install when every
+criterion is met and otherwise degrades silently to "Add to Home screen", which makes a
+bookmark. *Installs on desktop, refuses on Android* is therefore the expected symptom of
+criteria that were never met — not an Android-specific bug.
+
+Settings → Install → **"Why can't I install?"** evaluates every criterion on the device you are
+holding and shows which one fails. That is the only place the answer exists.
+
+**Deploying to a static host.** `npm run build` also writes `dist/200.html`, which is the SPA
+fallback Surge uses; without it a first visit to a deep link like `/library` 404s, because the
+service worker's navigation route only helps once the worker is already installed. Any host
+must serve the app from the domain root — `start_url` and `scope` are both `/`.
+
+**The install prompt is captured in `index.html`, not in React.** `beforeinstallprompt` fires
+once and never replays, and on a repeat visit Chrome fires it at navigation — the service
+worker is already active and the manifest already known — which is far sooner than ~590 KB of
+module bundle evaluates on a phone. A listener registered from application code misses it
+outright, and the symptom is deeply misleading: Chrome's own menu offers "Install app" while
+the page reports that no prompt was ever offered, so the app's own button never appears.
+Desktop hides this completely, because the address-bar icon works either way.
+
+**The worker takes over immediately** (`skipWaiting` + `clientsClaim`). A waiting worker keeps
+serving the previous `index.html` from the precache, so a deploy has no effect until every
+window of the app is closed — which for an installed PWA is close to never. That failure is
+invisible from outside: `curl` shows the new file while every browser shows the old one.
 
 **Audio is synthesised.** No recordings exist yet. The manifest fetch and per-word URLs go
 through the API exactly as they will with a real CDN (so that data path is exercised now),

@@ -5,6 +5,7 @@ import { FamilySheet } from "./FamilySheet";
 import { useSession } from "@/state/session";
 import { playWord, speak } from "@/lib/audio";
 import { textProps } from "@/content/course";
+import { WordFrequency } from "@/components/WordFrequency";
 
 /**
  * Renders a real verse with tap-to-gloss on every word (spec §4 Phase 4).
@@ -23,7 +24,7 @@ export function PassageReader({
   showTranslation?: boolean;
   fadeStage?: number;
 }) {
-  const { passageById } = useCourseContent();
+  const { passageById, wordById } = useCourseContent();
   const passage = passageById.get(passageId);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [familySheet, setFamilySheet] = useState<string | null>(null);
@@ -64,6 +65,16 @@ export function PassageReader({
                 <div>
                   <div style={{ fontSize: 15, fontWeight: 600 }}>{active.gloss}</div>
                   <div className="translit">{active.translit}</div>
+                  {/*
+                    Rarity, right where the word is met. A learner tapping an
+                    unfamiliar word in a verse is asking "should I bother
+                    learning this?", and the honest answer is a frequency.
+                  */}
+                  {active.wordId && (
+                    <div style={{ marginTop: 4 }}>
+                      <WordFrequency frequency={wordById.get(active.wordId)?.frequency} />
+                    </div>
+                  )}
                 </div>
                 <div className="row" style={{ gap: 6 }}>
                   <button
