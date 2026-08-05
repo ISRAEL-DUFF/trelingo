@@ -6424,7 +6424,7 @@
         "corpusBooks": 10
       },
       "_freq": 4,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "akouo",
@@ -8437,7 +8437,7 @@
         "corpusBooks": 25
       },
       "_freq": 41,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "megas",
@@ -10098,7 +10098,7 @@
         "corpusBooks": 5
       },
       "_freq": 3,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "diktyon",
@@ -11234,7 +11234,7 @@
         "corpusBooks": 5
       },
       "_freq": 1,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "egeiro",
@@ -11590,7 +11590,7 @@
         "corpusBooks": 9
       },
       "_freq": 6,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "skeyos",
@@ -12932,7 +12932,7 @@
         "corpusBooks": 3
       },
       "_freq": 2,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "speiro",
@@ -14411,7 +14411,7 @@
         "corpusBooks": 7
       },
       "_freq": 2,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "anachoreo",
@@ -17058,7 +17058,7 @@
         "corpusBooks": 9
       },
       "_freq": 1,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "ampelos",
@@ -18877,7 +18877,7 @@
         "corpusBooks": 7
       },
       "_freq": 5,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "eklektos",
@@ -20517,7 +20517,7 @@
         "corpusBooks": 5
       },
       "_freq": 2,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "typhlos",
@@ -20734,7 +20734,7 @@
         "corpusBooks": 8
       },
       "_freq": 3,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "tachy",
@@ -24978,7 +24978,7 @@
         "corpusBooks": 4
       },
       "_freq": 1,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "bibrosko",
@@ -26937,7 +26937,7 @@
         "corpusBooks": 2
       },
       "_freq": 3,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "osme",
@@ -27532,7 +27532,7 @@
         "corpusBooks": 3
       },
       "_freq": 2,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "kolpos",
@@ -27709,7 +27709,7 @@
         "corpusBooks": 4
       },
       "_freq": 2,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "hypomimnesko",
@@ -28485,7 +28485,7 @@
         "corpusBooks": 4
       },
       "_freq": 1,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "kategoria",
@@ -30363,7 +30363,7 @@
         "corpusBooks": 6
       },
       "_freq": 2,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "agalliao",
@@ -53716,13 +53716,7 @@
           "gloss": "earth, land, soil",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1,
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -55827,13 +55821,7 @@
           "gloss": "earth, land, soil",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1,
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "genitive",
             "number": "s",
@@ -55862,13 +55850,7 @@
           "gloss": "earth, land, soil",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1,
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "genitive",
             "number": "s",
@@ -55920,13 +55902,7 @@
           "gloss": "earth, land, soil",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1,
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "genitive",
             "number": "s",
@@ -67082,13 +67058,7 @@
           "gloss": "your",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1,
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -86012,13 +85982,7 @@
           "gloss": "earth, land, soil",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1,
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "genitive",
             "number": "s",
@@ -160689,13 +160653,7 @@
           "gloss": "earth, land, soil",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1,
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -162685,13 +162643,7 @@
           "gloss": "earth, land, soil",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1,
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "genitive",
             "number": "s",
@@ -199888,13 +199840,7 @@
           "gloss": "earth, land, soil",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1,
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "genitive",
             "number": "s",
@@ -201282,12 +201228,7 @@
           "gloss": "your",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "p",
@@ -201331,12 +201272,7 @@
           "gloss": "your",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "p",
@@ -203301,13 +203237,7 @@
           "gloss": "your",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1,
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -214452,13 +214382,7 @@
           "gloss": "your",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1,
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -238434,13 +238358,7 @@
           "gloss": "earth, land, soil",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1,
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "genitive",
             "number": "s",
@@ -238649,13 +238567,7 @@
           "gloss": "earth, land, soil",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1,
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -239104,13 +239016,7 @@
           "gloss": "earth, land, soil",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              1,
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",

@@ -81,11 +81,54 @@ const FINALS = { "ך": "כ", "ם": "מ", "ן": "נ", "ף": "פ", "ץ": "צ" };
  */
 const display = (w) => w.replace(/\//g, "");
 
-/** Bare consonants: points stripped, final forms folded. */
+/**
+ * ש CARRIES ITS DOT, BECAUSE שׂ AND שׁ ARE DIFFERENT LETTERS.
+ *
+ * The dot is written as a combining mark and sits in the same Unicode range as
+ * the vowel points, so stripping "points" strips it too — and then שָׂנֵא "to
+ * hate" and שָׁנָא "to change" reduce to the same three consonants and land in
+ * one root family. So do שָׂבַע "to be satisfied" and שָׁבַע "to swear". They
+ * are unrelated words, and asserting a shared root is precisely the root
+ * fallacy this importer refuses everywhere else.
+ *
+ * Jonah, Ruth and Esther never happened to contain both members of such a pair,
+ * so the defect was invisible until Ecclesiastes, which contains both.
+ *
+ * The presentation-form code points U+FB2A/U+FB2B are single characters that
+ * already mean "shin with its dot" and "sin with its dot", so using them keeps
+ * every consonant one character wide — which the rest of this file relies on,
+ * since roots are indexed character by character.
+ */
+const SHIN_DOT = "ׁ";
+const SIN_DOT = "ׂ";
+const SHIN = "שׁ";
+const SIN = "שׂ";
+
+/** Bare consonants: points stripped, final forms folded, sin/shin kept apart. */
 function consonants(word) {
+  const chars = [...word.normalize("NFD")];
   let out = "";
-  for (const ch of word) {
+  for (let i = 0; i < chars.length; i++) {
+    const ch = chars[i];
+    // Already-composed presentation forms, as produced by this function itself
+    // — hand-written roots in the glossaries round-trip through here.
+    if (ch === SHIN || ch === SIN) {
+      out += ch;
+      continue;
+    }
     if (!LETTER.test(ch)) continue;
+    if (ch === "ש") {
+      // The dot may sit anywhere in the cluster's marks, not necessarily first.
+      let dot = "";
+      for (let j = i + 1; j < chars.length && !LETTER.test(chars[j]); j++) {
+        if (chars[j] === SHIN_DOT || chars[j] === SIN_DOT) {
+          dot = chars[j];
+          break;
+        }
+      }
+      out += dot === SIN_DOT ? SIN : dot === SHIN_DOT ? SHIN : "ש";
+      continue;
+    }
     out += FINALS[ch] ?? ch;
   }
   return out;
@@ -333,7 +376,15 @@ function rekey(translations, bookPath) {
 }
 
 /** OSIS abbreviations that are not the name a reader expects to see. */
-const DISPLAY_BOOK = { Esth: "Esther", Eccl: "Ecclesiastes", Judg: "Judges", Gen: "Genesis" };
+const DISPLAY_BOOK = {
+  Esth: "Esther",
+  Eccl: "Ecclesiastes",
+  Judg: "Judges",
+  Gen: "Genesis",
+  Hag: "Haggai",
+  Mal: "Malachi",
+  Obad: "Obadiah",
+};
 
 const reference = (osisID) => {
   const [book, ch, vs] = osisID.split(".");
@@ -486,8 +537,20 @@ function main() {
     const surface = headword;
     const { pos, parse } = parseMorph(sample.morphs[sample.ci]);
 
-    // ---- root, safely ----
-    const root = cur.root ? consonants(cur.root) : primitiveRoot(strongs, lemma);
+    /*
+     * ---- root, safely ----
+     *
+     * `noRoot` lets curation REFUSE a root the rule would otherwise derive.
+     * It exists for homographs: עָנָה "to afflict" (H6031) and עָנָה "to
+     * answer" (H6030) are two distinct primitive roots spelled identically, so
+     * keying families on consonants files them together and the family sheet
+     * then teaches that answering and afflicting are the same word. Splitting
+     * them is not possible in this design — the family id IS the consonants —
+     * and choosing one gloss for both is a confident wrong answer. So both are
+     * taught plain, which is the same refusal this file already makes wherever
+     * a root cannot be located.
+     */
+    const root = cur.noRoot ? null : cur.root ? consonants(cur.root) : primitiveRoot(strongs, lemma);
     let highlight = null;
     if (root) {
       highlight = locateRoot(root, surface);

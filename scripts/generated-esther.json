@@ -11,8 +11,8 @@
       "coreGloss": "Judah, Jewish"
     },
     {
-      "id": "עשה",
-      "letters": "עשה",
+      "id": "עשׂה",
+      "letters": "עשׂה",
       "coreGloss": "to do, to make",
       "_inferredGloss": true
     },
@@ -41,14 +41,14 @@
       "_inferredGloss": true
     },
     {
-      "id": "אשה",
-      "letters": "אשה",
+      "id": "אשׁה",
+      "letters": "אשׁה",
       "coreGloss": "a woman, a wife",
       "_inferredGloss": true
     },
     {
-      "id": "שתה",
-      "letters": "שתה",
+      "id": "שׁתה",
+      "letters": "שׁתה",
       "coreGloss": "to drink; a feast"
     },
     {
@@ -73,8 +73,8 @@
       "coreGloss": "to see"
     },
     {
-      "id": "שלח",
-      "letters": "שלח",
+      "id": "שׁלח",
+      "letters": "שׁלח",
       "coreGloss": "to send"
     },
     {
@@ -129,8 +129,8 @@
       "_inferredGloss": true
     },
     {
-      "id": "ישב",
-      "letters": "ישב",
+      "id": "ישׁב",
+      "letters": "ישׁב",
       "coreGloss": "to sit, dwell"
     },
     {
@@ -144,8 +144,8 @@
       "coreGloss": "to go out"
     },
     {
-      "id": "בקש",
-      "letters": "בקש",
+      "id": "בקשׁ",
+      "letters": "בקשׁ",
       "coreGloss": "to seek, to request"
     },
     {
@@ -183,8 +183,8 @@
       "_inferredGloss": true
     },
     {
-      "id": "שוב",
-      "letters": "שוב",
+      "id": "שׁוב",
+      "letters": "שׁוב",
       "coreGloss": "to return"
     },
     {
@@ -198,8 +198,8 @@
       "coreGloss": "to cross over"
     },
     {
-      "id": "נשא",
-      "letters": "נשא",
+      "id": "נשׂא",
+      "letters": "נשׂא",
       "coreGloss": "to lift, to carry",
       "_inferredGloss": true
     },
@@ -210,13 +210,13 @@
       "_inferredGloss": true
     },
     {
-      "id": "שמח",
-      "letters": "שמח",
+      "id": "שׂמח",
+      "letters": "שׂמח",
       "coreGloss": "joy, to rejoice"
     },
     {
-      "id": "שמר",
-      "letters": "שמר",
+      "id": "שׁמר",
+      "letters": "שׁמר",
       "coreGloss": "to guard, keep"
     },
     {
@@ -225,13 +225,13 @@
       "coreGloss": "to take"
     },
     {
-      "id": "לבש",
-      "letters": "לבש",
+      "id": "לבשׁ",
+      "letters": "לבשׁ",
       "coreGloss": "to clothe"
     },
     {
-      "id": "נפש",
-      "letters": "נפש",
+      "id": "נפשׁ",
+      "letters": "נפשׁ",
       "coreGloss": "life, breath",
       "notes": "Not “soul” in the later philosophical sense: נֶפֶשׁ is the living, breathing self. Jonah 1:14 asks not to perish for this man's נֶפֶשׁ — his life."
     },
@@ -258,8 +258,8 @@
       "_inferredGloss": true
     },
     {
-      "id": "שמד",
-      "letters": "שמד",
+      "id": "שׁמד",
+      "letters": "שׁמד",
       "coreGloss": "to destroy, to annihilate",
       "_inferredGloss": true
     },
@@ -276,8 +276,8 @@
       "_inferredGloss": true
     },
     {
-      "id": "שמע",
-      "letters": "שמע",
+      "id": "שׁמע",
+      "letters": "שׁמע",
       "coreGloss": "to hear"
     },
     {
@@ -287,8 +287,8 @@
       "_inferredGloss": true
     },
     {
-      "id": "שומ",
-      "letters": "שומ",
+      "id": "שׂומ",
+      "letters": "שׂומ",
       "coreGloss": "to put, to set",
       "_inferredGloss": true
     },
@@ -316,14 +316,14 @@
       "_inferredGloss": true
     },
     {
-      "id": "שנה",
-      "letters": "שנה",
+      "id": "שׁנה",
+      "letters": "שׁנה",
       "coreGloss": "to be different, to change",
       "_inferredGloss": true
     },
     {
-      "id": "שרת",
-      "letters": "שרת",
+      "id": "שׁרת",
+      "letters": "שׁרת",
       "coreGloss": "to serve, to attend",
       "_inferredGloss": true
     },
@@ -357,14 +357,14 @@
       "_inferredGloss": true
     },
     {
-      "id": "שחה",
-      "letters": "שחה",
+      "id": "שׁחה",
+      "letters": "שׁחה",
       "coreGloss": "to bow down",
       "_inferredGloss": true
     },
     {
-      "id": "שוה",
-      "letters": "שוה",
+      "id": "שׁוה",
+      "letters": "שׁוה",
       "coreGloss": "to be worth, to be equal",
       "_inferredGloss": true
     },
@@ -381,14 +381,14 @@
       "_inferredGloss": true
     },
     {
-      "id": "ישט",
-      "letters": "ישט",
+      "id": "ישׁט",
+      "letters": "ישׁט",
       "coreGloss": "to hold out, to extend",
       "_inferredGloss": true
     },
     {
-      "id": "חרש",
-      "letters": "חרש",
+      "id": "חרשׁ",
+      "letters": "חרשׁ",
       "coreGloss": "to be silent, to hold one's peace",
       "_inferredGloss": true
     },
@@ -399,13 +399,13 @@
       "_inferredGloss": true
     },
     {
-      "id": "חשב",
-      "letters": "חשב",
+      "id": "חשׁב",
+      "letters": "חשׁב",
       "coreGloss": "to think, to plan"
     },
     {
-      "id": "שנא",
-      "letters": "שנא",
+      "id": "שׂנא",
+      "letters": "שׂנא",
       "coreGloss": "to hate",
       "_inferredGloss": true
     },
@@ -440,8 +440,8 @@
       "coreGloss": "after, behind"
     },
     {
-      "id": "שככ",
-      "letters": "שככ",
+      "id": "שׁככ",
+      "letters": "שׁככ",
       "coreGloss": "to subside, to abate",
       "_inferredGloss": true
     },
@@ -451,8 +451,8 @@
       "coreGloss": "to remember"
     },
     {
-      "id": "שקל",
-      "letters": "שקל",
+      "id": "שׁקל",
+      "letters": "שׁקל",
       "coreGloss": "to weigh out",
       "_inferredGloss": true
     },
@@ -522,8 +522,8 @@
       "_inferredGloss": true
     },
     {
-      "id": "שלט",
-      "letters": "שלט",
+      "id": "שׁלט",
+      "letters": "שׁלט",
       "coreGloss": "to have power over",
       "_inferredGloss": true
     },
@@ -545,8 +545,8 @@
       "_inferredGloss": true
     },
     {
-      "id": "שקה",
-      "letters": "שקה",
+      "id": "שׁקה",
+      "letters": "שׁקה",
       "coreGloss": "to give drink to",
       "_inferredGloss": true
     },
@@ -580,8 +580,8 @@
       "_inferredGloss": true
     },
     {
-      "id": "שרר",
-      "letters": "שרר",
+      "id": "שׂרר",
+      "letters": "שׂרר",
       "coreGloss": "to rule, to be master",
       "_inferredGloss": true
     },
@@ -731,8 +731,8 @@
       "_inferredGloss": true
     },
     {
-      "id": "כבש",
-      "letters": "כבש",
+      "id": "כבשׁ",
+      "letters": "כבשׁ",
       "coreGloss": "to subdue, to force",
       "_inferredGloss": true
     },
@@ -742,8 +742,8 @@
       "coreGloss": "to add"
     },
     {
-      "id": "כשר",
-      "letters": "כשר",
+      "id": "כשׁר",
+      "letters": "כשׁר",
       "coreGloss": "to be fitting, to succeed",
       "_inferredGloss": true
     },
@@ -766,8 +766,8 @@
       "_inferredGloss": true
     },
     {
-      "id": "שבר",
-      "letters": "שבר",
+      "id": "שׂבר",
+      "letters": "שׂבר",
       "coreGloss": "to wait, to hope",
       "_inferredGloss": true
     },
@@ -795,8 +795,8 @@
       "_inferredGloss": true
     },
     {
-      "id": "דרש",
-      "letters": "דרש",
+      "id": "דרשׁ",
+      "letters": "דרשׁ",
       "coreGloss": "to seek, to inquire",
       "_inferredGloss": true
     }
@@ -1072,7 +1072,7 @@
     },
     {
       "id": "h6213",
-      "familyId": "עשה",
+      "familyId": "עשׂה",
       "text": "עָשָׂה",
       "translit": "ʻâsâh",
       "gloss": "to do, to make",
@@ -1770,7 +1770,7 @@
     },
     {
       "id": "h802",
-      "familyId": "אשה",
+      "familyId": "אשׁה",
       "text": "אִשָּׁה",
       "translit": "ʼishshâh",
       "gloss": "a woman, a wife",
@@ -1812,7 +1812,7 @@
     },
     {
       "id": "h4960",
-      "familyId": "שתה",
+      "familyId": "שׁתה",
       "text": "מִשְׁתֶּה",
       "translit": "mishteh",
       "gloss": "a feast, a banquet",
@@ -2236,7 +2236,7 @@
     },
     {
       "id": "h7971",
-      "familyId": "שלח",
+      "familyId": "שׁלח",
       "text": "שָׁלַח",
       "translit": "shâlach",
       "gloss": "to send",
@@ -3110,7 +3110,7 @@
     },
     {
       "id": "h3427",
-      "familyId": "ישב",
+      "familyId": "ישׁב",
       "text": "יָשַׁב",
       "translit": "yâshab",
       "gloss": "to sit, to dwell",
@@ -3228,7 +3228,7 @@
     },
     {
       "id": "h1245",
-      "familyId": "בקש",
+      "familyId": "בקשׁ",
       "text": "בָּקַשׁ",
       "translit": "bâqash",
       "gloss": "to seek",
@@ -3701,7 +3701,7 @@
     },
     {
       "id": "h7725",
-      "familyId": "שוב",
+      "familyId": "שׁוב",
       "text": "שׁוּב",
       "translit": "shûwb",
       "gloss": "to turn back, to repent",
@@ -4024,7 +4024,7 @@
     },
     {
       "id": "h5375",
-      "familyId": "נשא",
+      "familyId": "נשׂא",
       "text": "נָשָׂא",
       "translit": "nâsâʼ",
       "gloss": "to lift, to carry",
@@ -4099,7 +4099,7 @@
     },
     {
       "id": "h1246",
-      "familyId": "בקש",
+      "familyId": "בקשׁ",
       "text": "בַּקָּשָׁה",
       "translit": "baqqâshâh",
       "gloss": "a request",
@@ -4141,7 +4141,7 @@
     },
     {
       "id": "h8057",
-      "familyId": "שמח",
+      "familyId": "שׂמח",
       "text": "שִׂמְחָה",
       "translit": "simchâh",
       "gloss": "joy, gladness",
@@ -4285,7 +4285,7 @@
     },
     {
       "id": "h8104",
-      "familyId": "שמר",
+      "familyId": "שׁמר",
       "text": "שָׁמַר",
       "translit": "shâmar",
       "gloss": "to keep, to guard",
@@ -4431,7 +4431,7 @@
     },
     {
       "id": "h3847",
-      "familyId": "לבש",
+      "familyId": "לבשׁ",
       "text": "לָבַשׁ",
       "translit": "lâbash",
       "gloss": "to put on, to clothe",
@@ -4469,7 +4469,7 @@
     },
     {
       "id": "h3830",
-      "familyId": "לבש",
+      "familyId": "לבשׁ",
       "text": "לְבוּשׁ",
       "translit": "lᵉbûwsh",
       "gloss": "clothing, a robe",
@@ -4541,7 +4541,7 @@
     },
     {
       "id": "h5315",
-      "familyId": "נפש",
+      "familyId": "נפשׁ",
       "text": "נֶפֶשׁ",
       "translit": "nephesh",
       "gloss": "soul, life, person",
@@ -5197,7 +5197,7 @@
     },
     {
       "id": "h8045",
-      "familyId": "שמד",
+      "familyId": "שׁמד",
       "text": "שָׁמַד",
       "translit": "shâmad",
       "gloss": "to destroy, to annihilate",
@@ -5680,7 +5680,7 @@
     },
     {
       "id": "h8085",
-      "familyId": "שמע",
+      "familyId": "שׁמע",
       "text": "שָׁמַע",
       "translit": "shâmaʻ",
       "gloss": "to hear, to listen",
@@ -5925,7 +5925,7 @@
     },
     {
       "id": "h7760",
-      "familyId": "שומ",
+      "familyId": "שׂומ",
       "text": "שׂוּם",
       "translit": "sûwm",
       "gloss": "to put, to set",
@@ -6552,7 +6552,7 @@
     },
     {
       "id": "h8138",
-      "familyId": "שנה",
+      "familyId": "שׁנה",
       "text": "שָׁנָה",
       "translit": "shânâh",
       "gloss": "to be different, to change",
@@ -6591,7 +6591,7 @@
     },
     {
       "id": "h8334",
-      "familyId": "שרת",
+      "familyId": "שׁרת",
       "text": "שָׁרַת",
       "translit": "shârath",
       "gloss": "to serve, to attend",
@@ -7163,7 +7163,7 @@
     },
     {
       "id": "h7812",
-      "familyId": "שחה",
+      "familyId": "שׁחה",
       "text": "שָׁחָה",
       "translit": "shâchâh",
       "gloss": "to bow down",
@@ -7230,7 +7230,7 @@
     },
     {
       "id": "h7737",
-      "familyId": "שוה",
+      "familyId": "שׁוה",
       "text": "שָׁוָה",
       "translit": "shâvâh",
       "gloss": "to be worth, to be equal",
@@ -7449,7 +7449,7 @@
     },
     {
       "id": "h8354",
-      "familyId": "שתה",
+      "familyId": "שׁתה",
       "text": "שָׁתָה",
       "translit": "shâthâh",
       "gloss": "to drink",
@@ -7555,7 +7555,7 @@
     },
     {
       "id": "h3447",
-      "familyId": "ישט",
+      "familyId": "ישׁט",
       "text": "יָשַׁט",
       "translit": "yâshaṭ",
       "gloss": "to hold out, to extend",
@@ -7594,7 +7594,7 @@
     },
     {
       "id": "h2790",
-      "familyId": "חרש",
+      "familyId": "חרשׁ",
       "text": "חָרַשׁ",
       "translit": "chârash",
       "gloss": "to be silent, to hold one's peace",
@@ -7797,7 +7797,7 @@
     },
     {
       "id": "h4284",
-      "familyId": "חשב",
+      "familyId": "חשׁב",
       "text": "מַחֲשָׁבָה",
       "translit": "machăshâbâh",
       "gloss": "a plot, a scheme",
@@ -7839,7 +7839,7 @@
     },
     {
       "id": "h2803",
-      "familyId": "חשב",
+      "familyId": "חשׁב",
       "text": "חָשַׁב",
       "translit": "châshab",
       "gloss": "to think, to reckon",
@@ -7911,7 +7911,7 @@
     },
     {
       "id": "h8130",
-      "familyId": "שנא",
+      "familyId": "שׂנא",
       "text": "שָׂנֵא",
       "translit": "sânêʼ",
       "gloss": "to hate",
@@ -8760,7 +8760,7 @@
     },
     {
       "id": "h7918",
-      "familyId": "שככ",
+      "familyId": "שׁככ",
       "text": "שָׁכַךְ",
       "translit": "shâkak",
       "gloss": "to subside, to abate",
@@ -9283,7 +9283,7 @@
     },
     {
       "id": "h8254",
-      "familyId": "שקל",
+      "familyId": "שׁקל",
       "text": "שָׁקַל",
       "translit": "shâqal",
       "gloss": "to weigh out",
@@ -10098,7 +10098,7 @@
     },
     {
       "id": "h8056",
-      "familyId": "שמח",
+      "familyId": "שׂמח",
       "text": "שָׂמֵחַ",
       "translit": "sâmêach",
       "gloss": "glad",
@@ -10627,7 +10627,7 @@
     },
     {
       "id": "h7980",
-      "familyId": "שלט",
+      "familyId": "שׁלט",
       "text": "שָׁלַט",
       "translit": "shâlaṭ",
       "gloss": "to have power over",
@@ -10775,7 +10775,7 @@
     },
     {
       "id": "h4916",
-      "familyId": "שלח",
+      "familyId": "שׁלח",
       "text": "מִשְׁלוֹחַ",
       "translit": "mishlôwach",
       "gloss": "a sending (of gifts)",
@@ -11368,7 +11368,7 @@
     },
     {
       "id": "h8248",
-      "familyId": "שקה",
+      "familyId": "שׁקה",
       "text": "שָׁקָה",
       "translit": "shâqâh",
       "gloss": "to give drink to",
@@ -11404,7 +11404,7 @@
     },
     {
       "id": "h8360",
-      "familyId": "שתה",
+      "familyId": "שׁתה",
       "text": "שְׁתִיָּה",
       "translit": "shᵉthîyâh",
       "gloss": "drinking",
@@ -12263,7 +12263,7 @@
     },
     {
       "id": "h8323",
-      "familyId": "שרר",
+      "familyId": "שׂרר",
       "text": "שָׂרַר",
       "translit": "sârar",
       "gloss": "to rule, to be master",
@@ -14847,7 +14847,7 @@
     },
     {
       "id": "h3533",
-      "familyId": "כבש",
+      "familyId": "כבשׁ",
       "text": "כָּבַשׁ",
       "translit": "kâbash",
       "gloss": "to subdue, to force",
@@ -15019,7 +15019,7 @@
     },
     {
       "id": "h3787",
-      "familyId": "כשר",
+      "familyId": "כשׁר",
       "text": "כָּשֵׁר",
       "translit": "kâshêr",
       "gloss": "to be fitting, to succeed",
@@ -15368,7 +15368,7 @@
     },
     {
       "id": "h8055",
-      "familyId": "שמח",
+      "familyId": "שׂמח",
       "text": "שָׂמַח",
       "translit": "sâmach",
       "gloss": "to rejoice",
@@ -15474,7 +15474,7 @@
     },
     {
       "id": "h7663",
-      "familyId": "שבר",
+      "familyId": "שׂבר",
       "text": "שָׂבַר",
       "translit": "sâbar",
       "gloss": "to wait, to hope",
@@ -15510,7 +15510,7 @@
     },
     {
       "id": "h8089",
-      "familyId": "שמע",
+      "familyId": "שׁמע",
       "text": "שֹׁמַע",
       "translit": "shômaʻ",
       "gloss": "a report, a rumour",
@@ -16718,7 +16718,7 @@
     },
     {
       "id": "h1875",
-      "familyId": "דרש",
+      "familyId": "דרשׁ",
       "text": "דָּרַשׁ",
       "translit": "dârash",
       "gloss": "to seek, to inquire",
@@ -17028,7 +17028,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -17043,7 +17043,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               1,
@@ -17321,7 +17321,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -17429,7 +17429,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               1,
@@ -17688,7 +17688,7 @@
           "translit": "",
           "gloss": "to give drink to",
           "wordId": "h8248",
-          "familyId": "שקה",
+          "familyId": "שׁקה",
           "morphology": {
             "highlight": [
               2,
@@ -17734,7 +17734,7 @@
           "translit": "",
           "gloss": "to be different, to change",
           "wordId": "h8138",
-          "familyId": "שנה",
+          "familyId": "שׁנה",
           "morphology": {
             "highlight": [
               0,
@@ -17815,7 +17815,7 @@
           "translit": "",
           "gloss": "drinking",
           "wordId": "h8360",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               2,
@@ -17945,7 +17945,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -18027,7 +18027,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -18042,7 +18042,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               1,
@@ -18275,7 +18275,7 @@
           "translit": "",
           "gloss": "to serve, to attend",
           "wordId": "h8334",
-          "familyId": "שרת",
+          "familyId": "שׁרת",
           "morphology": {
             "highlight": [
               2,
@@ -19005,7 +19005,7 @@
           "translit": "",
           "gloss": "to sit, to dwell",
           "wordId": "h3427",
-          "familyId": "ישב",
+          "familyId": "ישׁב",
           "morphology": {
             "highlight": [
               1,
@@ -19066,7 +19066,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -19127,7 +19127,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -19746,7 +19746,7 @@
           "translit": "",
           "gloss": "to hear, to listen",
           "wordId": "h8085",
-          "familyId": "שמע",
+          "familyId": "שׁמע",
           "morphology": {
             "highlight": [
               0,
@@ -20187,7 +20187,7 @@
           "translit": "",
           "gloss": "to hear, to listen",
           "wordId": "h8085",
-          "familyId": "שמע",
+          "familyId": "שׁמע",
           "morphology": {
             "highlight": [
               2,
@@ -20233,7 +20233,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -20446,7 +20446,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               2,
@@ -20505,7 +20505,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               2,
@@ -20675,7 +20675,7 @@
           "translit": "",
           "gloss": "to rule, to be master",
           "wordId": "h8323",
-          "familyId": "שרר",
+          "familyId": "שׂרר",
           "morphology": {
             "highlight": [
               0,
@@ -20774,7 +20774,7 @@
           "translit": "",
           "gloss": "to subside, to abate",
           "wordId": "h7918",
-          "familyId": "שככ",
+          "familyId": "שׁככ",
           "morphology": {
             "highlight": [
               1,
@@ -20866,7 +20866,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -20972,7 +20972,7 @@
           "translit": "",
           "gloss": "to serve, to attend",
           "wordId": "h8334",
-          "familyId": "שרת",
+          "familyId": "שׁרת",
           "morphology": {
             "highlight": [
               1,
@@ -20987,7 +20987,7 @@
           "translit": "",
           "gloss": "to seek",
           "wordId": "h1245",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               1,
@@ -21311,7 +21311,7 @@
           "translit": "",
           "gloss": "to keep, to guard",
           "wordId": "h8104",
-          "familyId": "שמר",
+          "familyId": "שׁמר",
           "morphology": {
             "highlight": [
               0,
@@ -21516,7 +21516,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               2,
@@ -22138,7 +22138,7 @@
           "translit": "",
           "gloss": "to hear, to listen",
           "wordId": "h8085",
-          "familyId": "שמע",
+          "familyId": "שׁמע",
           "morphology": {
             "highlight": [
               2,
@@ -22361,7 +22361,7 @@
           "translit": "",
           "gloss": "to keep, to guard",
           "wordId": "h8104",
-          "familyId": "שמר",
+          "familyId": "שׁמר",
           "morphology": {
             "highlight": [
               0,
@@ -22429,7 +22429,7 @@
           "translit": "",
           "gloss": "to lift, to carry",
           "wordId": "h5375",
-          "familyId": "נשא",
+          "familyId": "נשׂא",
           "morphology": {
             "highlight": [
               2,
@@ -22613,7 +22613,7 @@
           "translit": "",
           "gloss": "to be different, to change",
           "wordId": "h8138",
-          "familyId": "שנה",
+          "familyId": "שׁנה",
           "morphology": {
             "highlight": [
               2,
@@ -22946,7 +22946,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -23604,7 +23604,7 @@
           "translit": "",
           "gloss": "to keep, to guard",
           "wordId": "h8104",
-          "familyId": "שמר",
+          "familyId": "שׁמר",
           "morphology": {
             "highlight": [
               0,
@@ -23912,7 +23912,7 @@
           "translit": "",
           "gloss": "to seek",
           "wordId": "h1245",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -24020,7 +24020,7 @@
           "translit": "",
           "gloss": "to keep, to guard",
           "wordId": "h8104",
-          "familyId": "שמר",
+          "familyId": "שׁמר",
           "morphology": {
             "highlight": [
               0,
@@ -24065,7 +24065,7 @@
           "translit": "",
           "gloss": "to lift, to carry",
           "wordId": "h5375",
-          "familyId": "נשא",
+          "familyId": "נשׂא",
           "morphology": {
             "highlight": [
               0,
@@ -24351,7 +24351,7 @@
           "translit": "",
           "gloss": "to lift, to carry",
           "wordId": "h5375",
-          "familyId": "נשא",
+          "familyId": "נשׂא",
           "morphology": {
             "highlight": [
               2,
@@ -24482,7 +24482,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               2,
@@ -24511,7 +24511,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               1,
@@ -24573,7 +24573,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               1,
@@ -24612,7 +24612,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -24718,7 +24718,7 @@
           "translit": "",
           "gloss": "to sit, to dwell",
           "wordId": "h3427",
-          "familyId": "ישב",
+          "familyId": "ישׁב",
           "morphology": {
             "highlight": [
               0,
@@ -24895,7 +24895,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -24987,7 +24987,7 @@
           "translit": "",
           "gloss": "to sit, to dwell",
           "wordId": "h3427",
-          "familyId": "ישב",
+          "familyId": "ישׁב",
           "morphology": {
             "highlight": [
               0,
@@ -25087,7 +25087,7 @@
           "translit": "",
           "gloss": "to keep, to guard",
           "wordId": "h8104",
-          "familyId": "שמר",
+          "familyId": "שׁמר",
           "morphology": {
             "highlight": [
               1,
@@ -25110,7 +25110,7 @@
           "translit": "",
           "gloss": "to seek",
           "wordId": "h1245",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               2,
@@ -25125,7 +25125,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               1,
@@ -25314,7 +25314,7 @@
           "translit": "",
           "gloss": "to seek",
           "wordId": "h1245",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               2,
@@ -25596,7 +25596,7 @@
           "translit": "",
           "gloss": "to lift, to carry",
           "wordId": "h5375",
-          "familyId": "נשא",
+          "familyId": "נשׂא",
           "morphology": {
             "highlight": [
               2,
@@ -25759,7 +25759,7 @@
           "translit": "",
           "gloss": "to bow down",
           "wordId": "h7812",
-          "familyId": "שחה",
+          "familyId": "שׁחה",
           "morphology": {
             "highlight": [
               2,
@@ -25874,7 +25874,7 @@
           "translit": "",
           "gloss": "to bow down",
           "wordId": "h7812",
-          "familyId": "שחה",
+          "familyId": "שׁחה",
           "morphology": {
             "highlight": [
               1,
@@ -26118,7 +26118,7 @@
           "translit": "",
           "gloss": "to hear, to listen",
           "wordId": "h8085",
-          "familyId": "שמע",
+          "familyId": "שׁמע",
           "morphology": {
             "highlight": [
               0,
@@ -26351,7 +26351,7 @@
           "translit": "",
           "gloss": "to bow down",
           "wordId": "h7812",
-          "familyId": "שחה",
+          "familyId": "שׁחה",
           "morphology": {
             "highlight": [
               2,
@@ -26434,7 +26434,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               1,
@@ -26527,7 +26527,7 @@
           "translit": "",
           "gloss": "to seek",
           "wordId": "h1245",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               2,
@@ -26550,7 +26550,7 @@
           "translit": "",
           "gloss": "to destroy, to annihilate",
           "wordId": "h8045",
-          "familyId": "שמד",
+          "familyId": "שׁמד",
           "morphology": {
             "highlight": [
               2,
@@ -27033,7 +27033,7 @@
           "translit": "",
           "gloss": "to be different, to change",
           "wordId": "h8138",
-          "familyId": "שנה",
+          "familyId": "שׁנה",
           "morphology": {
             "highlight": [
               0,
@@ -27109,7 +27109,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -27153,7 +27153,7 @@
           "translit": "",
           "gloss": "to be worth, to be equal",
           "wordId": "h7737",
-          "familyId": "שוה",
+          "familyId": "שׁוה",
           "morphology": {
             "highlight": [
               0,
@@ -27291,7 +27291,7 @@
           "translit": "",
           "gloss": "to weigh out",
           "wordId": "h8254",
-          "familyId": "שקל",
+          "familyId": "שׁקל",
           "morphology": {
             "highlight": [
               1,
@@ -27322,7 +27322,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -27605,7 +27605,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -28061,7 +28061,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               2,
@@ -28146,7 +28146,7 @@
           "translit": "",
           "gloss": "to destroy, to annihilate",
           "wordId": "h8045",
-          "familyId": "שמד",
+          "familyId": "שׁמד",
           "morphology": {
             "highlight": [
               2,
@@ -28667,7 +28667,7 @@
           "translit": "",
           "gloss": "to sit, to dwell",
           "wordId": "h3427",
-          "familyId": "ישב",
+          "familyId": "ישׁב",
           "morphology": {
             "highlight": [
               0,
@@ -28682,7 +28682,7 @@
           "translit": "",
           "gloss": "to drink",
           "wordId": "h8354",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               1,
@@ -28781,7 +28781,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -28835,7 +28835,7 @@
           "translit": "",
           "gloss": "to put on, to clothe",
           "wordId": "h3847",
-          "familyId": "לבש",
+          "familyId": "לבשׁ",
           "morphology": {
             "highlight": [
               2,
@@ -29080,7 +29080,7 @@
           "translit": "",
           "gloss": "clothing, a robe",
           "wordId": "h3830",
-          "familyId": "לבש",
+          "familyId": "לבשׁ",
           "morphology": {
             "highlight": [
               1,
@@ -29435,7 +29435,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               2,
@@ -29458,7 +29458,7 @@
           "translit": "",
           "gloss": "to put on, to clothe",
           "wordId": "h3847",
-          "familyId": "לבש",
+          "familyId": "לבשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -29947,7 +29947,7 @@
           "translit": "",
           "gloss": "to weigh out",
           "wordId": "h8254",
-          "familyId": "שקל",
+          "familyId": "שׁקל",
           "morphology": {
             "highlight": [
               1,
@@ -30115,7 +30115,7 @@
           "translit": "",
           "gloss": "to destroy, to annihilate",
           "wordId": "h8045",
-          "familyId": "שמד",
+          "familyId": "שׁמד",
           "morphology": {
             "highlight": [
               2,
@@ -30288,7 +30288,7 @@
           "translit": "",
           "gloss": "to seek",
           "wordId": "h1245",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               2,
@@ -30587,7 +30587,7 @@
           "translit": "",
           "gloss": "a woman, a wife",
           "wordId": "h802",
-          "familyId": "אשה",
+          "familyId": "אשׁה",
           "morphology": {
             "highlight": [
               1,
@@ -30743,7 +30743,7 @@
           "translit": "",
           "gloss": "to hold out, to extend",
           "wordId": "h3447",
-          "familyId": "ישט",
+          "familyId": "ישׁט",
           "morphology": {
             "highlight": [
               0,
@@ -31049,7 +31049,7 @@
           "translit": "",
           "gloss": "soul, life, person",
           "wordId": "h5315",
-          "familyId": "נפש",
+          "familyId": "נפשׁ",
           "morphology": {
             "highlight": [
               1,
@@ -31148,7 +31148,7 @@
           "translit": "",
           "gloss": "to be silent, to hold one's peace",
           "wordId": "h2790",
-          "familyId": "חרש",
+          "familyId": "חרשׁ",
           "morphology": {
             "highlight": [
               1,
@@ -31163,7 +31163,7 @@
           "translit": "",
           "gloss": "to be silent, to hold one's peace",
           "wordId": "h2790",
-          "familyId": "חרש",
+          "familyId": "חרשׁ",
           "morphology": {
             "highlight": [
               1,
@@ -31570,7 +31570,7 @@
           "translit": "",
           "gloss": "to drink",
           "wordId": "h8354",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               1,
@@ -31808,7 +31808,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               2,
@@ -31906,7 +31906,7 @@
           "translit": "",
           "gloss": "to put on, to clothe",
           "wordId": "h3847",
-          "familyId": "לבש",
+          "familyId": "לבשׁ",
           "morphology": {
             "highlight": [
               2,
@@ -32044,7 +32044,7 @@
           "translit": "",
           "gloss": "to sit, to dwell",
           "wordId": "h3427",
-          "familyId": "ישב",
+          "familyId": "ישׁב",
           "morphology": {
             "highlight": [
               0,
@@ -32241,7 +32241,7 @@
           "translit": "",
           "gloss": "to lift, to carry",
           "wordId": "h5375",
-          "familyId": "נשא",
+          "familyId": "נשׂא",
           "morphology": {
             "highlight": [
               0,
@@ -32272,7 +32272,7 @@
           "translit": "",
           "gloss": "to hold out, to extend",
           "wordId": "h3447",
-          "familyId": "ישט",
+          "familyId": "ישׁט",
           "morphology": {
             "highlight": [
               1,
@@ -32495,7 +32495,7 @@
           "translit": "",
           "gloss": "a request",
           "wordId": "h1246",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -32694,7 +32694,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               2,
@@ -32717,7 +32717,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -32807,7 +32807,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -32891,7 +32891,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               2,
@@ -32914,7 +32914,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -32982,7 +32982,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               2,
@@ -33052,7 +33052,7 @@
           "translit": "",
           "gloss": "a request",
           "wordId": "h1246",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -33098,7 +33098,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               2,
@@ -33164,7 +33164,7 @@
           "translit": "",
           "gloss": "a request",
           "wordId": "h1246",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               1,
@@ -33310,7 +33310,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               2,
@@ -33332,7 +33332,7 @@
           "translit": "",
           "gloss": "a request",
           "wordId": "h1246",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -33393,7 +33393,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               2,
@@ -33416,7 +33416,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -33447,7 +33447,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -33538,7 +33538,7 @@
           "translit": "",
           "gloss": "glad",
           "wordId": "h8056",
-          "familyId": "שמח",
+          "familyId": "שׂמח",
           "morphology": {
             "highlight": [
               0,
@@ -33785,7 +33785,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               2,
@@ -33847,7 +33847,7 @@
           "translit": "",
           "gloss": "a woman, a wife",
           "wordId": "h802",
-          "familyId": "אשה",
+          "familyId": "אשׁה",
           "morphology": {
             "highlight": [
               0,
@@ -34015,7 +34015,7 @@
           "translit": "",
           "gloss": "to lift, to carry",
           "wordId": "h5375",
-          "familyId": "נשא",
+          "familyId": "נשׂא",
           "morphology": {
             "highlight": [
               0,
@@ -34177,7 +34177,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               2,
@@ -34200,7 +34200,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -34347,7 +34347,7 @@
           "translit": "",
           "gloss": "to be worth, to be equal",
           "wordId": "h7737",
-          "familyId": "שוה",
+          "familyId": "שׁוה",
           "morphology": {
             "highlight": [
               0,
@@ -34448,7 +34448,7 @@
           "translit": "",
           "gloss": "to sit, to dwell",
           "wordId": "h3427",
-          "familyId": "ישב",
+          "familyId": "ישׁב",
           "morphology": {
             "highlight": [
               0,
@@ -34524,7 +34524,7 @@
           "translit": "",
           "gloss": "a woman, a wife",
           "wordId": "h802",
-          "familyId": "אשה",
+          "familyId": "אשׁה",
           "morphology": {
             "highlight": [
               0,
@@ -34561,7 +34561,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -34722,7 +34722,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               2,
@@ -34737,7 +34737,7 @@
           "translit": "",
           "gloss": "glad",
           "wordId": "h8056",
-          "familyId": "שמח",
+          "familyId": "שׂמח",
           "morphology": {
             "highlight": [
               0,
@@ -34798,7 +34798,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               2,
@@ -35139,7 +35139,7 @@
           "translit": "",
           "gloss": "to keep, to guard",
           "wordId": "h8104",
-          "familyId": "שמר",
+          "familyId": "שׁמר",
           "morphology": {
             "highlight": [
               1,
@@ -35170,7 +35170,7 @@
           "translit": "",
           "gloss": "to seek",
           "wordId": "h1245",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -35185,7 +35185,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               1,
@@ -35276,7 +35276,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -35383,7 +35383,7 @@
           "translit": "",
           "gloss": "to serve, to attend",
           "wordId": "h8334",
-          "familyId": "שרת",
+          "familyId": "שׁרת",
           "morphology": {
             "highlight": [
               1,
@@ -35406,7 +35406,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -35872,7 +35872,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -36009,7 +36009,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -36175,7 +36175,7 @@
           "translit": "",
           "gloss": "clothing, a robe",
           "wordId": "h3830",
-          "familyId": "לבש",
+          "familyId": "לבשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -36213,7 +36213,7 @@
           "translit": "",
           "gloss": "to put on, to clothe",
           "wordId": "h3847",
-          "familyId": "לבש",
+          "familyId": "לבשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -36381,7 +36381,7 @@
           "translit": "",
           "gloss": "clothing, a robe",
           "wordId": "h3830",
-          "familyId": "לבש",
+          "familyId": "לבשׁ",
           "morphology": {
             "highlight": [
               1,
@@ -36459,7 +36459,7 @@
           "translit": "",
           "gloss": "to put on, to clothe",
           "wordId": "h3847",
-          "familyId": "לבש",
+          "familyId": "לבשׁ",
           "morphology": {
             "highlight": [
               2,
@@ -36614,7 +36614,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -36759,7 +36759,7 @@
           "translit": "",
           "gloss": "clothing, a robe",
           "wordId": "h3830",
-          "familyId": "לבש",
+          "familyId": "לבשׁ",
           "morphology": {
             "highlight": [
               1,
@@ -36813,7 +36813,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -36859,7 +36859,7 @@
           "translit": "",
           "gloss": "to sit, to dwell",
           "wordId": "h3427",
-          "familyId": "ישב",
+          "familyId": "ישׁב",
           "morphology": {
             "highlight": [
               1,
@@ -36996,7 +36996,7 @@
           "translit": "",
           "gloss": "clothing, a robe",
           "wordId": "h3830",
-          "familyId": "לבש",
+          "familyId": "לבשׁ",
           "morphology": {
             "highlight": [
               1,
@@ -37027,7 +37027,7 @@
           "translit": "",
           "gloss": "to put on, to clothe",
           "wordId": "h3847",
-          "familyId": "לבש",
+          "familyId": "לבשׁ",
           "morphology": {
             "highlight": [
               2,
@@ -37120,7 +37120,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -37357,7 +37357,7 @@
           "translit": "",
           "gloss": "a woman, a wife",
           "wordId": "h802",
-          "familyId": "אשה",
+          "familyId": "אשׁה",
           "morphology": {
             "highlight": [
               0,
@@ -37472,7 +37472,7 @@
           "translit": "",
           "gloss": "a woman, a wife",
           "wordId": "h802",
-          "familyId": "אשה",
+          "familyId": "אשׁה",
           "morphology": {
             "highlight": [
               0,
@@ -37761,7 +37761,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               2,
@@ -37784,7 +37784,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -37845,7 +37845,7 @@
           "translit": "",
           "gloss": "to drink",
           "wordId": "h8354",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               1,
@@ -37959,7 +37959,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               2,
@@ -38052,7 +38052,7 @@
           "translit": "",
           "gloss": "a request",
           "wordId": "h1246",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -38098,7 +38098,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               2,
@@ -38294,7 +38294,7 @@
           "translit": "",
           "gloss": "soul, life, person",
           "wordId": "h5315",
-          "familyId": "נפש",
+          "familyId": "נפשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -38325,7 +38325,7 @@
           "translit": "",
           "gloss": "a request",
           "wordId": "h1246",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -38386,7 +38386,7 @@
           "translit": "",
           "gloss": "to destroy, to annihilate",
           "wordId": "h8045",
-          "familyId": "שמד",
+          "familyId": "שׁמד",
           "morphology": {
             "highlight": [
               2,
@@ -38470,7 +38470,7 @@
           "translit": "",
           "gloss": "to be silent, to hold one's peace",
           "wordId": "h2790",
-          "familyId": "חרש",
+          "familyId": "חרשׁ",
           "morphology": {
             "highlight": [
               1,
@@ -38522,7 +38522,7 @@
           "translit": "",
           "gloss": "to be worth, to be equal",
           "wordId": "h7737",
-          "familyId": "שוה",
+          "familyId": "שׁוה",
           "morphology": {
             "highlight": [
               0,
@@ -38722,7 +38722,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -38933,7 +38933,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               2,
@@ -39003,7 +39003,7 @@
           "translit": "",
           "gloss": "to seek",
           "wordId": "h1245",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               1,
@@ -39026,7 +39026,7 @@
           "translit": "",
           "gloss": "soul, life, person",
           "wordId": "h5315",
-          "familyId": "נפש",
+          "familyId": "נפשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -39217,7 +39217,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               1,
@@ -39341,7 +39341,7 @@
           "translit": "",
           "gloss": "to subdue, to force",
           "wordId": "h3533",
-          "familyId": "כבש",
+          "familyId": "כבשׁ",
           "morphology": {
             "highlight": [
               1,
@@ -39587,7 +39587,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -39887,7 +39887,7 @@
           "translit": "",
           "gloss": "to subside, to abate",
           "wordId": "h7918",
-          "familyId": "שככ",
+          "familyId": "שׁככ",
           "morphology": {
             "highlight": [
               0,
@@ -40492,7 +40492,7 @@
           "translit": "",
           "gloss": "a plot, a scheme",
           "wordId": "h4284",
-          "familyId": "חשב",
+          "familyId": "חשׁב",
           "morphology": {
             "highlight": [
               1,
@@ -40515,7 +40515,7 @@
           "translit": "",
           "gloss": "to think, to reckon",
           "wordId": "h2803",
-          "familyId": "חשב",
+          "familyId": "חשׁב",
           "morphology": {
             "highlight": [
               0,
@@ -40560,7 +40560,7 @@
           "translit": "",
           "gloss": "to hold out, to extend",
           "wordId": "h3447",
-          "familyId": "ישט",
+          "familyId": "ישׁט",
           "morphology": {
             "highlight": [
               1,
@@ -40783,7 +40783,7 @@
           "translit": "",
           "gloss": "to be fitting, to succeed",
           "wordId": "h3787",
-          "familyId": "כשר",
+          "familyId": "כשׁר",
           "morphology": {
             "highlight": [
               1,
@@ -40913,7 +40913,7 @@
           "translit": "",
           "gloss": "a plot, a scheme",
           "wordId": "h4284",
-          "familyId": "חשב",
+          "familyId": "חשׁב",
           "morphology": {
             "highlight": [
               1,
@@ -41402,7 +41402,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               0,
@@ -42227,7 +42227,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               2,
@@ -42458,7 +42458,7 @@
           "translit": "",
           "gloss": "soul, life, person",
           "wordId": "h5315",
-          "familyId": "נפש",
+          "familyId": "נפשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -42473,7 +42473,7 @@
           "translit": "",
           "gloss": "to destroy, to annihilate",
           "wordId": "h8045",
-          "familyId": "שמד",
+          "familyId": "שׁמד",
           "morphology": {
             "highlight": [
               2,
@@ -43171,7 +43171,7 @@
           "translit": "",
           "gloss": "clothing, a robe",
           "wordId": "h3830",
-          "familyId": "לבש",
+          "familyId": "לבשׁ",
           "morphology": {
             "highlight": [
               1,
@@ -43303,7 +43303,7 @@
           "translit": "",
           "gloss": "to rejoice",
           "wordId": "h8055",
-          "familyId": "שמח",
+          "familyId": "שׂמח",
           "morphology": {
             "highlight": [
               1,
@@ -43363,7 +43363,7 @@
           "translit": "",
           "gloss": "joy, gladness",
           "wordId": "h8057",
-          "familyId": "שמח",
+          "familyId": "שׂמח",
           "morphology": {
             "highlight": [
               1,
@@ -43517,7 +43517,7 @@
           "translit": "",
           "gloss": "joy, gladness",
           "wordId": "h8057",
-          "familyId": "שמח",
+          "familyId": "שׂמח",
           "morphology": {
             "highlight": [
               0,
@@ -43555,7 +43555,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               1,
@@ -43839,7 +43839,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               2,
@@ -43869,7 +43869,7 @@
           "translit": "",
           "gloss": "to wait, to hope",
           "wordId": "h7663",
-          "familyId": "שבר",
+          "familyId": "שׂבר",
           "morphology": {
             "highlight": [
               0,
@@ -43907,7 +43907,7 @@
           "translit": "",
           "gloss": "to have power over",
           "wordId": "h7980",
-          "familyId": "שלט",
+          "familyId": "שׁלט",
           "morphology": {
             "highlight": [
               1,
@@ -43961,7 +43961,7 @@
           "translit": "",
           "gloss": "to have power over",
           "wordId": "h7980",
-          "familyId": "שלט",
+          "familyId": "שׁלט",
           "morphology": {
             "highlight": [
               1,
@@ -43999,7 +43999,7 @@
           "translit": "",
           "gloss": "to hate",
           "wordId": "h8130",
-          "familyId": "שנא",
+          "familyId": "שׂנא",
           "morphology": {
             "highlight": [
               1,
@@ -44098,7 +44098,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               1,
@@ -44121,7 +44121,7 @@
           "translit": "",
           "gloss": "to seek",
           "wordId": "h1245",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -44291,7 +44291,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -44336,7 +44336,7 @@
           "translit": "",
           "gloss": "to lift, to carry",
           "wordId": "h5375",
-          "familyId": "נשא",
+          "familyId": "נשׂא",
           "morphology": {
             "highlight": [
               1,
@@ -44482,7 +44482,7 @@
           "translit": "",
           "gloss": "a report, a rumour",
           "wordId": "h8089",
-          "familyId": "שמע",
+          "familyId": "שׁמע",
           "morphology": {
             "highlight": [
               1,
@@ -44674,7 +44674,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               2,
@@ -44688,7 +44688,7 @@
           "translit": "",
           "gloss": "to hate",
           "wordId": "h8130",
-          "familyId": "שנא",
+          "familyId": "שׂנא",
           "morphology": {
             "highlight": [
               1,
@@ -45104,7 +45104,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               0,
@@ -45444,7 +45444,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -45505,7 +45505,7 @@
           "translit": "",
           "gloss": "a request",
           "wordId": "h1246",
-          "familyId": "בקש",
+          "familyId": "בקשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -45528,7 +45528,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               2,
@@ -45680,7 +45680,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -45809,7 +45809,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               2,
@@ -46093,7 +46093,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               0,
@@ -46223,7 +46223,7 @@
           "translit": "",
           "gloss": "soul, life, person",
           "wordId": "h5315",
-          "familyId": "נפש",
+          "familyId": "נפשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -46276,7 +46276,7 @@
           "translit": "",
           "gloss": "to hate",
           "wordId": "h8130",
-          "familyId": "שנא",
+          "familyId": "שׂנא",
           "morphology": {
             "highlight": [
               1,
@@ -46337,7 +46337,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               0,
@@ -46454,7 +46454,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -46485,7 +46485,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               1,
@@ -46500,7 +46500,7 @@
           "translit": "",
           "gloss": "joy, gladness",
           "wordId": "h8057",
-          "familyId": "שמח",
+          "familyId": "שׂמח",
           "morphology": {
             "highlight": [
               1,
@@ -46670,7 +46670,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -46701,7 +46701,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               1,
@@ -46716,7 +46716,7 @@
           "translit": "",
           "gloss": "joy, gladness",
           "wordId": "h8057",
-          "familyId": "שמח",
+          "familyId": "שׂמח",
           "morphology": {
             "highlight": [
               1,
@@ -46799,7 +46799,7 @@
           "translit": "",
           "gloss": "to sit, to dwell",
           "wordId": "h3427",
-          "familyId": "ישב",
+          "familyId": "ישׁב",
           "morphology": {
             "highlight": [
               1,
@@ -46837,7 +46837,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -46899,7 +46899,7 @@
           "translit": "",
           "gloss": "joy, gladness",
           "wordId": "h8057",
-          "familyId": "שמח",
+          "familyId": "שׂמח",
           "morphology": {
             "highlight": [
               0,
@@ -46914,7 +46914,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               2,
@@ -46952,7 +46952,7 @@
           "translit": "",
           "gloss": "a sending (of gifts)",
           "wordId": "h4916",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               2,
@@ -47052,7 +47052,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               2,
@@ -47213,7 +47213,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -47454,7 +47454,7 @@
           "translit": "",
           "gloss": "joy, gladness",
           "wordId": "h8057",
-          "familyId": "שמח",
+          "familyId": "שׂמח",
           "morphology": {
             "highlight": [
               1,
@@ -47507,7 +47507,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -47537,7 +47537,7 @@
           "translit": "",
           "gloss": "a feast, a banquet",
           "wordId": "h4960",
-          "familyId": "שתה",
+          "familyId": "שׁתה",
           "morphology": {
             "highlight": [
               1,
@@ -47552,7 +47552,7 @@
           "translit": "",
           "gloss": "joy, gladness",
           "wordId": "h8057",
-          "familyId": "שמח",
+          "familyId": "שׂמח",
           "morphology": {
             "highlight": [
               1,
@@ -47567,7 +47567,7 @@
           "translit": "",
           "gloss": "a sending (of gifts)",
           "wordId": "h4916",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               2,
@@ -47689,7 +47689,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               1,
@@ -47835,7 +47835,7 @@
           "translit": "",
           "gloss": "to think, to reckon",
           "wordId": "h2803",
-          "familyId": "חשב",
+          "familyId": "חשׁב",
           "morphology": {
             "highlight": [
               0,
@@ -48032,7 +48032,7 @@
           "translit": "",
           "gloss": "to turn back, to repent",
           "wordId": "h7725",
-          "familyId": "שוב",
+          "familyId": "שׁוב",
           "morphology": {
             "highlight": [
               1,
@@ -48047,7 +48047,7 @@
           "translit": "",
           "gloss": "a plot, a scheme",
           "wordId": "h4284",
-          "familyId": "חשב",
+          "familyId": "חשׁב",
           "morphology": {
             "highlight": [
               1,
@@ -48084,7 +48084,7 @@
           "translit": "",
           "gloss": "to think, to reckon",
           "wordId": "h2803",
-          "familyId": "חשב",
+          "familyId": "חשׁב",
           "morphology": {
             "highlight": [
               0,
@@ -48574,7 +48574,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               0,
@@ -48705,7 +48705,7 @@
           "translit": "",
           "gloss": "to do, to make",
           "wordId": "h6213",
-          "familyId": "עשה",
+          "familyId": "עשׂה",
           "morphology": {
             "highlight": [
               2,
@@ -49070,7 +49070,7 @@
           "translit": "",
           "gloss": "to send",
           "wordId": "h7971",
-          "familyId": "שלח",
+          "familyId": "שׁלח",
           "morphology": {
             "highlight": [
               2,
@@ -49380,7 +49380,7 @@
           "translit": "",
           "gloss": "soul, life, person",
           "wordId": "h5315",
-          "familyId": "נפש",
+          "familyId": "נפשׁ",
           "morphology": {
             "highlight": [
               0,
@@ -49984,7 +49984,7 @@
           "translit": "",
           "gloss": "to seek, to inquire",
           "wordId": "h1875",
-          "familyId": "דרש",
+          "familyId": "דרשׁ",
           "morphology": {
             "highlight": [
               0,

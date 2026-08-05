@@ -357,7 +357,7 @@ export const words: ContentBundle["words"] = [
   {"id":"hypago","familyId":"ὑπ","text":"ὑπάγω","translit":"hypagō","gloss":"I go away, I depart","partOfSpeech":"noun","morphology":{"highlight":[2,3,4],"kind":"ending"},"attestations":[],"distractors":["I approach","I remain","I follow"],"frequency":{"inTrack":1,"inCorpus":79,"corpus":"the New Testament","corpusComplete":true,"corpusBooks":7}},
   // stem override · 1× in 1 John
   {"id":"metabaino","familyId":"μεταβαιν","text":"μεταβαίνω","translit":"metabainō","gloss":"I pass over, I move","partOfSpeech":"noun","morphology":{"highlight":[8],"kind":"ending"},"attestations":[],"distractors":["I stumble","I return","I wait"],"frequency":{"inTrack":1,"inCorpus":12,"corpus":"the New Testament","corpusComplete":true,"corpusBooks":5}},
-  // stem override · 1× in 1 John
+  // stem manual · 1× in 1 John
   {"id":"heko","familyId":"ἡκ","text":"ἥκω","translit":"hēkō","gloss":"I have come, I am present","partOfSpeech":"noun","morphology":{"highlight":[2],"kind":"ending"},"attestations":[],"distractors":["I depart","I wait","I hasten"],"frequency":{"inTrack":1,"inCorpus":27,"corpus":"the New Testament","corpusComplete":true,"corpusBooks":10}},
   // stem manual · 14× in 1 John
   {"id":"akoyo","familyId":"ἀκου","text":"ἀκούω","translit":"akoyō","gloss":"I hear","partOfSpeech":"noun","morphology":{"highlight":[4],"kind":"ending"},"attestations":[],"distractors":["I see","I speak","I obey"],"frequency":{"inTrack":14,"inCorpus":427,"corpus":"the New Testament","corpusComplete":true,"corpusBooks":23}},
@@ -517,7 +517,7 @@ export const words: ContentBundle["words"] = [
   {"id":"pas","familyId":"πα","text":"πᾶς","translit":"pas","gloss":"all, every","partOfSpeech":"adjective","morphology":{"highlight":[2],"kind":"ending"},"parse":{"case":"nominative","number":"s","gender":"m"},"attestations":["1 John 2:23","1 John 2:29","1 John 3:3"],"distractors":["none","few","some"],"frequency":{"inTrack":27,"inCorpus":1244,"corpus":"the New Testament","corpusComplete":true,"corpusBooks":27}},
   // stem derived · 2× in 1 John
   {"id":"holos","familyId":"ὁλ","text":"ὅλος","translit":"holos","gloss":"whole, entire","partOfSpeech":"adjective","morphology":{"highlight":[2,3],"kind":"ending"},"parse":{"case":"nominative","number":"s","gender":"m"},"attestations":["1 John 5:19"],"distractors":["partial","empty","half"],"frequency":{"inTrack":2,"inCorpus":108,"corpus":"the New Testament","corpusComplete":true,"corpusBooks":16}},
-  // stem override · 2× in 1 John
+  // stem manual · 2× in 1 John
   {"id":"polys","familyId":"πολ","text":"πολύς","translit":"polys","gloss":"many, much","partOfSpeech":"noun","morphology":{"highlight":[3,4],"kind":"ending"},"attestations":[],"distractors":["few","all","enough"],"notes":"Suppletive: πολύς beside πολλή and πολλῶν. Derivation produced a one-letter stem, which is no morpheme at all. The Attic course dropped this word rather than assert πολ-, because there it collided with πόλις; 1 John has no πόλις, so the split is stated here with that reasoning on the record.","frequency":{"inTrack":2,"inCorpus":415,"corpus":"the New Testament","corpusComplete":true,"corpusBooks":25}},
   // stem derived · 3× in 1 John
   {"id":"megas","familyId":"με","text":"μέγας","translit":"megas","gloss":"great, large","partOfSpeech":"noun","morphology":{"highlight":[2,3,4],"kind":"ending"},"attestations":[],"distractors":["small","many","high"],"frequency":{"inTrack":3,"inCorpus":240,"corpus":"the New Testament","corpusComplete":true,"corpusBooks":17}},

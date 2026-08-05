@@ -88,10 +88,15 @@ describe.each(availableCourseIds())("course: %s", (courseId: CourseId) => {
       jonah: "the Hebrew Bible",
       ruth: "the Hebrew Bible",
       esther: "the Hebrew Bible",
+      ecclesiastes: "the Hebrew Bible",
+      haggai: "the Hebrew Bible",
+      malachi: "the Hebrew Bible",
+      obadiah: "the Hebrew Bible",
       "koine-gospels": "the New Testament",
       "1john": "the New Testament",
       mark: "the New Testament",
       john: "the New Testament",
+      matthew: "the New Testament",
     };
     for (const w of content.words) {
       const f = w.frequency;

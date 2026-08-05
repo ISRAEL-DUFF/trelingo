@@ -145,15 +145,45 @@ function deriveStems(tokens) {
     let n = arr[0].length;
     for (const f of arr.slice(1)) n = Math.min(n, commonPrefixLen(arr[0], f));
     const shortest = Math.min(...arr.map((f) => f.length));
-    if (n > 0 && n < shortest) stems.set(lemma, n);
+    if (n >= MIN_STEM && n < shortest) stems.set(lemma, n);
   }
   return stems;
 }
 
+/**
+ * A single letter is not a morpheme.
+ *
+ * Where a lemma's attested forms diverge at once, the common prefix collapses
+ * to one letter and the rule "returns" a stem it has not actually found.
+ * Matthew surfaced four: καλύπτω reduplicates to κεκαλυμμένον beside
+ * καλύπτεσθαι, leaving "κ"; σαρόω gives "σ"; ἐκκόπτω "ἐ"; πλατύνω "π". Each
+ * would have created a one-letter family and highlighted the rest of the word
+ * as an ending.
+ *
+ * The content schema rejects these outright — a family id must be at least two
+ * characters — which is how they were caught. But the schema catching it is a
+ * backstop, not the rule. The rule is here: below two letters we do not claim
+ * to know where the stem ends, so the word is taught plain, exactly as it is
+ * when no stem can be derived at all.
+ */
+const MIN_STEM = 2;
+
+/**
+ * The schema's cap on a highlight array, and a sanity bound in its own right.
+ *
+ * An ending of thirteen letters means the stem is far too short for the word,
+ * not that Greek has thirteen-letter endings. εἰσακουσθήσονται in 6:7 derived a
+ * three-letter stem and would have highlighted the remaining thirteen — a
+ * confident wrong answer of exactly the kind spike-a-findings.md exists to
+ * avoid. Beyond this, the split is refused and the word shown whole.
+ */
+const MAX_ENDING = 12;
+
 /** Letter indices of the ending, i.e. everything after the stem. */
 function endingIndices(surface, stemLen) {
   const len = clusters(surface).length;
-  if (stemLen == null || stemLen <= 0 || stemLen >= len) return null;
+  if (stemLen == null || stemLen < MIN_STEM || stemLen >= len) return null;
+  if (len - stemLen > MAX_ENDING) return null;
   return Array.from({ length: len - stemLen }, (_, i) => stemLen + i);
 }
 

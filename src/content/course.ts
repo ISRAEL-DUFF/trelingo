@@ -35,7 +35,7 @@ import { type ScriptModule } from "@/lib/script";
 import { scriptOfLanguage } from "./language";
 import { type ParseFieldDef } from "./parse-fields";
 
-export type CourseId = "shoresh" | "jonah" | "ruth" | "esther" | "koine-gospels" | "1john" | "mark" | "john" | "attic-prose" | "latin";
+export type CourseId = "shoresh" | "jonah" | "ruth" | "esther" | "ecclesiastes" | "haggai" | "malachi" | "obadiah" | "koine-gospels" | "1john" | "mark" | "john" | "matthew" | "attic-prose" | "latin";
 
 /** Fields a track inherits rather than declares. */
 type Inherited = Pick<Variety, "supportsFading" | "morphemeNoun" | "diacriticsCopy" | "parseFields"> &
@@ -129,6 +129,65 @@ export const HEBREW_ESTHER: Course = {
 };
 
 /**
+ * The fourth whole book, and the first that is not a story.
+ *
+ * Placed after the three narratives because it is harder than its length: 5.3
+ * tokens per lexeme against Esther's 6.6, late Hebrew, and an argument rather
+ * than a plot. It is also the cheapest book left — 277 of its 562 lexemes were
+ * already glossed.
+ */
+export const HEBREW_ECCLESIASTES: Course = {
+  ...inherit(BIBLICAL_HEBREW),
+  id: "ecclesiastes",
+  name: "Ecclesiastes",
+  subtitle: "Wisdom poetry, twelve chapters",
+  accentColor: "var(--sage)",
+};
+
+/**
+ * The fifth Hebrew book, and the first chosen by measurement rather than taste.
+ *
+ * Every book of the Hebrew Bible was scored on how many new words a reader of
+ * the four earlier tracks needs to reach 95% coverage of its running words.
+ * Haggai came first at 32 — the lowest in the canon.
+ */
+export const HEBREW_HAGGAI: Course = {
+  ...inherit(BIBLICAL_HEBREW),
+  id: "haggai",
+  name: "Haggai",
+  subtitle: "Two chapters, the easiest book in the canon",
+  accentColor: "var(--sage)",
+};
+
+/**
+ * Placed after Haggai for the overlap: on its own Malachi needs 113 new
+ * glosses, after Haggai 101. Both are post-exilic and both are about the temple
+ * and its priesthood — the same reasoning that put Matthew after John.
+ */
+export const HEBREW_MALACHI: Course = {
+  ...inherit(BIBLICAL_HEBREW),
+  id: "malachi",
+  name: "Malachi",
+  subtitle: "Three chapters, a quarrel with the priests",
+  accentColor: "var(--sage)",
+};
+
+/**
+ * The shortest book in the Hebrew Bible, and the third chosen by measurement.
+ *
+ * Placed after Malachi deliberately: Obadiah is entirely about Edom, and
+ * Malachi had already taught Esau, Edom and the vocabulary of ruin. 61 glosses
+ * instead of 72.
+ */
+export const HEBREW_OBADIAH: Course = {
+  ...inherit(BIBLICAL_HEBREW),
+  id: "obadiah",
+  name: "Obadiah",
+  subtitle: "Twenty-one verses against Edom",
+  accentColor: "var(--sage)",
+};
+
+/**
  * Koine and Attic each have exactly one track today.
  *
  * That is the asymmetry the third level exposes rather than creates: Biblical
@@ -184,6 +243,22 @@ export const GREEK_JOHN: Course = {
   accentColor: "var(--sage)",
 };
 
+/**
+ * The fourth whole Koine book, and the one that proved ORDER changes cost.
+ *
+ * When Mark was finished, Luke was the obvious next Gospel. After John landed,
+ * Matthew needed 526 new glosses to Luke's 934 for the same amount of text —
+ * Matthew's overlap with Mark is enormous and Luke's is not. Re-measuring
+ * before curating saved about four hundred glosses.
+ */
+export const GREEK_MATTHEW: Course = {
+  ...inherit(KOINE_GREEK),
+  id: "matthew",
+  name: "Matthew",
+  subtitle: "The whole gospel, twenty-eight chapters",
+  accentColor: "var(--sage)",
+};
+
 export const GREEK_ATTIC: Course = {
   ...inherit(ATTIC_GREEK),
   id: "attic-prose",
@@ -194,7 +269,7 @@ export const GREEK_ATTIC: Course = {
   accentColor: "#211d1a", // charcoal
 };
 
-export const courses: Course[] = [HEBREW_BIBLICAL, HEBREW_JONAH, HEBREW_RUTH, HEBREW_ESTHER, GREEK_KOINE, GREEK_1JOHN, GREEK_MARK, GREEK_JOHN, GREEK_ATTIC];
+export const courses: Course[] = [HEBREW_BIBLICAL, HEBREW_JONAH, HEBREW_RUTH, HEBREW_ESTHER, HEBREW_ECCLESIASTES, HEBREW_HAGGAI, HEBREW_MALACHI, HEBREW_OBADIAH, GREEK_KOINE, GREEK_1JOHN, GREEK_MARK, GREEK_JOHN, GREEK_MATTHEW, GREEK_ATTIC];
 
 /** The tracks belonging to one variety. */
 export function tracksOf(varietyId: VarietyId): Course[] {

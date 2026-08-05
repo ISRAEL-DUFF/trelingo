@@ -48,7 +48,7 @@ const ENTRIES = [
   // ---- the spine of the narrative ----
   ["H559", "to say", ["to ask", "to shout", "to whisper"], { root: "אמר", familyGloss: "to say" }],
   ["H7725", "to return, to turn back", ["to remain", "to hurry", "to wander"], {
-    root: "שוב",
+    root: "שׁוב",
     familyGloss: "to return, to turn back",
     notes: "The verb the book is built on — twelve occurrences. Naomi returns, Orpah returns, and Ruth refuses to. In 1:22 the narrator calls Ruth 'the Moabitess who RETURNED' from a country she had never left.",
   }],

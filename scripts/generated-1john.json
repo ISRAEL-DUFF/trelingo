@@ -3557,7 +3557,7 @@
         "corpusBooks": 10
       },
       "_freq": 1,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "akoyo",
@@ -6059,7 +6059,7 @@
         "corpusBooks": 25
       },
       "_freq": 2,
-      "_stemSource": "override"
+      "_stemSource": "manual"
     },
     {
       "id": "megas",

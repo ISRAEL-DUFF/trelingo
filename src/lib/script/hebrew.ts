@@ -45,6 +45,15 @@ export function toLetterClusters(word: string): LetterCluster[] {
     if (COMBINING_MARK.test(ch) && last) {
       last.text += ch;
       last.marks.push(ch);
+      // The sin/shin dot is not a point ON a letter, it is what tells two
+      // letters apart — שׂ and שׁ are as different as ב and כ. So it joins the
+      // cluster's BASE, not just its marks, and `base` stays one code point by
+      // using the presentation form. Without this, anything reading `base` to
+      // ask "which letter is this?" answers ש for both, and root families
+      // built on that answer merge שָׂנֵא "to hate" with שָׁנָא "to change".
+      if (last.base === "ש" && SHIN_SIN_DOT.test(ch)) {
+        last.base = ch === "ׂ" ? "שׂ" : "שׁ";
+      }
     } else {
       clusters.push({ text: ch, base: ch, marks: [] });
     }
@@ -55,6 +64,24 @@ export function toLetterClusters(word: string): LetterCluster[] {
 /** The consonantal skeleton — what the word looks like in an unpointed text. */
 export function stripNiqqud(word: string): string {
   return word.replace(/\p{Mn}/gu, "");
+}
+
+/** Marks removed, but the sin/shin dot left in place. See `fold` below. */
+function stripPointsKeepingSinShin(word: string): string {
+  return word.normalize("NFD").replace(/\p{Mn}/gu, (m) => (SHIN_SIN_DOT.test(m) ? m : ""));
+}
+
+/**
+ * ש + dot → the single code point that already means "shin"/"sin".
+ *
+ * NFC will not do this: U+FB2A and U+FB2B are composition exclusions, so the
+ * normal forms keep the mark separate. Mapping explicitly is the only way to
+ * get one character per consonant.
+ */
+function composeSinShin(word: string): string {
+  return word.replace(/ש([ׁׂ])/gu, (_, dot: string) =>
+    dot === "ׁ" ? "שׁ" : "שׂ",
+  );
 }
 
 /**
@@ -95,7 +122,9 @@ export function fadeNiqqud(word: string, stage: number): string {
 
 /** True if the cluster carries a real consonant (not punctuation or maqqef). */
 export function isHebrewLetter(cluster: LetterCluster): boolean {
-  return /[\u05D0-\u05EA]/u.test(cluster.base);
+  // U+FB2A/U+FB2B are shin and sin with their dot folded in — see
+  // toLetterClusters. They are letters, and sit outside the main block.
+  return /[\u05D0-\u05EA\uFB2A\uFB2B]/u.test(cluster.base);
 }
 
 export const hebrewScript: ScriptModule = {
@@ -121,7 +150,24 @@ export const hebrewScript: ScriptModule = {
   // קוּם ends in ם but its root is ק־ו־מ, and without folding the two never
   // compare equal. Surfaced by the Jonah content, where seven verbs ending in
   // a final form failed the highlight-agrees-with-family check.
-  fold: (word) => stripNiqqud(word).replace(/[ךםןףץ]/g, (c) => FINAL_FORMS[c]!),
+  // ...AND the sin/shin dot is KEPT, because שׂ and שׁ are different letters.
+  //
+  // Unicode writes that dot as a combining mark in the same block as the vowel
+  // points, so "strip the points" silently strips it too — and then שָׂנֵא "to
+  // hate" and שָׁנָא "to change" fold to the same three consonants, as do
+  // שָׂבַע "to be satisfied" and שָׁבַע "to swear". Surfaced by Ecclesiastes,
+  // which is the first track to contain both members of such a pair; the
+  // importer had been building one root family out of each.
+  //
+  // The fade ladder above already treats this dot as the LAST mark to drop,
+  // at stage 6, for the same reason: it is not really a vowel point.
+  //
+  // The dot is folded ONTO its letter as a single presentation-form code point
+  // rather than left as a combining mark, so that a folded word stays one
+  // character per consonant. Root matching indexes consonants positionally on
+  // both sides of the pipeline and would otherwise count the mark as a letter.
+  fold: (word) =>
+    composeSinShin(stripPointsKeepingSinShin(word)).replace(/[ךםןףץ]/g, (c) => FINAL_FORMS[c]!),
   isLetter: isHebrewLetter,
   fade: fadeNiqqud,
   joinLetters: (letters) =>

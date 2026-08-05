@@ -28,10 +28,15 @@ import { hebrewBiblicalBundle, CONTENT_REVIEW_NOTES } from "./courses/hebrew-bib
 import { hebrewJonahBundle, JONAH_REVIEW_NOTES } from "./courses/hebrew-jonah";
 import { hebrewRuthBundle, RUTH_REVIEW_NOTES } from "./courses/hebrew-ruth";
 import { hebrewEstherBundle, ESTHER_REVIEW_NOTES } from "./courses/hebrew-esther";
+import { hebrewEcclesiastesBundle, ECCLESIASTES_REVIEW_NOTES } from "./courses/hebrew-ecclesiastes";
+import { hebrewHaggaiBundle, HAGGAI_REVIEW_NOTES } from "./courses/hebrew-haggai";
+import { hebrewMalachiBundle, MALACHI_REVIEW_NOTES } from "./courses/hebrew-malachi";
+import { hebrewObadiahBundle, OBADIAH_REVIEW_NOTES } from "./courses/hebrew-obadiah";
 import { greekKoineBundle, KOINE_REVIEW_NOTES } from "./courses/greek-koine";
 import { greek1JohnBundle, ONE_JOHN_REVIEW_NOTES } from "./courses/greek-1john";
 import { greekMarkBundle, MARK_REVIEW_NOTES } from "./courses/greek-mark";
 import { greekJohnBundle, JOHN_REVIEW_NOTES } from "./courses/greek-john";
+import { greekMatthewBundle, MATTHEW_REVIEW_NOTES } from "./courses/greek-matthew";
 import { greekAtticBundle, ATTIC_REVIEW_NOTES } from "./courses/greek-attic";
 
 const BUNDLES: Partial<Record<CourseId, ContentBundle>> = {
@@ -39,10 +44,15 @@ const BUNDLES: Partial<Record<CourseId, ContentBundle>> = {
   "jonah": hebrewJonahBundle,
   "ruth": hebrewRuthBundle,
   "esther": hebrewEstherBundle,
+  "ecclesiastes": hebrewEcclesiastesBundle,
+  "haggai": hebrewHaggaiBundle,
+  "malachi": hebrewMalachiBundle,
+  "obadiah": hebrewObadiahBundle,
   "koine-gospels": greekKoineBundle,
   "1john": greek1JohnBundle,
   "mark": greekMarkBundle,
   "john": greekJohnBundle,
+  "matthew": greekMatthewBundle,
   "attic-prose": greekAtticBundle,
 };
 
@@ -59,10 +69,15 @@ const REVIEW_NOTES: Partial<Record<CourseId, ReviewNote[]>> = {
   "jonah": JONAH_REVIEW_NOTES,
   "ruth": RUTH_REVIEW_NOTES,
   "esther": ESTHER_REVIEW_NOTES,
+  "ecclesiastes": ECCLESIASTES_REVIEW_NOTES,
+  "haggai": HAGGAI_REVIEW_NOTES,
+  "malachi": MALACHI_REVIEW_NOTES,
+  "obadiah": OBADIAH_REVIEW_NOTES,
   "koine-gospels": KOINE_REVIEW_NOTES,
   "1john": ONE_JOHN_REVIEW_NOTES,
   "mark": MARK_REVIEW_NOTES,
   "john": JOHN_REVIEW_NOTES,
+  "matthew": MATTHEW_REVIEW_NOTES,
   "attic-prose": ATTIC_REVIEW_NOTES,
 };
 

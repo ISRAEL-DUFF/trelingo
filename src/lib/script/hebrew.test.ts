@@ -144,13 +144,17 @@ describe("validateRootIndices", () => {
 });
 
 describe("rootLettersOf / formatRoot", () => {
-  it("extracts the bare root consonants", () => {
-    expect(rootLettersOf(SHAMAR, [0, 1, 2])).toEqual(["ש", "מ", "ר"]);
+  // The shin comes back WITH its dot. That dot is not a vowel point: שׂ and שׁ
+  // are different letters, and a root made of bare ש cannot tell שָׂנֵא "to
+  // hate" from שָׁנָא "to change". Ecclesiastes is the first book in the app to
+  // contain both, and it had them filed under one root until this changed.
+  it("extracts the root consonants, keeping the sin/shin dot", () => {
+    expect(rootLettersOf(SHAMAR, [0, 1, 2])).toEqual(["\uFB2A", "מ", "ר"]); // שׁ
   });
 
   it("extracts a root under a prefix", () => {
     // bereshit: root ר-א-שׁ sits at letters 1,2,3 behind a prefixed bet.
-    expect(rootLettersOf(BERESHIT, [1, 2, 3])).toEqual(["ר", "א", "ש"]);
+    expect(rootLettersOf(BERESHIT, [1, 2, 3])).toEqual(["ר", "א", "\uFB2A"]); // שׁ
   });
 
   it("joins root letters with maqqef for display, keeping the shin dot", () => {
