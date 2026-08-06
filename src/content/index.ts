@@ -32,6 +32,7 @@ import { hebrewEcclesiastesBundle, ECCLESIASTES_REVIEW_NOTES } from "./courses/h
 import { hebrewHaggaiBundle, HAGGAI_REVIEW_NOTES } from "./courses/hebrew-haggai";
 import { hebrewMalachiBundle, MALACHI_REVIEW_NOTES } from "./courses/hebrew-malachi";
 import { hebrewObadiahBundle, OBADIAH_REVIEW_NOTES } from "./courses/hebrew-obadiah";
+import { hebrewGenesisBundle, GENESIS_REVIEW_NOTES } from "./courses/hebrew-genesis";
 import { greekKoineBundle, KOINE_REVIEW_NOTES } from "./courses/greek-koine";
 import { greek1JohnBundle, ONE_JOHN_REVIEW_NOTES } from "./courses/greek-1john";
 import { greekMarkBundle, MARK_REVIEW_NOTES } from "./courses/greek-mark";
@@ -48,6 +49,7 @@ const BUNDLES: Partial<Record<CourseId, ContentBundle>> = {
   "haggai": hebrewHaggaiBundle,
   "malachi": hebrewMalachiBundle,
   "obadiah": hebrewObadiahBundle,
+  "genesis": hebrewGenesisBundle,
   "koine-gospels": greekKoineBundle,
   "1john": greek1JohnBundle,
   "mark": greekMarkBundle,
@@ -73,6 +75,7 @@ const REVIEW_NOTES: Partial<Record<CourseId, ReviewNote[]>> = {
   "haggai": HAGGAI_REVIEW_NOTES,
   "malachi": MALACHI_REVIEW_NOTES,
   "obadiah": OBADIAH_REVIEW_NOTES,
+  "genesis": GENESIS_REVIEW_NOTES,
   "koine-gospels": KOINE_REVIEW_NOTES,
   "1john": ONE_JOHN_REVIEW_NOTES,
   "mark": MARK_REVIEW_NOTES,

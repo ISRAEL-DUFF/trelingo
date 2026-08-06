@@ -314,3 +314,91 @@ function newishCard(wordId: string) {
     isLeech: false,
   };
 }
+
+describe("game progress", () => {
+  const KEY = "games:hebrew-day-one:progress";
+
+  it("rides export/import without the exporter knowing games exist", async () => {
+    await setMeta(KEY, { furthest: 3, completed: false, runs: 0 });
+    const file = await exportBackup();
+    expect(file.meta[KEY]).toEqual({ furthest: 3, completed: false, runs: 0 });
+
+    await clearLocalData();
+    await importBackup(file);
+    expect(await getMeta(KEY, null)).toEqual({ furthest: 3, completed: false, runs: 0 });
+  });
+
+  it("NEVER discards a finished run for a local one that is behind", async () => {
+    /*
+     * The bug this rule exists for. The fallback merge is "local wins if
+     * present" — a device on verse 2 has a local value, so without the rule
+     * the import keeps verse 2 and the finish is gone. Rule 1 says merge, never
+     * destroy, and this is the case where the conservative default destroys.
+     */
+    await setMeta(KEY, { furthest: 5, completed: true, completedAt: 1000, runs: 2 });
+    const finished = await exportBackup();
+
+    await clearLocalData();
+    await setMeta(KEY, { furthest: 2, completed: false, runs: 0 });
+    await importBackup(finished);
+
+    expect(await getMeta(KEY, null)).toEqual({
+      furthest: 5,
+      completed: true,
+      completedAt: 1000,
+      runs: 2,
+    });
+  });
+
+  it("does not walk a local player back when the FILE is the stale side", async () => {
+    await setMeta(KEY, { furthest: 1, completed: false, runs: 0 });
+    const stale = await exportBackup();
+
+    await clearLocalData();
+    await setMeta(KEY, { furthest: 4, completed: false, runs: 0 });
+    await importBackup(stale);
+
+    expect(await getMeta<{ furthest: number }>(KEY, { furthest: 0 })).toMatchObject({ furthest: 4 });
+  });
+
+  it("keeps the earliest completion date, whichever side holds it", async () => {
+    await setMeta(KEY, { furthest: 5, completed: true, completedAt: 500, runs: 1 });
+    const early = await exportBackup();
+
+    await clearLocalData();
+    await setMeta(KEY, { furthest: 5, completed: true, completedAt: 9000, runs: 1 });
+    await importBackup(early);
+
+    expect(await getMeta<{ completedAt: number }>(KEY, { completedAt: 0 })).toMatchObject({
+      completedAt: 500,
+    });
+  });
+
+  it("is idempotent — importing twice does not double the run count", async () => {
+    await setMeta(KEY, { furthest: 5, completed: true, completedAt: 1, runs: 3 });
+    const file = await exportBackup();
+
+    await clearLocalData();
+    await setMeta(KEY, { furthest: 5, completed: true, completedAt: 1, runs: 3 });
+    await importBackup(file);
+    const once = await getMeta(KEY, null);
+    await importBackup(file);
+
+    expect(await getMeta(KEY, null)).toEqual(once);
+  });
+
+  it("restores progress onto a device that has never played it", async () => {
+    await setMeta(KEY, { furthest: 5, completed: true, completedAt: 42, runs: 1 });
+    const file = await exportBackup();
+
+    await clearLocalData();
+    await importBackup(file);
+
+    expect(await getMeta(KEY, null)).toEqual({
+      furthest: 5,
+      completed: true,
+      completedAt: 42,
+      runs: 1,
+    });
+  });
+});

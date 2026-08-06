@@ -213,8 +213,10 @@ export function FluencyScreen() {
           Fluency results are tracked separately from your review schedule, so a slow read never
           makes a word come round more often.
         </p>
-        <Button block onClick={() => navigate("/progress")}>
-          Back to progress
+        {/* /you, not /progress: the fluency check is reached from there and it
+            is the tab the nav highlights. */}
+        <Button block onClick={() => navigate("/you")}>
+          Back to your stats
         </Button>
       </div>
     </div>

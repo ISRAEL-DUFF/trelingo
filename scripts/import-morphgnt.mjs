@@ -34,6 +34,7 @@
  *              --translations scripts/web-1john.json --out <file>
  */
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { derivedFamilyId } from "./greek-families.mjs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -259,8 +260,8 @@ function main() {
       continue;
     }
     const derived = stems.has(lemma);
-    const stemLen = entry.stem != null ? clusters(entry.stem).length : stems.get(lemma);
-    const highlight = endingIndices(lemma, stemLen);
+    let stemLen = entry.stem != null ? clusters(entry.stem).length : stems.get(lemma);
+    let highlight = endingIndices(lemma, stemLen);
 
     // NO STEM IS NOT A REASON NOT TO TEACH THE WORD.
     //
@@ -278,12 +279,39 @@ function main() {
       skipped.push({ lemma, reason: stemLen == null ? "no derivable stem" : "degenerate split" });
       continue;
     }
-    if (!highlight) unsplit.push(lemma);
-    const stem = highlight ? clusters(lemma).slice(0, stemLen).join("") : null;
+    const rawStem = highlight ? clusters(lemma).slice(0, stemLen).join("") : null;
     // The glossary may group words into a shared family. Surface stems cannot
     // see that ἀγάπη (ἀγαπ-) and ἀγαπάω (ἀγαπα-) belong together, and the
     // family sheet is worthless if every word sits in a family of one.
-    const familyId = highlight ? (entry.familyId ?? fold(stem)) : null;
+    /*
+     * A CURATED family always wins; a derived one must earn it. See
+     * greek-families.mjs — a shared prefix is not evidence of a shared root,
+     * and for compound verbs it is systematically not.
+     */
+    const familyId = highlight ? (entry.familyId ?? derivedFamilyId(rawStem, fold)) : null;
+
+    /*
+     * A REFUSED FAMILY REFUSES THE SPLIT WITH IT, and the split was wrong too.
+     *
+     * When the derived stem turns out to be a preposition, the highlight built
+     * on it is not merely unfamilied — it is a bad analysis. ἀναβαίνω was being
+     * shown as ἀν + αβαίνω, with six letters of verb marked as the ending.
+     * Keeping that while dropping the family would leave the worse half.
+     *
+     * It also preserves the invariant content.test.ts already enforces: a
+     * highlighted morpheme must say which family it belongs to, because the
+     * highlight is how a learner reaches the family sheet. A highlight leading
+     * nowhere is a promise the app cannot keep.
+     *
+     * So these words join the ones with no derivable stem at all — taught
+     * plain, which is the house rule whenever the evidence runs out.
+     */
+    if (highlight && !familyId) {
+      highlight = null;
+      stemLen = null;
+    }
+    if (!highlight) unsplit.push(lemma);
+    const stem = highlight ? rawStem : null;
 
     if (familyId && !families.has(familyId)) {
       families.set(familyId, {
@@ -409,10 +437,13 @@ function main() {
     verseTokens.map((t) => {
       const teachable = !INDECLINABLE.has(t.pos) && !FUNCTION_WORD.has(t.pos);
       const stemLen = splitAt(t.lemma, t.word);
-      const highlight = teachable ? endingIndices(t.word, stemLen) : null;
       const entry = byLemmaAll.get(t.lemma);
       const stem = stemLen ? clusters(t.lemma).slice(0, stemLen).join("") : null;
-      const familyId = highlight && stem && families.has(fold(stem)) ? fold(stem) : null;
+      const familyId = stem && families.has(fold(stem)) ? fold(stem) : null;
+      // Same rule as the vocabulary above: no family, no highlight. A refused
+      // family means the split it rested on was a prefix artefact, and a
+      // highlight with nowhere to lead is worse than no highlight.
+      const highlight = teachable && familyId ? endingIndices(t.word, stemLen) : null;
       return {
         // MorphGNT marks textual variants with ⸀ and friends; they are
         // apparatus, not letters, and would render as stray glyphs.
@@ -483,10 +514,11 @@ function main() {
       tokens: verseTokens.map((t) => {
         const teachable = !INDECLINABLE.has(t.pos) && !FUNCTION_WORD.has(t.pos);
         const stemLen = splitAt(t.lemma, t.word);
-        const highlight = teachable ? endingIndices(t.word, stemLen) : null;
         const entry = byLemma.get(t.lemma);
         const stem = stemLen ? clusters(t.lemma).slice(0, stemLen).join("") : null;
-        const familyId = highlight && stem && families.has(fold(stem)) ? fold(stem) : null;
+        const familyId = stem && families.has(fold(stem)) ? fold(stem) : null;
+        // No family, no highlight — see the sibling path above.
+        const highlight = teachable && familyId ? endingIndices(t.word, stemLen) : null;
         return {
           text: t.word,
           translit: spec.translit?.[t.word] ?? spec.translit?.[t.norm] ?? t.norm,

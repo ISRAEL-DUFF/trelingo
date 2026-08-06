@@ -8,7 +8,15 @@ import { morphemeLabel } from "@/content/course";
 import { ScriptWord } from "@/components/ScriptWord";
 import { Empty, TopBar } from "@/components/ui";
 
-export function StatsScreen() {
+/**
+ * The stats themselves, without a TopBar or a screen wrapper.
+ *
+ * Split out when the nav collapsed to five tabs and "You" took over as the
+ * destination — YouScreen composes this between an account strip and a link to
+ * Settings. It stays here rather than moving because everything it renders is
+ * about the REVIEW QUEUE, which is this feature's subject.
+ */
+export function StatsBody() {
   const { wordById, families } = useCourseContent();
   const morpheme = morphemeLabel(useCourse());
   const data = useLiveQuery(async () => {
@@ -41,9 +49,7 @@ export function StatsScreen() {
   ];
 
   return (
-    <div className="screen">
-      <TopBar left={<span className="small">Progress</span>} />
-
+    <>
       <div
         className="pad"
         style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}
@@ -150,6 +156,21 @@ export function StatsScreen() {
           <Empty icon="📊" title="Nothing to measure yet" hint="Complete a unit to start tracking." />
         )}
       </div>
+    </>
+  );
+}
+
+/**
+ * The old standalone Progress screen.
+ *
+ * Kept so /progress still resolves — it was the stats URL for the whole life of
+ * the app and may be bookmarked. The nav points at /you now.
+ */
+export function StatsScreen() {
+  return (
+    <div className="screen">
+      <TopBar left={<span className="small">Progress</span>} />
+      <StatsBody />
     </div>
   );
 }

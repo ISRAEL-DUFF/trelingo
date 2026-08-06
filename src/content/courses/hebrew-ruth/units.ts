@@ -81,6 +81,8 @@ const TITLES: Record<string, string[]> = {
     "The LORD Gave Her Conception",
     "A Son Is Born to Naomi",
     "These Are the Generations",
+    "Hezron, Ram, Amminadab",
+    "Salmon Begat Boaz, and Boaz Obed",
   ],
 };
 

@@ -35,7 +35,7 @@ import { type ScriptModule } from "@/lib/script";
 import { scriptOfLanguage } from "./language";
 import { type ParseFieldDef } from "./parse-fields";
 
-export type CourseId = "shoresh" | "jonah" | "ruth" | "esther" | "ecclesiastes" | "haggai" | "malachi" | "obadiah" | "koine-gospels" | "1john" | "mark" | "john" | "matthew" | "attic-prose" | "latin";
+export type CourseId = "shoresh" | "jonah" | "ruth" | "esther" | "ecclesiastes" | "haggai" | "malachi" | "obadiah" | "genesis" | "koine-gospels" | "1john" | "mark" | "john" | "matthew" | "attic-prose" | "latin";
 
 /** Fields a track inherits rather than declares. */
 type Inherited = Pick<Variety, "supportsFading" | "morphemeNoun" | "diacriticsCopy" | "parseFields"> &
@@ -188,6 +188,23 @@ export const HEBREW_OBADIAH: Course = {
 };
 
 /**
+ * Genesis 1–11 — the first track that is a SLICE of a book.
+ *
+ * Genesis entire needs 973 new glosses, more than Luke, which was parked for
+ * that reason. These eleven chapters need 285 and end where the text does: the
+ * primeval history closes at Babel and Terah's departure, and Abraham begins at
+ * 12:1. Named for the range rather than the book, so nobody opens it expecting
+ * Joseph.
+ */
+export const HEBREW_GENESIS: Course = {
+  ...inherit(BIBLICAL_HEBREW),
+  id: "genesis",
+  name: "Genesis 1–11",
+  subtitle: "Creation, the flood, and Babel",
+  accentColor: "var(--sage)",
+};
+
+/**
  * Koine and Attic each have exactly one track today.
  *
  * That is the asymmetry the third level exposes rather than creates: Biblical
@@ -269,7 +286,7 @@ export const GREEK_ATTIC: Course = {
   accentColor: "#211d1a", // charcoal
 };
 
-export const courses: Course[] = [HEBREW_BIBLICAL, HEBREW_JONAH, HEBREW_RUTH, HEBREW_ESTHER, HEBREW_ECCLESIASTES, HEBREW_HAGGAI, HEBREW_MALACHI, HEBREW_OBADIAH, GREEK_KOINE, GREEK_1JOHN, GREEK_MARK, GREEK_JOHN, GREEK_MATTHEW, GREEK_ATTIC];
+export const courses: Course[] = [HEBREW_BIBLICAL, HEBREW_JONAH, HEBREW_RUTH, HEBREW_ESTHER, HEBREW_ECCLESIASTES, HEBREW_HAGGAI, HEBREW_MALACHI, HEBREW_OBADIAH, HEBREW_GENESIS, GREEK_KOINE, GREEK_1JOHN, GREEK_MARK, GREEK_JOHN, GREEK_MATTHEW, GREEK_ATTIC];
 
 /** The tracks belonging to one variety. */
 export function tracksOf(varietyId: VarietyId): Course[] {

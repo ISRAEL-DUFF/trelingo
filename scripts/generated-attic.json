@@ -33,13 +33,13 @@
       "notes": "Behind δίκαιος (just) and δικαστής (juror)."
     },
     {
-      "id": "ἐργ",
-      "letters": "ἐργ",
+      "id": "ἐρ",
+      "letters": "ἐρ",
       "coreGloss": "work"
     },
     {
-      "id": "ἀνθρωπ",
-      "letters": "ἀνθρωπ",
+      "id": "ἀνθρω",
+      "letters": "ἀνθρω",
       "coreGloss": "human being"
     },
     {
@@ -59,8 +59,8 @@
       "coreGloss": "judgement"
     },
     {
-      "id": "φιλ",
-      "letters": "φιλ",
+      "id": "φι",
+      "letters": "φι",
       "coreGloss": "friend, dear"
     },
     {
@@ -70,19 +70,19 @@
       "notes": "The word the whole Euthyphro argues about."
     },
     {
-      "id": "πρωτ",
-      "letters": "πρωτ",
+      "id": "πρω",
+      "letters": "πρω",
       "coreGloss": "first"
     },
     {
-      "id": "ὀλιγ",
-      "letters": "ὀλιγ",
+      "id": "ὀλι",
+      "letters": "ὀλι",
       "coreGloss": "few",
       "notes": "Behind “oligarchy” — rule by the few."
     },
     {
-      "id": "μον",
-      "letters": "μον",
+      "id": "μο",
+      "letters": "μο",
       "coreGloss": "alone"
     },
     {
@@ -97,24 +97,14 @@
       "notes": "Behind English “dynamic”."
     },
     {
-      "id": "βασιλε",
-      "letters": "βασιλε",
+      "id": "βασιλ",
+      "letters": "βασιλ",
       "coreGloss": "king"
-    },
-    {
-      "id": "ἀν",
-      "letters": "ἀν",
-      "coreGloss": "man"
-    },
-    {
-      "id": "πατ",
-      "letters": "πατ",
-      "coreGloss": "father"
     },
     {
       "id": "πα",
       "letters": "πα",
-      "coreGloss": "all"
+      "coreGloss": "father"
     },
     {
       "id": "ναυτικ",
@@ -127,24 +117,14 @@
       "coreGloss": "treaty, libation"
     },
     {
-      "id": "βαρβαρ",
-      "letters": "βαρβαρ",
+      "id": "βαρβα",
+      "letters": "βαρβα",
       "coreGloss": "non-Greek"
     },
     {
-      "id": "ἑκαστ",
-      "letters": "ἑκαστ",
+      "id": "ἑκασ",
+      "letters": "ἑκασ",
       "coreGloss": "each"
-    },
-    {
-      "id": "ὁσ",
-      "letters": "ὁσ",
-      "coreGloss": "as much as"
-    },
-    {
-      "id": "οἱ",
-      "letters": "οἱ",
-      "coreGloss": "of what sort"
     },
     {
       "id": "θαλασσ",
@@ -215,16 +195,42 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml",
+        "tlg0548.tlg001.perseus-grc1.1.1.1-1.4.1.tb.xml"
       ],
       "distractors": [
         "house",
         "field",
         "ship"
       ],
-      "_freq": 152,
-      "_stemSource": "derived"
+      "_freq": 1128,
+      "_stemSource": "manual"
     },
     {
       "id": "polemos",
@@ -247,16 +253,39 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml",
+        "tlg0548.tlg001.perseus-grc1.1.1.1-1.4.1.tb.xml"
       ],
       "distractors": [
         "peace",
         "law",
         "council"
       ],
-      "_freq": 110,
-      "_stemSource": "derived"
+      "_freq": 601,
+      "_stemSource": "manual"
     },
     {
       "id": "theos",
@@ -272,17 +301,48 @@
         ],
         "kind": "ending"
       },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "man",
         "king",
         "hero"
       ],
-      "_freq": 73,
+      "_freq": 1577,
       "_stemSource": "derived"
     },
     {
@@ -306,8 +366,32 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "deed",
@@ -315,7 +399,7 @@
         "custom"
       ],
       "notes": "In Plato λόγος is usually “argument” or “account”, not simply “word”.",
-      "_freq": 58,
+      "_freq": 551,
       "_stemSource": "derived"
     },
     {
@@ -339,15 +423,35 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "war",
         "city",
         "justice"
       ],
-      "_freq": 54,
+      "_freq": 210,
       "_stemSource": "derived"
     },
     {
@@ -370,26 +474,51 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "war",
         "wealth",
         "honour"
       ],
-      "_freq": 52,
+      "_freq": 286,
       "_stemSource": "derived"
     },
     {
       "id": "ergon",
-      "familyId": "ἐργ",
+      "familyId": "ἐρ",
       "text": "ἔργον",
       "translit": "ergon",
       "gloss": "work, deed",
       "partOfSpeech": "noun",
       "morphology": {
         "highlight": [
+          2,
           3,
           4
         ],
@@ -402,26 +531,53 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "word",
         "rest",
         "plan"
       ],
-      "_freq": 48,
+      "_freq": 571,
       "_stemSource": "derived"
     },
     {
       "id": "anthropos",
-      "familyId": "ἀνθρωπ",
+      "familyId": "ἀνθρω",
       "text": "ἄνθρωπος",
       "translit": "anthrōpos",
       "gloss": "human being",
       "partOfSpeech": "noun",
       "morphology": {
         "highlight": [
+          5,
           6,
           7
         ],
@@ -434,15 +590,40 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "god",
         "beast",
         "city"
       ],
-      "_freq": 46,
+      "_freq": 550,
       "_stemSource": "derived"
     },
     {
@@ -466,15 +647,41 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml",
+        "tlg0548.tlg001.perseus-grc1.1.1.1-1.4.1.tb.xml"
       ],
       "distractors": [
         "place",
         "war",
         "year"
       ],
-      "_freq": 58,
+      "_freq": 405,
       "_stemSource": "derived"
     },
     {
@@ -497,15 +704,37 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml",
+        "tlg0548.tlg001.perseus-grc1.1.1.1-1.4.1.tb.xml"
       ],
       "distractors": [
         "end",
         "middle",
         "law"
       ],
-      "_freq": 29,
+      "_freq": 226,
       "_stemSource": "derived"
     },
     {
@@ -528,25 +757,44 @@
       },
       "attestations": [
         "Thucydides",
-        "Lysias"
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "fear",
         "hope",
         "custom"
       ],
-      "_freq": 41,
+      "_freq": 141,
       "_stemSource": "derived"
     },
     {
       "id": "philos",
-      "familyId": "φιλ",
+      "familyId": "φι",
       "text": "φίλος",
       "translit": "philos",
       "gloss": "friend; dear",
       "partOfSpeech": "noun",
       "morphology": {
         "highlight": [
+          2,
           3,
           4
         ],
@@ -559,15 +807,41 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "enemy",
         "stranger",
         "slave"
       ],
-      "_freq": 37,
+      "_freq": 1079,
       "_stemSource": "derived"
     },
     {
@@ -579,22 +853,50 @@
       "partOfSpeech": "adjective",
       "morphology": {
         "highlight": [
+          4,
           5,
           6
         ],
         "kind": "ending"
       },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "unjust",
         "wise",
         "brave"
       ],
-      "_freq": 55,
+      "_freq": 194,
       "_stemSource": "derived"
     },
     {
@@ -613,7 +915,15 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
         "Plato, Euthyphro",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
         "Lysias"
       ],
       "distractors": [
@@ -621,7 +931,7 @@
         "orator",
         "priest"
       ],
-      "_freq": 36,
+      "_freq": 53,
       "_stemSource": "derived"
     },
     {
@@ -645,25 +955,36 @@
       },
       "attestations": [
         "Thucydides",
-        "Plato, Euthyphro"
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "Plato, Euthyphro",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml"
       ],
       "distractors": [
         "unholy",
         "just",
         "wise"
       ],
-      "_freq": 73,
+      "_freq": 84,
       "_stemSource": "derived"
     },
     {
       "id": "protos",
-      "familyId": "πρωτ",
+      "familyId": "πρω",
       "text": "πρῶτος",
       "translit": "prōtos",
       "gloss": "first",
       "partOfSpeech": "adjective",
       "morphology": {
         "highlight": [
+          3,
           4,
           5
         ],
@@ -676,53 +997,98 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml",
+        "tlg0548.tlg001.perseus-grc1.1.1.1-1.4.1.tb.xml"
       ],
       "distractors": [
         "last",
         "many",
         "few"
       ],
-      "_freq": 59,
+      "_freq": 554,
       "_stemSource": "derived"
     },
     {
       "id": "oligos",
-      "familyId": "ὀλιγ",
+      "familyId": "ὀλι",
       "text": "ὀλίγος",
       "translit": "oligos",
       "gloss": "few, little",
       "partOfSpeech": "adjective",
       "morphology": {
         "highlight": [
+          3,
           4,
           5
         ],
         "kind": "ending"
       },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "many",
         "great",
         "whole"
       ],
-      "_freq": 31,
+      "_freq": 174,
       "_stemSource": "derived"
     },
     {
       "id": "monos",
-      "familyId": "μον",
+      "familyId": "μο",
       "text": "μόνος",
       "translit": "monos",
       "gloss": "alone, only",
       "partOfSpeech": "adjective",
       "morphology": {
         "highlight": [
+          2,
           3,
           4
         ],
@@ -735,15 +1101,39 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "all",
         "both",
         "each"
       ],
-      "_freq": 35,
+      "_freq": 361,
       "_stemSource": "derived"
     },
     {
@@ -767,14 +1157,21 @@
       },
       "attestations": [
         "Thucydides",
-        "Lysias"
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "time",
         "army",
         "wall"
       ],
-      "_freq": 29,
+      "_freq": 50,
       "_stemSource": "derived"
     },
     {
@@ -798,25 +1195,42 @@
       },
       "attestations": [
         "Thucydides",
-        "Lysias"
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml",
+        "tlg0548.tlg001.perseus-grc1.1.1.1-1.4.1.tb.xml"
       ],
       "distractors": [
         "weakness",
         "wealth",
         "fame"
       ],
-      "_freq": 41,
+      "_freq": 314,
       "_stemSource": "derived"
     },
     {
       "id": "basileus",
-      "familyId": "βασιλε",
+      "familyId": "βασιλ",
       "text": "βασιλεύς",
       "translit": "basileus",
       "gloss": "king",
       "partOfSpeech": "noun",
       "morphology": {
         "highlight": [
+          5,
           6,
           7
         ],
@@ -829,53 +1243,100 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "citizen",
         "slave",
         "general"
       ],
-      "_freq": 38,
+      "_freq": 480,
       "_stemSource": "derived"
     },
     {
       "id": "aner",
-      "familyId": "ἀν",
+      "familyId": null,
       "text": "ἀνήρ",
       "translit": "anēr",
       "gloss": "man",
       "partOfSpeech": "noun",
-      "morphology": {
-        "highlight": [
-          2,
-          3
-        ],
-        "kind": "ending"
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "woman",
         "child",
         "god"
       ],
-      "_freq": 103,
+      "_freq": 1992,
       "_stemSource": "derived"
     },
     {
       "id": "pater",
-      "familyId": "πατ",
+      "familyId": "πα",
       "text": "πατήρ",
       "translit": "patēr",
       "gloss": "father",
       "partOfSpeech": "noun",
       "morphology": {
         "highlight": [
+          2,
           3,
           4
         ],
@@ -888,15 +1349,42 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml",
+        "tlg0548.tlg001.perseus-grc1.1.1.1-1.4.1.tb.xml"
       ],
       "distractors": [
         "mother",
         "son",
         "brother"
       ],
-      "_freq": 35,
+      "_freq": 805,
       "_stemSource": "derived"
     },
     {
@@ -919,15 +1407,42 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml",
+        "tlg0548.tlg001.perseus-grc1.1.1.1-1.4.1.tb.xml"
       ],
       "distractors": [
         "none",
         "few",
         "some"
       ],
-      "_freq": 131,
+      "_freq": 2441,
       "_stemSource": "derived"
     },
     {
@@ -945,14 +1460,22 @@
         "kind": "ending"
       },
       "attestations": [
-        "Thucydides"
+        "Thucydides",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "infantry",
         "civic",
         "sacred"
       ],
-      "_freq": 31,
+      "_freq": 86,
       "_stemSource": "derived"
     },
     {
@@ -969,14 +1492,24 @@
         "kind": "ending"
       },
       "attestations": [
-        "Thucydides"
+        "Thucydides",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "battle",
         "speech",
         "tribute"
       ],
-      "_freq": 31,
+      "_freq": 47,
       "_stemSource": "derived"
     },
     {
@@ -993,27 +1526,44 @@
         ],
         "kind": "ending"
       },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
       "attestations": [
         "Thucydides",
-        "Lysias"
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "friendly",
         "neutral",
         "allied"
       ],
-      "_freq": 30,
+      "_freq": 214,
       "_stemSource": "derived"
     },
     {
       "id": "barbaros",
-      "familyId": "βαρβαρ",
+      "familyId": "βαρβα",
       "text": "βάρβαρος",
       "translit": "barbaros",
       "gloss": "foreign; a foreigner",
       "partOfSpeech": "noun",
       "morphology": {
         "highlight": [
+          5,
           6,
           7
         ],
@@ -1025,25 +1575,39 @@
         "gender": "m"
       },
       "attestations": [
-        "Thucydides"
+        "Thucydides",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "Greek",
         "noble",
         "free"
       ],
-      "_freq": 31,
+      "_freq": 154,
       "_stemSource": "derived"
     },
     {
       "id": "hekastos",
-      "familyId": "ἑκαστ",
+      "familyId": "ἑκασ",
       "text": "ἕκαστος",
       "translit": "hekastos",
       "gloss": "each",
       "partOfSpeech": "adjective",
       "morphology": {
         "highlight": [
+          4,
           5,
           6
         ],
@@ -1056,31 +1620,47 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml",
+        "tlg0548.tlg001.perseus-grc1.1.1.1-1.4.1.tb.xml"
       ],
       "distractors": [
         "all",
         "none",
         "both"
       ],
-      "_freq": 41,
+      "_freq": 422,
       "_stemSource": "derived"
     },
     {
       "id": "hosos",
-      "familyId": "ὁσ",
+      "familyId": null,
       "text": "ὅσος",
       "translit": "hosos",
       "gloss": "as much as, how great",
       "partOfSpeech": "adjective",
-      "morphology": {
-        "highlight": [
-          2,
-          3
-        ],
-        "kind": "ending"
-      },
       "parse": {
         "case": "nominative",
         "number": "s",
@@ -1088,42 +1668,89 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "who",
         "where",
         "when"
       ],
-      "_freq": 68,
+      "_freq": 551,
       "_stemSource": "derived"
     },
     {
       "id": "hoios",
-      "familyId": "οἱ",
+      "familyId": null,
       "text": "οἷος",
       "translit": "hoios",
       "gloss": "such as, what sort of",
       "partOfSpeech": "adjective",
-      "morphology": {
-        "highlight": [
-          2,
-          3
-        ],
-        "kind": "ending"
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "how many",
         "how often",
         "whether"
       ],
-      "_freq": 29,
+      "_freq": 404,
       "_stemSource": "derived"
     },
     {
@@ -1146,7 +1773,27 @@
       },
       "attestations": [
         "Thucydides",
-        "Lysias"
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml",
+        "tlg0548.tlg001.perseus-grc1.1.1.1-1.4.1.tb.xml"
       ],
       "distractors": [
         "land",
@@ -1154,7 +1801,7 @@
         "mountain"
       ],
       "notes": "Stem supplied by hand: the corpus invariant stopped at θάλα-, which is not the standard analysis.",
-      "_freq": 40,
+      "_freq": 318,
       "_stemSource": "override"
     },
     {
@@ -1178,15 +1825,24 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "Spartan",
         "Corinthian",
         "Persian"
       ],
-      "_freq": 89,
+      "_freq": 199,
       "_stemSource": "override"
     },
     {
@@ -1202,10 +1858,36 @@
         ],
         "kind": "ending"
       },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "n"
+      },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "word",
@@ -1213,7 +1895,7 @@
         "place"
       ],
       "notes": "3rd declension: the stem is really χρηματ-, visible in the genitive χρήματος. The nominative hides the tau.",
-      "_freq": 45,
+      "_freq": 165,
       "_stemSource": "override"
     },
     {
@@ -1230,9 +1912,23 @@
         ],
         "kind": "ending"
       },
+      "parse": {
+        "case": "nominative",
+        "number": "s",
+        "gender": "m"
+      },
       "attestations": [
         "Thucydides",
-        "Plato, Euthyphro"
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "Plato, Euthyphro",
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml"
       ],
       "distractors": [
         "older",
@@ -1240,7 +1936,7 @@
         "fewer"
       ],
       "notes": "Comparative of νέος. The corpus invariant stopped inside the comparative suffix -τερ-, so the stem is supplied by hand.",
-      "_freq": 5,
+      "_freq": 27,
       "_stemSource": "override"
     },
     {
@@ -1263,8 +1959,34 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "small",
@@ -1272,7 +1994,7 @@
         "swift"
       ],
       "notes": "Irregular: most forms use the stem μεγαλ-, as in μεγάλου.",
-      "_freq": 100,
+      "_freq": 1554,
       "_stemSource": "override"
     },
     {
@@ -1290,15 +2012,41 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml",
+        "tlg0548.tlg001.perseus-grc1.1.1.1-1.4.1.tb.xml"
       ],
       "distractors": [
         "I hear",
         "I write",
         "I ask"
       ],
-      "_freq": 135,
+      "_freq": 1083,
       "_stemSource": "override"
     },
     {
@@ -1316,16 +2064,43 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml",
+        "tlg0548.tlg001.perseus-grc1.1.1.1-1.4.1.tb.xml"
       ],
       "distractors": [
         "I give",
         "I lose",
         "I take"
       ],
-      "_freq": 187,
-      "_stemSource": "override"
+      "_freq": 2271,
+      "_stemSource": "manual"
     },
     {
       "id": "poieo",
@@ -1342,16 +2117,40 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml",
+        "tlg0548.tlg001.perseus-grc1.1.1.1-1.4.1.tb.xml"
       ],
       "distractors": [
         "I destroy",
         "I find",
         "I send"
       ],
-      "_freq": 148,
-      "_stemSource": "override"
+      "_freq": 862,
+      "_stemSource": "manual"
     },
     {
       "id": "hegeomai",
@@ -1371,8 +2170,30 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg002.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0013.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg001.perseus-grc2.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg003.perseus-grc2.tb.xml",
+        "tlg0085.tlg004.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg006.perseus-grc2.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "I follow",
@@ -1380,7 +2201,7 @@
         "I fear"
       ],
       "notes": "Deponent: middle in form, active in meaning.",
-      "_freq": 63,
+      "_freq": 187,
       "_stemSource": "override"
     },
     {
@@ -1398,8 +2219,28 @@
       },
       "attestations": [
         "Thucydides",
+        "tlg0007.tlg004.perseus-grc1.tb.xml",
+        "tlg0007.tlg015.perseus-grc1.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.12.tb.xml",
+        "tlg0008.tlg001.perseus-grc1.13.tb.xml",
+        "tlg0011.tlg001.perseus-grc2.tb.xml",
+        "tlg0011.tlg003.perseus-grc1.tb.xml",
+        "tlg0011.tlg004.perseus-grc1.tb.xml",
+        "tlg0011.tlg005.perseus-grc2.tb.xml",
+        "tlg0012.tlg001.perseus-grc1.tb.xml",
+        "tlg0012.tlg002.perseus-grc1.tb.xml",
+        "tlg0016.tlg001.perseus-grc1.1.tb.xml",
+        "tlg0020.tlg001.perseus-grc1.tb.xml",
+        "tlg0020.tlg002.perseus-grc1.tb.xml",
+        "tlg0020.tlg003.perseus-grc1.tb.xml",
         "Plato, Euthyphro",
-        "Lysias"
+        "tlg0060.tlg001.perseus-grc3.11.tb.xml",
+        "tlg0085.tlg002.perseus-grc2.tb.xml",
+        "tlg0085.tlg005.perseus-grc1.tb.xml",
+        "tlg0085.tlg007.perseus-grc1.tb.xml",
+        "tlg0096.tlg002.opp-grc2.1-53.tb.xml",
+        "Lysias",
+        "tlg0543.tlg001.perseus-grc1.tb.xml"
       ],
       "distractors": [
         "I withhold",
@@ -1407,7 +2248,7 @@
         "I destroy"
       ],
       "notes": "παρά (beside) prefixed to ἔχω — “hold out to”, hence “provide”.",
-      "_freq": 32,
+      "_freq": 145,
       "_stemSource": "override"
     }
   ],

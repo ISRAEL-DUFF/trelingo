@@ -92,6 +92,11 @@ describe.each(availableCourseIds())("course: %s", (courseId: CourseId) => {
       haggai: "the Hebrew Bible",
       malachi: "the Hebrew Bible",
       obadiah: "the Hebrew Bible",
+      // Genesis 1–11 is a slice of a book, but the FREQUENCY corpus is still
+      // the whole Hebrew Bible — the counts come from the full Tanakh index,
+      // not from the eleven chapters taught. A hapax badge in this track means
+      // hapax in the Bible, which is the only thing it could honestly mean.
+      genesis: "the Hebrew Bible",
       "koine-gospels": "the New Testament",
       "1john": "the New Testament",
       mark: "the New Testament",

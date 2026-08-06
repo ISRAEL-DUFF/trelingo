@@ -98,11 +98,22 @@ describe("design tokens", () => {
       ".btn--danger",
       ".chip--wrong",
       ".choice--wrong",
+      // The reading drills: a tapped token that was wrong, a rejected option,
+      // and the "Missed" verdict. All three mean the learner got it wrong.
+      // Day One aliases it once as --dayone-rose and uses that throughout, so
+      // the whole game shows up here as a single declaration.
+      ".game-opt--bad",
+      ".game-tok--err",
+      ".game-verdict__tag.is-miss",
+      ".sunrise",
     ]);
   });
 
   it("keeps --attention to states that mean work is waiting", () => {
-    expect(rulesUsing("--attention").sort()).toEqual([".bottomnav__badge"]);
+    // Cold Read's missed words earn this rather than --danger: the learner
+    // reported a gap honestly, they did not answer wrongly, and the reveal
+    // lists exactly these under "worth learning next".
+    expect(rulesUsing("--attention").sort()).toEqual([".bottomnav__badge", ".cold__tok.is-missed"]);
   });
 
   it("sets the runtime-only tokens from applyCourse", () => {

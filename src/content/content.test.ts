@@ -172,6 +172,26 @@ describe.each(COURSES)("course: %s", (courseId: CourseId) => {
       }
     });
 
+    it("names every unit, rather than falling back to its verse range", () => {
+      /*
+       * The books with hand-written title lists key them by chapter, and a unit
+       * whose chapter list has run out silently gets its verse range as a
+       * title. That is a correct fallback and a bad symptom: it means the list
+       * is the wrong LENGTH for the chapter, which usually means the rest of
+       * the chapter's titles are one verse out too.
+       *
+       * WHAT THIS CANNOT CATCH: a list of the right length whose entries are
+       * all shifted by one. Titles are prose and nothing here knows which verse
+       * a sentence describes. Obadiah shipped with exactly that defect and this
+       * check would have passed — it was found by reading the rendered path in
+       * a browser, which remains the only way to find it.
+       */
+      const titled = new Set(["jonah", "ruth", "esther", "ecclesiastes", "genesis"]);
+      if (!titled.has(courseId)) return;
+      const fellBack = units.filter((u) => u.title === u.subtitle);
+      expect(fellBack.map((u) => `${u.id} ${u.subtitle}`)).toEqual([]);
+    });
+
     it("orders units consistently with their prerequisites", () => {
       const order = new Map(units.map((u) => [u.id, u.orderIndex]));
       for (const u of units) {

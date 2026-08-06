@@ -92,6 +92,10 @@
 
 :root {
   --font-hebrew: "Frank Ruhl Libre", "Times New Roman", serif;
+  /* Greek, available regardless of which course is active. --script-font
+     follows the ACTIVE track, and the games are language-scoped rather than
+     track-scoped: a player on a Hebrew track can open the Greek drills. */
+  --font-greek: "Gentium Plus", "New Athena Unicode", "Times New Roman", serif;
   --font-body: "Crimson Pro", Georgia, serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
@@ -394,6 +398,24 @@ button:disabled {
   padding: 18px;
 }
 
+/*
+ * A card that is a link must still be a box.
+ *
+ * An <a> is inline, so `.card` on one collapses to its text and the padding and
+ * border wrap nothing. Every card-link in the app happened to sit inside a
+ * .stack, where flex made it fill the row anyway — so this went unnoticed until
+ * the "You" screen put one outside a stack and the text spilled out of a
+ * half-width box.
+ *
+ * :where() keeps the specificity at (0,1,0) rather than the (0,1,1) of `a.card`.
+ * That matters: `.game-tile` sets display:flex further down, and at equal
+ * specificity the later rule wins. Written as `a.card` this would silently
+ * flatten the games gallery instead.
+ */
+.card:where(a) {
+  display: block;
+}
+
 .card--flat {
   border-radius: var(--radius);
   padding: 14px;
@@ -473,7 +495,11 @@ button:disabled {
   height: var(--nav-height);
   padding-bottom: var(--safe-bottom);
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  /* Derived, not counted. This was repeat(5, 1fr) and adding a sixth
+     destination silently wrapped Settings onto a second row, over the content
+     and below the fold. Auto-flow columns fit whatever the nav holds. */
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
   background: var(--surface);
   border-top: 1px solid var(--border);
   z-index: 20;
@@ -502,18 +528,40 @@ button:disabled {
 .bottomnav__icon {
   font-size: 19px;
   line-height: 1;
+  /* The badge anchors to THIS, not to the page — see below. */
+  position: relative;
+  display: inline-block;
 }
 
+/*
+ * The due badge, pinned to its own icon.
+ *
+ * It used to be `position: absolute` with no positioned ancestor, so it
+ * resolved against the nav and sat at a fixed translate(14px, -8px) from
+ * wherever the icon happened to start. At 480px that looked deliberate; at
+ * 320px, with 53px cells, it overlapped the Read icon in the next tab — a
+ * count sitting on top of an unrelated destination.
+ *
+ * Anchored to the icon and shifted by its own size, it now stays put at any
+ * width and at any number of tabs. `max-width` keeps a three-digit count from
+ * pushing back into the neighbour it just stopped covering.
+ */
 .bottomnav__badge {
   position: absolute;
-  transform: translate(14px, -8px);
+  left: 100%;
+  bottom: 60%;
+  transform: translateX(-40%);
   background: var(--attention);
   color: #fff;
   border-radius: var(--radius-pill);
   font-size: 9px;
   font-weight: 700;
-  padding: 1px 5px;
+  line-height: 1.4;
+  padding: 0 4px;
+  max-width: 26px;
+  overflow: hidden;
   font-family: var(--font-mono);
+  pointer-events: none;
 }
 
 /* ---------- Lesson path ---------- */
@@ -837,4 +885,1052 @@ button:disabled {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ---------- Games ----------
+ *
+ * The Greek reading drills arrived as a standalone page with their own dark
+ * palette. Everything here is expressed in the app's tokens instead, so the
+ * game cannot drift from the rest of the UI and works in both themes:
+ *
+ *   its "rubric" red   → var(--gold)   its "verdigris" → var(--sage)
+ *   its "amber"        → var(--gold-bright)  panels/rules → --surface/--border
+ *
+ * --attention is not used either: it means "work is waiting", which is the due
+ * badge, not "this is the token under test".
+ *
+ * --morpheme is deliberately NOT used. It means "this is a morpheme" and
+ * nothing else; design-tokens.test.ts pins it to its two legitimate selectors.
+ * Reaching for it here would have painted the marked verb of a correct answer
+ * in the app's wrong-answer red, which is the exact confusion that test exists
+ * to prevent.
+ *
+ * The one thing kept from the original is the shape of the fluency window: a
+ * hairline bar with the deadline notched at the midpoint, because a progress
+ * bar that fills to "done" would say the wrong thing about running out of time.
+ */
+
+.game-tile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+}
+.game-tile__icon {
+  font-size: 26px;
+  line-height: 1;
+}
+.game-tile__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+.game-tile__head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.game-tile__name {
+  font-weight: 600;
+}
+.game-tile__script {
+  color: var(--text-soft);
+  font-size: 15px;
+}
+.game-tile__script--greek {
+  font-family: var(--font-greek);
+}
+.game-tile__script--hebrew {
+  font-family: var(--font-hebrew);
+}
+.game-tile__blurb {
+  line-height: 1.5;
+}
+.game-tile__meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+/*
+ * How far the player got, on the tile.
+ *
+ * --gold, not --attention. Nothing here is waiting to be done: games sit
+ * outside the review queue by design, and painting "3 of 5 verses" in the
+ * colour the app uses for a due backlog would say the opposite of what the
+ * gallery says one line above it.
+ */
+.game-tile__status {
+  color: var(--gold);
+}
+
+/* ---- drill menu ---- */
+.game-mast {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+}
+.game-eyebrow,
+.game-kicker {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+.game-title {
+  font-family: var(--font-greek);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.15;
+  margin: 0;
+}
+.game-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: start;
+  width: 100%;
+  cursor: pointer;
+}
+.game-card__name {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.game-card__foot {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  margin-top: 8px;
+}
+
+/* ---- the round ---- */
+.game-ask {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin: 0;
+  font-weight: 600;
+}
+.game-counts {
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+.game-counts b {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.game-field {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-inline-start: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 22px 18px;
+}
+.game-greek {
+  font-family: var(--font-greek);
+  font-size: 25px;
+  line-height: 1.8;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.42em;
+}
+
+.game-tok {
+  padding: 1px 3px;
+  border-radius: 3px;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+}
+.game-tok--pick {
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+}
+.game-tok--pick:hover {
+  background: var(--ink-wash);
+}
+.game-tok--mark {
+  color: var(--gold);
+}
+.game-tok--hit {
+  background: var(--sage-wash);
+  color: var(--sage);
+}
+.game-tok--err {
+  background: var(--danger-wash);
+  color: var(--danger);
+}
+
+.game-slot {
+  display: inline-block;
+  min-width: 2.4em;
+  border-bottom: 2px solid var(--gold);
+  text-align: center;
+  color: var(--gold);
+}
+.game-slot--filled {
+  border-bottom-color: transparent;
+}
+
+/* The deadline sits at the midpoint; the bar runs to twice the window, so
+   "past the notch" is visible without the bar ever reading as complete. */
+.game-window {
+  position: relative;
+  height: 3px;
+  background: var(--border);
+  overflow: visible;
+}
+.game-fill {
+  height: 100%;
+  background: var(--sage);
+}
+.game-fill--past {
+  background: var(--gold-bright);
+}
+.game-notch {
+  position: absolute;
+  top: -4px;
+  width: 1px;
+  height: 11px;
+  background: var(--text-soft);
+}
+.game-wlabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--text-soft);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 7px;
+  font-family: var(--font-mono);
+}
+
+.game-opts {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, 1fr);
+}
+.game-opts--three {
+  grid-template-columns: repeat(3, 1fr);
+}
+.game-opt {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  padding: 16px 10px;
+  cursor: pointer;
+  font-family: var(--font-greek);
+  font-size: 22px;
+  position: relative;
+  min-height: 62px;
+}
+.game-opt:hover:not(:disabled) {
+  border-color: var(--text-soft);
+}
+.game-opt:disabled {
+  cursor: default;
+}
+.game-opt__key {
+  position: absolute;
+  top: 5px;
+  inset-inline-start: 7px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-soft);
+}
+.game-opt__cap {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--text-soft);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 8px;
+  line-height: 1.3;
+}
+.game-opt svg {
+  display: block;
+  margin: 0 auto;
+}
+.game-opt--good {
+  border-color: var(--sage);
+  background: var(--sage-wash);
+}
+.game-opt--bad {
+  border-color: var(--danger);
+  background: var(--danger-wash);
+}
+
+.game-verdict {
+  min-height: 46px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-soft);
+}
+.game-verdict__tag {
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 10px;
+  margin-inline-end: 10px;
+}
+.game-verdict__tag.is-fluent {
+  color: var(--sage);
+}
+.game-verdict__tag.is-slow {
+  color: var(--gold-bright);
+}
+.game-verdict__tag.is-miss {
+  color: var(--danger);
+}
+
+/* ---- report ---- */
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.game-cell {
+  background: var(--surface);
+  padding: 16px 12px;
+}
+.game-cell__n {
+  font-family: var(--font-greek);
+  font-size: 26px;
+  line-height: 1;
+}
+.game-cell__l {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-top: 7px;
+}
+.game-weak {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+.game-weak li {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  font-size: 13px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.game-weak li:last-child {
+  border-bottom: 0;
+}
+
+/* ---------- Day One (Hebrew game) ----------
+ *
+ * Ported from a standalone React file that used Tailwind and a fixed dark
+ * palette. There is no Tailwind here, so every utility became a rule below, and
+ * every colour became a token.
+ *
+ * ONE EXCEPTION, ON PURPOSE. The night-to-dawn background is set inline from
+ * JS, because it is not styling — it is the progress meter, and the whole
+ * premise of the game is that the screen brightens as you read. Its endpoints
+ * are read from --ink-deep and --gold-bright at runtime, so it tracks the
+ * theme; everything sitting on top of it is fixed here.
+ *
+ * Text on that ground cannot use --text: the ground moves from near-black to
+ * gold over a session. --sunrise-ink flips once the sun is up, which is what
+ * .sunrise--risen does.
+ */
+
+.sunrise {
+  /* NOT a theme token, and it cannot be one. The ground here runs from
+     --ink-deep to --gold-bright, and --ink-deep is dark in BOTH themes — so
+     the ink has to be light in both until the sun comes up. Reaching for
+     --text or --parchment gives near-black on near-black in one theme or the
+     other, which is exactly what happened first time. */
+  --sunrise-ink: #efe9db;
+  --sunrise-dim: #8a93b8;
+  --sunrise-lamp: var(--gold-bright);
+  --sunrise-sea: var(--sage);
+  /* The one place this game names the wrong-answer colour; everything below
+     goes through the alias, so --danger has a single reference here. */
+  --sunrise-rose: var(--danger);
+
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  transition: background 900ms ease;
+  color: var(--sunrise-ink);
+  z-index: 40;
+}
+
+/* Past this point the sky is bright enough that pale text would vanish. */
+.sunrise--risen {
+  --sunrise-ink: #241e14;
+  --sunrise-dim: #3a2e1499;
+  --sunrise-lamp: #3a2e14;
+}
+
+.sunrise-centre {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 56px 24px;
+  gap: 0;
+}
+
+.sunrise-eyebrow {
+  font-family: var(--font-mono);
+  color: var(--sunrise-dim);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.sunrise-eyebrow--sea {
+  color: var(--sunrise-sea);
+}
+
+.sunrise-hero {
+  font-family: var(--script-font, var(--font-hebrew));
+  color: var(--sunrise-lamp);
+  font-size: 64px;
+  margin: 28px 0 6px;
+  font-weight: 400;
+}
+
+.sunrise-sub {
+  font-family: var(--font-body);
+  color: var(--sunrise-ink);
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 300;
+  margin: 0 0 26px;
+}
+.sunrise-sub--tight {
+  margin: 18px 0 40px;
+}
+
+.sunrise-lede {
+  font-family: var(--font-body);
+  color: var(--sunrise-dim);
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: 30rem;
+  margin: 0 0 34px;
+}
+
+.sunrise-whisper {
+  font-family: var(--font-mono);
+  color: var(--sunrise-dim);
+  font-size: 11px;
+  margin-top: 34px;
+  opacity: 0.6;
+}
+
+.sunrise-btn {
+  font-family: var(--font-body);
+  background: var(--sunrise-lamp);
+  color: var(--ink-deep);
+  border: none;
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  font-size: 17px;
+  cursor: pointer;
+  transition: filter 200ms ease, transform 200ms ease;
+}
+.sunrise-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+.sunrise-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+.sunrise-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.sunrise-btn--ghost {
+  background: transparent;
+  color: var(--sunrise-ink);
+  border: 1px solid var(--sunrise-dim);
+}
+
+.sunrise-exit {
+  position: fixed;
+  top: 14px;
+  inset-inline-end: 14px;
+  z-index: 45;
+  background: none;
+  border: none;
+  color: var(--sunrise-dim);
+  font-size: 20px;
+  line-height: 1;
+  padding: 8px;
+  cursor: pointer;
+}
+.sunrise-exit:hover {
+  color: var(--sunrise-ink);
+}
+
+/* ---- the sky's own progress rail ---- */
+.sunrise-rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #00000033;
+  z-index: 44;
+}
+.sunrise-rail__fill {
+  height: 100%;
+  background: var(--gold-bright);
+  transition: width 500ms ease;
+}
+
+.sunrise-spark {
+  position: fixed;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  color: var(--gold-bright);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  z-index: 46;
+  animation: sunrise-pulse 900ms ease;
+}
+@keyframes sunrise-pulse {
+  0%, 100% { opacity: 0; }
+  20%, 70% { opacity: 1; }
+}
+
+/* ---- the teaching card ---- */
+.sunrise-teach {
+  border: 1px solid color-mix(in srgb, var(--gold-bright) 27%, transparent);
+  border-radius: 24px;
+  padding: 32px 40px;
+  margin-bottom: 34px;
+  max-width: 32rem;
+}
+.sunrise-teach__he {
+  font-family: var(--script-font, var(--font-hebrew));
+  color: var(--sunrise-lamp);
+  font-size: 54px;
+  margin-bottom: 12px;
+}
+.sunrise-teach__en {
+  font-family: var(--font-body);
+  color: var(--sunrise-ink);
+  font-size: 20px;
+  font-style: italic;
+  margin-bottom: 18px;
+}
+.sunrise-teach__line {
+  font-family: var(--font-body);
+  color: var(--sunrise-dim);
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ---- a round ---- */
+.sunrise-play {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 20px;
+}
+.sunrise-play__inner {
+  width: 100%;
+  max-width: 48rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sunrise-drill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 0;
+}
+.sunrise-ref {
+  position: fixed;
+  bottom: 18px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sunrise-dim);
+}
+
+.sunrise-stim {
+  margin: 36px 0;
+}
+.sunrise-stim--he {
+  font-family: var(--script-font, var(--font-hebrew));
+  color: var(--sunrise-lamp);
+  font-size: 60px;
+  line-height: 1.25;
+}
+.sunrise-stim--en {
+  font-family: var(--font-body);
+  color: var(--sunrise-ink);
+  font-size: 34px;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.sunrise-opts {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  max-width: 28rem;
+}
+@media (min-width: 480px) {
+  .sunrise-opts--pairs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.sunrise-opt {
+  font-family: var(--font-body);
+  font-size: 18px;
+  background: transparent;
+  border: 1px solid var(--sunrise-dim);
+  border-radius: 16px;
+  color: var(--sunrise-ink);
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: filter 150ms ease, transform 150ms ease;
+}
+.sunrise-opt--he {
+  font-family: var(--script-font, var(--font-hebrew));
+  font-size: 30px;
+}
+.sunrise-opt:hover:not(:disabled) {
+  filter: brightness(1.25);
+}
+.sunrise-opt:active:not(:disabled) {
+  transform: scale(0.96);
+}
+.sunrise-opt:disabled {
+  cursor: default;
+}
+.sunrise-opt.is-right {
+  border-color: var(--sunrise-sea);
+  color: var(--sunrise-sea);
+  background: color-mix(in srgb, var(--sage) 13%, transparent);
+}
+.sunrise-opt.is-wrong {
+  border-color: var(--sunrise-rose);
+  color: var(--sunrise-rose);
+  background: color-mix(in srgb, var(--sunrise-rose) 9%, transparent);
+}
+.sunrise-opt.is-dimmed {
+  color: var(--sunrise-dim);
+}
+
+/* ---- tap-all, and the word bank ---- */
+.sunrise-verse,
+.sunrise-bank {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 42rem;
+}
+.sunrise-verse {
+  margin: 36px 0;
+}
+.sunrise-word {
+  font-family: var(--script-font, var(--font-hebrew));
+  font-size: 32px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 4px 12px;
+  color: var(--sunrise-ink);
+  cursor: pointer;
+  transition: filter 150ms ease, transform 150ms ease;
+}
+.sunrise-bank .sunrise-word {
+  border-color: var(--sunrise-dim);
+  font-size: 28px;
+}
+.sunrise-word:hover:not(:disabled) {
+  filter: brightness(1.25);
+}
+.sunrise-word:active:not(:disabled) {
+  transform: scale(0.96);
+}
+.sunrise-word:disabled {
+  cursor: default;
+}
+.sunrise-word.is-on {
+  color: var(--sunrise-lamp);
+  border-color: var(--sunrise-lamp);
+}
+.sunrise-word.is-right {
+  color: var(--sunrise-sea);
+  border-color: var(--sunrise-sea);
+}
+.sunrise-word.is-wrong {
+  color: var(--sunrise-rose);
+  border-color: var(--sunrise-rose);
+}
+.sunrise-word.is-dimmed {
+  color: var(--sunrise-dim);
+}
+
+/* ---- rebuild the verse ---- */
+.sunrise-line {
+  border-bottom: 1px solid color-mix(in srgb, var(--gold-bright) 20%, transparent);
+  width: 100%;
+  max-width: 48rem;
+  min-height: 96px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 20px 0;
+  margin: 28px 0;
+  transition: transform 120ms ease;
+}
+.sunrise-line.is-shaking {
+  transform: translateX(4px);
+}
+.sunrise-line__hint {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--sunrise-dim);
+}
+.sunrise-line__word {
+  font-family: var(--script-font, var(--font-hebrew));
+  font-size: 32px;
+  color: var(--sunrise-lamp);
+}
+
+/* ---- the verse you have just earned ---- */
+.sunrise-reward {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+  margin: 32px 0;
+  max-width: 48rem;
+}
+.sunrise-reward__word {
+  font-family: var(--script-font, var(--font-hebrew));
+  font-size: 38px;
+  background: none;
+  border: none;
+  color: var(--sunrise-lamp);
+  cursor: pointer;
+  padding: 0;
+  transition: color 150ms ease;
+}
+.sunrise-reward__word.is-open {
+  color: var(--sunrise-sea);
+}
+.sunrise-gloss {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-style: italic;
+  color: var(--sunrise-ink);
+  min-height: 32px;
+  margin-bottom: 34px;
+}
+.sunrise-gloss.is-empty {
+  color: var(--sunrise-dim);
+}
+
+/* ---- finale ---- */
+.sunrise-allwords {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 12px;
+  margin: 28px 0;
+  max-width: 48rem;
+}
+.sunrise-allwords span {
+  font-family: var(--script-font, var(--font-hebrew));
+  font-size: 28px;
+}
+.sunrise-finale__lead {
+  font-family: var(--font-body);
+  font-size: 21px;
+  font-style: italic;
+  line-height: 1.6;
+  max-width: 28rem;
+  margin: 0 0 12px;
+}
+.sunrise-finale__body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  opacity: 0.8;
+  max-width: 28rem;
+  margin: 0 0 34px;
+}
+.sunrise-finale__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ---- the explanation panel ---- */
+.sunrise-why {
+  border: 1px solid color-mix(in srgb, var(--sage) 33%, transparent);
+  background: color-mix(in srgb, var(--sage) 5%, transparent);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-top: 32px;
+  max-width: 32rem;
+  text-align: center;
+}
+.sunrise-why p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0 0 16px;
+}
+.sunrise-why--bare {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sunrise,
+  .sunrise-rail__fill,
+  .sunrise-line,
+  .sunrise-btn,
+  .sunrise-opt,
+  .sunrise-word {
+    transition: none;
+  }
+  .sunrise-spark {
+    animation: none;
+  }
+}
+
+/* ---------- Cold Read ---------- */
+/*
+ * The verse is the screen. Everything else is small and gets out of its way,
+ * because the whole exercise is "can you read this" and any chrome competing
+ * with the text is answering the question for the learner.
+ */
+.cold {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cold__eyebrow {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.cold__ask {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-soft);
+  line-height: 1.5;
+}
+
+.cold__verse {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  font-family: var(--script-font, var(--font-hebrew));
+  font-size: 26px;
+  line-height: 1.75;
+  unicode-bidi: isolate;
+}
+
+.cold__tok {
+  border: none;
+  background: none;
+  padding: 2px 4px;
+  border-radius: 6px;
+  font: inherit;
+  color: var(--text);
+  /* Generous, because these are the tap targets and a pointed Hebrew word is
+     already only ~20px of ink. */
+  min-height: var(--tap);
+}
+
+/*
+ * Untaught tokens — articles and particles the course never teaches. Rendered
+ * so the verse reads whole, dimmed and inert so it is visible they are not part
+ * of the question. They are 40% of a Greek verse, so this is not a detail.
+ */
+.cold__tok--untaught {
+  color: var(--text-soft);
+  opacity: 0.55;
+  min-height: 0;
+}
+
+.cold__tok.is-flagged {
+  background: var(--ink-wash);
+  color: var(--text-soft);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+/* --- after the commit --- */
+
+.cold__tok.is-read {
+  color: var(--sage);
+}
+
+/* Read without ever having drilled it. --gold, because it is the best news in
+   the game and must not look like the wrong-answer state. */
+.cold__tok.is-inferred {
+  color: var(--gold-bright);
+}
+
+/*
+ * Flagged as unreadable.
+ *
+ * --attention, NOT --danger, and the token test is what forced the question.
+ * --danger means "you got that wrong", and the learner did not get anything
+ * wrong — they honestly reported a gap. --attention means "you have work
+ * waiting", which is exactly what these words are: the reveal lists them under
+ * "worth learning next". Same value today, different meaning, and the one that
+ * survives the two diverging.
+ */
+.cold__tok.is-missed {
+  color: var(--attention);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.cold__verse.is-revealed .cold__tok {
+  min-height: 0;
+}
+
+.cold__btn {
+  align-self: flex-start;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--gold-bright);
+  color: var(--ink-deep);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 28px;
+  min-height: var(--tap);
+}
+
+.cold__exit {
+  border: none;
+  background: none;
+  color: var(--chrome-fg);
+  font-size: 16px;
+  padding: 4px 8px;
+}
+
+.cold__reveal {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cold__score {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 22px;
+  line-height: 1.35;
+}
+
+.cold__score b {
+  color: var(--gold-bright);
+}
+
+.cold__second,
+.cold__aside {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-soft);
+}
+
+.cold__aside {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.cold__translation {
+  margin: 0;
+  padding: 14px 16px;
+  border-left: 2px solid var(--border);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--text-soft);
+}
+
+.cold__missed {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.cold__missed-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cold__missed-word {
+  font-family: var(--script-font, var(--font-hebrew));
+  font-size: 22px;
+  unicode-bidi: isolate;
+}
+
+.cold__tally {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-soft);
+}
+
+/* The premise, stated on screen. Gold because it is the good news, and it is
+   only rendered when it is actually true. */
+.cold__hook {
+  margin: -8px 0 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--gold-bright);
 }

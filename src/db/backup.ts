@@ -36,6 +36,7 @@ import type { LocalCard, LocalDeck, LocalProgress, LocalReviewLog } from "./inde
 import { rebuildCardsFromLogs } from "./repo";
 import type { CourseId } from "@/content/course";
 import type { AssessmentResult, StreakState } from "@/api/types";
+import type { GameProgress } from "@/features/games/progress";
 
 /**
  * Bump when the file shape changes in a way an older app could not read.
@@ -311,6 +312,7 @@ async function unionById<T extends { id: string }>(
  *                             a fact about consecutive days and the stale side
  *                             cannot know about days it never saw
  *   placementUnlocked:<id>    union — unlocking is monotonic
+ *   games:<id>:progress       max/or — see below
  *   anything else             local wins if present, else take the file's
  *
  * The fallback is deliberately conservative: a key added later gets sane
@@ -340,9 +342,50 @@ async function mergeMeta(incoming: Record<string, unknown>): Promise<void> {
       continue;
     }
 
+    /*
+     * Game progress needs its own rule, because the fallback below would LOSE
+     * a finished run.
+     *
+     * The fallback is "local wins if present". A device sitting on verse 2 has
+     * a local value, so importing a backup from a device that finished all five
+     * would keep verse 2 and silently discard the finish. That is precisely the
+     * destruction rule 1 exists to prevent, and the conservative default only
+     * looks conservative because it assumes local is always the fresher side.
+     *
+     * Monotonic fields merge monotonically: furthest by max, completed by or,
+     * runs by max, and completedAt by EARLIEST because it records the first
+     * finish rather than the latest. Every one is idempotent, so a file
+     * imported twice — or the same file imported on three devices — lands in
+     * the same place. See features/games/progress.ts for the shape.
+     */
+    if (/^games:.+:progress$/.test(key)) {
+      const local = await getMeta<GameProgress | null>(key, null);
+      const incoming = (value ?? null) as GameProgress | null;
+      await setMeta(key, mergeGameProgress(local, incoming));
+      continue;
+    }
+
     const existing = await db.meta.get(key);
     if (existing === undefined) await setMeta(key, value);
   }
+}
+
+function mergeGameProgress(
+  local: GameProgress | null,
+  incoming: GameProgress | null,
+): GameProgress {
+  if (!incoming) return local!;
+  if (!local) return incoming;
+  const completedAt = [local.completedAt, incoming.completedAt].filter(
+    (t): t is number => typeof t === "number",
+  );
+  return {
+    furthest: Math.max(local.furthest, incoming.furthest),
+    completed: local.completed || incoming.completed,
+    runs: Math.max(local.runs, incoming.runs),
+    // The first finish, not the most recent one.
+    ...(completedAt.length ? { completedAt: Math.min(...completedAt) } : {}),
+  };
 }
 
 function mergeStreak(local: StreakState | null, incoming: StreakState | null): StreakState {

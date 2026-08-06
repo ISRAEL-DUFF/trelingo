@@ -7,12 +7,18 @@ import { LessonScreen } from "@/features/lesson/LessonScreen";
 import { ReviewScreen } from "@/features/review/ReviewScreen";
 import { LibraryScreen, PassageScreen } from "@/features/reading/LibraryScreen";
 import { StatsScreen } from "@/features/progress/StatsScreen";
+import { YouScreen } from "@/features/you/YouScreen";
 import { LeagueScreen } from "@/features/gamification/LeagueScreen";
 import { DecksScreen } from "@/features/decks/DecksScreen";
 import { PlacementScreen } from "@/features/placement/PlacementScreen";
 import { FluencyScreen } from "@/features/assessment/FluencyScreen";
 import { ScanScreen } from "@/features/scan/ScanScreen";
 import { SettingsScreen } from "@/features/settings/SettingsScreen";
+import { GamesScreen } from "@/features/games/GamesScreen";
+import { ReadingDrillsScreen } from "@/features/games/greek-reading/ReadingDrillsScreen";
+import { DayOneScreen } from "@/features/games/hebrew-dayone/DayOneScreen";
+import { InBeginningScreen } from "@/features/games/greek-inbeginning/InBeginningScreen";
+import { ColdReadScreen } from "@/features/games/cold-read/ColdReadScreen";
 import { AuthScreen } from "@/features/auth/AuthScreen";
 import { DevPanel } from "@/features/dev/DevPanel";
 import { CourseScreen } from "@/features/courses/CourseScreen";
@@ -26,7 +32,16 @@ import { applyCourse, getCourse } from "@/content/course";
 import { Spinner } from "@/components/ui";
 
 /** Routes that take over the whole screen and hide the tab bar. */
-const IMMERSIVE = [/^\/lesson\//, /^\/review/, /^\/placement/, /^\/assessment/, /^\/auth/];
+const IMMERSIVE = [
+  /^\/lesson\//,
+  /^\/review/,
+  /^\/placement/,
+  /^\/assessment/,
+  /^\/auth/,
+  // Day One paints the whole viewport and its background IS the progress
+  // meter; a tab bar sitting on top of the sunrise fights it.
+  /^\/games\/hebrew-day-one/,
+];
 
 function BottomNav() {
   const counts = useLiveQuery(() => getDueCounts(), []);
@@ -36,8 +51,18 @@ function BottomNav() {
     { to: "/", icon: "🌱", label: "Learn", end: true },
     { to: "/review", icon: "🔁", label: "Review", badge: due },
     { to: "/library", icon: "📖", label: "Read" },
-    { to: "/progress", icon: "📊", label: "Progress" },
-    { to: "/settings", icon: "⚙️", label: "Settings" },
+    { to: "/games", icon: "🎲", label: "Games" },
+    /*
+     * Progress and Settings merged here when a sixth tab stopped fitting. At
+     * 320px the Review and Read labels overlapped and the due badge covered the
+     * Read icon. They were the right pair to merge: both are about the learner
+     * — streak, XP, preferences, backup, account — where the first four are
+     * about the material and the game.
+     *
+     * FIVE IS THE CEILING, not a coincidence. If a sixth destination is ever
+     * wanted, it belongs inside one of these rather than beside them.
+     */
+    { to: "/you", icon: "👤", label: "You" },
   ];
 
   return (
@@ -113,6 +138,8 @@ export default function App() {
         <Route path="/review/deck/:deckId" element={<ReviewScreen />} />
         <Route path="/library" element={<LibraryScreen />} />
         <Route path="/passages/:passageId" element={<PassageScreen />} />
+        <Route path="/you" element={<YouScreen />} />
+        {/* Kept for bookmarks and deep links; the nav points at /you. */}
         <Route path="/progress" element={<StatsScreen />} />
         <Route path="/leagues" element={<LeagueScreen />} />
         <Route path="/decks" element={<DecksScreen />} />
@@ -121,6 +148,11 @@ export default function App() {
         <Route path="/scan" element={<ScanScreen />} />
         <Route path="/scan/:sectionId" element={<ScanScreen />} />
         <Route path="/courses" element={<CourseScreen />} />
+        <Route path="/games" element={<GamesScreen />} />
+        <Route path="/games/greek-reading-drills" element={<ReadingDrillsScreen />} />
+        <Route path="/games/hebrew-day-one" element={<DayOneScreen />} />
+        <Route path="/games/greek-in-beginning" element={<InBeginningScreen />} />
+        <Route path="/games/cold-read" element={<ColdReadScreen />} />
         <Route path="/settings" element={<SettingsScreen />} />
         <Route path="/auth" element={<AuthScreen />} />
         <Route path="/dev" element={<DevPanel />} />

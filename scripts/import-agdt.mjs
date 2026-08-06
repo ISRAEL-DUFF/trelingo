@@ -22,6 +22,7 @@
  * Usage:  node scripts/import-agdt.mjs <proseDir> [--out <file>]
  */
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { derivedFamilyId } from "./greek-families.mjs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -118,10 +119,19 @@ function deriveStems(tokens) {
     let n = arr[0].length;
     for (const f of arr.slice(1)) n = Math.min(n, commonPrefixLen(arr[0], f));
     const shortest = Math.min(...arr.map((f) => f.length));
-    if (n > 0 && n < shortest) stems.set(lemma, n);
+    // MIN_STEM, matching import-morphgnt.mjs: a single letter is not a
+    // morpheme. This importer was written without the rule and πόλις, πόλεμος,
+    // ὅσος and οἷος each derived a one-letter stem, giving families called "π"
+    // and "ὁ" — which the content schema rejects outright (a family id must be
+    // at least two characters). The schema catching it is a backstop; the rule
+    // belongs here, as it does on the Koine side.
+    if (n >= MIN_STEM && n < shortest) stems.set(lemma, n);
   }
   return stems;
 }
+
+/** A single letter is not a morpheme. See deriveStems above. */
+const MIN_STEM = 2;
 
 const endingIndices = (surface, stemLen) => {
   const len = clusters(surface).length;
@@ -157,20 +167,36 @@ function main() {
   const skipped = [];
   /** lemma (and spelling variants of it) → the split this course actually teaches. */
   const curated = new Map();
+  /** Taught, but with no morpheme claimed — reported like Koine does. */
+  const unsplit = [];
 
   for (const entry of glossary.words) {
     const { lemma, id, gloss, distractors, notes, familyGloss, familyNotes } = entry;
     const derived = stems.has(lemma);
     const stemLen = entry.stem != null ? clusters(entry.stem).length : stems.get(lemma);
     const highlight = endingIndices(lemma, stemLen);
-    if (!highlight) {
-      skipped.push({ lemma, reason: stemLen == null ? "no derivable stem" : "degenerate split" });
-      continue;
-    }
-    const stem = clusters(lemma).slice(0, stemLen).join("");
-    const familyId = entry.familyId ?? fold(stem);
-    for (const key of [lemma, ...(entry.lemmaAliases ?? [])]) curated.set(key, { stem, familyId, id });
-    if (!families.has(familyId)) {
+    /*
+     * A word with no derivable stem is TAUGHT PLAIN, not dropped.
+     *
+     * This importer used to drop it, which was survivable only because it also
+     * accepted one-letter stems — so almost everything got a "morpheme". Adding
+     * MIN_STEM exposed the gap: πόλις, πόλεμος, ὅσος and οἷος each lost their
+     * one-letter stem and with it their place in a 41-word curated course.
+     *
+     * Koine and Hebrew both settled this long ago (see the note in
+     * import-morphgnt.mjs, and WordSchema.morphology being optional). No
+     * highlight, no family, nothing guessed — but the word is still vocabulary.
+     */
+    const stem = highlight ? clusters(lemma).slice(0, stemLen).join("") : null;
+    // Curated wins; derived must clear greek-families.mjs. Same rule as Koine.
+    const familyId = highlight ? (entry.familyId ?? derivedFamilyId(stem, fold)) : null;
+    // No family, no highlight — a refused family means the split it rested on
+    // was a prefix artefact, and ἀν- + -ήρ is a worse claim than none.
+    const shown = familyId ? highlight : null;
+    if (!shown) unsplit.push(lemma);
+    for (const key of [lemma, ...(entry.lemmaAliases ?? [])])
+      curated.set(key, { stem: shown ? stem : null, familyId, id });
+    if (familyId && !families.has(familyId)) {
       families.set(familyId, {
         id: familyId,
         letters: familyId,
@@ -197,7 +223,7 @@ function main() {
       translit: entry.translit,
       gloss,
       partOfSpeech: POS[pos] ?? "noun",
-      morphology: { highlight, kind: "ending" },
+      ...(shown ? { morphology: { highlight: shown, kind: "ending" } } : {}),
       // As in Koine: a verb's citation form is 1sg present by definition, so a
       // sampled parse can only mislead.
       ...(sample && pos !== "v" ? { parse: parseOf(sample.postag) } : {}),
@@ -237,8 +263,10 @@ function main() {
         //                  starts with it. γίγνομαι/γέγονεν reduplicates, so a
         //                  fixed stem length would cut it at γέγο|νεν.
         //   non-empty    — a form identical to its stem has no ending to show.
-        const stemLen = entry ? clusters(entry.stem).length : null;
-        const prefixed = entry && fold(t.form).startsWith(fold(entry.stem));
+        // entry.stem is now null for a word taught plain, so both guards have
+        // to check it rather than just `entry`.
+        const stemLen = entry?.stem ? clusters(entry.stem).length : null;
+        const prefixed = Boolean(entry?.stem) && fold(t.form).startsWith(fold(entry.stem));
         const highlight = teachable && prefixed ? endingIndices(t.form, stemLen) : null;
         return {
           text: t.form,
@@ -255,7 +283,7 @@ function main() {
 
   writeFileSync(outFile, JSON.stringify({ families: [...families.values()], words, passages, skipped }, null, 2));
 
-  console.log(`words:     ${words.length} (${skipped.length} skipped)`);
+  console.log(`words:     ${words.length} (${skipped.length} skipped, ${unsplit.length} taught with no morpheme)`);
   console.log(`families:  ${families.size}`);
   console.log(`passages:  ${passages.length}`);
   if (skipped.length) for (const s of skipped) console.log(`  skipped ${s.lemma}: ${s.reason}`);

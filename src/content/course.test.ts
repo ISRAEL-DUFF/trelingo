@@ -74,7 +74,7 @@ describe("the three-level hierarchy", () => {
       expect(varietyOf(t).id, t.id).toBe(t.variety);
       expect(varietyOf(t).language, t.id).toBe(t.language);
     }
-    expect(tracksOf("biblical-hebrew").map((t) => t.name)).toEqual(["Shoresh", "Jonah", "Ruth", "Esther", "Ecclesiastes", "Haggai", "Malachi", "Obadiah"]);
+    expect(tracksOf("biblical-hebrew").map((t) => t.name)).toEqual(["Shoresh", "Jonah", "Ruth", "Esther", "Ecclesiastes", "Haggai", "Malachi", "Obadiah", "Genesis 1–11"]);
     // Koine now has two tracks and Attic one — the asymmetry the third level
     // exposes rather than creates, and the reason adding 1 John beside The
     // Gospels needed no structural change at all.

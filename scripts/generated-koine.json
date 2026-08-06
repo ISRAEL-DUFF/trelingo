@@ -2206,12 +2206,7 @@
           "gloss": "him",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              3
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "dative",
             "number": "s",
@@ -2314,12 +2309,7 @@
           "gloss": "light",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -2383,12 +2373,7 @@
           "gloss": "light",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              2
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -2490,12 +2475,7 @@
           "gloss": "it",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              3
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -2516,17 +2496,7 @@
           "gloss": "overcame",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              3,
-              4,
-              5,
-              6,
-              7,
-              8
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "person": "3",
             "tense": "aorist",
@@ -2607,13 +2577,7 @@
           "gloss": "of Christ",
           "wordId": null,
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "genitive",
             "number": "s",

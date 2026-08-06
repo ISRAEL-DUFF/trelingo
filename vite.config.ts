@@ -77,23 +77,35 @@ export default defineConfig({
         globIgnores: ["**/mockServiceWorker.js", "probe/**"],
         /*
          * Workbox refuses to precache a file over 2 MiB and FAILS THE BUILD
-         * rather than warning. Our one chunk is 7.2 MB because the tracks are
+         * rather than warning. Our one chunk is 12.6 MB because the tracks are
          * compiled into it: measured, the shell alone is 529 KB and content is
          * 93% of the bundle. Every whole book added moves this number — John
          * alone is 3.1 MB of the total, Mark 2.6 MB.
          *
          * Raised rather than worked around, because the alternative is to drop
          * the chunk from the precache, and then the tracks stop working offline
-         * — which is most of the point of the PWA. The cost is a ~7 MB (1 MB
-         * over the wire, gzipped) first install.
+         * — which is most of the point of the PWA.
          *
-         * THIS IS A HOLDING MEASURE. It cannot keep being raised: content
-         * belongs behind an API, fetched per book and runtime-cached the way
-         * sw.ts already caches audio. See the "WHY NOT LAZY" header in
-         * src/content/index.ts, which names that as the destination and the
-         * content version stamp that has to land with it.
+         * THIS IS A HOLDING MEASURE AND IT HAS NOW BEEN RAISED TWICE. 2 MiB →
+         * 12 MiB when Matthew landed, 12 → 15 when Genesis 1–11 did, and that
+         * second raise was five hours after the first.
+         *
+         * 15 IS DELIBERATELY TIGHT — about 2.2 MB of headroom over the current
+         * 12.75. That is roughly what Genesis 12–50 alone would consume, so the
+         * next whole book will probably hit this ceiling rather than sail under
+         * it. That is the point. A limit set just above the current size keeps
+         * the pressure where it belongs; a comfortable one would quietly let
+         * the bundle grow for another year.
+         *
+         * DO NOT RAISE THIS A THIRD TIME. The ceiling is not the problem — the
+         * problem is that a learner reading Obadiah downloads the whole of John
+         * to do it. Content belongs behind an API, fetched per book and
+         * runtime-cached the way sw.ts already caches audio. See the "WHY NOT
+         * LAZY" header in src/content/index.ts, which names that as the
+         * destination and the content version stamp that has to land with it,
+         * and task #76.
          */
-        maximumFileSizeToCacheInBytes: 12 * 1024 * 1024,
+        maximumFileSizeToCacheInBytes: 15 * 1024 * 1024,
       },
       devOptions: { enabled: false },
     }),
@@ -109,5 +121,16 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["./src/test/setup.ts"],
     css: false,
+    /*
+     * Never collect from .claude/worktrees.
+     *
+     * A background task spun up an isolated copy of the frontend there and left
+     * it behind when the session was deleted. Vitest's default `include` walks
+     * the whole tree, so it picked up the copy's tests too and ran the entire
+     * suite TWICE — 22,749 tests instead of 11,744, with the duplicates failing
+     * against a stale copy of the source. The count is the tell; the failures
+     * are noise from a directory that is not part of the app.
+     */
+    exclude: ["**/node_modules/**", "**/dist/**", "**/.claude/worktrees/**"],
   },
 });

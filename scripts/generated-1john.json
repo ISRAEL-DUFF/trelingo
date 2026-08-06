@@ -341,11 +341,6 @@
       "coreGloss": "I go out"
     },
     {
-      "id": "ὑπ",
-      "letters": "ὑπ",
-      "coreGloss": "I go away, I depart"
-    },
-    {
       "id": "μεταβαιν",
       "letters": "μεταβαιν",
       "coreGloss": "I pass over, I move"
@@ -3472,19 +3467,11 @@
     },
     {
       "id": "hypago",
-      "familyId": "ὑπ",
+      "familyId": null,
       "text": "ὑπάγω",
       "translit": "hypagō",
       "gloss": "I go away, I depart",
       "partOfSpeech": "noun",
-      "morphology": {
-        "highlight": [
-          2,
-          3,
-          4
-        ],
-        "kind": "ending"
-      },
       "attestations": [],
       "distractors": [
         "I approach",
@@ -7263,15 +7250,7 @@
           "gloss": "I announce, I report",
           "wordId": "apangello",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              8,
-              9,
-              10,
-              11
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "person": "1",
             "tense": "present",
@@ -7333,13 +7312,7 @@
           "gloss": "eternal",
           "wordId": "aionios",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -7509,15 +7482,7 @@
           "gloss": "I announce, I report",
           "wordId": "apangello",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              8,
-              9,
-              10,
-              11
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "person": "1",
             "tense": "present",
@@ -7806,7 +7771,7 @@
           "translit": "Ἰησοῦ",
           "gloss": "Jesus",
           "wordId": "iesoys",
-          "familyId": null,
+          "familyId": "ἰησου",
           "morphology": null,
           "parse": {
             "case": "genitive",
@@ -8030,12 +7995,7 @@
           "gloss": "a message",
           "wordId": "angelia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -8111,15 +8071,7 @@
           "gloss": "I declare, I proclaim",
           "wordId": "anangello",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              8,
-              9,
-              10,
-              11
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "person": "1",
             "tense": "present",
@@ -8476,16 +8428,7 @@
           "gloss": "I lie",
           "wordId": "pseydomai",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              4,
-              5,
-              6,
-              7,
-              8
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "person": "1",
             "tense": "present",
@@ -8810,7 +8753,7 @@
           "translit": "Ἰησοῦ",
           "gloss": "Jesus",
           "wordId": "iesoys",
-          "familyId": null,
+          "familyId": "ἰησου",
           "morphology": null,
           "parse": {
             "case": "genitive",
@@ -8931,13 +8874,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "genitive",
             "number": "s",
@@ -8988,13 +8925,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -9181,13 +9112,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "p",
@@ -9316,13 +9241,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "p",
@@ -9478,13 +9397,7 @@
           "gloss": "a liar",
           "wordId": "pseystes",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -9995,13 +9908,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "genitive",
             "number": "p",
@@ -10493,13 +10400,7 @@
           "gloss": "a liar",
           "wordId": "pseystes",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -10701,7 +10602,7 @@
           "translit": "ἀληθῶς",
           "gloss": "truly",
           "wordId": "alethos",
-          "familyId": null,
+          "familyId": "ἀληθω",
           "morphology": null
         },
         {
@@ -11091,13 +10992,7 @@
           "gloss": "beloved",
           "wordId": "agapetos",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "number": "p",
             "gender": "m"
@@ -12420,16 +12315,8 @@
           "translit": "ὑπάγει",
           "gloss": "I go away, I depart",
           "wordId": "hypago",
-          "familyId": "ὑπ",
-          "morphology": {
-            "highlight": [
-              2,
-              3,
-              4,
-              5
-            ],
-            "kind": "ending"
-          },
+          "familyId": null,
+          "morphology": null,
           "parse": {
             "person": "3",
             "tense": "present",
@@ -12634,13 +12521,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "p",
@@ -13385,13 +13266,7 @@
           "gloss": "I love",
           "wordId": "agapao",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "person": "2",
             "tense": "present",
@@ -14256,13 +14131,7 @@
           "gloss": "an age",
           "wordId": "aion",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              3,
-              4
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -15240,13 +15109,7 @@
           "gloss": "a lie",
           "wordId": "pseydos",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              4,
-              5
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -15360,13 +15223,7 @@
           "gloss": "a liar",
           "wordId": "pseystes",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -16262,12 +16119,7 @@
           "gloss": "a promise",
           "wordId": "epangelia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              8
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -16374,13 +16226,7 @@
           "gloss": "eternal",
           "wordId": "aionios",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -16939,13 +16785,7 @@
           "gloss": "a lie",
           "wordId": "pseydos",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              4,
-              5
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -17469,13 +17309,7 @@
           "gloss": "righteousness",
           "wordId": "dikaiosyne",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              9,
-              10
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -17873,13 +17707,7 @@
           "gloss": "beloved",
           "wordId": "agapetos",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "number": "p",
             "gender": "m"
@@ -18311,13 +18139,7 @@
           "gloss": "I purify",
           "wordId": "hagnizo",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "person": "3",
             "tense": "present",
@@ -18463,13 +18285,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -18553,12 +18369,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -18708,13 +18519,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "p",
@@ -18750,12 +18555,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -18906,13 +18706,7 @@
           "gloss": "I sin",
           "wordId": "hamartano",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              7,
-              8
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "person": "3",
             "tense": "present",
@@ -18953,13 +18747,7 @@
           "gloss": "I sin",
           "wordId": "hamartano",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              7,
-              8
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "tense": "present",
             "voice": "active",
@@ -19099,13 +18887,7 @@
           "gloss": "I lead astray, I deceive",
           "wordId": "planao",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "person": "3",
             "tense": "present",
@@ -19164,13 +18946,7 @@
           "gloss": "righteousness",
           "wordId": "dikaiosyne",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              9,
-              10
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -19317,13 +19093,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -19448,13 +19218,7 @@
           "gloss": "I sin",
           "wordId": "hamartano",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              7,
-              8
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "person": "3",
             "tense": "present",
@@ -19725,13 +19489,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -19902,14 +19660,7 @@
           "gloss": "I sin",
           "wordId": "hamartano",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              7,
-              8,
-              9
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "tense": "present",
             "voice": "active",
@@ -20205,13 +19956,7 @@
           "gloss": "righteousness",
           "wordId": "dikaiosyne",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              9,
-              10
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -20419,12 +20164,7 @@
           "gloss": "a message",
           "wordId": "angelia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -21568,13 +21308,7 @@
           "gloss": "eternal",
           "wordId": "aionios",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -22955,13 +22689,7 @@
           "gloss": "beloved",
           "wordId": "agapetos",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "number": "p",
             "gender": "m"
@@ -23466,16 +23194,7 @@
           "gloss": "I believe, I trust",
           "wordId": "pisteyo",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7,
-              8,
-              9,
-              10
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "person": "1",
             "tense": "aorist",
@@ -23563,7 +23282,7 @@
           "translit": "Ἰησοῦ",
           "gloss": "Jesus",
           "wordId": "iesoys",
-          "familyId": null,
+          "familyId": "ἰησου",
           "morphology": null,
           "parse": {
             "case": "genitive",
@@ -24063,13 +23782,7 @@
           "gloss": "beloved",
           "wordId": "agapetos",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "number": "p",
             "gender": "m"
@@ -24129,14 +23842,7 @@
           "gloss": "I believe, I trust",
           "wordId": "pisteyo",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7,
-              8
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "person": "2",
             "tense": "present",
@@ -25955,13 +25661,7 @@
           "gloss": "beloved",
           "wordId": "agapetos",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "number": "p",
             "gender": "m"
@@ -27032,13 +26732,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "genitive",
             "number": "p",
@@ -27070,13 +26764,7 @@
           "gloss": "beloved",
           "wordId": "agapetos",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "number": "p",
             "gender": "m"
@@ -27221,12 +26909,7 @@
           "gloss": "I love",
           "wordId": "agapao",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "tense": "present",
             "voice": "active",
@@ -29105,12 +28788,7 @@
           "gloss": "complete, perfect",
           "wordId": "teleios",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -29629,13 +29307,7 @@
           "gloss": "a liar",
           "wordId": "pseystes",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -29870,12 +29542,7 @@
           "gloss": "I love",
           "wordId": "agapao",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "tense": "present",
             "voice": "active",
@@ -30154,13 +29821,7 @@
           "gloss": "I believe, I trust",
           "wordId": "pisteyo",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "tense": "present",
             "voice": "active",
@@ -31362,13 +31023,7 @@
           "gloss": "I believe, I trust",
           "wordId": "pisteyo",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "tense": "present",
             "voice": "active",
@@ -32225,13 +31880,7 @@
           "gloss": "testimony",
           "wordId": "martyria",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              7,
-              8
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -32302,12 +31951,7 @@
           "gloss": "testimony",
           "wordId": "martyria",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -32427,12 +32071,7 @@
           "gloss": "testimony",
           "wordId": "martyria",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -32564,13 +32203,7 @@
           "gloss": "I believe, I trust",
           "wordId": "pisteyo",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "tense": "present",
             "voice": "active",
@@ -32677,13 +32310,7 @@
           "gloss": "testimony",
           "wordId": "martyria",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              7,
-              8
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -32733,13 +32360,7 @@
           "gloss": "I believe, I trust",
           "wordId": "pisteyo",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "tense": "present",
             "voice": "active",
@@ -32781,13 +32402,7 @@
           "gloss": "a liar",
           "wordId": "pseystes",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -32881,13 +32496,7 @@
           "gloss": "testimony",
           "wordId": "martyria",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              7,
-              8
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -33060,12 +32669,7 @@
           "gloss": "testimony",
           "wordId": "martyria",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -33105,13 +32709,7 @@
           "gloss": "eternal",
           "wordId": "aionios",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -33672,13 +33270,7 @@
           "gloss": "eternal",
           "wordId": "aionios",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -33699,16 +33291,7 @@
           "gloss": "I believe, I trust",
           "wordId": "pisteyo",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7,
-              8,
-              9,
-              10
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "tense": "present",
             "voice": "active",
@@ -34261,14 +33844,7 @@
           "gloss": "a request",
           "wordId": "aitema",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "p",
@@ -34425,15 +34001,7 @@
           "gloss": "I sin",
           "wordId": "hamartano",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              7,
-              8,
-              9,
-              10
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "tense": "present",
             "voice": "active",
@@ -34449,13 +34017,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6,
-              7
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "accusative",
             "number": "s",
@@ -34586,16 +34148,7 @@
           "gloss": "I sin",
           "wordId": "hamartano",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              7,
-              8,
-              9,
-              10,
-              11
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "tense": "present",
             "voice": "active",
@@ -34661,12 +34214,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -34828,12 +34376,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -34884,12 +34427,7 @@
           "gloss": "sin",
           "wordId": "hamartia",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
@@ -35061,13 +34599,7 @@
           "gloss": "I sin",
           "wordId": "hamartano",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              7,
-              8
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "person": "3",
             "tense": "present",
@@ -35815,7 +35347,7 @@
           "translit": "Ἰησοῦ",
           "gloss": "Jesus",
           "wordId": "iesoys",
-          "familyId": null,
+          "familyId": "ἰησου",
           "morphology": null,
           "parse": {
             "case": "dative",
@@ -35947,13 +35479,7 @@
           "gloss": "eternal",
           "wordId": "aionios",
           "familyId": null,
-          "morphology": {
-            "highlight": [
-              5,
-              6
-            ],
-            "kind": "ending"
-          },
+          "morphology": null,
           "parse": {
             "case": "nominative",
             "number": "s",
